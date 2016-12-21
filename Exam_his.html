@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>    
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Dentistry Information Systems</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:700,300,400">        
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/elegant-font/code/style.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="assets/css/magnific-popup.css">
+		<link rel="stylesheet" href="assets/css/form-elements.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/media-queries.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="assets/ico/icon.png">
+        <style type="text/css">
+            .first-container{
+                margin-top: 50px;
+                margin-left: 50px;
+                margin-right: 50px;
+            }
+
+            input[type="text"], 
+            textarea, 
+            textarea.form-control {
+                margin: 0;
+                /*padding: 1px 80px;*/
+                vertical-align: middle;
+                background: none;
+                border: 1px solid #0277BD;
+                font-family: 'Open Sans', sans-serif;
+                font-size: 22px;
+                font-weight: 100;
+                color: #000000;
+                -moz-border-radius: 6px;
+                -webkit-border-radius: 6px;
+                border-radius: 6px;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                -o-transition: all .3s;
+                -moz-transition: all .3s;
+                -webkit-transition: all .3s;
+                -ms-transition: all .3s;
+                transition: all .3s;
+            }
+
+            input[type="text"]:focus, 
+            textarea:focus, 
+            textarea.form-control:focus {
+                outline: 0;
+                border: 1px solid #43A047;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+
+            input[type="text"]:-moz-placeholder, textarea:-moz-placeholder, textarea.form-control:-moz-placeholder { color: #000; }
+            input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #000; }
+            input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #000; }
+
+            table{
+                margin-left: 15px;
+                text-align: left;
+            }
+
+            td{
+                padding: 5px;
+            }
+
+        </style>
+
+    </head>
+
+ <body><!-- change background image at assets/js/scripts.js --> 
+        <!-- Loader -->
+        <div class="loader">
+            <div class="loader-img"></div>
+        </div>
+
+    <div class="first-container">
+    <form name="examform" action="Diagnosis_his.html" method="post">
+    <div class="panel panel-info">
+        <div class="panel-heading"><h3>Examination</h3></div>
+        
+        <div class="panel panel-body">
+            <h4>S.Subjective Symptoms</h4>
+
+            <table width="90%">
+            <tr>
+               <td width="15%"><b>Pain intensity: </b></td> 
+
+               <td width="15%">
+                <input type="radio" name="paininten" value="noneinten">&nbsp; None
+               </td>
+
+               <td width="15%">
+                <input type="radio" name="paininten" value="mildinten"> &nbsp; Mild
+               </td>
+
+               <td width="15%">
+                <input type="radio" name="paininten" value="moderateinten"> &nbsp; Moderate
+               </td>
+
+               <td width="15%">
+                <input type="radio" name="paininten" value="seversinten"> &nbsp; Severe
+               </td>
+
+               <td width="15%"></td>
+            </tr>
+
+            <tr>
+               <td width="15%"><b>Pain Character: </b></td> 
+
+               <td width="15%">
+                <input type="radio" name="painchar" value="dullchar">&nbsp; Dull
+               </td>
+
+               <td width="15%">
+                <input type="radio" name="painchar" value="sharpchar"> &nbsp; Sharp
+               </td>
+
+               <td width="15%">
+                <input type="radio" name="painchar" value="throbbingchar"> &nbsp; Throbbing
+               </td>
+
+               <td width="15%"></td>
+               <td width="15%"></td>
+            </tr>
+
+            <tr>
+               <td width="15%"><b>Onset: </b></td> 
+
+               <td width="15%">
+                <input type="radio" name="onset" value="spontaneousonset">&nbsp; Spontaneous
+               </td>
+
+               <td colspan="3" width="45%">
+                <input type="radio" name="onset" value="stimulationonset"> &nbsp; Stimulation Required &nbsp;
+                <input type="text" name="onsetstimul">
+               </td>
+
+               <td width="15%"></td>
+
+            </tr>
+
+            <tr>
+               <td width="15%"><b>Duration: </b></td> 
+
+               <td width="15%">
+                <input type="radio" name="duration" value="secondsduration">&nbsp; Seconds
+               </td>
+
+               <td width="15%">
+                <input type="radio" name="duration" value="minutesduration"> &nbsp; Minutes 
+               </td>
+
+               <td width="15%">
+                <input type="radio" name="duration" value="hoursduration"> &nbsp; Hours 
+               </td>
+
+               <td width="15%">
+                <input type="radio" name="duration" value="intermittentduration"> &nbsp; Intermittent 
+               </td>
+
+               <td width="15%">
+                <input type="radio" name="duration" value="constantduration"> &nbsp; Constant 
+               </td>
+            </tr>
+
+
+            <tr>
+               <td width="15%"><b>Location: </b></td> 
+
+               <td width="15%">
+                <input type="radio" name="location" value="localizedlocat">&nbsp; Localized
+               </td>
+
+               <td width="15%">
+                <input type="radio" name="location" value="diffusedlocat"> &nbsp; Diffused 
+               </td>
+
+               <td colspan="3" width="45%">
+                <input type="radio" name="location" value="radiatinglocat"> &nbsp; Radiating to &nbsp; <input type="text" name="locatradiat"> 
+               </td>
+            </tr>
+
+            <tr>
+                <td width="15%"></td>
+               <td colspan="5" width="75%">
+                <input type="radio" name="location" value="referredlocat"> &nbsp; Referred to &nbsp;
+                <input type="text" name="refer"> 
+               </td>
+            </tr>
+            
+            </table>
+
+            <h4>O.Objective Symptoms</h4>
+            <table width="90%">
+            <tr>
+                <td width="15%"><b>
+                Extraoral: </b>
+                </td>
+
+                <td width="15%">
+                <input type="radio" name="extra" value="facialextra">&nbsp; Facial Swelling
+                </td>
+
+                <td width="15%">
+                <input type="radio" name="extra" value="lymphextra">&nbsp; Lymph Node
+                </td>
+
+                <td width="15%">
+                <input type="radio" name="extra" value="extsinusextra">&nbsp; Sinus Tract
+                </td>
+                <td width="15%"></td>
+                <td width="15%"></td>
+            </tr>
+            <tr>
+                <td width="15%"></td>
+                <td colspan="5" width="75%">
+                <input type="radio" name="extra" value="otherextra">&nbsp; Other &nbsp; <input type="text" name="extraother">
+                </td>
+            </tr>
+            
+            <tr>
+                <td width="15%"><b>
+                Intraoral: </b>
+                </td>
+
+                <td colspan="5" width="75%">
+                <input type="radio" name="intra" value="swellingintra">&nbsp; Swelling (Soft/Firm) area &nbsp; <input type="text" name="intraswell">
+                </td>
+            </tr>
+
+            <tr>
+                <td width="15%"></td>
+                <td colspan="5" width="75%">
+                <input type="radio" name="intra" value="sinusintra">&nbsp; Sinus Tract at &nbsp; <input type="text" name="intrasinus">
+                </td>
+            </tr>
+
+            <tr>
+                <td width="15%"><b>
+                Tooth: </b>
+                </td>
+
+                <td width="15%">
+                <input type="radio" name="tooth" value="cariestooth">&nbsp; Caries
+                </td>
+
+                <td width="15%">
+                <input type="radio" name="tooth" value="pulptoothex">&nbsp; Pulp Exposure
+                </td>
+
+                <td width="15%">
+                <input type="radio" name="tooth" value="pulptoothpoly">&nbsp; Pulp Polyp
+                </td>
+
+                <td width="15%">
+                <input type="radio" name="tooth" value="opentoothdrai"> &nbsp; Opened for Drainage
+                </td>
+
+                <td colspan="2" width="30%">
+                <input type="radio" name="tooth" value="temptooth">&nbsp; Temp. Restoration
+                </td>
+            </tr>
+
+            <tr>
+                <td width="15%"></td>
+
+                <td colspan="5" width="75%">
+                    <input type="radio" name="tooth" value="restoothtoration"> &nbsp; Restoration with &nbsp; <input type="text" name="toothrestoration">
+                </td>                 
+            </tr>
+
+            <tr>
+                <td width="15%"></td>
+
+                <td colspan="5" width="75%">
+                    <input type="radio" name="tooth" value="fracturetoration"> &nbsp; Fracture at &nbsp; <input type="text" name="toothfractoration">
+                </td>                 
+            </tr>
+
+            <tr>
+                <td width="15%"></td>
+
+                <td colspan="3" width="45%">
+                    <input type="radio" name="tooth" value="crowntooth"> &nbsp; Crown Discoloration to &nbsp; <input type="text" name="toothcrown">
+                </td> 
+
+                <td colspan="2" width="30%">
+                    <input type="radio" name="tooth" value="othertooth"> &nbsp; Other &nbsp; <input type="text" name="toothother">
+                </td>                 
+            </tr>
+            </table>
+
+            <h4>Radiographic findings</h4>
+            <table width="90%">
+            <tr>
+                <td width="15%"><b>Crown: </b></td>
+                <td width="15%">
+                    <input type="radio" name="crown" value="normcrown">&nbsp; Normal 
+                </td>
+                <td colspan="2" width="30%">
+                    <input type="radio" name="crown" value="restcrown">&nbsp; Restoration
+                </td>
+                <td colspan="2" width="30%">
+                    <input type="radio" name="crown" value="fractcrown">&nbsp; Fracture
+                </td>
+            </tr>
+
+            <tr>
+                <td width="15%"></td>
+                <td colspan="5" width="45%">
+                    <input type="radio" name="crown" value="cariescrown">&nbsp; Caries &nbsp;&nbsp;   
+                    area &nbsp; <input type="text" name="crowarea">&nbsp; &nbsp;
+                    depth &nbsp; <input type="text" name="crowdepth">
+                </td>
+            </tr>
+
+            <tr>
+                <td width="15%"></td>
+                <td colspan="5" width="75%">
+                    <input type="radio" name="crown" value="othercrown">&nbsp; Other &nbsp; <input type="text" name="crownother">
+                </td>
+            </tr>
+
+            <tr>
+                <td width="15%"><b>Pulp Chambar: </b></td>
+                <td width="15%">
+                    <input type="radio" name="pulpcham" value="normcham">&nbsp; Normal 
+                </td>
+
+                <td width="15%">
+                    <input type="radio" name="pulpcham" value="stonecham">&nbsp; Pulp Stone 
+                </td>
+
+                <td width="15%">
+                    <input type="radio" name="pulpcham" value="rescham">&nbsp; Resorption 
+                </td>
+            </tr>
+            <tr>
+                <td width="15%"></td>
+                <td colspan="2" width="30%">
+                    <input type="radio" name="pulpcham" value="calcificatecham">&nbsp; Calcification &nbsp;
+                    <select>
+                        <option value="partialchamber">Partial</option>
+                        <option value="completechamber">Complete</option>
+                    </select>
+                </td>
+
+                <td colspan="3" width="45%">
+                    <input type="radio" name="pulpcham" value="otherchamber">&nbsp; Other &nbsp; <input type="text" name="crownother">
+                </td>
+            </tr>
+
+             <tr>
+                <td width="15%"><b>Root: </b></td>
+                <td width="15%">
+                    <input type="radio" name="root" value="normroot">&nbsp; Normal 
+                </td>
+                <td width="15%">
+                    <input type="radio" name="root" value="cariesroot">&nbsp; Caries
+                </td>
+                <td width="15%">
+                    <input type="radio" name="root" value="curvatureroot">&nbsp; Curvature
+                </td>
+                <td width="15%">
+                    <input type="radio" name="root" value="extresroot">&nbsp; Ext. Resorption
+                </td>
+                <td width="15%">
+                    <input type="radio" name="root" value="fractroot">&nbsp; Fracture
+                </td>
+            </tr>
+
+            <tr>
+                <td width="15%"></td>
+                <td colspan="5" width="75%">
+                    <input type="radio" name="root" value="otherroot">&nbsp; Other &nbsp; <input type="text" name="rootother">
+                </td>
+            </tr>
+
+            <tr>
+                <td width="15%"><b>Pulp Canal: </b></td>
+                <td width="15%">
+                    <input type="radio" name="pulpcan" value="normcanel">&nbsp; Normal 
+                </td>
+                <td width="15%">
+                    <input type="radio" name="pulpcan" value="resorpcanel">&nbsp; Resorption
+                </td>
+                <td width="15%">
+                    <input type="radio" name="pulpcan" value="perforcanel">&nbsp; Perforation
+                </td>
+                <td width="15%">
+                    <input type="radio" name="pulpcan" value="prevcanel">&nbsp; Previous RCT
+                </td>
+                <td width="15%">
+                    <input type="radio" name="pulpcan" value="brokecanel">&nbsp; Broken Instrument
+                </td>
+            </tr>
+
+            <tr>
+                <td width="15%"></td>
+                <td colspan="2" width="30%">
+                    <input type="radio" name="pulpcan" value="calcificatecanel">&nbsp; Calcification &nbsp;
+                    <select>
+                        <option value="partialcanel">Partial</option>
+                        <option value="completecanel">Complete</option>
+                    </select>
+                </td>
+
+                <td colspan="5" width="75%">
+                    <input type="radio" name="pulpcan" value="othercanel">&nbsp; Other &nbsp; <input type="text" name="rootother">
+                </td>
+            </tr>
+
+            <tr>
+                <td width="15%"><b>Periradicular: </b></td>
+                <td width="15%">
+                    <input type="radio" name="perirad" value="normperirad">&nbsp; Normal 
+                </td>
+                <td width="15%">
+                    <input type="radio" name="perirad" value="widenperirad">&nbsp; Widening PDL 
+                </td>
+                <td width="15%">
+                    <input type="radio" name="perirad" value="lossperirad">&nbsp; Loss of Lamina Dura 
+                </td>
+                <td width="15%">
+                    <input type="radio" name="perirad" value="resorpperirad">&nbsp; Resorption 
+                </td>
+                <td width="15%">
+                    <input type="radio" name="perirad" value="apexperirad">&nbsp; Open Apex 
+                </td>
+            </tr>
+
+            <tr>
+                <td width="15%"></td>
+                <td width="15%">
+                    <input type="radio" name="perirad" value="osteoperirad">&nbsp; OsteosIcerosis
+                </td>
+                <td colspan="4" width="15%">
+                    <input type="radio" name="perirad" value="hyperperirad">&nbsp; Hyperplasia of cementurn 
+                </td>
+            </tr>
+            <tr>
+                <td width="15%"></td>
+                <td colspan="5" width="75%">
+                    <input type="radio" name="perirad" value="perialessperirad">&nbsp; Periapical Lesion &nbsp;
+                    <input type="text" name="periradperialess"> 
+                </td>
+            </tr>
+            <tr>
+                <td width="15%"></td>
+                <td colspan="5" width="75%">
+                    <input type="radio" name="perirad" value="laterlessperirad">&nbsp; Lateral Lesion &nbsp;
+                    <input type="text" name="periradlaterless"> 
+                </td>
+            </tr>
+
+            <tr>
+                <td width="15%"></td>
+                <td colspan="5" width="75%">
+                    <input type="radio" name="perirad" value="otherperirad">&nbsp; Other &nbsp; <input type="text" name="periradother">
+                </td>
+            </tr>
+
+            <tr>
+                <td width="15%"><b>Alveolar Bone: </b></td>
+                <td width="15%">
+                    <input type="radio" name="alveolar" value="normalveolar">&nbsp; Normal 
+                </td>
+                <td width="15%">
+                    <input type="radio" name="alveolar" value="generalalveolar">&nbsp; Generalized Bone loss 
+                </td>
+                <td width="15%">
+                    <input type="radio" name="alveolar" value="localalveolar">&nbsp; Localized Bone loss
+                </td>
+                <td colspan="2" width="30%">
+                    <input type="radio" name="perirad" value="otherperirad">&nbsp; Other &nbsp; <input type="text" name="periradother">
+                </td>
+            </tr>
+
+            <tr>
+                <td width="15%"><b>Remarks: </b></td>
+                <td colspan="5" width="75%">
+                    <input type="text" name="otherremark">
+                </td>
+            </tr>
+            </table><br><br>
+            <input type="submit" class="big-link-1 btn scroll-link" name="next" value="NEXT">
+            <input type="reset" class="big-link-1 btn scroll-link" name="reset" value="CLEAR">
+        </div>
+    </div>   
+    </form>
+    </div>
+
+    <!-- Javascript -->
+        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.backstretch.min.js"></script>
+        <script src="assets/js/wow.min.js"></script>
+        <script src="assets/js/retina-1.1.0.min.js"></script>
+        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="assets/js/waypoints.min.js"></script>
+        <script src="assets/js/jquery.countTo.js"></script>
+        <script src="assets/js/masonry.pkgd.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
+        
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+</body>
+</html>

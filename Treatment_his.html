@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>    
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Dentistry Information Systems</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:700,300,400">        
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/elegant-font/code/style.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="assets/css/magnific-popup.css">
+		<link rel="stylesheet" href="assets/css/form-elements.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/media-queries.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="assets/ico/icon.png">
+        <style type="text/css">
+            .first-container{
+                margin-top: 50px;
+                margin-left: 50px;
+                margin-right: 50px;
+            }
+
+            input[type="text"], 
+            textarea, 
+            textarea.form-control {
+                margin: 0;
+                /*padding: 1px 80px;*/
+                vertical-align: middle;
+                background: none;
+                border: 1px solid #0277BD;
+                font-family: 'Open Sans', sans-serif;
+                font-size: 22px;
+                font-weight: 100;
+                color: #000000;
+                -moz-border-radius: 6px;
+                -webkit-border-radius: 6px;
+                border-radius: 6px;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                -o-transition: all .3s;
+                -moz-transition: all .3s;
+                -webkit-transition: all .3s;
+                -ms-transition: all .3s;
+                transition: all .3s;
+            }
+
+            input[type="text"]:focus, 
+            textarea:focus, 
+            textarea.form-control:focus {
+                outline: 0;
+                border: 1px solid #43A047;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+
+            input[type="text"]:-moz-placeholder, textarea:-moz-placeholder, textarea.form-control:-moz-placeholder { color: #000; }
+            input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #000; }
+            input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #000; }
+
+            table{
+                margin-left: 15px;
+                text-align: left;
+            }
+
+            td{
+                padding: 5px;
+            }
+
+        </style>
+
+    </head>
+
+ <body><!-- change background image at assets/js/scripts.js --> 
+        <!-- Loader -->
+        <div class="loader">
+            <div class="loader-img"></div>
+        </div>
+
+        <div class="first-container">
+        <form name="treatment" action="" method="post">
+            <div class="panel panel-info">
+            <div class="panel-heading"><h3>Treatment Planning</h3></div>
+            <div class="panel-body">
+                <table width="90%">
+
+                <tr>
+                <td width="15%">
+                <input type="checkbox" name="notreat" value="notreat">No Treatment
+                </td>
+                <td width="15%">
+                <input type="checkbox" name="pulpotomy" value="pulpotomy">Pulpotomy
+                    <select>
+                        <option value="partial">Partial</option>
+                        <option value="full">Full</option>
+                    </select>
+                </td>
+                <td width="15%">
+                <input type="checkbox" name="pulpectomy" value="pulpectomy">Pulpectomy
+                </td>
+                <td width="15%">
+                <input type="checkbox" name="nonrootcanel" value="nonrootcanel">Non-surgical Root Canel Treatment
+                </td>
+                <td width="15%">
+                <input type="checkbox" name="nonretreatment" value="nonretreatment">Non-surgical Retreatment
+                </td>
+                <td width="15%">
+                <input type="checkbox" name="apexification" value="apexification">Apexification
+                </td>
+                </tr>
+
+                <tr>
+                <td width="15%">
+                <input type="checkbox" name="intentional" value="intentional">Intentional RCT
+                </td>
+                <td width="15%">
+                <input type="checkbox" name="rootcaneltreat" value="rootcaneltreat">Surgical Root Canel Treatment
+                </td>
+                <td width="15%">
+                <input type="checkbox" name="perio" value="perio">Perio Consult
+                </td>
+                <td colspan="3" width="45%">
+                    <input type="checkbox" name="othertreat" value="othertreat">&nbsp; Other &nbsp; <input type="text" name="periradother">
+                </td>
+                </tr>
+
+                <tr>
+                <td colspan="6" width="90%">
+                   <b>Plan for final restoration</b>
+                    <input type="text" name="planrestor">
+                </td>
+                </tr>
+
+                <tr>
+                <td width="15%">
+                    <b>Pre-op treatment: </b>
+                </td>
+                <td width="15%">
+                    <input type="radio" name="preop" value="cariesremove">&nbsp; Caries Removal
+                </td>
+                <td width="15%">
+                    <input type="radio" name="preop" value="dam">&nbsp; Dam
+                </td>
+                <td colspan="3" width="45%">
+                    <input type="radio" name="preop" value="otherpreop">&nbsp; Other <input type="text" name="preopother">
+                </td>
+                </tr>
+
+                <tr>
+                    <td width="15%"><b>Anesthesia: </b></td>
+                    <td width="15%">
+                        <input type="radio" name="anesthesis" value="anesrequired">&nbsp; Required;
+                    </td>    
+
+                    <td colspan="4" width="60%">
+                        <input type="radio" name="anesthesis" value="anesnotrequired">&nbsp; Not required;
+                    </td>  
+                </tr>
+
+                <tr>
+                    <td width="15%">
+                        <b>X-ray file:</b>
+                    </td>
+                    <td colspan="5" width="75%"><input type="file" name="xrayfile"></td>
+                </tr>
+
+                <tr>
+                    <td width="15%">
+                        <b>Dental student:</b>
+                    </td>
+                    <td colspan="5" width="75%"><input type="text" name="student"></td>
+                </tr>
+
+                <tr>
+                    <td width="15%">
+                        <b>Instructor:</b>
+                    </td>
+                    <td colspan="5" width="75%"><input type="text" name="instructor"></td>
+                </tr>
+
+                <tr>
+                    <td width="15%">
+                        <b>Dete:</b>
+                    </td>
+                    <td colspan="5" width="75%">
+                        <select name="DOBMonth">
+                            <option> - Month - </option>
+                            <option value="January">January</option>
+                            <option value="Febuary">Febuary</option>
+                            <option value="March">March</option>
+                            <option value="April">April</option>
+                            <option value="May">May</option>
+                            <option value="June">June</option>
+                            <option value="July">July</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>
+                            <option value="October">October</option>
+                            <option value="November">November</option>
+                            <option value="December">December</option>
+                        </select>
+
+                        <select name="DOBDay">
+                            <option> - Day - </option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                        </select>
+
+                        <select name="DOBYear">
+                            <option> - Year - </option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                            <option value="2013">2013</option>
+                            <option value="2012">2012</option>
+                            <option value="2011">2011</option>
+                            <option value="2010">2010</option>
+                            <option value="2009">2009</option>
+                            <option value="2008">2008</option>
+                            <option value="2007">2007</option>
+                            <option value="2006">2006</option>
+                            <option value="2005">2005</option>
+                            <option value="2004">2004</option>
+                            <option value="2003">2003</option>
+                            <option value="2002">2002</option>
+                            <option value="2001">2001</option>
+                            <option value="2000">2000</option>
+                            <option value="1999">1999</option>
+                            <option value="1998">1998</option>
+                            <option value="1997">1997</option>
+                            <option value="1996">1996</option>
+                            <option value="1995">1995</option>
+                            <option value="1994">1994</option>
+                            <option value="1993">1993</option>
+                            <option value="1992">1992</option>
+                            <option value="1991">1991</option>
+                            <option value="1990">1990</option>
+                            <option value="1989">1989</option>
+                            <option value="1988">1988</option>
+                            <option value="1987">1987</option>
+                            <option value="1986">1986</option>
+                            <option value="1985">1985</option>
+                            <option value="1984">1984</option>
+                            <option value="1983">1983</option>
+                            <option value="1982">1982</option>
+                            <option value="1981">1981</option>
+                            <option value="1980">1980</option>
+                            <option value="1979">1979</option>
+                            <option value="1978">1978</option>
+                            <option value="1977">1977</option>
+                            <option value="1976">1976</option>
+                            <option value="1975">1975</option>
+                            <option value="1974">1974</option>
+                            <option value="1973">1973</option>
+                            <option value="1972">1972</option>
+                            <option value="1971">1971</option>
+                            <option value="1970">1970</option>
+                            
+                        </select>
+                    </td>
+                </tr>
+                </table><br><br>
+                <input type="submit" class="big-link-1 btn scroll-link" name="next" value="ADD">
+                <input type="reset" class="big-link-1 btn scroll-link" name="reset" value="CLEAR">
+
+
+            </div>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Javascript -->
+        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.backstretch.min.js"></script>
+        <script src="assets/js/wow.min.js"></script>
+        <script src="assets/js/retina-1.1.0.min.js"></script>
+        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="assets/js/waypoints.min.js"></script>
+        <script src="assets/js/jquery.countTo.js"></script>
+        <script src="assets/js/masonry.pkgd.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
+        
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+</body>
+</html>

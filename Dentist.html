@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>    
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Dentistry Information Systems</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:700,300,400">        
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/elegant-font/code/style.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="assets/css/magnific-popup.css">
+		<link rel="stylesheet" href="assets/css/form-elements.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/media-queries.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="assets/ico/icon.png">
+        <style type="text/css">
+            .first-container{
+                margin-top: 120px;
+                margin-left: 200px;
+                margin-right: 200px;
+            }
+
+            input[type="text"], 
+            textarea, 
+            textarea.form-control {
+                margin: 0;
+                /*padding: 1px 80px;*/
+                vertical-align: middle;
+                background: none;
+                border: 1px solid #0277BD;
+                font-family: 'Open Sans', sans-serif;
+                font-size: 22px;
+                font-weight: 100;
+                color: #000000;
+                -moz-border-radius: 6px;
+                -webkit-border-radius: 6px;
+                border-radius: 6px;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                -o-transition: all .3s;
+                -moz-transition: all .3s;
+                -webkit-transition: all .3s;
+                -ms-transition: all .3s;
+                transition: all .3s;
+            }
+
+            input[type="text"]:focus, 
+            textarea:focus, 
+            textarea.form-control:focus {
+                outline: 0;
+                border: 1px solid #43A047;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+
+            input[type="text"]:-moz-placeholder, textarea:-moz-placeholder, textarea.form-control:-moz-placeholder { color: #000; }
+            input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #000; }
+            input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #000; }
+
+            table{
+                margin-left: 100px;
+                text-align: left;
+            }
+
+            td{
+                padding: 5px;
+            }
+
+        </style>
+
+    </head>
+
+ <body><!-- change background image at assets/js/scripts.js --> 
+    <!-- Loader -->
+        <div class="loader">
+            <div class="loader-img"></div>
+        </div>
+
+    <!-- Top menu -->
+        <nav class="navbar navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="Home.html"></a> <!-- import pic from style.css file -->
+                </div>
+
+                 <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="top-navbar-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="Login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="first-container">
+        <form name="dentist" action="" method="post">
+            <div class="panel panel-danger">
+                <div class="panel-heading"><h3>Dentist Record</h3></div>
+                    <div class="panel-body">
+                    <table>
+                    <tr>
+                        <td width="30%"><b>Dentist's name: </b></td>
+                        <td><input type="text" name="dentname"></td>
+                    </tr>
+
+                    <tr>
+                        <td width="30%"><b>Age: </b></td>
+                        <td><input type="text" name="dentage"></td>
+                    </tr>
+
+                    <tr>
+                        <td width="30%"><b>Gender: </b></td>
+                        <td><select name="genderdent">
+                            <option value="male">Male</option>
+                            <option value="Female">Female</option>
+                        </select></td>
+                    </tr>
+
+                    <tr>
+                        <td width="30%"><b>Tel: </b></td>
+                        <td><input type="text" name="denttel"></td>
+                    </tr>
+
+                    <tr>
+                        <td width="30%"><b>Education: </b></td>
+                        <td><input type="text" name="dentedu"></td>
+                    </tr>
+
+                    </table>
+
+                    <br><br>
+                    <input type="submit" class="big-link-1 btn scroll-link" name="submit" value="ADD">
+                    <input type="reset" class="big-link-1 btn scroll-link" name="reset" value="CLEAR">
+                </div>
+            </div>
+        </form>
+        </div>
+
+        <!-- Javascript -->
+        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.backstretch.min.js"></script>
+        <script src="assets/js/wow.min.js"></script>
+        <script src="assets/js/retina-1.1.0.min.js"></script>
+        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="assets/js/waypoints.min.js"></script>
+        <script src="assets/js/jquery.countTo.js"></script>
+        <script src="assets/js/masonry.pkgd.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
+        
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+ </body>
+ </html>

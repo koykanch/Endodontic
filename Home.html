@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Dentistry Information Systems</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:700,300,400">        
+      	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/elegant-font/code/style.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="assets/css/magnific-popup.css">
+		<link rel="stylesheet" href="assets/css/form-elements.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/media-queries.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="assets/ico/icon.png">
+        <style type="text/css">
+            .menucenter{
+                display: block;
+                padding: .4em 3em .4em .4em;                
+                margin: .5em 0;
+                background:#E3F2FD;
+            }
+            .rounded-list a{
+                position: relative;
+                display: block;
+                padding: .4em .4em .4em 2em;                
+                margin: .5em 0;
+                background: #81C784;    
+                color: #444;
+                text-decoration: none;
+                -moz-border-radius: .3em; /*กำหนดเส้นขอบแบบโค้งมน*/
+                -webkit-border-radius: .3em; /*กำหนดเส้นขอบแบบโค้งมน*/
+                border-radius: .3em;
+                -webkit-transition: all .3s ease-out;
+                -moz-transition: all .3s ease-out;
+                -ms-transition: all .3s ease-out;
+                -o-transition: all .3s ease-out;
+                transition: all .3s ease-out;   
+                font-size:16px;
+            }
+
+            .rounded-list  ul { list-style-type: circle; }
+            .rounded-list a:hover{
+                background: #69F0AE;
+            }
+            .rounded-list a:hover:before{
+                -moz-transform: rotate(360deg);
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);  
+            }
+            .rounded-list a:before{
+                /*content: counter(li);
+                counter-increment: li;*/
+                content: "";
+                display: block;
+                background: url("assets/img/dent1.png") center #fff no-repeat;
+                position: absolute; 
+                left: -1.3em;
+                top: 50%;
+                margin-top: -1.3em;
+                /*background: #d6a4d6;*/
+                height: 2.5em;
+                width: 2.5em;
+                line-height: 2em;
+                border: .3em solid #FFC107;
+                text-align: center;
+                font-weight: bold;
+                -moz-border-radius: 2em;
+                -webkit-border-radius: 2em;
+                border-radius: 2em;
+                -webkit-transition: all .3s ease-out;
+                -moz-transition: all .3s ease-out;
+                -ms-transition: all .3s ease-out;
+                -o-transition: all .3s ease-out;
+                transition: all .3s ease-out;
+            }
+        </style>
+    </head>
+
+    <body><!-- change background image at assets/js/scripts.js -->
+    
+        <!-- Loader -->
+    	<div class="loader">
+    		<div class="loader-img"></div>
+    	</div>
+		
+		<!-- Top menu -->
+		<nav class="navbar navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="Home.html"></a> <!-- import pic from style.css file -->
+				</div>
+			
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="top-navbar-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a class="scroll-link" href="#top-content">Top</a></li>
+                        <li><a class="scroll-link" href="#manage">Manage</a></li>
+                        <li><a href="Login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+		</nav>
+		
+        <!-- Page title -->
+        <div class="page-title top-content">
+            <div class="page-title-text wow fadeInUp">
+            	<h1>Dentistry Information Systems</h1>
+            </div>
+        </div>
+
+       <div class="manage-container section-container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 manage section-description wow fadeIn">
+                    <div class="menucenter">
+                    <table width="100%">
+                    <tr>
+                        <td width="50%">
+                        <ul class="rounded-list">
+                            <li><a href="Patient_his.html" target="_blank">อัพเดทประวัติการรักษา<br />Endodontic Record</a></li>
+                            <li><a href="Patient.html" target="_blank">ข้อมูลผู้ป่วย<br />Manage data of Patients</a></li>
+                        </ul>
+                        </td>
+                        <td width="50%">
+                        <ul class="rounded-list">
+                            <li><a href="Dentist.html" target="_blank">ข้อมูลทันตแพทย์<br />Manage data of Dentist</a></li>
+                            <li><a href="" target="_blank">รายงานสรุปผล<br />Report</a></li>           
+                        </ul>
+                        </td>
+                    </tr>   
+                    </table>
+                    </div>    
+                    </div>
+                </div>
+            </div>
+        </div>     
+
+        <!-- Javascript -->
+        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.backstretch.min.js"></script>
+        <script src="assets/js/wow.min.js"></script>
+        <script src="assets/js/retina-1.1.0.min.js"></script>
+        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="assets/js/waypoints.min.js"></script>
+        <script src="assets/js/jquery.countTo.js"></script>
+        <script src="assets/js/masonry.pkgd.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
+        
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+
+    </body>
+
+</html>
