@@ -1,5 +1,6 @@
 <?php
 class Check{
+	//eieieiieiei
 	public function CheckNone($image,$conn){
 		if($image == ""){
 			?>
