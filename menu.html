@@ -1,9 +1,81 @@
 <html>
+<head>
+ <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+ <style type="text/css">
+ 	.list-group{
+ 		padding-top: 2em;
+ 	}
+
+    .rounded-list a{
+        position: relative;
+        display: block;
+        padding: .4em .4em .4em 2em;                
+        margin: .5em 0;
+        background: #81C784;    
+        color: #444;
+        text-decoration: none;
+        -moz-border-radius: .3em; /*กำหนดเส้นขอบแบบโค้งมน*/
+        -webkit-border-radius: .3em; /*กำหนดเส้นขอบแบบโค้งมน*/
+        border-radius: .3em;
+        -webkit-transition: all .3s ease-out;
+        -moz-transition: all .3s ease-out;
+        -ms-transition: all .3s ease-out;
+        -o-transition: all .3s ease-out;
+        transition: all .3s ease-out;   
+        font-size:16px;
+    }
+
+    .rounded-list  ul { list-style-type: circle; }
+    .rounded-list a:hover{
+        background: #69F0AE;
+    }
+    .rounded-list a:hover:before{
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);  
+    }
+    .rounded-list a:before{
+        /*content: counter(li);
+        counter-increment: li;*/
+        content: "";
+        display: block;
+        background: url("assets/img/dent1.png") center #fff no-repeat;
+        position: absolute; 
+        left: -1.3em;
+        top: 50%;
+        margin-top: -1.3em;
+        /*background: #d6a4d6;*/
+        height: 2.5em;
+        width: 2.5em;
+        line-height: 2em;
+        border: .3em solid #FFC107;
+        text-align: center;
+        font-weight: bold;
+        -moz-border-radius: 2em;
+        -webkit-border-radius: 2em;
+        border-radius: 2em;
+        -webkit-transition: all .3s ease-out;
+        -moz-transition: all .3s ease-out;
+        -ms-transition: all .3s ease-out;
+        -o-transition: all .3s ease-out;
+        transition: all .3s ease-out;
+    }
+
+ </style>
+</head>
 <body>
-<h1>Menu</h1> <br>
-<p><a href="Patient_his.html" target="part">Patient's history</a></p>
-<p><a href="Exam_his.html" target="part">Examination</a></p>
-<p><a href="Diagnosis_his.html" target="part">Diagnosis</a></p>
-<p><a href="Treatment_his.html" target="part">Treatment planning</a></p>
+<div class="list-group">
+	<ul class="rounded-list">
+		 <li><a href="Patient.html" class="list-group-item" target="part">ข้อมูลผู้ป่วย<br />Manage data of Patients</a></li>
+		 <li><a href="Dentist.html" class="list-group-item" target="part">ข้อมูลทันตแพทย์<br />Manage data of Dentist</a></li>
+		 <li><a href="" class="list-group-item" target="part">ข้อมูลนักศึกษาทันตแพทย์<br />Manage data of Dentist</a></li>
+		 <li><a href="Patient_his.php" class="list-group-item" target="part">อัพเดทประวัติการรักษา<br />Endodontic Record</a></li>
+         <li><a href="" class="list-group-item" target="part">รายงานสรุปผล<br />Report</a></li>
+    </ul>
+</div>
+
 </body>
 </html>

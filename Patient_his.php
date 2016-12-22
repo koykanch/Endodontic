@@ -143,8 +143,19 @@
                        
                        <tr>
                        <td width="25%">
-                        <input type="checkbox" name="nonemed" value="nonemed">&nbsp;None
+                       <?php
+                            if($_SESSION['avgnone'] > 30){
+                                ?>
+                                <input type="checkbox" name="nonemed" value="nonemed" checked>&nbsp;None
+                                <?php
+                            }else{
+                                ?>
+                                <input type="checkbox" name="nonemed" value="nonemed">&nbsp;None
+                                <?php
+                            }
+                       ?>
                         </td>
+
                         <td width="25%">
                         <input type="checkbox" name="cardiodismed" value="cardiodismed">&nbsp; Cardiovascular Diseases
                         </td>
