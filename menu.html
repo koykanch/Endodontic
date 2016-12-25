@@ -1,10 +1,22 @@
 <html>
 <head>
- <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
- <style type="text/css">
- 	.list-group{
- 		padding-top: 2em;
- 	}
+ 
+ <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <!-- BOOTSTRAP STYLES-->
+    <link href="assets/css/bootstrap1.css" rel="stylesheet" />
+     <!-- FONTAWESOME STYLES-->
+    <link href="assets/css/font-awesome1.css" rel="stylesheet" />
+        <!-- CUSTOM STYLES-->
+    <link href="assets/css/custom1.css" rel="stylesheet" />
+     <!-- GOOGLE FONTS-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+ <!-- <style type="text/css">
+    .list-group{
+        padding-top: 2em;
+    }
 
     .rounded-list a{
         position: relative;
@@ -64,18 +76,31 @@
         transition: all .3s ease-out;
     }
 
- </style>
+ </style> -->
+
 </head>
 <body>
-<div class="list-group">
+<nav class="navbar-default navbar-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="main-menu">
+             <li><a href="patient_info.php" target="part">ข้อมูลผู้ป่วย</a></li>
+             <li><a href="dentist_info.php" target="part">ข้อมูลทันตแพทย์</a></li>
+             <li><a href="Student_info.php" target="part">ข้อมูลนักศึกษาทันตแพทย์</a></li>
+             <li><a href="importpict.php" target="part">อัพเดทประวัติการรักษา</li></a>
+             <li><a href="#" target="part">รายงานสรุปผล</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- <div class="list-group">
 	<ul class="rounded-list">
-		 <li><a href="Patient.html" class="list-group-item" target="part">ข้อมูลผู้ป่วย<br />Manage data of Patients</a></li>
-		 <li><a href="Dentist.html" class="list-group-item" target="part">ข้อมูลทันตแพทย์<br />Manage data of Dentist</a></li>
-		 <li><a href="" class="list-group-item" target="part">ข้อมูลนักศึกษาทันตแพทย์<br />Manage data of Dentist</a></li>
-		 <li><a href="Patient_his.php" class="list-group-item" target="part">อัพเดทประวัติการรักษา<br />Endodontic Record</a></li>
-         <li><a href="" class="list-group-item" target="part">รายงานสรุปผล<br />Report</a></li>
+		 <li><a href="patient_info.php" class="list-group-item-warning" target="part">ข้อมูลผู้ป่วย<br />Manage data of Patients</a></li>
+		 <li><a href="dentist_info.php" class="list-group-item-warning" target="part">ข้อมูลทันตแพทย์<br />Manage data of Dentist</a></li>
+		 <li><a href="Student_info.php" class="list-group-item-warning" target="part">ข้อมูลนักศึกษาทันตแพทย์<br />Manage data of Dentist</a></li>
+        <li><a href="importpict.php" class="list-group-item-warning" target="part">อัพเดทประวัติการรักษา<br />Endodontic Record</a></li>
+         <li><a href="" class="list-group-item-warning" target="part">รายงานสรุปผล<br />Report</a></li>
     </ul>
-</div>
+</div> -->
 
 </body>
 </html>

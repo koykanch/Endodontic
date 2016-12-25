@@ -17,6 +17,7 @@
 		<link rel="stylesheet" href="assets/css/form-elements.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/media-queries.css">
+        <link rel="stylesheet" href="assets/css/popup.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,8 +31,8 @@
         <style type="text/css">
             .first-container{
                 margin-top: 50px;
-                margin-left: 200px;
-                margin-right: 200px;
+                margin-left: 50px;
+                margin-right: 50px;
             }
 
             input[type="text"], 
@@ -73,57 +74,78 @@
             input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #000; }
             input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #000; }
 
-            table{
-                margin-left: 100px;
-                text-align: left;
-            }
-
-            td{
-                padding: 5px;
-            }
-
         </style>
 
     </head>
+<?php
+    require("connect.php");
+    require("class_stu.php");
 
+    $stuinfo = new Student;
+?>
  <body><!-- change background image at assets/js/scripts.js --> 
     <!-- Loader -->
         <div class="loader">
             <div class="loader-img"></div>
         </div>
-
+        <div class="container">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true" style="float: right;">
+                <!-- Trigger/Open The Modal -->
+                  <button id="myBtn" class="btn btn-success">เพิ่มข้อมูลนักศึกษา</button>
+            </span>
+        </div>
         <div class="first-container">
-        <form name="dentist" action="" method="post">
+        <div class="panel panel-info">
+        <div class="panel-heading"><h3>ข้อมูลนักศึกษา (Student Information)</h3></div>
+        <div class="panel-body">
+            <table class="table table-bordered" border="1">
+                <tr bgcolor="#D7CCC8">
+                    <td>รหัสนักศึกษา</td>
+                    <td>ชื่อนักศึกษา</td>
+                    <td>ช่วงเวลาที่อยู่รักษาผู้ป่วย</td>
+                    <td>ช่วงเวลาที่หยุดรักษาผู้ป่วย</td>
+                    <td>จัดการข้อมูลนักศึกษา</td>
+                </tr>
+                <?php
+                    $stuinfo->Studentinfo($conn)
+                 ?>
+            </table>
+        </div>    
+        </div>    
+        </div>
+
+        <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="sect-container">
+        <form name="student" action="" method="post">
             <div class="panel panel-danger">
-                <div class="panel-heading"><h3>Dentist Record</h3></div>
+            <span class="close">&times;</span>
+                <div class="panel-heading"><h3>Student Record</h3></div>
                     <div class="panel-body">
                     <table>
-                    <tr>
-                        <td width="30%"><b>Dentist's name: </b></td>
-                        <td><input type="text" name="dentname"></td>
+
+                    <tr height="80">
+                        <td width="30%"><b>Student ID: </b></td>
+                        <td><input type="text" name="studentid"></td>
                     </tr>
 
-                    <tr>
-                        <td width="30%"><b>Age: </b></td>
-                        <td><input type="text" name="dentage"></td>
+                    <tr height="80">
+                        <td width="30%"><b>Student name: </b></td>
+                        <td><input type="text" name="studentname"></td>
                     </tr>
 
-                    <tr>
-                        <td width="30%"><b>Gender: </b></td>
-                        <td><select name="genderdent">
-                            <option value="male">Male</option>
-                            <option value="Female">Female</option>
-                        </select></td>
+                    <tr height="80">
+                        <td width="30%"><b>Time begin: </b></td>
+                        <td><input type="text" name="timebegin"></td>
                     </tr>
 
-                    <tr>
-                        <td width="30%"><b>Tel: </b></td>
-                        <td><input type="text" name="denttel"></td>
-                    </tr>
-
-                    <tr>
-                        <td width="30%"><b>Education: </b></td>
-                        <td><input type="text" name="dentedu"></td>
+                    <tr height="80">
+                        <td width="30%"><b>Time end: </b></td>
+                        <td><input type="text" name="timeend"></td>
                     </tr>
 
                     </table>
@@ -134,8 +156,9 @@
                 </div>
             </div>
         </form>
-        </div>
-
+    </div>
+    </div>
+    </div>
         <!-- Javascript -->
         <script src="assets/js/jquery-1.11.1.min.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
@@ -153,3 +176,31 @@
         <![endif]-->
  </body>
  </html>
+
+<script type="text/javascript">
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal 
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>

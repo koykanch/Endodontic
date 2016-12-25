@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="assets/css/form-elements.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/media-queries.css">
+    <link rel="stylesheet" href="assets/css/popup.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,7 +32,7 @@
     <style type="text/css">
     	.menucenter{
                 display: block;
-                padding: .4em 3em .4em .4em;                
+                padding: .5em 3em .4em .4em;                
                 margin: 10em 0;
                 background:#E3F2FD;
             }
@@ -43,68 +44,6 @@
                 background:#E3F2FD;
             }
 
-        /* Modal Body */
-		.modal-body {
-			padding: 2px 16px;
-			text-align: left;
-		}
-
-		/* The Modal (background) */
-		.modal {
-		    display: none; /* Hidden by default */
-		    position: fixed; /* Stay in place */
-		    z-index: 1; /* Sit on top */
-		    left: 0;
-		    top: 0;
-		    width: 100%; /* Full width */
-		    height: 100%; /* Full height */
-		    overflow: auto; /* Enable scroll if needed */
-		    background-color: rgb(0,0,0); /* Fallback color */
-		    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-		    text-align: left;
-		}
-
-		/* Modal Content */
-		.modal-content {
-		    position: relative;
-		    background-color: #fefefe;
-		    margin: 15% auto;
-		    padding: 20px;
-		    border: 1px solid #888;
-		    width: 90%;
-		    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-		    -webkit-animation-name: animatetop;
-		    -webkit-animation-duration: 0.4s;
-		    animation-name: animatetop;
-		    animation-duration: 0.4s;
-		    text-align: left;
-		}
-
-		/* Add Animation */
-		@-webkit-keyframes animatetop {
-		    from {top: -300px; opacity: 0} 
-		    to {top: 0; opacity: 1}
-		}
-
-		@keyframes animatetop {
-		    from {top: -300px; opacity: 0}
-		    to {top: 0; opacity: 1}
-		}
-
-		/* The Close Button */
-		.close {
-		    color: #aaa;
-		    float: right;
-		    font-size: 28px;
-		    font-weight: bold;
-		}
-
-		.close:hover,
-		.close:focus {
-		    color: black;
-		    text-decoration: none;
-		    cursor: pointer;
-		}
 
 		input[type="text"], 
         textarea, 
@@ -141,174 +80,1008 @@
             box-shadow: none;
         }
 
+        .container{
+        	margin-top: 30px;
+        }
+
+        td{
+          padding-right: 7px;
+        }
+
+        button{
+            background-color: #B39DDB;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            width: 250px;
+           
+        }
     </style>
+
 </head>
 <body>
 
-        <!-- Loader -->
-    	<div class="loader">
-    		<div class="loader-img"></div>
-    	</div>
-		
-		<!-- Top menu -->
-		<nav class="navbar navbar-fixed-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="Home.html"></a> <!-- import pic from style.css file -->
-				</div>
-			
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="top-navbar-1">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a class="scroll-link" href="#top-content">Top</a></li>
-                        <li><a class="scroll-link" href="#manage">Manage</a></li>
-                        <li><a href="Login.html">Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-		</nav>
-		
-		<div class="manage-container section-container">
-            <div class="container">
-             <div class="menucenter">
-				<form name="import" method="post" enctype="multipart/form-data">
-					<table border="1">
-					<tr><h3>Import Picture</h3></tr>
-					<tr height="80">
-						<td>Select File</td>
-						<td colspan="2"><input type="file" name="f1"></td>
-					</tr>
-					<tr align="center">
-						<td><input type="submit" name="submit1"  value="UPLOAD" disabled></td>
-						<!-- <td><input type="submit" name="submit2" value="display"></td> -->
-						<td><input type="submit" name="submit3" value="PROCESS"></td>
-						<td><input type="reset" name="clare" value="RESET"></td>
-					</tr>
-					</table>
-				</form>
-			 </div>
-			</div>
-		</div>
+    <!-- Loader -->
+	<div class="loader">
+		<div class="loader-img"></div>
+	</div>
+	
 
-		<div class="block-3-container section-container what-we-do-container">
-	        <div class="container">
-	        	<div class="menu-body">
-	        	<center><table>
-	        	<tr>
-	        		<td width="80%">สิ่งที่ต้องกรอก</td>
-	        		<td width="80%">การจัดการ</td>
-	        	</tr>
-	        	<tr>
-	        		<td>
-	        			<!-- Trigger/Open The Modal -->
-						<button id="myBtn">Open Modal</button>
-					</td>
+     <div class="container">
+        <div class="panel panel-info">
+        <div class="panel-heading"><h3>Import Picture</h3></div>
+        <div class="panel-body">
+			<form name="import" method="post" enctype="multipart/form-data">
+				<center><table border="0">
+				<tr height="80">
+					<td><input type="file"  name="f1"></td>
+				</tr>
+				<tr align="center">
+					<!-- <td><input type="submit" name="submit2" value="display"></td> -->
 					<td>
-						<input type="submit" name="edit" value="EDIT">
-					</td>
+					<input type="submit" name="submit1" class="btn btn-info" value="UPLOAD" disabled>
+					<input type="submit" class="btn btn-success" name="submit3" value="PROCESS">
+					<input type="reset" name="clare" class="btn btn-danger" value="RESET"></td>
 				</tr>
 				</table></center>
+			</form>
+		
+		</div>
+		</div>
+		</div>
+	</div>
 
-						<!-- The Modal -->
-						<div id="myModal" class="modal">
 
-					  	<!-- Modal content -->
-					  	<div class="modal-content">
-						  <div class="modal-body">
-						    <div class="sect-container">
-					        <form name="patient_his" method="post" action="Exam_his.html">
-					            <div class="panel panel-success">
-					            	<span class="close">&times;</span>
-					            <div class="panel-heading"><h3>Patient's History</h3></div>
-					            	<div class="panel-body">
-					                    <div class="form-group">
-					                       <h4>Medical History</h4>
-					                       
-					                       <table width="100%">
-					                       
-					                       <tr height="80">
-					                       <td width="25%">
-					                        <input type="checkbox" name="nonemed" value="nonemed">&nbsp;None
-					                        </td>
-					                        <td width="25%">
-					                        <input type="checkbox" name="cardiodismed" value="cardiodismed">&nbsp; Cardiovascular Diseases
-					                        </td>
-					                        <td width="25%">
-					                        <input type="checkbox" name="pulmonarydismed" value="pulmonarydismed">&nbsp; Pulmonary Diseases
-					                        </td>
-					                        <td width="25%">
-					                        <input type="checkbox" name="gastrodismed" value="gastrodismed">&nbsp; Gastrointestinal Diseases
-					                        </td>
-					                        </tr>
+<div class="container">
+	<div class="panel panel-danger">
+    <div class="panel-heading"><h3>ข้อมูลสำคัญ</h3></div>
+    <div class="panel-body">
+    	<table class="table table-bordered">
+			<!-- Trigger/Open The Modal -->
+			<tr><td><button id="myBtn">Endodontic record</button></td></tr>
+			<tr><td><button id="myButton">Patient's history</button></td></tr>
+			<tr><td><button id="myButton1">Examination</button></td></tr>
+			<tr><td><button id="myButton2">Diagnosis</button></td></tr>
+			<tr><td><button id="myButton3">Treatment Planning</button></td></tr>
+		</table>
+	</div>
+	</div>
+	</div>
+</div>
 
-					                        <tr height="80">
-					                        <td width="25%"> 
-					                        <input type="checkbox" name="hemadismed" value="hemadismed">&nbsp;Hematologic Diseases
-					                        </td>
-					                        <td width="25%">
-					                        <input type="checkbox" name="neurodismed" value="neurodismed">&nbsp; Neurologic Diseases
-					                        </td>
-					                        <td colspan="2" width="50%">
-					                        <input type="checkbox" name="allergicmed" value="allergicmed">&nbsp; Allergic to &nbsp;&nbsp;
-					                        <input type="text" name="allermed" style="width: 400px; height: 50px;">
-					                        </td>
-					                        </tr>
+<!-- The Modal -->
+<div id="myModal" class="modal">
 
-					                        <tr height="80">
-					                        <td colspan="2" width="50%"> 
-					                        <input type="checkbox" name="bloodpressmed" value="bloodpressmed">&nbsp;Blood Pressure (if needed) &nbsp; <input type="text" name="blood">
-					                        </td>
-					                        <td colspan="2" width="50%">
-					                        <input type="checkbox" name="othermed" value="othermed">&nbsp; Other &nbsp; <input type="text" name="medother">
-					                        </td>
-					                        </tr>
+<!-- Modal content -->
+<div class="modal-content">
+  <div class="modal-body">
+    <div class="sect-container">
+        <form name="hnpatient" action="" method="post">
+            <div class="panel panel-danger">
+            <span class="close">&times;</span>
+                <div class="panel-heading"><h3>Endodontic Record</h3></div>
+                    <div class="panel-body">
+                    <table>
+                    <tr height="80">
+                    <td>
+                        <b>HN: </b><input type="text" style="width: 100px; height: 50px;" name="hnid">
+                    </td>
+                    <td>
+                        <b>Patient's name: </b><input type="text" style="width: 350px; height: 50px;" name="patientname">
+                    </td>
+                    <td>
+                        <b>Age: </b><input type="text" style="width: 100px; height: 50px;" name="age">
+                    </td>
+                    <td>
+                        <b>Tooth: </b><input type="text" style="width: 100px; height: 50px;" name="tooth">
+                    </td>
+                    <td>
+                        <b>Gender: </b>
+                            <select style="width:100px; height: 50px;">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                    </td>
+                    </tr>
 
-					                        <tr height="80">
-					                        <td colspan="2" width="50%">
-					                        <input type="checkbox" name="takingmed" value="takingmed">&nbsp; Taking medicine &nbsp; <input type="text" name="medtaking">
-					                        </td>
-					                        <td colspan="2" width="50%"><b>
-					                        Personal Doctor</b>&nbsp;<input type="text" name="personalmed">
-					                        </td>
-					                        </tr>
+                    <tr height="80">
+                    <td>
+                        <b>Dental student:</b>
+                    </td>
+                    <td colspan="4"><input type="text" name="student"></td>
+                </tr>
 
-					                        <tr height="80">
-					                        <td colspan="2" width="50%"><b> Tel &nbsp;</b> <input type="text" name="telmed">
-					                        </td>
-					                        <td colspan="2" width="50%"><b> Remark &nbsp; </b><input type="text" name="remarkmed">
-					                        </td>
-					                        </tr>
+                <tr height="80">
+                    <td>
+                        <b>Instructor:</b>
+                    </td>
+                    <td colspan="4"><input type="text" name="instructor"></td>
+                </tr>
 
-					                      </table> 
+                <tr height="80">
+                    <td>
+                        <b>Dete:</b>
+                    </td>
+                    <td colspan="4">
+                        <select name="DOBMonth">
+                            <option> - Month - </option>
+                            <option value="January">January</option>
+                            <option value="Febuary">Febuary</option>
+                            <option value="March">March</option>
+                            <option value="April">April</option>
+                            <option value="May">May</option>
+                            <option value="June">June</option>
+                            <option value="July">July</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>
+                            <option value="October">October</option>
+                            <option value="November">November</option>
+                            <option value="December">December</option>
+                        </select>
 
-					                      <h4>Dental History</h4>
-					                      <table width="100%">
-					                      <tr height="80">
-					                      <td width="100%"><b>
-					                         Chief Complaint &nbsp;<input type="text" name="chiefdent"></b>
-					                      </td>
-					                      </tr>
-					                      
-					                      <tr height="80">
-					                      <td width="100%"><b>
-					                          History of Present Illness &nbsp; </b><input type="text" name="presentilldent">
-					                      </td>    
-					                      </tr>    
-					                      </table>
-					                    </div>
-					                <input type="submit" class="big-link-1 btn scroll-link" name="next" value="NEXT">
-					                <input type="reset" class="big-link-1 btn scroll-link" name="reset" value="CLEAR">
-					                </div>
-					            </div>
-					        </form>        
-					    	</div> 
-						  </div>
-						</div>
-					</div>
-	        	</div>
-	        </div>
-	    </div>
+                        <select name="DOBDay">
+                            <option> - Day - </option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                        </select>
 
+                        <select name="DOBYear">
+                            <option> - Year - </option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                            <option value="2013">2013</option>
+                            <option value="2012">2012</option>
+                            <option value="2011">2011</option>
+                            <option value="2010">2010</option>
+                            <option value="2009">2009</option>
+                            <option value="2008">2008</option>
+                            <option value="2007">2007</option>
+                            <option value="2006">2006</option>
+                            <option value="2005">2005</option>
+                            <option value="2004">2004</option>
+                            <option value="2003">2003</option>
+                            <option value="2002">2002</option>
+                            <option value="2001">2001</option>
+                            <option value="2000">2000</option>
+                            <option value="1999">1999</option>
+                            <option value="1998">1998</option>
+                            <option value="1997">1997</option>
+                            <option value="1996">1996</option>
+                            <option value="1995">1995</option>
+                            <option value="1994">1994</option>
+                            <option value="1993">1993</option>
+                            <option value="1992">1992</option>
+                            <option value="1991">1991</option>
+                            <option value="1990">1990</option>
+                            <option value="1989">1989</option>
+                            <option value="1988">1988</option>
+                            <option value="1987">1987</option>
+                            <option value="1986">1986</option>
+                            <option value="1985">1985</option>
+                            <option value="1984">1984</option>
+                            <option value="1983">1983</option>
+                            <option value="1982">1982</option>
+                            <option value="1981">1981</option>
+                            <option value="1980">1980</option>
+                            <option value="1979">1979</option>
+                            <option value="1978">1978</option>
+                            <option value="1977">1977</option>
+                            <option value="1976">1976</option>
+                            <option value="1975">1975</option>
+                            <option value="1974">1974</option>
+                            <option value="1973">1973</option>
+                            <option value="1972">1972</option>
+                            <option value="1971">1971</option>
+                            <option value="1970">1970</option>
+                            
+                        </select>
+                    </td>
+                </tr>
+                    </table>        
+                </div>
+            </div>
+        </form>
+	</div> 
+  </div>
+</div>
+</div>
+
+<!-- The Modal -->
+<div id="popup" class="modal">
+
+<!-- Modal content -->
+<div class="modal-content">
+  <div class="modal-body">
+    <div class="sect-container">
+    <form name="patient_his" method="post" action="Exam_his.html">
+            <div class="panel panel-info">
+            <span class="close1">&times;</span>
+            <div class="panel-heading"><h3>Patient's History</h3></div>
+                <div class="panel-body">
+                    <div class="form-group">
+                       <h4>Medical History</h4>
+                       
+                       <table>
+                       
+                       <tr height="80">
+                       <td>
+                            <input type="checkbox" name="nonemed" value="nonemed">&nbsp;None
+                        </td>
+
+                        <td>
+                        <input type="checkbox" name="cardiodismed" value="cardiodismed">&nbsp; Cardiovascular Diseases
+                        </td>
+                        <td>
+                        <input type="checkbox" name="pulmonarydismed" value="pulmonarydismed">&nbsp; Pulmonary Diseases
+                        </td>
+                        <td>
+                        <input type="checkbox" name="gastrodismed" value="gastrodismed">&nbsp; Gastrointestinal Diseases
+                        </td>
+                        </tr>
+
+                        <tr height="80">
+                        <td> 
+                        <input type="checkbox" name="hemadismed" value="hemadismed">&nbsp;Hematologic Diseases
+                        </td>
+                        <td>
+                        <input type="checkbox" name="neurodismed" value="neurodismed">&nbsp; Neurologic Diseases
+                        </td>
+                        <td colspan="2" width="50%">
+                        <input type="checkbox" name="allergicmed" value="allergicmed">&nbsp; Allergic to &nbsp;&nbsp;
+                        <input type="text" name="allermed" style="width: 280px; height: 50px;">
+                        </td>
+                        </tr>
+
+                        <tr height="80">
+                        <td colspan="2"> 
+                        <input type="checkbox" name="bloodpressmed" value="bloodpressmed">&nbsp;Blood Pressure (if needed) &nbsp; <input type="text" name="blood" style="width: 180px; height: 50px;">
+                        </td>
+                        <td colspan="2">
+                        <input type="checkbox" name="othermed" value="othermed">&nbsp; Other &nbsp; <input type="text" name="medother" style="width: 310px; height: 50px;">
+                        </td>
+                        </tr>
+
+                        <tr height="80">
+                        <td colspan="2">
+                        <input type="checkbox" name="takingmed" value="takingmed">&nbsp; Taking medicine &nbsp; <input type="text" name="medtaking" style="width: 250px; height: 50px;">
+                        </td>
+                        <td colspan="2"><b>
+                        Personal Doctor</b>&nbsp;<input type="text" name="personalmed" style="width: 250px; height: 50px;">
+                        </td>
+                        </tr>
+
+                        <tr height="80">
+                        <td colspan="2"><b> Tel &nbsp;</b> <input type="text" name="telmed" style="width: 350px; height: 50px;">
+                        </td>
+                        <td colspan="2"><b> Remark &nbsp; </b><input type="text" name="remarkmed" style="width: 300px; height: 50px;">
+                        </td>
+                        </tr>
+
+                      </table> 
+
+                      <h4>Dental History</h4>
+                      <table>
+                      <tr height="80">
+                      <td><b>
+                         Chief Complaint &nbsp;<input type="text" name="chiefdent" style="width: 700px; height: 50px;"></b>
+                      </td>
+                      </tr>
+                      
+                      <tr height="80"> 
+                      <td><b>
+                          History of Present Illness &nbsp; </b><input type="text" name="presentilldent" style="width: 620px; height: 50px;">
+                      </td>    
+                      </tr>    
+                      </table>
+                    </div>
+                <center><input type="submit" class="big-link-1 btn scroll-link" name="next" value="ADD">
+                <input type="reset" class="big-link-1 btn scroll-link" name="reset" value="CLEAR"></center>
+                </div>
+            </div>
+        </form>        
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- The Modal -->
+<div id="popup1" class="modal">
+
+<!-- Modal content -->
+<div class="modal-content">
+  <div class="modal-body">
+    <div class="sect-container">
+    <form name="examform" action="Diagnosis_his.html" method="post">
+    <div class="panel panel-info">
+    <span class="close2">&times;</span>
+        <div class="panel-heading"><h3>Examination</h3></div>
+        
+        <div class="panel panel-body">
+            <h4>S.Subjective Symptoms</h4>
+
+            <table>
+            <tr height="80">
+               <td><b>Pain intensity: </b></td> 
+
+               <td>
+                <input type="radio" name="paininten" value="noneinten">&nbsp; None
+               </td>
+
+               <td>
+                <input type="radio" name="paininten" value="mildinten"> &nbsp; Mild
+               </td>
+
+               <td>
+                <input type="radio" name="paininten" value="moderateinten"> &nbsp; Moderate
+               </td>
+
+               <td>
+                <input type="radio" name="paininten" value="seversinten"> &nbsp; Severe
+               </td>
+
+               <td></td>
+            </tr>
+
+            <tr height="80">
+               <td width="20%"><b>Pain Character: </b></td> 
+
+               <td>
+                <input type="radio" name="painchar" value="dullchar">&nbsp; Dull
+               </td>
+
+               <td>
+                <input type="radio" name="painchar" value="sharpchar"> &nbsp; Sharp
+               </td>
+
+               <td>
+                <input type="radio" name="painchar" value="throbbingchar"> &nbsp; Throbbing
+               </td>
+
+               <td></td>
+               <td></td>
+            </tr>
+
+            <tr height="80">
+               <td><b>Onset: </b></td> 
+
+               <td>
+                <input type="radio" name="onset" value="spontaneousonset">&nbsp; Spontaneous
+               </td>
+
+               <td colspan="4">
+                <input type="radio" name="onset" value="stimulationonset"> &nbsp; Stimulation Required &nbsp;
+                <input type="text" name="onsetstimul" style="width: 300px; height: 50px; ">
+               </td>
+
+            </tr>
+
+            <tr height="80">
+               <td><b>Duration: </b></td> 
+
+               <td>
+                <input type="radio" name="duration" value="secondsduration">&nbsp; Seconds
+               </td>
+
+               <td>
+                <input type="radio" name="duration" value="minutesduration"> &nbsp; Minutes 
+               </td>
+
+               <td>
+                <input type="radio" name="duration" value="hoursduration"> &nbsp; Hours 
+               </td>
+
+               <td>
+                <input type="radio" name="duration" value="intermittentduration"> &nbsp; Intermittent 
+               </td>
+
+               <td>
+                <input type="radio" name="duration" value="constantduration"> &nbsp; Constant 
+               </td>
+            </tr>
+
+
+            <tr height="80">
+               <td><b>Location: </b></td> 
+
+               <td>
+                <input type="radio" name="location" value="localizedlocat">&nbsp; Localized
+               </td>
+
+               <td>
+                <input type="radio" name="location" value="diffusedlocat"> &nbsp; Diffused 
+               </td>
+
+               <td colspan="3">
+                <input type="radio" name="location" value="radiatinglocat"> &nbsp; Radiating to &nbsp; <input type="text" name="locatradiat" style="width: 250px; height: 50px;"> 
+               </td>
+            </tr>
+
+            <tr height="80">
+                <td></td>
+               <td colspan="5">
+                <input type="radio" name="location" value="referredlocat"> &nbsp; Referred to &nbsp;
+                <input type="text" name="refer" style="width: 500px; height: 50px;"> 
+               </td>
+            </tr>
+            
+            </table>
+
+            <br><br>
+            <h4>O.Objective Symptoms</h4>
+            <table>
+            <tr height="80">
+                <td><b>
+                Extraoral: </b>
+                </td>
+
+                <td>
+                <input type="radio" name="extra" value="facialextra">&nbsp; Facial Swelling
+                </td>
+
+                <td>
+                <input type="radio" name="extra" value="lymphextra">&nbsp; Lymph Node
+                </td>
+
+                <td>
+                <input type="radio" name="extra" value="extsinusextra">&nbsp; Sinus Tract
+                </td>
+            </tr>
+            <tr height="80">
+                <td></td>
+                <td colspan="3">
+                <input type="radio" name="extra" value="otherextra">&nbsp; Other &nbsp; 
+                <input type="text" name="extraother" style="width: 600px; height: 50px;">
+                </td>
+            </tr>
+            
+            <tr height="80">
+                <td><b>
+                Intraoral: </b>
+                </td>
+
+                <td colspan="3">
+                <input type="radio" name="intra" value="swellingintra">&nbsp; Swelling (Soft/Firm) area &nbsp; <input type="text" name="intraswell" style="width: 450px; height: 50px;">
+                </td>
+            </tr>
+
+            <tr height="80">
+                <td></td>
+                <td colspan="3">
+                <input type="radio" name="intra" value="sinusintra">&nbsp; Sinus Tract at &nbsp; <input type="text" name="intrasinus" style="width: 540px; height: 50px;">
+                </td>
+            </tr>
+
+            <tr height="80">
+                <td><b>
+                Tooth: </b>
+                </td>
+
+                <td>
+                <input type="radio" name="tooth" value="cariestooth">&nbsp; Caries
+                </td>
+
+                <td>
+                <input type="radio" name="tooth" value="pulptoothex">&nbsp; Pulp Exposure
+                </td>
+
+                <td>
+                <input type="radio" name="tooth" value="pulptoothpoly">&nbsp; Pulp Polyp
+                </td>
+            </tr>
+
+            <tr height="80">
+                <td></td>
+                <td>
+                <input type="radio" name="tooth" value="opentoothdrai"> &nbsp; Opened for Drainage
+                </td>
+
+                <td colspan="2">
+                <input type="radio" name="tooth" value="temptooth">&nbsp; Temp. Restoration
+                </td>
+            </tr>
+
+            <tr height="80">
+                <td width="15%"></td>
+
+                <td colspan="3">
+                    <input type="radio" name="tooth" value="restoothtoration"> &nbsp; Restoration with &nbsp; <input type="text" name="toothrestoration" style="width: 500px; height: 50px;">
+                </td>                 
+            </tr>
+
+            <tr height="80">
+                <td></td>
+
+                <td colspan="3">
+                    <input type="radio" name="tooth" value="fracturetoration"> &nbsp; Fracture at &nbsp; <input type="text" name="toothfractoration" style="width: 550px; height: 50px;">
+                </td>                 
+            </tr>
+
+            <tr height="80">
+                <td></td>
+
+                <td colspan="3">
+                    <input type="radio" name="tooth" value="crowntooth"> &nbsp; Crown Discoloration to &nbsp; <input type="text" name="toothcrown" style="width: 450px; height: 50px;">
+                </td> 
+            </tr>
+
+                <td></td>
+                <td colspan="3">
+                    <input type="radio" name="tooth" value="othertooth"> &nbsp; Other &nbsp; <input type="text" name="toothother" style="width: 550px; height: 50px;">
+                </td>                 
+            </tr>
+            </table>
+
+            <br><br>
+            <h4>Radiographic findings</h4>
+            <table>
+            <tr height="80">
+                <td width="18%"><b>Crown: </b></td>
+                <td width="15%">
+                    <input type="radio" name="crown" value="normcrown">&nbsp; Normal 
+                </td>
+                <td>
+                    <input type="radio" name="crown" value="restcrown">&nbsp; Restoration
+                </td>
+                <td colspan="2">
+                    <input type="radio" name="crown" value="fractcrown">&nbsp; Fracture
+                </td>
+            </tr>
+
+            <tr height="80">
+                <td></td>
+                <td colspan="4">
+                    <input type="radio" name="crown" value="cariescrown">&nbsp; Caries &nbsp;&nbsp;   
+                    area &nbsp; <input type="text" name="crowarea" style="width: 100px; height: 50px;">&nbsp; &nbsp;
+                    depth &nbsp; <input type="text" name="crowdepth" style="width: 100px; height: 50px;">
+                </td>
+            </tr>
+
+            <tr height="80">
+                <td></td>
+                <td colspan="4">
+                    <input type="radio" name="crown" value="othercrown">&nbsp; Other &nbsp; 
+                    <input type="text" name="crownother" style="width: 400px; height: 50px;">
+                </td>
+            </tr>
+
+            <tr height="80">
+                <td><b>Pulp Chambar: </b></td>
+                <td>
+                    <input type="radio" name="pulpcham" value="normcham">&nbsp; Normal 
+                </td>
+
+                <td>
+                    <input type="radio" name="pulpcham" value="stonecham">&nbsp; Pulp Stone 
+                </td>
+
+                <td colspan="2">
+                    <input type="radio" name="pulpcham" value="rescham">&nbsp; Resorption 
+                </td>
+            </tr>
+            <tr height="80">
+                <td></td>
+                <td colspan="2">
+                    <input type="radio" name="pulpcham" value="calcificatecham">&nbsp; Calcification &nbsp;
+                    <select style="height: 50px;">
+                        <option value="partialchamber">Partial</option>
+                        <option value="completechamber">Complete</option>
+                    </select>
+                </td>
+
+                <td colspan="2">
+                    <input type="radio" name="pulpcham" value="otherchamber">&nbsp; Other &nbsp; <input type="text" name="crownother" style="width: 150px; height: 50px;">
+                </td>
+            </tr>
+
+             <tr height="80">
+                <td><b>Root: </b></td>
+                <td>
+                    <input type="radio" name="root" value="normroot">&nbsp; Normal 
+                </td>
+                <td>
+                    <input type="radio" name="root" value="cariesroot">&nbsp; Caries
+                </td>
+                <td colspan="2">
+                    <input type="radio" name="root" value="curvatureroot">&nbsp; Curvature
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td colspan="2">
+                    <input type="radio" name="root" value="extresroot">&nbsp; Ext. Resorption
+                </td>
+                <td colspan="2">
+                    <input type="radio" name="root" value="fractroot">&nbsp; Fracture
+                </td>
+            </tr>
+
+            <tr height="80">
+                <td></td>
+                <td colspan="4">
+                    <input type="radio" name="root" value="otherroot">&nbsp; Other &nbsp; 
+                    <input type="text" name="rootother" style="width: 400px; height: 50px;">
+                </td>
+            </tr>
+
+            <tr height="80">
+                <td><b>Pulp Canal: </b></td>
+                <td>
+                    <input type="radio" name="pulpcan" value="normcanel">&nbsp; Normal 
+                </td>
+                <td>
+                    <input type="radio" name="pulpcan" value="resorpcanel">&nbsp; Resorption
+                </td>
+                <td colspan="2">
+                    <input type="radio" name="pulpcan" value="perforcanel">&nbsp; Perforation
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2">
+                    <input type="radio" name="pulpcan" value="prevcanel">&nbsp; Previous RCT
+                </td>
+                <td colspan="2">
+                    <input type="radio" name="pulpcan" value="brokecanel">&nbsp; Broken Instrument
+                </td>
+            </tr>
+
+            <tr height="80">
+                <td></td>
+                <td colspan="2">
+                    <input type="radio" name="pulpcan" value="calcificatecanel">&nbsp; Calcification &nbsp;
+                    <select style="height: 50px;">
+                        <option value="partialcanel">Partial</option>
+                        <option value="completecanel">Complete</option>
+                    </select>
+                </td>
+
+                <td colspan="2">
+                    <input type="radio" name="pulpcan" value="othercanel">&nbsp; Other &nbsp; 
+                    <input type="text" name="rootother" style="width: 150px; height: 50px;">
+                </td>
+            </tr>
+
+            <tr height="80">
+                <td><b>Periradicular: </b></td>
+                <td>
+                    <input type="radio" name="perirad" value="normperirad">&nbsp; Normal 
+                </td>
+                <td>
+                    <input type="radio" name="perirad" value="widenperirad">&nbsp; Widening PDL 
+                </td>
+                <td colspan="2">
+                    <input type="radio" name="perirad" value="lossperirad">&nbsp; Loss of Lamina Dura 
+                </td>
+            </tr>
+                <td></td>
+                <td>
+                    <input type="radio" name="perirad" value="resorpperirad">&nbsp; Resorption 
+                </td>
+                <td>
+                    <input type="radio" name="perirad" value="apexperirad">&nbsp; Open Apex 
+                </td>
+                <td colspan="2">
+                    <input type="radio" name="perirad" value="osteoperirad">&nbsp; OsteosIcerosis
+                </td>
+            </tr>
+
+            <tr height="80">
+                <td></td>
+                
+                <td colspan="2">
+                    <input type="radio" name="perirad" value="hyperperirad">&nbsp; Hyperplasia of cementurn 
+                </td>
+                <td colspan="2">
+                    <input type="radio" name="perirad" value="perialessperirad">&nbsp; Periapical Lesion &nbsp;
+                    <input type="text" name="periradperialess" style="width: 200px; height: 50px;"> 
+                </td>
+            </tr>
+
+            <tr height="80">
+                <td></td>
+                <td colspan="5">
+                    <input type="radio" name="perirad" value="laterlessperirad">&nbsp; Lateral Lesion &nbsp;
+                    <input type="text" name="periradlaterless" style="width: 500px; height:50px;"> 
+                </td>
+            </tr>
+
+            <tr height="80">
+                <td></td>
+                <td colspan="5">
+                    <input type="radio" name="perirad" value="otherperirad">&nbsp; Other &nbsp; <input type="text" name="periradother" style="width: 550px; height:50px;">
+                </td>
+            </tr>
+
+            <tr height="80">
+                <td><b>Alveolar Bone: </b></td>
+                <td>
+                    <input type="radio" name="alveolar" value="normalveolar">&nbsp; Normal 
+                </td>
+                <td width="25%">
+                    <input type="radio" name="alveolar" value="generalalveolar">&nbsp; Generalized Bone loss 
+                </td>
+                <td colspan="2">
+                    <input type="radio" name="alveolar" value="localalveolar">&nbsp; Localized Bone loss
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="4">
+                    <input type="radio" name="perirad" value="otherperirad">&nbsp; Other &nbsp; 
+                    <input type="text" name="periradother" style="width:550px; height: 50px;">
+                </td>
+            </tr>
+
+            <tr height="80">
+                <td><b>Remarks: </b></td>
+                <td colspan="4">
+                    <input type="text" name="otherremark" style="width: 700px; height: 50px;">
+                </td>
+            </tr>
+            </table><br><br>
+            <center><input type="submit" class="big-link-1 btn scroll-link" name="next" value="ADD">
+            <input type="reset" class="big-link-1 btn scroll-link" name="reset" value="CLEAR"></center>
+        </div>
+    </div>   
+    </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- The Modal -->
+<div id="popup2" class="modal">
+
+<!-- Modal content -->
+<div class="modal-content">
+  <div class="modal-body">
+    <div class="sect-container">
+        <form name="diagnosisform" action="Treatment_his.html" method="post">
+            <div class="panel panel-info">
+            <span class="close3">&times;</span>
+                <div class="panel-heading"><h3>Diagnosis</h3></div>
+                <div class="panel-body">
+                    <h4>Pulpal Diagnosis</h4>
+                    <table>
+                    <tr>
+                        <td width="30%">
+                            <input type="checkbox" name="puldiagnorm" value="normalpuldiag">&nbsp; Normal 
+                        </td>
+                        <td width="35%">
+                            <input type="checkbox" name="puldiagrevers" value="reverspuldiag">&nbsp; Reversible Pulpitis 
+                        </td>
+                        <td>
+                            <input type="checkbox" name="irrever" value="irreverpuldiag">&nbsp; Irreversible Pulpitis
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td> 
+                            <input type="checkbox" name="symptomirrever" value="symptompuldiag" style="margin-left:2em;">&nbsp; Symptomatic <br>
+                            <input type="checkbox" name="asymtomirrever" value="asymtompuldiag" style="margin-left:2em;">&nbsp; Asymtomatic
+                        </td>
+                    </tr> 
+
+                    <tr height="80">
+                        <td>
+                            <input type="checkbox" name="pulpnecrosis" value="pulpnecrosis">&nbsp; Pulp Necrosis 
+                        </td>
+                        <td>
+                            <input type="checkbox" name="previnitiat" value="prevnitiat">&nbsp; Previously Initiated Therapy 
+                        </td>
+                        <td>
+                            <input type="checkbox" name="prevtreat" value="prevtreat">&nbsp; Previously treated
+                            <select style="height:50px; width: 110px;">
+                                <option value="improper">Improper</option>
+                                <option value="incomplete">Incomplete RCT</option>
+                            </select>
+                        </td>
+                    </tr>
+                    </table>
+                    
+                    <h4>Periradicular Diagnosis</h4>
+                    <table>
+                        <tr height="80">
+                            <td width="28%">
+                            <input type="checkbox" name="periraddiagnorm" value="normalperdiag">&nbsp; Normal 
+                            </td>
+
+                            <td width="38%">
+                            <input type="checkbox" name="symptomperdiag" value="symptomperdiag">&nbsp; Symptomatic Apical Periodontitis    
+                            </td>
+
+                            <td>
+                            <input type="checkbox" name="asymptomperdiag" value="asymptomperdiag">&nbsp; Asymptomatic Apical Periodontitis    
+                            </td>
+                        </tr>
+
+                        <tr height="80">
+                             <td>
+                            <input type="checkbox" name="acuteperdiag" value="acuteperdiag">&nbsp; Acute Apical Abscess    
+                            </td>
+
+                             <td>
+                            <input type="checkbox" name="chronicperdiag" value="chronicperdiag">&nbsp; Chronic Apical Abscess
+                            </td>
+
+                            <td>
+                                <input type="checkbox" name="perdiag" value="otherperdiag">&nbsp; Other &nbsp; <input type="text" name="perdiagother" style="width: 200px; height: 50px;">
+                            </td>
+                        </tr>
+                    </table><br><br>
+                    <center><input type="submit" class="big-link-1 btn scroll-link" name="next" value="ADD">
+                    <input type="reset" class="big-link-1 btn scroll-link" name="reset" value="CLEAR"></center>
+                </div>    
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- The Modal -->
+<div id="popup3" class="modal">
+
+<!-- Modal content -->
+<div class="modal-content">
+  <div class="modal-body">
+    <div class="sect-container">
+        <form name="treatment" action="" method="post">
+            <div class="panel panel-info">
+            <span class="close4">&times;</span>
+            <div class="panel-heading"><h3>Treatment Planning</h3></div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+
+                <tr height="80">
+                  <td width="35%">
+                  <input type="checkbox" name="notreat" value="notreat">No Treatment
+                  </td>
+
+                  <td>
+                  <input type="checkbox" name="pulpotomy" value="pulpotomy">Pulpotomy
+                      <select style="height: 50px;">
+                          <option value="partial">Partial</option>
+                          <option value="full">Full</option>
+                      </select>
+                  </td>
+
+                  <td>
+                  <input type="checkbox" name="pulpectomy" value="pulpectomy">Pulpectomy
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                  <input type="checkbox" name="nonrootcanel" value="nonrootcanel">Non-surgical Root Canel Treatment
+                  </td>
+
+                  <td>
+                  <input type="checkbox" name="nonretreatment" value="nonretreatment">Non-surgical Retreatment
+                  </td>
+
+                  <td>
+                  <input type="checkbox" name="apexification" value="apexification">Apexification
+                  </td>
+                </tr>
+
+                <tr height="80">
+                  
+                  <td>
+                  <input type="checkbox" name="intentional" value="intentional">Intentional RCT
+                  </td>
+
+                  <td>
+                  <input type="checkbox" name="rootcaneltreat" value="rootcaneltreat">Surgical Root Canel Treatment
+                  </td>
+
+                  <td>
+                  <input type="checkbox" name="perio" value="perio">Perio Consult
+                  </td>
+                </tr>
+
+                <tr height="80">
+                  <td colspan="3">
+                      <input type="checkbox" name="othertreat" value="othertreat">&nbsp; Other &nbsp; <input type="text" name="periradother">
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                     <b>Plan for final restoration: </b>
+                  </td>
+
+                  <td colspan="2">
+                      <input type="text" name="planrestor" style="height: 50px;">
+                  </td>
+                </tr>
+
+                <tr height="80">
+                  <td>
+                      <b>Pre-op treatment: </b>
+                  </td>
+
+                  <td>
+                      <input type="radio" name="preop" value="cariesremove">&nbsp; Caries Removal
+                  </td>
+                  <td>
+                      <input type="radio" name="preop" value="dam">&nbsp; Dam
+                  </td>
+                </tr>
+
+                <tr>
+                  <td></td>
+                  <td colspan="2">
+                      <input type="radio" name="preop" value="otherpreop">&nbsp; Other 
+                      <input type="text" name="preopother">
+                  </td>
+                </tr>
+
+                <tr height="80">
+                    <td><b>Anesthesia: </b></td>
+                    <td>
+                        <input type="radio" name="anesthesis" value="anesrequired">&nbsp; Required
+                    </td>    
+
+                    <td>
+                        <input type="radio" name="anesthesis" value="anesnotrequired">&nbsp; Not required
+                    </td>  
+                </tr>
+
+                <tr height="80">
+                    <td>
+                        <b>X-ray file:</b>
+                    </td>
+                    <td colspan="2"><input type="file" name="xrayfile"></td>
+                </tr>
+
+                
+                </table><br><br>
+                <center><input type="submit" class="big-link-1 btn scroll-link" name="next" value="ADD">
+                <input type="reset" class="big-link-1 btn scroll-link" name="reset" value="CLEAR"></center>
+
+            </div>
+            </div>
+        </form>
+    </div>
+ </div>
+</div>
+</div>
  <!-- Javascript -->
         <script src="assets/js/jquery-1.11.1.min.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
@@ -434,4 +1207,121 @@
 	        modal.style.display = "none";
 	    }
 	}
+    
+</script>
+
+<script type="text/javascript">
+    // Get the modal
+    var popup = document.getElementById('popup');
+
+    // Get the button that opens the modal
+    var buttonn = document.getElementById("myButton");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close1")[0];
+
+    // When the user clicks on the button, open the modal 
+    buttonn.onclick = function() {
+        popup.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        popup.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == popup) {
+            popup.style.display = "none";
+        }
+    }
+
+</script>
+
+<script type="text/javascript">
+    // Get the modal
+    var popup1 = document.getElementById('popup1');
+
+    // Get the button that opens the modal
+    var buttonn1 = document.getElementById("myButton1");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close2")[0];
+
+    // When the user clicks on the button, open the modal 
+    buttonn1.onclick = function() {
+        popup1.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        popup1.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == popup1) {
+            popup1.style.display = "none";
+        }
+    }
+
+</script>
+
+<script type="text/javascript">
+    // Get the modal
+    var popup2 = document.getElementById('popup2');
+
+    // Get the button that opens the modal
+    var buttonn2 = document.getElementById("myButton2");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close3")[0];
+
+    // When the user clicks on the button, open the modal 
+    buttonn2.onclick = function() {
+        popup2.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        popup2.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == popup2) {
+            popup2.style.display = "none";
+        }
+    }
+
+</script>
+
+<script type="text/javascript">
+    // Get the modal
+    var popup3 = document.getElementById('popup3');
+
+    // Get the button that opens the modal
+    var buttonn3 = document.getElementById("myButton3");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close4")[0];
+
+    // When the user clicks on the button, open the modal 
+    buttonn3.onclick = function() {
+        popup3.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        popup3.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == popup3) {
+            popup3.style.display = "none";
+        }
+    }
+
 </script>

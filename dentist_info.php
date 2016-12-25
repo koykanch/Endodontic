@@ -17,6 +17,7 @@
 		<link rel="stylesheet" href="assets/css/form-elements.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/media-queries.css">
+        <link rel="stylesheet" href="assets/css/popup.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,8 +31,8 @@
         <style type="text/css">
             .first-container{
                 margin-top: 50px;
-                margin-left: 200px;
-                margin-right: 200px;
+                margin-left: 50px;
+                margin-right: 50px;
             }
 
             input[type="text"], 
@@ -73,57 +74,74 @@
             input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #000; }
             input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #000; }
 
-            table{
-                margin-left: 100px;
-                text-align: left;
-            }
-
-            td{
-                padding: 5px;
-            }
-
         </style>
 
     </head>
+<?php
+    require("connect.php");
+    require("class_dent.php");
 
+    $dentinfo = new Dentist;
+?>
  <body><!-- change background image at assets/js/scripts.js --> 
     <!-- Loader -->
         <div class="loader">
             <div class="loader-img"></div>
         </div>
 
+        <div class="container">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true" style="float: right;">
+                <!-- Trigger/Open The Modal -->
+                  <button id="myBtn" class="btn btn-success">เพิ่มข้อมูลทันตแพทย์</button>
+            </span>
+        </div>
+
         <div class="first-container">
-        <form name="patient" action="" method="post">
-            <div class="panel panel-success">
-                <div class="panel-heading"><h3>Patient Record</h3></div>
+        <div class="panel panel-info">
+        <div class="panel-heading"><h3>ข้อมูลทันตแพทย์ (Dentist Information)</h3></div>
+        <div class="panel-body">
+            <table class="table table-bordered" border="1">
+                <tr bgcolor="#D7CCC8">
+                    <td>รหัสทันตแพทย์</td>
+                    <td>ชื่อทันตแพทย์</td>
+                    <td>สถานะ</td>
+                    <td>จัดการข้อมูลนักศึกษา</td>
+                </tr>
+                <?php
+                    $dentinfo->Dentistinfo($conn)
+                 ?>
+            </table>
+        </div>    
+        </div>    
+        </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="sect-container">
+        <form name="dentist" action="" method="post">
+            <div class="panel panel-danger">
+            <span class="close">&times;</span>
+                <div class="panel-heading"><h3>Dentist Record</h3></div>
                     <div class="panel-body">
                     <table>
-                    <tr>
-                        <td width="30%"><b>Patient's name: </b></td>
-                        <td><input type="text" name="patientname"></td>
+
+                    <tr height="80">
+                        <td width="30%"><b>Dent ID: </b></td>
+                        <td><input type="text" name="dentid"></td>
                     </tr>
 
-                    <tr>
-                        <td width="30%"><b>Age: </b></td>
-                        <td><input type="text" name="patientage"></td>
+                    <tr height="80">
+                        <td width="30%"><b>Dentist's name: </b></td>
+                        <td><input type="text" name="dentname"></td>
                     </tr>
 
-                    <tr>
-                        <td width="30%"><b>Gender: </b></td>
-                        <td><select name="gender">
-                            <option value="male">Male</option>
-                            <option value="Female">Female</option>
-                        </select></td>
-                    </tr>
-
-                    <tr>
-                        <td width="30%"><b>Tel: </b></td>
-                        <td><input type="text" name="patienttel"></td>
-                    </tr>
-
-                    <tr>
-                        <td width="30%"><b>ยาที่แพ้: </b></td>
-                        <td><input type="text" name="patientdrug"></td>
+                    <tr height="80">
+                        <td width="30%"><b>Status: </b></td>
+                        <td><input type="text" name="dentstatus"></td>
                     </tr>
 
                     </table>
@@ -134,7 +152,9 @@
                 </div>
             </div>
         </form>
-        </div>
+    </div>
+    </div>
+    </div>
 
         <!-- Javascript -->
         <script src="assets/js/jquery-1.11.1.min.js"></script>
@@ -153,3 +173,31 @@
         <![endif]-->
  </body>
  </html>
+
+<script type="text/javascript">
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal 
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>

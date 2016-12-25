@@ -2,7 +2,7 @@
 	$servername = "localhost";
 	$username = "root";
 	$password = "";
-	$select_db = "image_test";
+	$select_db = "dentalsystem";
 	
 	$conn = new mysqli($servername,$username,$password,$select_db);
 	mysqli_set_charset($conn,"utf8");
