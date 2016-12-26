@@ -74,6 +74,17 @@
             input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #000; }
             input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #000; }
 
+            button{
+                margin-top: 2em;
+                width: 150px;
+                height: 40px;
+                background-color: #FFD54F;
+                border: none;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px
+            }
         </style>
 
     </head>
@@ -90,10 +101,11 @@
         </div>
 
         <div class="container">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true" style="float: right;">
-            <!-- Trigger/Open The Modal -->
-              <button id="myBtn" class="btn btn-success">เพิ่มข้อมูลผู้ป่วย</button>
-            </span>
+            <button id="myBtn" style="float: right;">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true" style="float: left;"></span>
+                <!-- Trigger/Open The Modal -->
+                เพิ่มข้อมูลผู้ป่วย
+            </button>  
         </div>
 
         <div class="first-container">

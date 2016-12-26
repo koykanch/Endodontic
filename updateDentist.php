@@ -74,18 +74,6 @@
             input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #000; }
             input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #000; }
 
-
-            button{
-                margin-top: 2em;
-                width: 200px;
-                height: 45px;
-                background-color: #FFD54F;
-                border: none;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px
-            }
         </style>
 
     </head>
@@ -93,71 +81,56 @@
     require("connect.php");
     require("class_dent.php");
 
-    $dentinfo = new Dentist;
+    $DentId = $_POST['dentId'];
+    $sql = "SELECT * FROM dentist_info WHERE dentId = '$DentId' ";
+    $result = $conn->query($sql);
+    $row = mysqli_fetch_array($result);
 ?>
  <body><!-- change background image at assets/js/scripts.js --> 
     <!-- Loader -->
-        <div class="loader">
-            <div class="loader-img"></div>
-        </div>
+    <div class="loader">
+        <div class="loader-img"></div>
+    </div>
 
-        <div class="container">
-            <button id="myBtn" style="float: right;">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true" style="float: left;"></span>
-                <!-- Trigger/Open The Modal -->
-                เพิ่มข้อมูลทันตแพทย์
-            </button>  
-        </div>
-
-        <div class="first-container">
-        <div class="panel panel-info">
-        <div class="panel-heading"><h3>ข้อมูลทันตแพทย์ (Dentist Information)</h3></div>
-        <div class="panel-body">
-            <table class="table table-bordered" border="1">
-                <tr bgcolor="#D7CCC8">
-                    <td>รหัสทันตแพทย์</td>
-                    <td>ชื่อทันตแพทย์</td>
-                    <td>สถานะ</td>
-                    <td>จัดการข้อมูลนักศึกษา</td>
-                </tr>
-                <?php
-                    $dentinfo->Dentistinfo($conn)
-                 ?>
-            </table>
-        </div>    
-        </div>    
-        </div>
-
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-
-    <!-- Modal content -->
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="sect-container">
-        <form name="dentist" action="insertdent.php" method="post">
+    <div class="first-container">
+    <form name="dentist" action="" method="post">
             <div class="panel panel-danger">
-            <span class="close">&times;</span>
                 <div class="panel-heading"><h3>Dentist Record</h3></div>
                     <div class="panel-body">
                     <table>
 
                     <tr height="80">
                         <td><b>Dent ID: </b></td>
-                        <td><input type="text" name="dentid"></td>
+                        <td><input type="text" name="dentid" value="<?php echo $row['dentId']; ?>" disabled></td>
                     </tr>
 
                     <tr height="80">
                         <td><b>Dentist's name: </b></td>
-                        <td><input type="text" name="dentname"></td>
+                        <td><input type="text" name="dentname" value="<?php echo $row['dent_name']; ?>"></td>
                     </tr>
 
                     <tr height="80">
                         <td><b>Status: </b></td>
                         <td>
                         <select name="dentstatus" style="height: 50px;">
-                            <option value="0">พนักงาน</option>
-                            <option value="1">ทันตแพทย์</option>
+                        <?php
+                            $sqli = "SELECT * FROM dentist_info WHERE dentId = '$DentId' ";
+                            $result1 = $conn->query($sqli);
+                            while($row1 = mysqli_fetch_array($result1)){
+                                if($row1['status'] == '1'){
+                                  ?>
+                                    <option value="<?php echo $row1['status']; ?>"><?php echo $row1['status'] ?> - <?php echo 'ทันตแพทย์'; ?></option>
+                                    <option value="0">0 - พนักงาน</option>
+                                  <?php  
+                                }else{
+                                    ?>
+                                    <option value="<?php echo $row1['status']; ?>"><?php echo $row1['status'] ?> - <?php echo 'พนักงาน'; ?></option>
+                                    <option value="1">1 - ทันตแพทย์</option>
+                                  <?php  
+                                }
+                            
+                            }
+                        ?>
                         </select>
                         </td>
                     </tr>
@@ -165,57 +138,27 @@
                     </table>
 
                     <br><br>
-                    <input type="submit" class="big-link-1 btn scroll-link" name="submit" value="ADD">
+                    <input type="submit" class="big-link-1 btn scroll-link" name="submit" value="Update">
                     <input type="reset" class="big-link-1 btn scroll-link" name="reset" value="CLEAR">
                 </div>
             </div>
         </form>
-    </div>
-    </div>
-    </div>
+    </div> 
 
-        <!-- Javascript -->
-        <script src="assets/js/jquery-1.11.1.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.backstretch.min.js"></script>
-        <script src="assets/js/wow.min.js"></script>
-        <script src="assets/js/retina-1.1.0.min.js"></script>
-        <script src="assets/js/jquery.magnific-popup.min.js"></script>
-        <script src="assets/js/waypoints.min.js"></script>
-        <script src="assets/js/jquery.countTo.js"></script>
-        <script src="assets/js/masonry.pkgd.min.js"></script>
-        <script src="assets/js/scripts.js"></script>
-        
-        <!--[if lt IE 10]>
-            <script src="assets/js/placeholder.js"></script>
-        <![endif]-->
+    <!-- Javascript -->
+    <script src="assets/js/jquery-1.11.1.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.backstretch.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/retina-1.1.0.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/jquery.countTo.js"></script>
+    <script src="assets/js/masonry.pkgd.min.js"></script>
+    <script src="assets/js/scripts.js"></script>
+    
+    <!--[if lt IE 10]>
+        <script src="assets/js/placeholder.js"></script>
+    <![endif]-->
  </body>
  </html>
-
-<script type="text/javascript">
-    // Get the modal
-    var modal = document.getElementById('myModal');
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on the button, open the modal 
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>

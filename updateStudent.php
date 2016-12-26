@@ -74,18 +74,6 @@
             input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #000; }
             input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #000; }
 
-
-            button{
-                margin-top: 2em;
-                width: 200px;
-                height: 45px;
-                background-color: #FFD54F;
-                border: none;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px
-            }
         </style>
 
     </head>
@@ -93,64 +81,32 @@
     require("connect.php");
     require("class_stu.php");
 
-    $stuinfo = new Student;
+    $StudentId = $_POST['studentId'];
+    $sql = "SELECT * FROM dentalstudent_info WHERE student_code = '$StudentId' ";
+    $result = $conn->query($sql);
+    $row = mysqli_fetch_array($result);
 ?>
  <body><!-- change background image at assets/js/scripts.js --> 
     <!-- Loader -->
-        <div class="loader">
-            <div class="loader-img"></div>
-        </div>
+    <div class="loader">
+        <div class="loader-img"></div>
+    </div>
 
-        <div class="container">
-            <button id="myBtn" style="float: right;">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true" style="float: left;"></span>
-                <!-- Trigger/Open The Modal -->
-                เพิ่มข้อมูลนักศึกษา
-            </button>  
-        </div>
-
-        <div class="first-container">
-        <div class="panel panel-info">
-        <div class="panel-heading"><h3>ข้อมูลนักศึกษา (Student Information)</h3></div>
-        <div class="panel-body">
-            <table class="table table-bordered" border="1">
-                <tr bgcolor="#D7CCC8">
-                    <td>รหัสนักศึกษา</td>
-                    <td>ชื่อนักศึกษา</td>
-                    <td>ช่วงเวลาที่อยู่รักษาผู้ป่วย</td>
-                    <td>ช่วงเวลาที่หยุดรักษาผู้ป่วย</td>
-                    <td>จัดการข้อมูลนักศึกษา</td>
-                </tr>
-                <?php
-                    $stuinfo->Studentinfo($conn)
-                 ?>
-            </table>
-        </div>    
-        </div>    
-        </div>
-
-        <!-- The Modal -->
-    <div id="myModal" class="modal">
-
-    <!-- Modal content -->
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="sect-container">
-        <form name="student" action="" method="post">
+    <div class="first-container">
+    <form name="student" action="" method="post">
             <div class="panel panel-danger">
-            <span class="close">&times;</span>
                 <div class="panel-heading"><h3>Student Record</h3></div>
                     <div class="panel-body">
                     <table>
 
                     <tr height="80">
                         <td width="30%"><b>Student ID: </b></td>
-                        <td><input type="text" name="studentid"></td>
+                        <td><input type="text" name="studentid" value="<?php echo $row['student_code']; ?>" disabled></td>
                     </tr>
 
                     <tr height="80">
                         <td width="30%"><b>Student name: </b></td>
-                        <td><input type="text" name="studentname"></td>
+                        <td><input type="text" name="studentname" value="<?php echo $row['student_name']; ?>"></td>
                     </tr>
 
                     <tr height="80">
@@ -166,56 +122,27 @@
                     </table>
 
                     <br><br>
-                    <input type="submit" class="big-link-1 btn scroll-link" name="submit" value="ADD">
+                    <input type="submit" class="big-link-1 btn scroll-link" name="submit" value="Update">
                     <input type="reset" class="big-link-1 btn scroll-link" name="reset" value="CLEAR">
                 </div>
             </div>
         </form>
-    </div>
-    </div>
-    </div>
-        <!-- Javascript -->
-        <script src="assets/js/jquery-1.11.1.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.backstretch.min.js"></script>
-        <script src="assets/js/wow.min.js"></script>
-        <script src="assets/js/retina-1.1.0.min.js"></script>
-        <script src="assets/js/jquery.magnific-popup.min.js"></script>
-        <script src="assets/js/waypoints.min.js"></script>
-        <script src="assets/js/jquery.countTo.js"></script>
-        <script src="assets/js/masonry.pkgd.min.js"></script>
-        <script src="assets/js/scripts.js"></script>
-        
-        <!--[if lt IE 10]>
-            <script src="assets/js/placeholder.js"></script>
-        <![endif]-->
+    </div> 
+
+    <!-- Javascript -->
+    <script src="assets/js/jquery-1.11.1.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.backstretch.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/retina-1.1.0.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/jquery.countTo.js"></script>
+    <script src="assets/js/masonry.pkgd.min.js"></script>
+    <script src="assets/js/scripts.js"></script>
+    
+    <!--[if lt IE 10]>
+        <script src="assets/js/placeholder.js"></script>
+    <![endif]-->
  </body>
  </html>
-
-<script type="text/javascript">
-    // Get the modal
-    var modal = document.getElementById('myModal');
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on the button, open the modal 
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
