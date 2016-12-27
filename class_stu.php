@@ -10,12 +10,13 @@ class Student
 		while($row=mysqli_fetch_array($result)){
 
 			$studentId = $row['student_code'];
-
+			$begin=date('d/m/Y',strtotime($row['student_timebegin']));
+			$end=date('d/m/Y',strtotime($row['student_timeend']));
 			echo '<tr>
 				<td>'.$row['student_code'].'</td>
 				<td>'.$row['student_name'].'</td>
-				<td>'.$row['student_timebegin'].'</td>
-				<td>'.$row['student_timeend'].'</td>
+				<td>'.$begin.'</td>
+				<td>'.$end.'</td>
 				<td>
 					<form action="updateStudent.php" method="post" name="updatebtn">
 							<input type="hidden" name="studentId" value="'.$row['student_code'].'">

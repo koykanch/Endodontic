@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/media-queries.css">
         <link rel="stylesheet" href="assets/css/popup.css">
+        <link rel="stylesheet" href="assets/css/cuppa-datepicker-styles.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -113,7 +114,7 @@
         <div class="panel-heading"><h3>ข้อมูลผู้ป่วย (Patient Information)</h3></div>
         <div class="panel-body">
             <table class="table table-bordered" border="1">
-                <tr bgcolor="#D7CCC8">
+                <tr bgcolor="#D1C4E9">
                     <td>รหัสผู้ป่วย</td>
                     <td>ชื่อผู้ป่วย</td>
                     <td>เพศ</td>
@@ -135,7 +136,7 @@
     <div class="modal-content">
       <div class="modal-body">
         <div class="sect-container">
-        <form name="patient" action="" method="post">
+        <form name="patient" action="insertPatient.php" method="post">
             <div class="panel panel-success">
             <span class="close">&times;</span>
                 <div class="panel-heading"><h3>Patient Record</h3></div>
@@ -148,7 +149,7 @@
 
                     <tr height="80">
                         <td width="30%"><b>Gender: </b></td>
-                        <td><select name="gender">
+                        <td><select name="gender" style="width: 150px; padding: .4em;">
                             <option value="male">Male</option>
                             <option value="Female">Female</option>
                         </select></td>
@@ -156,7 +157,10 @@
 
                     <tr height="80">
                         <td width="30%"><b>Birth date: </b></td>
-                        <td><input type="text" name="patientbirth"></td>
+                        <td>  
+                            <i class="glyphicon glyphicon-calendar"></i>
+                            <input type="date" style="width: 150px; padding: .4em;" name="patientbirth">
+                        </td>                         
                     </tr>
 
                     </table>
@@ -215,4 +219,5 @@
             modal.style.display = "none";
         }
     }
+
 </script>

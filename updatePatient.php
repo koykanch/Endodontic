@@ -93,7 +93,7 @@
     </div>
 
     <div class="first-container">
-    <form name="patient" action="" method="post">
+    <form name="patient" action="updatePatient1.php" method="post">
     <div class="panel panel-success">
         <div class="panel-heading"><h3>Patient Record</h3></div>
             <div class="panel-body">
@@ -105,7 +105,7 @@
 
             <tr height="80">
                 <td width="30%"><b>Gender: </b></td>
-                <td><select name="gender">
+                <td><select name="gender" style="width: 150px; padding: .4em;">
                 <?php
                     $PatientHN = $_POST['PatientHN'];
                     $sqli = "SELECT * FROM patients_info WHERE HN = '$PatientHN' ";
@@ -133,12 +133,16 @@
 
             <tr height="80">
                 <td width="30%"><b>Birth date: </b></td>
-                <td><input type="text" name="patientbirth"></td>
+                <td>  
+                    <i class="glyphicon glyphicon-calendar"></i>
+                    <input type="date" style="width: 150px; padding: .4em;" name="patientbirth" value="<?php echo $row['birthdate']; ?>">
+                </td> 
             </tr>
 
             </table>
 
             <br><br>
+            <input type="hidden" name="HN" value="<?php echo $PatientHN; ?>">
             <input type="submit" class="big-link-1 btn scroll-link" name="submit" value="Update">
             <input type="reset" class="big-link-1 btn scroll-link" name="reset" value="CLEAR">
         </div>

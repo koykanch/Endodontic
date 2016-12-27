@@ -114,7 +114,7 @@
         <div class="panel-heading"><h3>ข้อมูลทันตแพทย์ (Dentist Information)</h3></div>
         <div class="panel-body">
             <table class="table table-bordered" border="1">
-                <tr bgcolor="#D7CCC8">
+                <tr bgcolor="#D1C4E9">
                     <td>รหัสทันตแพทย์</td>
                     <td>ชื่อทันตแพทย์</td>
                     <td>สถานะ</td>

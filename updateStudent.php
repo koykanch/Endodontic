@@ -18,7 +18,8 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/media-queries.css">
         <link rel="stylesheet" href="assets/css/popup.css">
-
+        <link rel="stylesheet" href="datepicker/datepicker.css">
+        <script src="datepicker/datepicker.js"></script>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -74,6 +75,9 @@
             input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #000; }
             input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #000; }
 
+            .panel-body{
+                font-size: 15px;
+            }
         </style>
 
     </head>
@@ -93,7 +97,7 @@
     </div>
 
     <div class="first-container">
-    <form name="student" action="" method="post">
+    <form name="student" action="updateStudent1.php" method="post">
             <div class="panel panel-danger">
                 <div class="panel-heading"><h3>Student Record</h3></div>
                     <div class="panel-body">
@@ -101,7 +105,7 @@
 
                     <tr height="80">
                         <td width="30%"><b>Student ID: </b></td>
-                        <td><input type="text" name="studentid" value="<?php echo $row['student_code']; ?>" disabled></td>
+                        <td><input type="text" name="studentid" value="<?php echo $row['student_code']; ?>"></td>
                     </tr>
 
                     <tr height="80">
@@ -111,17 +115,25 @@
 
                     <tr height="80">
                         <td width="30%"><b>Time begin: </b></td>
-                        <td><input type="text" name="timebegin"></td>
+                        <td><!-- <input type="text" name="timebegin"> -->
+                            <i class="glyphicon glyphicon-calendar" style="font-size: 20px;"></i>
+                            <input type="text" name="student_begin" class="startDate" value="<?php echo $row['student_timebegin']; ?>">&nbsp;
+                        </td>
                     </tr>
 
                     <tr height="80">
                         <td width="30%"><b>Time end: </b></td>
-                        <td><input type="text" name="timeend"></td>
+                        <td>
+                        <!-- <input type="text" name="timeend"> -->
+                            <i class="glyphicon glyphicon-calendar" style="font-size: 20px;"></i>
+                            <input type="text" name="student_end" class="endDate" value="<?php echo $row['student_timeend']; ?>">
+                        </td>
                     </tr>
 
                     </table>
 
                     <br><br>
+                    <input type="hidden" name="stu_code" value="<?php echo $StudentId; ?>">
                     <input type="submit" class="big-link-1 btn scroll-link" name="submit" value="Update">
                     <input type="reset" class="big-link-1 btn scroll-link" name="reset" value="CLEAR">
                 </div>
@@ -146,3 +158,15 @@
     <![endif]-->
  </body>
  </html>
+<script type="text/javascript">
+    var tripDatePicker = new datePicker({
+        start:  document.getElementsByClassName('startDate'),
+        end:    document.getElementsByClassName('endDate'),
+    });
+
+    var tripDatePicker = new datePicker({
+        start:  document.getElementsByClassName('startDate'),
+        end:    document.getElementsByClassName('endDate'),
+        months: 2,
+    });
+</script>

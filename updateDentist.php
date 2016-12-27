@@ -93,7 +93,7 @@
     </div>
 
     <div class="first-container">
-    <form name="dentist" action="" method="post">
+    <form name="dentist" action="updateDentist1.php" method="post">
             <div class="panel panel-danger">
                 <div class="panel-heading"><h3>Dentist Record</h3></div>
                     <div class="panel-body">
@@ -138,6 +138,7 @@
                     </table>
 
                     <br><br>
+                    <input type="hidden" name="id" value="<?php echo $DentId; ?>">
                     <input type="submit" class="big-link-1 btn scroll-link" name="submit" value="Update">
                     <input type="reset" class="big-link-1 btn scroll-link" name="reset" value="CLEAR">
                 </div>

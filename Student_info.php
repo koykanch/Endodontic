@@ -18,6 +18,8 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/media-queries.css">
         <link rel="stylesheet" href="assets/css/popup.css">
+        <link rel="stylesheet" href="datepicker/datepicker.css">
+        <script src="datepicker/datepicker.js"></script>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -86,6 +88,10 @@
                 display: inline-block;
                 font-size: 16px
             }
+
+            .panel-body{
+                font-size: 14px;
+            }
         </style>
 
     </head>
@@ -114,7 +120,7 @@
         <div class="panel-heading"><h3>ข้อมูลนักศึกษา (Student Information)</h3></div>
         <div class="panel-body">
             <table class="table table-bordered" border="1">
-                <tr bgcolor="#D7CCC8">
+                <tr bgcolor="#D1C4E9">
                     <td>รหัสนักศึกษา</td>
                     <td>ชื่อนักศึกษา</td>
                     <td>ช่วงเวลาที่อยู่รักษาผู้ป่วย</td>
@@ -136,7 +142,7 @@
     <div class="modal-content">
       <div class="modal-body">
         <div class="sect-container">
-        <form name="student" action="" method="post">
+        <form name="student" action="insertStudent.php" method="post">
             <div class="panel panel-danger">
             <span class="close">&times;</span>
                 <div class="panel-heading"><h3>Student Record</h3></div>
@@ -155,12 +161,20 @@
 
                     <tr height="80">
                         <td width="30%"><b>Time begin: </b></td>
-                        <td><input type="text" name="timebegin"></td>
+                        <td><!-- <input type="text" name="timebegin"> -->
+                            <i class="glyphicon glyphicon-calendar" style="font-size: 20px;"></i>
+                            <input type="text" name="student_begin" class="startDate" placeholder="Start">
+                        
+                        </td>
                     </tr>
 
                     <tr height="80">
                         <td width="30%"><b>Time end: </b></td>
-                        <td><input type="text" name="timeend"></td>
+                        <td>
+                        <!-- <input type="text" name="timeend"> -->
+                            <i class="glyphicon glyphicon-calendar" style="font-size: 20px;"></i>
+                            <input type="text" name="student_end" class="endDate" placeholder="End">
+                        </td>
                     </tr>
 
                     </table>
@@ -191,7 +205,18 @@
         <![endif]-->
  </body>
  </html>
+<script type="text/javascript">
+    var tripDatePicker = new datePicker({
+        start:  document.getElementsByClassName('startDate'),
+        end:    document.getElementsByClassName('endDate'),
+    });
 
+    var tripDatePicker = new datePicker({
+        start:  document.getElementsByClassName('startDate'),
+        end:    document.getElementsByClassName('endDate'),
+        months: 2,
+    });
+</script>
 <script type="text/javascript">
     // Get the modal
     var modal = document.getElementById('myModal');
@@ -218,4 +243,5 @@
             modal.style.display = "none";
         }
     }
+
 </script>
