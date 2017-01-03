@@ -178,9 +178,8 @@ $patient = new Patient;
                     <div class="panel-body">
                     <table>
                     <tr height="80">
-                
                         <b>HN: </b>
-                            <?php $patient->SearchHN($conn); ?>
+                             <?php $patient->SearchHN($conn); ?>
                         <!-- <input type="text" style="width: 100px; height: 50px;" name="hnid"> -->
                     
 
@@ -1031,7 +1030,7 @@ $patient = new Patient;
 			<?php
 		}else{
 			
-			$sql = "INSERT INTO image(imageName) VALUES('$encoded_image')";
+			$sql = "INSERT INTO dent_hardcopy(hardcopyData) VALUES('$image')";
 		     $res = $conn->query($sql);
 
 		     if($res){

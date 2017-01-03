@@ -124,10 +124,7 @@
                 <?php
                     $patientinfo->Patientinfo($conn)
                  ?>
-            </table>
-        </div>    
-        </div>    
-        </div>
+            
 
         <!-- The Modal -->
     <div id="myModal" class="modal">

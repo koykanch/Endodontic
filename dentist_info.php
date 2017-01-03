@@ -35,7 +35,8 @@
                 margin-right: 50px;
             }
 
-            input[type="text"], 
+            input[type="text"],
+            input[type="password"], 
             textarea, 
             textarea.form-control {
                 margin: 0;
@@ -60,7 +61,8 @@
                 transition: all .3s;
             }
 
-            input[type="text"]:focus, 
+            input[type="text"]:focus,
+            input[type="password"]:focus,  
             textarea:focus, 
             textarea.form-control:focus {
                 outline: 0;
@@ -70,9 +72,9 @@
                 box-shadow: none;
             }
 
-            input[type="text"]:-moz-placeholder, textarea:-moz-placeholder, textarea.form-control:-moz-placeholder { color: #000; }
-            input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #000; }
-            input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #000; }
+            input[type="text"],input[type="password"]:-moz-placeholder, textarea:-moz-placeholder, textarea.form-control:-moz-placeholder { color: #000; }
+            input[type="text"],input[type="password"]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #000; }
+            input[type="text"],input[type="password"]:-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #000; }
 
 
             button{
@@ -150,6 +152,11 @@
                     <tr height="80">
                         <td><b>Dentist's name: </b></td>
                         <td><input type="text" name="dentname"></td>
+                    </tr>
+
+                    <tr height="80">
+                        <td><b>Dentist's password: </b></td>
+                        <td><input type="password" name="dentpassword"></td>
                     </tr>
 
                     <tr height="80">

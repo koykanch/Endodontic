@@ -4,11 +4,40 @@ class Patient
 {
 	public function Patientinfo($conn)
 	{
-		$sql = "SELECT * FROM patients_info";
+		$per_page=5;
+		// Let's put FROM and WHERE parts of the query into variable
+		$from_where="FROM patients_info";
+		// and get total number of records
+		$sql = "SELECT count(*) ".$from_where;
 		$result = $conn->query($sql);
+		$row = mysqli_fetch_row($result);
+		$total_rows = $row[0];
 
-		while($row=mysqli_fetch_array($result)){
+		//let's get page number from the query string 
+		if (isset($_GET['page'])) $CUR_PAGE = intval($_GET['page']); else $CUR_PAGE=1;
+		//and calculate $start variable for the LIMIT clause
+		$start = abs(($CUR_PAGE-1)*$per_page);
 
+		//Let's query database for the actual data
+		$sql = "SELECT * $from_where LIMIT $start,$per_page";
+		$result = $conn->query($sql);
+		// and fill an array
+		while ($row=mysqli_fetch_array($result)) $DATA[++$start]=$row;
+
+		//now let's form new query string without page variable
+		$uri = strtok($_SERVER['REQUEST_URI'],"?")."?";    
+		$tmpget = $_GET;
+		unset($tmpget['page']);
+		if ($tmpget) {
+		  $uri .= http_build_query($tmpget)."&";
+		}    
+		//now we're getting total pages number and fill an array of links
+		$num_pages=ceil($total_rows/$per_page);
+		for($i=1;$i<=$num_pages;$i++) $PAGES[$i]=$uri.'page='.$i;
+
+		//and, finally, starting output in the template.
+		?>
+		<?php foreach ($DATA as $i => $row): 
 			$studentId = $row['HN'];
 			$date=date('d/m/Y',strtotime($row['birthdate']));
 			if($row['gender'] == 'F'){
@@ -36,53 +65,42 @@ class Patient
 					</form>				
 				</td>
 			</tr><?php	
-		}
+		 endforeach ?>	
+		 </table>
+
+             Pages: 
+            <?php foreach ($PAGES as $i => $link): ?>
+            <?php if ($i == $CUR_PAGE): ?>
+            <b><?php=$i?></b>
+            <?php else: ?> 
+            <a href="<?=$link?>"><?php echo $i?></a>
+            <?php endif ?> 
+            <?php endforeach ?><br> 
+            Found rows: <b><?php echo $total_rows?></b><br>
+                </div>    
+                </div>    
+                </div>
+	<?php
 	}
 
 	public function SearchHN($conn){
-	
 		?>
-		<td><select name="searchHN" style="height:30" OnChange="window.location= '?item=' +this.value;">
-			<option value=""><-- Please Select HN of patient --></option>
-			<?php
-			$strSQL = "SELECT * FROM patients_info GROUP BY HN";
+		<select name="HNpatient" style="width: 300px; height:50px;">
+		<option value=" "><-- Please Select Item --></option>
+		<?php
+			$strSQL = "SELECT * FROM patients_info ORDER BY HN";
 			$objQuery = $conn->query($strSQL);
-			while($objResult = mysqli_fetch_array($objQuery))
-			{
-				if($_GET["item"] == $objResult["HN"])
-				{
-					$sel = "selected";
-				}
-				else
-				{
-					$sel = "";
-				}
+	
+		while($objResult = mysqli_fetch_array($objQuery))
+		{
 			?>
-				<option value="<?php echo $objResult["HN"];?>" <?php echo $sel;?>> 
-					<?php echo $objResult["HN"];?>
-				</option>
+				<option value="<?php echo $objResult["HN"];?> : <?php echo $objResult['patientName']; ?>"> <?php echo $objResult["HN"]; ?> : <?php echo $objResult['patientName']; ?> </option>
 			<?php
-			}
-			?>
-			</select></td>  
-
-			<td> 
-			 <?php    
-			 error_reporting( error_reporting() & ~E_NOTICE );
-			if($_GET["item"] != "")
-			{
-				?> <select name="searchHN" style="height:30">
-				<?php
-				$strSQL = "SELECT * FROM patients_info WHERE HN = '".$_GET["item"]."' ";
-				$objQuery = $conn->query($strSQL);
-				while($objResult2 = mysqli_fetch_array($objQuery)){  
-					
-					?> <option name="txtName" style="width:1000;" value="<?php echo $objResult2["HN"];?>"><?php echo  $objResult2["HN"]?> : <?php echo $objResult2["patientName"];?> <?php
-
-				}
-				?>  </select> <?php
-			}
-			   
+		}
+				
+		?>
+			</select>
+			<?php
 	}
 
 }
