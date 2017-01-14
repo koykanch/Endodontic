@@ -4,7 +4,7 @@ class Patient
 {
 	public function Patientinfo($conn)
 	{
-		$per_page=5;
+		$per_page=2;
 		// Let's put FROM and WHERE parts of the query into variable
 		$from_where="FROM patients_info";
 		// and get total number of records
@@ -85,7 +85,7 @@ class Patient
 
 	public function SearchHN($conn){
 		?>
-		<select name="HNpatient" style="width: 300px; height:50px;">
+		<select name="HNpatient" style="width: 300px; height:50px; float:left;">
 		<option value=" "><-- Please Select Item --></option>
 		<?php
 			$strSQL = "SELECT * FROM patients_info ORDER BY HN";
@@ -94,7 +94,7 @@ class Patient
 		while($objResult = mysqli_fetch_array($objQuery))
 		{
 			?>
-				<option value="<?php echo $objResult["HN"];?> : <?php echo $objResult['patientName']; ?>"> <?php echo $objResult["HN"]; ?> : <?php echo $objResult['patientName']; ?> </option>
+				<option value="<?php echo $objResult["HN"];?> : <?php echo $objResult["patientName"]; ?>"> <?php echo $objResult["HN"]; ?> : <?php echo $objResult["patientName"]; ?> </option>
 			<?php
 		}
 				

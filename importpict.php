@@ -160,8 +160,13 @@
 <?php 
 require('connect.php');
 require('class_patient.php');
+require('class_stu.php');
+require('class_dent.php');
 
 $patient = new Patient;
+$stu = new Student;
+$instruc = new Dentist;
+
 ?>
 
 <!-- The Modal -->
@@ -177,51 +182,67 @@ $patient = new Patient;
                 <div class="panel-heading"><h3>Endodontic Record</h3></div>
                     <div class="panel-body">
                     <table>
+                    <col width="30">
                     <tr height="80">
+                      <td>
                         <b>HN: </b>
+                      </td>
+                      <td>
                              <?php $patient->SearchHN($conn); ?>
                         <!-- <input type="text" style="width: 100px; height: 50px;" name="hnid"> -->
-                    
+                        </td>
+                    </tr>
 
                     <!-- <td>
                         <b>Patient's name: </b>
                         <input type="text" style="width: 350px; height: 50px;" name="patientname">
                     </td> -->
-                    <td>
+                    <!-- <td>
                         <b>Age: </b><input type="text" style="width: 100px; height: 50px;" name="age">
+                    </td> -->
+                    <tr>
+                    <td>
+                        <b>Tooth: </b>
                     </td>
                     <td>
-                        <b>Tooth: </b><input type="text" style="width: 100px; height: 50px;" name="tooth">
+                        <input type="text" style="width: 100px; height: 50px;" name="tooth">
                     </td>
-                    <td>
+                    <!-- <td>
                         <b>Gender: </b>
                             <select style="width:100px; height: 50px;">
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select>
-                    </td>
+                    </td> -->
                     </tr>
 
                     <tr height="80">
                     <td>
                         <b>Dental student:</b>
                     </td>
-                    <td colspan="4"><input type="text" name="student"></td>
+                    <td>
+                        <?php $stu->searchstu($conn); ?>
+                        <!-- <input type="text" name="student"> -->
+                    </td>
                 </tr>
 
                 <tr height="80">
                     <td>
                         <b>Instructor:</b>
                     </td>
-                    <td colspan="4"><input type="text" name="instructor"></td>
+                    <td>
+                        <?php $instruc->searchdent($conn); ?>
+                        <!-- <input type="text" name="instructor"> -->
+                    </td>
                 </tr>
 
                 <tr height="80">
                     <td>
                         <b>Date:</b>
                     </td>
-                    <td colspan="4">
-                        <div id="demo"></div>
+                    <td>
+
+                        <div id="demo" style="width:200px;"></div>
                     </td>
                 </tr>
                     </table>        
@@ -249,11 +270,10 @@ $patient = new Patient;
                        <h4>Medical History</h4>
                        
                        <table>
-                       
                        <tr height="80">
-                       <td>
+                        <td>
                             <input type="checkbox" name="nonemed" value="nonemed">&nbsp;None
-                        </td>
+                        </td>                    
 
                         <td>
                         <input type="checkbox" name="cardiodismed" value="cardiodismed">&nbsp; Cardiovascular Diseases
@@ -879,7 +899,7 @@ $patient = new Patient;
             <span class="close4">&times;</span>
             <div class="panel-heading"><h3>Treatment Planning</h3></div>
             <div class="panel-body">
-                <table class="table table-bordered">
+                <table>
 
                 <tr height="80">
                   <td width="35%">
@@ -888,7 +908,7 @@ $patient = new Patient;
 
                   <td>
                   <input type="checkbox" name="pulpotomy" value="pulpotomy">Pulpotomy
-                      <select style="height: 50px;">
+                      <select style="height: 50px;" name="pulposelect">
                           <option value="partial">Partial</option>
                           <option value="full">Full</option>
                       </select>

@@ -132,7 +132,7 @@
                 <?php
                     $stuinfo->Studentinfo($conn)
                  ?>
-            </table>
+            
         </div>    
         </div>    
         </div>

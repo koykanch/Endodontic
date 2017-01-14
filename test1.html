@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>(Type a title for your page here)</title>
+<script type="text/javascript">
+<!--
+
+function enable_text(status)
+{
+status=status;	// true or false
+	document.f1.other_text.disabled = status;
+	document.f1.other_text2.disabled = status;
+	document.f1.other_text3.disabled = status;
+	document.f1.other_text4.disabled = status;
+	document.f1.other_text5.disabled = status;
+	document.getElementById("others2").disabled = status;
+}
+//-->
+</script>
+</head>
+
+<body onload=enable_text(false);>
+<form name=f1 method=post>
+<input type="checkbox" name=others" onclick="enable_text(this.checked)" >Check <br><br>
+<input type="checkbox" id="others2" >Others <br><br>
+<input type="text" name="other_text"><br><br>
+<input type="text" name="other_text2">
+<br><br>
+<input type="text" name="other_text3"><br><br>
+<input type="text" name="other_text4"><br><br>
+<input type="text" name="other_text5">
+</form>
+
+</body>
+</html>

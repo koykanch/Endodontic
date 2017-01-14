@@ -125,7 +125,7 @@
                 <?php
                     $dentinfo->Dentistinfo($conn)
                  ?>
-            </table>
+            
         </div>    
         </div>    
         </div>
