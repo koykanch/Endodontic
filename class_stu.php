@@ -45,8 +45,10 @@ class Student
 				<td>'.$row['student_code'].'</td>
 				<td>'.$row['student_name'].'</td>
 				<td>'.$begin.'</td>
-				<td>'.$end.'</td>
-				<td>
+				<td>'.$end.'</td>';
+
+			if(isset($_SESSION['username'])){
+			echo '<td>
 					<form action="updateStudent.php" method="post" name="updatebtn">
 							<input type="hidden" name="studentId" value="'.$row['student_code'].'">
 							<input type="submit" class="btn btn-primary" style="width: 100px;" name="'.$row['student_code'].'" value="Edit">
@@ -56,7 +58,7 @@ class Student
 							<input type="hidden" name="stu_code" value="<?php echo $row['student_code']; ?>">
 							<input type="submit" class="btn btn-danger"  value="Delete" style="width: 100px;"name="<?php echo $row['student_code']; ?>">
 					</form>	
-				</td>
+				</td> <?php } ?>
 			</tr><?php
 			endforeach ?>	
 		 </table>
@@ -78,7 +80,7 @@ class Student
 
 	public function searchstu($conn){
 		?>
-		<select name="codestudent" style="width: 300px; height:50px; float:left;">
+		
 		<option value=" "><-- Please Select Student --></option>
 		<?php
 			$strSQL = "SELECT * FROM dentalstudent_info ORDER BY student_code";
@@ -87,13 +89,9 @@ class Student
 		while($objResult = mysqli_fetch_array($objQuery))
 		{
 			?>
-				<option value="<?php echo $objResult["student_code"];?> : <?php echo $objResult["student_name"]; ?>"> <?php echo $objResult["student_code"]; ?> : <?php echo $objResult["student_name"]; ?> </option>
+				<option value="<?php echo $objResult["student_code"];?>"> <?php echo $objResult["student_code"]; ?> : <?php echo $objResult["student_name"]; ?> </option>
 			<?php
 		}
-				
-		?>
-			</select>
-			<?php
 	}
 }
 ?>

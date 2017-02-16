@@ -5,7 +5,7 @@ class Dentist
 	
 	public function Dentistinfo($conn)
 	{
-		$per_page=2;
+		$per_page=5;
 		// Let's put FROM and WHERE parts of the query into variable
 		$from_where="FROM dentist_info";
 		// and get total number of records
@@ -52,6 +52,7 @@ class Dentist
 					echo '<td>ทันตแพทย์</td>';
 				}
 			
+			if(isset($_SESSION['username'])){
 			echo '<td>
 					<form action="updateDentist.php" method="post" name="updatebtn">
 							<input type="hidden" name="dentId" value="'.$row['dentId'].'">
@@ -61,7 +62,7 @@ class Dentist
 							<input type="hidden" name="dentId" value="<?php echo $row['dentId']; ?>">
 							<input type="submit" class="btn btn-danger"  value="Delete" style="width: 100px;"name="<?php echo $row['dentId']; ?>">
 					</form>
-				 </td>
+				 </td> <?php } ?>
 			</tr><?php
 		endforeach ?>	
 		 </table>
@@ -83,7 +84,6 @@ class Dentist
 
 	public function searchdent($conn){
 		?>
-		<select name="dentname" style="width: 300px; height:50px; float:left;">
 		<option value=" "><-- Please Select Dentist --></option>
 		<?php
 			$strSQL = "SELECT * FROM dentist_info ORDER BY dentId";
@@ -92,13 +92,9 @@ class Dentist
 		while($objResult = mysqli_fetch_array($objQuery))
 		{
 			?>
-				<option value="<?php echo $objResult["dentId"];?> : <?php echo $objResult["dent_name"]; ?>"> <?php echo $objResult["dentId"]; ?> : <?php echo $objResult["dent_name"]; ?> </option>
+				<option value="<?php echo $objResult["dentId"];?>"> <?php echo $objResult["dentId"]; ?> : <?php echo $objResult["dent_name"]; ?> </option>
 			<?php
 		}
-				
-		?>
-			</select>
-			<?php
 	}
 }
 

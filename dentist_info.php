@@ -2,6 +2,7 @@
 <html lang="en">
 
     <head>    
+    <?php session_start(); ?>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -102,7 +103,9 @@
         <div class="loader">
             <div class="loader-img"></div>
         </div>
-
+<?php
+if(isset($_SESSION['username'])){
+    ?>
         <div class="container">
             <button id="myBtn" style="float: right;">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true" style="float: left;"></span>
@@ -110,7 +113,9 @@
                 เพิ่มข้อมูลทันตแพทย์
             </button>  
         </div>
-
+    <?php
+}
+?>
         <div class="first-container">
         <div class="panel panel-info">
         <div class="panel-heading"><h3>ข้อมูลทันตแพทย์ (Dentist Information)</h3></div>
@@ -120,7 +125,11 @@
                     <td>รหัสทันตแพทย์</td>
                     <td>ชื่อทันตแพทย์</td>
                     <td>สถานะ</td>
-                    <td>จัดการข้อมูลนักศึกษา</td>
+                <?php 
+                if(isset($_SESSION['username'])){
+                    echo '<td>จัดการข้อมูลนักศึกษา</td>';
+                }
+                ?>
                 </tr>
                 <?php
                     $dentinfo->Dentistinfo($conn)
@@ -146,12 +155,12 @@
 
                     <tr height="80">
                         <td><b>Dent ID: </b></td>
-                        <td><input type="text" name="dentid"></td>
+                        <td><input type="text" name="dentid" maxlength="9"></td>
                     </tr>
 
                     <tr height="80">
                         <td><b>Dentist's name: </b></td>
-                        <td><input type="text" name="dentname"></td>
+                        <td><input type="text" name="dentname" maxlength="100"></td>
                     </tr>
 
                     <tr height="80">

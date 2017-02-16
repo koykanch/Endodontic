@@ -127,7 +127,7 @@
 				</tr>
 				<tr align="center">
 					<td>
-					<input type="submit" name="submit1" class="btn btn-info" value="UPLOAD" disabled>
+					<input type="submit" name="submit1" class="btn btn-info" value="UPLOAD">
 					<input type="submit" class="btn btn-success" name="submit3" value="PROCESS">
 					<input type="reset" name="clear" class="btn btn-danger" value="RESET"></td>
 				</tr>

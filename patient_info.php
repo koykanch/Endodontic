@@ -2,6 +2,7 @@
 <html lang="en">
 
     <head>    
+    <?php session_start(); ?>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -100,7 +101,10 @@
         <div class="loader">
             <div class="loader-img"></div>
         </div>
+<?php
 
+if(isset($_SESSION['username'])){
+    ?>
         <div class="container">
             <button id="myBtn" style="float: right;">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true" style="float: left;"></span>
@@ -108,7 +112,9 @@
                 เพิ่มข้อมูลผู้ป่วย
             </button>  
         </div>
-
+    <?php
+ }       
+?>
         <div class="first-container">
         <div class="panel panel-info">
         <div class="panel-heading"><h3>ข้อมูลผู้ป่วย (Patient Information)</h3></div>
@@ -119,7 +125,11 @@
                     <td>ชื่อผู้ป่วย</td>
                     <td>เพศ</td>
                     <td>วันเกิด</td>
-                    <td>จัดการข้อมูลผู้ป่วย</td>
+                <?php
+                if(isset($_SESSION['username'])){
+                    echo '<td>จัดการข้อมูลผู้ป่วย</td>';
+                }
+                ?>
                 </tr>
                 <?php
                     $patientinfo->Patientinfo($conn)

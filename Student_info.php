@@ -2,6 +2,7 @@
 <html lang="en">
 
     <head>    
+    <?php session_start(); ?>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -108,15 +109,18 @@
         <div class="loader">
             <div class="loader-img"></div>
         </div>
-
+<?php if(isset($_SESSION['username'])){
+    ?>
         <div class="container">
             <button id="myBtn" style="float: right;">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true" style="float: left;"></span>
                 <!-- Trigger/Open The Modal -->
                 เพิ่มข้อมูลนักศึกษา
             </button>  
-        </div>
-
+        </div> 
+    <?php 
+        }
+?>
         <div class="first-container">
         <div class="panel panel-info">
         <div class="panel-heading"><h3>ข้อมูลนักศึกษา (Student Information)</h3></div>
@@ -127,7 +131,11 @@
                     <td>ชื่อนักศึกษา</td>
                     <td>ช่วงเวลาที่อยู่รักษาผู้ป่วย</td>
                     <td>ช่วงเวลาที่หยุดรักษาผู้ป่วย</td>
-                    <td>จัดการข้อมูลนักศึกษา</td>
+                <?php
+                if(isset($_SESSION['username'])){
+                    echo '<td>จัดการข้อมูลนักศึกษา</td>';
+                }
+                ?>
                 </tr>
                 <?php
                     $stuinfo->Studentinfo($conn)
@@ -153,12 +161,12 @@
 
                     <tr height="80">
                         <td width="30%"><b>Student ID: </b></td>
-                        <td><input type="text" name="studentid"></td>
+                        <td><input type="text" name="studentid" maxlength="9"></td>
                     </tr>
 
                     <tr height="80">
                         <td width="30%"><b>Student name: </b></td>
-                        <td><input type="text" name="studentname"></td>
+                        <td><input type="text" name="studentname" maxlength="100"></td>
                     </tr>
 
                     <tr height="80">

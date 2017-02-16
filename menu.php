@@ -77,7 +77,7 @@
     }
 
  </style> 
-
+<?php session_start(); ?>
 </head>
 <body>
 <!-- <nav class="navbar-default navbar-side" role="navigation">
@@ -97,9 +97,16 @@
 		 <li><a href="patient_info.php" class="list-group-item-warning" target="part">ข้อมูลผู้ป่วย<br />Manage data of Patients</a></li>
 		 <li><a href="dentist_info.php" class="list-group-item-warning" target="part">ข้อมูลทันตแพทย์<br />Manage data of Dentist</a></li>
 		 <li><a href="Student_info.php" class="list-group-item-warning" target="part">ข้อมูลนักศึกษาทันตแพทย์<br />Manage data of Dentist</a></li>
-        <li><a href="importpict.php" class="list-group-item-warning" target="part">อัพเดทประวัติการรักษา<br />Endodontic Record</a></li>
+<?php 
+    if(isset($_SESSION['username'])){
+        ?>
+        <li><a href="endorecord.php" class="list-group-item-warning" target="_blank">อัพเดทประวัติการรักษา<br />Endodontic Record</a></li>
+<?php 
+    } ?>
+
          <li><a href="" class="list-group-item-warning" target="part">รายงานสรุปผล<br />Report</a></li>
          </li>
+    
     </ul>
 </div> 
 

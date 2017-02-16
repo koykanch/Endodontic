@@ -4,7 +4,8 @@ class Patient
 {
 	public function Patientinfo($conn)
 	{
-		$per_page=2;
+		
+		$per_page=5;
 		// Let's put FROM and WHERE parts of the query into variable
 		$from_where="FROM patients_info";
 		// and get total number of records
@@ -49,8 +50,10 @@ class Patient
 				<td>'.$row['HN'].'</td>
 				<td>'.$row['patientName'].'</td>
 				<td>'.$gender.'</td>
-				<td>'.$date.'</td>
-				<td>
+				<td>'.$date.'</td>';
+
+			if(isset($_SESSION['username'])){	
+				echo'<td>
 					<form action="updatePatient.php" method="post" name="updatebtn">
 							<input type="hidden" name="PatientHN" value="'.$row['HN'].'">
 						
@@ -58,12 +61,13 @@ class Patient
 							<input type="submit" class="btn btn-primary" style="width: 100px; name="'.$row['HN'].'" value="Edit" >
 						
 					</form><br>';?>
+
 					<form action="deletePatient.php" method="post" name="deletebtn" onSubmit="return confirm('are you sure?')">
 							<input type="hidden" name="HN" value="<?php echo $row['HN']; ?>">
 							<input type="submit" class="btn btn-danger"  value="Delete" style="width: 100px;"name="<?php echo $row['HN']; ?>">
 
-					</form>				
-				</td>
+					</form>		
+				</td> <?php } ?>	
 			</tr><?php	
 		 endforeach ?>	
 		 </table>
@@ -85,7 +89,7 @@ class Patient
 
 	public function SearchHN($conn){
 		?>
-		<select name="HNpatient" style="width: 300px; height:50px; float:left;">
+		
 		<option value=" "><-- Please Select Item --></option>
 		<?php
 			$strSQL = "SELECT * FROM patients_info ORDER BY HN";
@@ -94,13 +98,9 @@ class Patient
 		while($objResult = mysqli_fetch_array($objQuery))
 		{
 			?>
-				<option value="<?php echo $objResult["HN"];?> : <?php echo $objResult["patientName"]; ?>"> <?php echo $objResult["HN"]; ?> : <?php echo $objResult["patientName"]; ?> </option>
+				<option value="<?php echo $objResult["HN"];?>"> <?php echo $objResult["HN"]; ?> : <?php echo $objResult["patientName"]; ?> </option>
 			<?php
 		}
-				
-		?>
-			</select>
-			<?php
 	}
 
 }

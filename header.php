@@ -2,6 +2,7 @@
 <html lang="en">
 
     <head>    
+    <?php session_start(); ?>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,11 +38,53 @@
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
+            <?php 
+            if(isset($_SESSION['username'])){
+            ?>
                 <div class="collapse navbar-collapse" id="top-navbar-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="Login.html">Logout</a></li>
+                        <li>
+                            <?php
+                            require('connect.php');
+                            $sql = "SELECT * FROM dentalstudent_info,dentist_info WHERE dentId = ".$_SESSION['username']." OR student_code = ".$_SESSION['username']."";
+                            $result = $conn->query($sql);
+                            $row = mysqli_fetch_array($result);
+
+                            if($_SESSION['username'] == $row['dentId']){
+                                echo '<h4>Hello =>'.$row['dent_name'].'</h4>';
+
+                                ?>
+                                <div class="collapse navbar-collapse" id="top-navbar-1">
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li><a href="Login.php" target="_top">Logout</a></li>
+                                    </ul>
+                                </div>
+                                <?php
+                            }else{
+                                echo '<h4>Hello=>'.$row['student_name'].'</h4>';
+                                ?>
+                                <div class="collapse navbar-collapse" id="top-navbar-1">
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li><a href="Login.php" target="_top">Logout</a></li>
+                                    </ul>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </li>
                     </ul>
                 </div>
+
+            <?php }else{
+                ?>
+                <div class="collapse navbar-collapse" id="top-navbar-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="Login.php" target="_top">Login</a></li>
+                    </ul>
+                </div>
+                <?php
+            }
+            ?>
             </div>
         </nav>
  
