@@ -104,7 +104,7 @@
 <?php 
     } ?>
 
-         <li><a href="" class="list-group-item-warning" target="part">รายงานสรุปผล<br />Report</a></li>
+         <li><a href="summary.php" class="list-group-item-warning" target="part">รายงานสรุปผล<br />Report</a></li>
          </li>
     
     </ul>
