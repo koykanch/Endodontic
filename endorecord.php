@@ -523,6 +523,7 @@ $endo = new Endodontic;
 
           <div class="row">
             <div class="col-md-6"><label>Personal Doctor : &nbsp;</label><input type="text" name="personalmed" style="width: 250px; height: 50px; float:left;"></div>
+
             <div class="col-md-6"><label>Tel : &nbsp;</label><input type="text" name="telmed" style="width: 350px; height: 50px; float:left;"></div>
           </div>
 
@@ -593,9 +594,6 @@ $endo = new Endodontic;
           <input type="radio" name="onset" style="float:left;" value="1"><label> &nbsp; Stimulation Required &nbsp;</label>
           <input type="text" id="onsetsti" name="onsetstimul" style="width: 300px; height: 50px; float:left;">
         </div>
-
-        
-
      </div>
 
       <div class="row">

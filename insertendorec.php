@@ -46,7 +46,7 @@ if(isset($_POST['neurodismed']) && $none == 0){
 }else{
 	$neurologic = 0;
 }
-if(isset($_POST['allergicmed'])){
+if(isset($_POST['allergicmed']) && $none == 0){
 	$allergic_to = $_POST['allermed'];
 }else{
 	$allergic_to = "";
@@ -502,7 +502,15 @@ if(isset($_POST['reverOrirrever']) && $pul_normal == 0){
 }
 
 if(isset($_POST['reverOrirrever']) && $pul_normal == 0 && $ReverOrIrrever == 1){
-	$sympOrasymp = $_POST['sympOrasymp'];
+	
+	if(isset($_POST['sympOrasymp'])){
+		$sympOrasymp = $_POST['sympOrasymp'];
+	}else{
+		?>
+		<script> window.alert('Please select Symptomatic or Asymptomatic'); </script>
+		<?php
+		$sympOrasymp = "1";
+	}
 }else{
 	$sympOrasymp = "";
 }

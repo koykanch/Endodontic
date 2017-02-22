@@ -124,5 +124,150 @@ class Endodontic{
 		$row = mysqli_fetch_array($result);
 		return $row['gender'];
 	}
+
+	public function selpaininten_edit($conn,$painintenId){
+		$searchPainintenname = "SELECT * FROM pain_intensity WHERE paininten_id = '$painintenId'";
+		$resultPainintenname = $conn->query($searchPainintenname);
+		$objresultPainintenname = mysqli_fetch_array($resultPainintenname);
+		?>
+			<option value="<?php echo $painintenId; ?>"><?php echo $painintenId; ?> : <?php echo $objresultPainintenname['paininten_detail']; ?></option>
+		<?php
+		$strSQL = "SELECT * FROM pain_intensity WHERE paininten_id != '$painintenId' ORDER BY paininten_id";
+		$objQuery = $conn->query($strSQL);
+	
+		while($objResult = mysqli_fetch_array($objQuery))
+		{
+			?>
+				<option value="<?php echo $objResult["paininten_id"];?>"> <?php echo $objResult["paininten_id"]; ?> : <?php echo $objResult["paininten_detail"]; ?> </option>
+			<?php
+		}
+	}
+
+	public function selpaincharact_edit($conn,$paincharId){
+		$searchPaincharname = "SELECT * FROM pain_character WHERE painchar_id = '$paincharId'";
+		$resultPaincharname = $conn->query($searchPaincharname);
+		$objresultPaincharname = mysqli_fetch_array($resultPaincharname);
+		?>
+			<option value="<?php echo $paincharId; ?>"><?php echo $paincharId; ?> : <?php echo $objresultPaincharname['painchar_detail']; ?></option>
+		<?php
+		$strSQL = "SELECT * FROM pain_character WHERE painchar_id != '$paincharId' ORDER BY painchar_id";
+		$objQuery = $conn->query($strSQL); 
+	
+		while($objResult = mysqli_fetch_array($objQuery))
+		{
+			?>
+				<option value="<?php echo $objResult["painchar_id"];?>"> <?php echo $objResult["painchar_id"]; ?> : <?php echo $objResult["painchar_detail"]; ?> </option>
+			<?php
+		}
+	}
+
+	public function selduration_edit($conn,$durationId){
+		$searchDurationname = "SELECT * FROM duration WHERE duration_id = '$durationId'";
+		$resultDurationname = $conn->query($searchDurationname);
+		$objresultDurationname = mysqli_fetch_array($resultDurationname);
+		?>
+			<option value="<?php echo $durationId; ?>"><?php echo $durationId; ?> : <?php echo $objresultDurationname['duration_detail']; ?></option>
+		<?php
+		$strSQL = "SELECT * FROM duration WHERE duration_id != '$durationId' ORDER BY duration_id";
+		$objQuery = $conn->query($strSQL); 
+	
+		while($objResult = mysqli_fetch_array($objQuery))
+		{
+			?>
+				<option value="<?php echo $objResult["duration_id"];?>"> <?php echo $objResult["duration_id"]; ?> : <?php echo $objResult["duration_detail"]; ?> </option>
+			<?php
+		}
+	}
+
+	public function sellocation_edit($conn,$locat_locOrdiff){
+		$searchLocation = "SELECT * FROM location WHERE location_id = '$locat_locOrdiff'";
+		$resultLocation = $conn->query($searchLocation);
+		$objresultLocation = mysqli_fetch_array($resultLocation);
+		?>
+			<option value="<?php echo $locat_locOrdiff; ?>"><?php echo $locat_locOrdiff; ?> : <?php echo $objresultLocation['location_detail']; ?></option>
+		<?php
+		$strSQL = "SELECT * FROM location WHERE location_id != '$locat_locOrdiff' ORDER BY location_id";
+		$objQuery = $conn->query($strSQL); 
+	
+		while($objResult = mysqli_fetch_array($objQuery))
+		{
+			?>
+				<option value="<?php echo $objResult["location_id"];?>"> <?php echo $objResult["location_id"]; ?> : <?php echo $objResult["location_detail"]; ?> </option>
+			<?php
+		}
+	}
+
+	public function selextrafacial_edit($conn,$facialswellId){
+		$searchFacial = "SELECT * FROM extra_facial WHERE facialswell_id = '$facialswellId'";
+		$resultFacial = $conn->query($searchFacial);
+		$objresultFacial = mysqli_fetch_array($resultFacial);
+		?>
+			<option value="<?php echo $facialswellId; ?>"><?php echo $facialswellId; ?> : <?php echo $objresultFacial['facialswell_detail']; ?></option>
+		<?php
+		$strSQL = "SELECT * FROM extra_facial WHERE facialswell_id != '$facialswellId' ORDER BY facialswell_id";
+		$objQuery = $conn->query($strSQL); 
+	
+		while($objResult = mysqli_fetch_array($objQuery))
+		{
+			?>
+				<option value="<?php echo $objResult["facialswell_id"];?>"> <?php echo $objResult["facialswell_id"]; ?> : <?php echo $objResult["facialswell_detail"]; ?> </option>
+			<?php
+		}
+	}
+
+	public function selextralymphnode_edit($conn,$lymphnodeId){
+		$searchLymph = "SELECT * FROM extra_lymphnode WHERE lymphnode_id = '$lymphnodeId'";
+		$resultLymph = $conn->query($searchLymph);
+		$objresultLymph = mysqli_fetch_array($resultLymph);
+		?>
+			<option value="<?php echo $lymphnodeId; ?>"><?php echo $lymphnodeId; ?> : <?php echo $objresultLymph['lymphnode_detail']; ?></option>
+		<?php
+		$strSQL = "SELECT * FROM extra_lymphnode WHERE lymphnode_id != '$lymphnodeId' ORDER BY lymphnode_id";
+		$objQuery = $conn->query($strSQL); 
+	
+		while($objResult = mysqli_fetch_array($objQuery))
+		{
+			?>
+				<option value="<?php echo $objResult["lymphnode_id"];?>"> <?php echo $objResult["lymphnode_id"]; ?> : <?php echo $objResult["lymphnode_detail"]; ?> </option>
+			<?php
+		}
+	}
+
+	public function selextrasinus_edit($conn,$sinustractId){
+		$searchSinus = "SELECT * FROM extra_sinus WHERE sinustract_id = '$sinustractId'";
+		$resultSinus = $conn->query($searchSinus);
+		$objresultSinus = mysqli_fetch_array($resultSinus);
+		?>
+			<option value="<?php echo $sinustractId; ?>"><?php echo $sinustractId; ?> : <?php echo $objresultSinus['sinustract_detail']; ?></option>
+		<?php
+		$strSQL = "SELECT * FROM extra_sinus WHERE sinustract_id != '$sinustractId' ORDER BY sinustract_id";
+		$objQuery = $conn->query($strSQL); 
+	
+		while($objResult = mysqli_fetch_array($objQuery))
+		{
+			?>
+				<option value="<?php echo $objResult["sinustract_id"];?>"> <?php echo $objResult["sinustract_id"]; ?> : <?php echo $objResult["sinustract_detail"]; ?> </option>
+			<?php
+		}
+	}
+
+	public function selspecialtest_edit($conn,$spectestId){
+		$searchSpecial = "SELECT * FROM special_test WHERE spectest_id = '$spectestId'";
+		$resultSpecial = $conn->query($searchSpecial);
+		$objresultSpecial = mysqli_fetch_array($resultSpecial);
+		?>
+			<option value="<?php echo $spectestId; ?>"><?php echo $spectestId; ?> : <?php echo $objresultSpecial['spectest_detail']; ?></option>
+		<?php
+		$strSQL = "SELECT * FROM special_test WHERE spectest_id != '$spectestId' ORDER BY spectest_id";
+		$objQuery = $conn->query($strSQL); 
+	
+		while($objResult = mysqli_fetch_array($objQuery))
+		{
+			?>
+				<option value="<?php echo $objResult["spectest_id"];?>"> <?php echo $objResult["spectest_id"]; ?> : <?php echo $objResult["spectest_detail"]; ?> </option>
+			<?php
+		}
+	}
+
 }
 ?>

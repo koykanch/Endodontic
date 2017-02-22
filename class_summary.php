@@ -21,8 +21,26 @@ Class Medicalrecord
 			  		<input type="hidden" name="Dent_id" value="'.$objresult['dentId'].'">
 			  		<input type="hidden" name="hard_date" value="'.$objresult['hard_Date'].'">
 
-			  		<input type="submit" class="btn btn-success"  name="detail" value="View"></tr>
-			  	  </form>';
+			  		<input type="submit" class="btn btn-success" style="width:100px;" name="detail" value="VIEW">
+			  	  </form><br>
+
+			  	  <form action="updateEndodontic.php" method="post" name="edit_detail" target="_blank">
+			  	  	<input type="hidden" name="PatientHN" value="'.$objresult['HN'].'">
+			  	  	<input type="hidden" name="Stu_code" value="'.$objresult['student_code'].'">
+			  		<input type="hidden" name="Dent_id" value="'.$objresult['dentId'].'">
+			  		<input type="hidden" name="hard_date" value="'.$objresult['hard_Date'].'">
+
+			  	  	<input type="submit" class="btn btn-info" style="width:100px;" name="edit" value="EDIT">
+			  	  </form><br>
+
+			  	  <form action="deleteEndodontic.php" method="post" name="delete_detail">
+			  	  	<input type="hidden" name="PatientHN" value="'.$objresult['HN'].'">
+			  	  	<input type="hidden" name="Stu_code" value="'.$objresult['student_code'].'">
+			  		<input type="hidden" name="Dent_id" value="'.$objresult['dentId'].'">
+			  		<input type="hidden" name="hard_date" value="'.$objresult['hard_Date'].'">
+
+			  	  	<input type="submit" class="btn btn-danger" style="width:100px;" name="delete" value="DELETE"></tr>
+			  	  </form></tr>';
 		}
 	}
 }

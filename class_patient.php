@@ -64,7 +64,7 @@ class Patient
 
 					<form action="deletePatient.php" method="post" name="deletebtn" onSubmit="return confirm('are you sure?')">
 							<input type="hidden" name="HN" value="<?php echo $row['HN']; ?>">
-							<input type="submit" class="btn btn-danger"  value="Delete" style="width: 100px;"name="<?php echo $row['HN']; ?>">
+							<input type="submit" class="btn btn-danger" value="Delete" style="width: 100px;"name="<?php echo $row['HN']; ?>">
 
 					</form>		
 				</td> <?php } ?>	

@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="assets/css/multi-step-form.css">
   <style type="text/css">
 
+
 /*css for textbox*/
     input[type="text"], 
         textarea, 
@@ -66,27 +67,37 @@
             box-shadow: none;
         }
 
-        .row{
+        /*.row{
           height: 60px;
-        }
+        }*/
 
         label{
           float: left;
         }
 
+        font{
+          float: left;
+          font-weight: bold;
+          color: red;
+          /*text-decoration: underline;*/
+          border-bottom: 2px dotted;
+        }
     </style>
 </head>
 <body>
 <?php
-  require('connect.php');
-  $HN = $_POST['PatientHN'];
-  $stucode = $_POST['Stu_code'];
-  $dent = $_POST['Dent_id'];
-  $harddate = $_POST['hard_date'];
+require_once('mpdf/mpdf.php');
+ob_start();
+
+require('connect.php');
+$HN = $_POST['PatientHN'];
+$stucode = $_POST['Stu_code'];
+$dent = $_POST['Dent_id'];
+$harddate = $_POST['hard_date'];
   
 ?>
 	<div>
-		  <p><label style="float:right; font-size:40px; margin-right:2em;"><b>Endodontic Record</b></label></p>
+		  <label style="float:right; font-size:40px; margin-right:2em;"><b>Endodontic Record</b></label>
 	</div><br><br><br>
 
 	<div>
@@ -94,7 +105,7 @@
 	</div><br><br>
 
 	<div>
-		  <p><label style="font-size:20px; float:left; margin-left:2em;">HN : <?php echo $HN; ?></label></p>
+		  <label style="font-size:20px; float:left; margin-left:2em;">HN : <?php echo $HN; ?></label>
 	</div><br><br>
 
   <?php
@@ -220,7 +231,6 @@
 		</div>
 
 		<div class="row">
- 
 		  <div class="col-md-6"><input type="checkbox" style="float:left;" name="allergicmed" value="1"
           <?php
              if($objresultMed['allergic'] != ""){
@@ -235,8 +245,8 @@
               <?php
              }
           ?>
-       <label>&nbsp; Allergic to : &nbsp;&nbsp;</label>
-       <input type="text" name="allermed"  style="width: 280px; height: 50px; float:left;" value="<?php echo $objresultMed['allergic']; ?>" disabled="true" >
+       <label>&nbsp; Allergic to : &nbsp;&nbsp; </label> 
+       <font><?php echo $objresultMed['allergic']; ?> </font>
       </div>
 
   	   <div class="col-md-6"><input type="checkbox" style="float:left;" name="bloodpressmed" value="1" 
@@ -253,13 +263,11 @@
            }
         ?>
        <label>&nbsp;Blood Pressure (if needed): &nbsp;&nbsp;</label> 
-       <input type="text" name="blood" style="width: 180px; height: 50px; float:left;" value="<?php echo $objresultMed['blood_pres']; ?>" disabled="true" >
-             
-       </div>
-		  </div>
+       <font><?php echo $objresultMed['blood_pres']; ?></font> 
+     </div>
+		</div>
 
-		  <p><div class="row">
-
+		<div class="row">
   	 <div class="col-md-6">
        <input type="checkbox" style="float:left;" name="othermed" value="1"
           <?php
@@ -275,7 +283,7 @@
            }
         ?>
         <label>&nbsp; Other : &nbsp; </label>
-        <textarea rows="3" cols="45" style="float:left;" name="medother" disabled><?php echo $objresultMed['Other']; ?></textarea>
+        <font><?php echo $objresultMed['Other']; ?></font>
      </div>
 
 	   <div class="col-md-6"><input type="checkbox" style="float:left;" name="takingmed" value="1" 
@@ -292,19 +300,25 @@
         }
       ?>
      <label>&nbsp; Taking medicine : &nbsp; </label>
-     <input type="text" name="medtaking" style="width: 250px; height: 50px; float:left;" value="<?php echo $objresultMed['taking_med']; ?>" disabled="true" >
+     <font><?php echo $objresultMed['taking_med']; ?></font>
      </div>
          
-		  </div></p><br><br><br>
+		</div>
 
 		  <div class="row">   
-          <div style="height:80px;" class="col-md-6"><label>Personal Doctor : &nbsp;</label><input type="text" name="personalmed" style="width: 250px; height: 50px; float:left;" value="<?php echo $objresultMed['personal_doc']; ?>" disabled></div>
+          <div class="col-md-6"><label>Personal Doctor : &nbsp;</label>
+            <font><?php echo $objresultMed['personal_doc']; ?></font>
+          </div>
 
-          <div style="height:80px;" class="col-md-6"><label>Tel : &nbsp;</label><input type="text" name="telmed" style="width: 350px; height: 50px; float:left;" value="<?php echo $objresultMed['Tel']; ?>" disabled></div>
+          <div class="col-md-6"><label>Tel : &nbsp;</label>
+            <font><?php echo $objresultMed['Tel']; ?></font>
+          </div>
       </div>
 
       <div class="row">
-          <div style="height:150px;" class="col-md-12"><label>Remark : &nbsp; </label><textarea name="remarkmed" rows="3" cols="50" style="float:left;" disabled><?php echo $objresultMed['remark']; ?></textarea></div>
+          <div class="col-md-12"><label>Remark : &nbsp; </label>
+            <font><?php echo $objresultMed['remark']; ?></font>
+          </div>
       </div>
 
     <?php
@@ -315,11 +329,15 @@
 
     <h4>Dental History</h4>
       <div class="row">
-          <div class="col-md-12"><label>Chief Complaint : &nbsp;</label><input type="text" name="chiefdent" style="width: 700px; height: 50px; float:left;" value="<?php echo $objresultDen['chief_complaint']; ?>" disabled></div>
+          <div class="col-md-12"><label>Chief Complaint : &nbsp;</label>
+            <font><?php echo $objresultDen['chief_complaint']; ?></font>
+          </div>
       </div>
     
       <div class="row"> 
-        <div class="col-md-12"><label>History of Present Illness : &nbsp; </label><textarea name="presentilldent" style="float:left;" rows="5" cols="50" disabled=""><?php echo $objresultDen['his_of_presentill']; ?></textarea></div>
+        <div class="col-md-12"><label>History of Present Illness : &nbsp; </label>
+          <font><?php echo $objresultDen['his_of_presentill']; ?></font>
+        </div>
       </div>
   </div>
   </div>
@@ -345,7 +363,7 @@
           $resultpainin = $conn->query($paininten);
           $objresultpainin = mysqli_fetch_array($resultpainin);
         ?>
-         <label>Pain intensity: </label><?php echo $objresultpainin['paininten_detail']; ?>
+         <label>Pain intensity: </label><font><?php echo $objresultpainin['paininten_detail']; ?></font>
         </div>
       </div>
 
@@ -356,7 +374,7 @@
           $resultpainchar = $conn->query($painchar);
           $objresultpainchar = mysqli_fetch_array($resultpainchar);
         ?>
-          <label>Pain Character: </label><?php echo $objresultpainchar['painchar_detail']; ?>
+          <label>Pain Character: </label><font><?php echo $objresultpainchar['painchar_detail']; ?></font>
         </div>
       </div>
 
@@ -365,9 +383,9 @@
           <label>Onset: </label>
           <?php 
             if($objresultSubj['onset_spontOrstim'] == "0") {
-              echo "Spontaneous";
+              echo "<font>Spontaneous</font>";
             }else{
-              echo "Stimulation Required(".$objresultSubj['stimulation_detail'].")";
+              echo "<font>Stimulation Required(".$objresultSubj['stimulation_detail'].")</font>";
             }
 
           ?>
@@ -380,7 +398,8 @@
           $resultduration = $conn->query($duration);
           $objresultduration = mysqli_fetch_array($resultduration);
       ?>
-       <div class="col-md-2"><label>Duration: </label><?php echo $objresultduration['duration_detail']; ?></div> 
+       <div class="col-md-2"><label>Duration: </label>
+          <font><?php echo $objresultduration['duration_detail']; ?></div> </font>
       </div>
 
     	<div class="row">
@@ -389,7 +408,8 @@
           $resultlocation = $conn->query($location);
           $objresultlocation = mysqli_fetch_array($resultlocation);
       ?>
-    	  <div class="col-md-2"><label>Location: </label><?php echo $objresultlocation['location_detail']; ?></div> 
+    	  <div class="col-md-2"><label>Location: </label>
+          <font><?php echo $objresultlocation['location_detail']; ?></div> </font>
     	</div>
 
       <div class="row">
@@ -409,7 +429,7 @@
             }
           ?>
         <label> &nbsp; Radiating to &nbsp; </label>
-        <input type="text" name="locatradiat" style="width: 250px; height: 50px; float:left;" value="<?php echo $objresultSubj['locat_radiating']; ?>" disabled> 
+        <font><?php echo $objresultSubj['locat_radiating']; ?></font>
        </div> 
         
       </div>
@@ -431,12 +451,10 @@
             }
           ?>
           <label> &nbsp; Referred to &nbsp; </label>
-          <input type="text" name="refer" style="width: 250px; height: 50px; float:left;" value="<?php echo $objresultSubj['locat_referred']; ?>" disabled="true"> 
+          <font><?php echo $objresultSubj['locat_referred']; ?></font>
         
       </div>
       </div>
-
-      <br><br>
 
       <?php
         $searchObj = "SELECT * FROM object_symptom WHERE HN='$HN' AND Date = '$harddate'";
@@ -457,7 +475,8 @@
                 $resultfacial = $conn->query($facialswell);
                 $objresultfacial = mysqli_fetch_array($resultfacial);
               ?>
-              <label>&nbsp;&nbsp;Extraoral Facial Swelling: </label><?php echo $objresultfacial['facialswell_detail']; ?>
+              <label>&nbsp;&nbsp;Extraoral Facial Swelling: </label>
+              <font><?php echo $objresultfacial['facialswell_detail']; ?></font>
               </div> 
             <?php
           }else{
@@ -482,7 +501,8 @@
                 $resultlymphnode = $conn->query($lymphnode);
                 $objresultlymphnode = mysqli_fetch_array($resultlymphnode);
             ?>
-                <label>&nbsp;&nbsp;Extraoral Lymph Node: </label><?php echo $objresultlymphnode['lymphnode_detail']; ?>
+                <label>&nbsp;&nbsp;Extraoral Lymph Node: </label>
+                <font><?php echo $objresultlymphnode['lymphnode_detail']; ?></font>
             </div> 
             <?php
           }else{
@@ -507,7 +527,8 @@
                 $resultsinus = $conn->query($sinus);
                 $objresultsinus = mysqli_fetch_array($resultsinus);
             ?>
-              <label>&nbsp;&nbsp;Extra Sinus Tract: </label><?php echo $objresultsinus['sinustract_detail']; ?>
+              <label>&nbsp;&nbsp;Extra Sinus Tract: </label>
+              <font><?php echo $objresultsinus['sinustract_detail']; ?></font>
             </div>  
             <?php
           }else{
@@ -520,16 +541,16 @@
         ?>
         </div>
         
-        <p><div class="row">
+        <div class="row">
             <div class="col-md-3">
                 <label>&nbsp; Other: &nbsp;</label> 
             </div>
-            <div style="height:150px;" class="col-md-9">
-                <textarea name="extraother" rows="3" cols="50" style="float:left;" disabled="true"><?php echo $objresultObj['ext_other']; ?></textarea>
+            <div class="col-md-9">
+                <font><?php echo $objresultObj['ext_other']; ?></font>
             </div>
-        </div></p>
+        </div>
         
-        <div style="height:150px;" class="row">
+        <div class="row">
             <div class="col-md-2">
               
                 <label>&nbsp;&nbsp; Intraoral:  </label>
@@ -544,14 +565,15 @@
                 }
               ?>
                 <label>Sweling(<?php echo $swell; ?>)</label>
-                <label>&nbsp;&nbsp; area &nbsp; </label><input type="text" name="intraswell_area" style="width: 150px; height: 50px; float:left;" value="<?php echo $objresultObj['intra_swellarea']; ?>" disabled>
+                <label>&nbsp;&nbsp; area &nbsp; </label>
+                <font><?php echo $objresultObj['intra_swellarea']; ?></font>
             </div>
 
             <div class="col-md-5">
  
               <input type="radio" style="float:left;" name="intra_sinus" value="1" 
                 <?php
-                  if($objresultObj['intra_sinustract'] == "1"){
+                  if($objresultObj['intra_sinustract'] != ""){
                     ?>
                         checked="true" 
                         disabled="true">
@@ -563,7 +585,7 @@
                   }
                 ?>
               <label>&nbsp; Sinus Tract at &nbsp; </label>
-              <input type="text" name="intrasinus" style="width: 250px; height: 50px; float:left;" value="<?php echo $objresultObj['intra_sinustract']; ?>" disabled="true">
+              <font><?php echo $objresultObj['intra_sinustract']; ?></font>
             </div>            
         </div>
 
@@ -678,7 +700,7 @@
                   }
                 ?>
                   <label> &nbsp; Restoration with &nbsp; </label>
-                  <input type="text" name="toothrestoration" style="width: 300px; height: 50px; float:left;" value="<?php echo $objresultObj['tooth_restoration']; ?>" disabled="true">
+                  <font><?php echo $objresultObj['tooth_restoration']; ?></font>
                 </div>
         </div>
 
@@ -699,7 +721,7 @@
                   }
                 ?>
                 <label> &nbsp; Fracture at &nbsp; </label>
-                <input type="text" name="toothfractoration" style="width: 300px; height: 50px; float:left;" value="<?php echo $objresultObj['tooth_fracture']; ?>" disabled="true">
+                <font><?php echo $objresultObj['tooth_fracture']; ?></font>
                 </div>            
 
             <div class="col-md-5">
@@ -717,7 +739,7 @@
                   }
                 ?>
                 <label> &nbsp; Crown Discoloration to &nbsp; </label>
-                <input type="text" name="toothcrown" style="width: 200px; height: 50px; float:left;" value="<?php echo $objresultObj['tooth_crown']; ?>" disabled="true">
+                <font><?php echo $objresultObj['tooth_crown']; ?></font>
                 </div>
 
         </div>
@@ -725,9 +747,10 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-10">
-                <label> &nbsp; Other: &nbsp; </label><textarea type="text" name="toothother" rows="5" cols="50" style="float:left;" disabled><?php echo $objresultObj['tooth_other']; ?></textarea>
+                <label> &nbsp; Other: &nbsp; </label>
+                <font><?php echo $objresultObj['tooth_other']; ?></font>
               </div>              
-        </div><br><br>
+        </div>
 
       <h4>Examination</h4>
       <?php
@@ -735,15 +758,15 @@
         $resultExam = $conn->query($searchExam);
         $objresultExam = mysqli_fetch_array($resultExam);
       ?>
-        <div class="row" style="height: 80px;">
+        <div class="row">
           <div class="col-md-2">
               <label>Tooth : &nbsp;</label>
-              <input type="text" name="numtooth" style="width: 80px; height: 50px; float:left;" value="<?php echo $objresultExam['exam_tooth']; ?>" disabled>
+              <font><?php echo $objresultExam['exam_tooth']; ?></font>
           </div>
 
           <div class="col-md-2">
               <label>EPT : &nbsp;</label>
-              <input type="text" name="epttooth" style="width: 80px; height: 50px; float:left;" value="<?php echo $objresultExam['exam_EPT']; ?>" disabled>
+              <font><?php echo $objresultExam['exam_EPT']; ?></font>
           </div>
 
           <div class="col-md-2">
@@ -814,44 +837,55 @@
           </div>
         </div>
 
-        <div class="row" style="height: 80px;">
+        <div class="row">
           <div class="col-md-2">
-            <label>Mobility : &nbsp;</label><?php echo $objresultExam['exam_mobility']; ?>
+            <label>Mobility : &nbsp;</label>
+            <?php 
+              if($objresultExam['exam_mobility'] == "1"){
+                  echo '<font>1<sup>0</sup></font>'; 
+              }
+              else if($objresultExam['exam_mobility'] == "2"){
+                  echo '<font>2<sup>0</sup></font>'; 
+              }
+              else if($objresultExam['exam_mobility'] == "3"){
+                  echo '<font>3<sup>0</sup></font>';
+              }
+            ?>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-2">
             <label>Perio Probe of MB : &nbsp;</label>
-            <input type="text" name="probe_mb" style="width: 80px; height: 50px; float:left;" value="<?php echo $objresultExam['exam_perioMB']; ?>" disabled>
+            <font><?php echo $objresultExam['exam_perioMB']; ?></font>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-2">
             <label>Perio Probe of B : &nbsp;</label>
-            <input type="text" name="probe_b" style="width: 80px; height: 50px; float:left;" value="<?php echo $objresultExam['exam_perioB']; ?>" disabled>
+            <font><?php echo $objresultExam['exam_perioB']; ?></font>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-2">
             <label>Perio Probe of DB : &nbsp;</label>
-            <input type="text" name="probe_db" style="width: 80px; height: 50px; float:left;" value="<?php echo $objresultExam['exam_perioDB']; ?>" disabled>
+            <font><?php echo $objresultExam['exam_perioDB']; ?></font>
           </div>
         </div>
 
-        <div class="row" style="height: 80px;">
-          <div class="col-md-3">
+        <div class="row">
+          <div class="col-md-2">
             <label>Perio Probe of ML : &nbsp;</label>
-            <input type="text" name="probe_ml" style="width: 80px; height: 50px; float:left;" value="<?php echo $objresultExam['exam_perioML']; ?>" disabled>
+            <font><?php echo $objresultExam['exam_perioML']; ?></font>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-2">
             <label>Perio Probe of L : &nbsp;</label>
-            <input type="text" name="probe_l" style="width: 80px; height: 50px; float:left;" value="<?php echo $objresultExam['exam_perioL']; ?>" disabled>
+            <font><?php echo $objresultExam['exam_perioL']; ?></font>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-2">
             <label>Perio Probe of DL : &nbsp;</label>
-            <input type="text" name="probe_dl" style="width: 80px; height: 50px; float:left;" value="<?php echo $objresultExam['exam_perioDL']; ?>" disabled>
+            <font><?php echo $objresultExam['exam_perioDL']; ?></font>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-6">
 
             <input type="checkbox" name="spectest" value="1" style="float:left;"
               <?php 
@@ -885,10 +919,10 @@
         $objresultRadio = mysqli_fetch_array($resultRadio);
           
       ?>
-      <h4>&nbsp;&nbsp;Radiographic findings</h4>
+      <h4>Radiographic findings</h4>
         <div class="row">
           <div class="col-md-2">
-              <label>&nbsp;&nbsp;&nbsp;Crown: </label>
+              <label>&nbsp;Crown: </label>
           </div>
           <div class="col-md-2">
                 <input type="checkbox" name="normcrown" style="float:left;" value="1"
@@ -953,40 +987,33 @@
                         <?php 
                     } ?>
                
-                <label>&nbsp; Caries &nbsp;&nbsp; area &nbsp; </label>
-                <input type="text" name="crowarea" style="width: 100px; height: 50px; float:left;"
+                <label>&nbsp; Caries &nbsp;&nbsp; area : &nbsp; </label>
+                
                   <?php 
                     if($objresultRadio['crown_caries'] == "1"){
                         ?>
-                         value="<?php echo $objresultRadio['crown_cariesarea']; ?>"
-                         disabled = "true" >                      
+                         <font><?php echo $objresultRadio['crown_cariesarea']; ?>"</font>                   
                         <?php
                     }else{
-                        ?>
-                         disabled = "true" >
-                        <?php 
+                        echo '<font></font>';
                     } ?>
-                <label>&nbsp; &nbsp; depth &nbsp; </label>
-                <input type="text" name="crowdepth" style="width: 100px; height: 50px; float:left;"
+                <label>&nbsp; &nbsp; depth : &nbsp; </label>
                   <?php 
                     if($objresultRadio['crown_caries'] == "1"){
                         ?>
-                         value="<?php echo $objresultRadio['crown_cariesdepth']; ?>"
-                         disabled = "true" >                      
+                         <font><?php echo $objresultRadio['crown_cariesdepth']; ?></font>                  
                         <?php
                     }else{
-                        ?>
-                         disabled = "true" >
-                        <?php 
+                        echo '<font></font>';
                     } ?>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-2"></div>
-          <div style="height:200px;" class="col-md-10">
-              <label>&nbsp; Other : &nbsp; </label>
-              <textarea name="crownother" rows="5" cols="50" style="float:left;" disabled><?php echo $objresultRadio['crown_other']; ?></textarea>
+          <div class="col-md-10">
+              <label> Other : &nbsp; </label>
+              <font><?php echo $objresultRadio['crown_other']; ?></font>
           </div>
         </div>
 
@@ -999,7 +1026,7 @@
       ?>
         <div class="row">
           <div class="col-md-2">
-            <label>&nbsp;&nbsp;&nbsp;Pulp Chambar: </label>
+            <label>&nbsp;Pulp Chambar: </label>
           </div>
           <div class="col-md-2">
               <input type="checkbox" name="normcham" style="float:left;" value="1"
@@ -1052,7 +1079,7 @@
               <label>&nbsp; Resorption </label>
           </div>
 
-          <div style="height:50px;" class="col-md-4">
+          <div class="col-md-4">
           <input type="checkbox" name="calcificatecham" style="float:left;" value="1"
                 <?php 
                       if($objresultPulpcham['pulpcham_calPartOrComp'] != ""){
@@ -1062,9 +1089,9 @@
                            <label>&nbsp; Calcification : &nbsp;</label>               
                           <?php
                         if($objresultPulpcham['pulpcham_calPartOrComp'] == "0"){
-                          echo "Partial";
+                          echo "<font>Partial</font>";
                         }else{
-                          echo "Complete";
+                          echo "<font>Complete</font>";
                         }
                           
                       }else{
@@ -1080,9 +1107,9 @@
 
         <div class="row">
           <div class="col-md-2"></div>
-          <div style="height:200px;" class="col-md-10">
+          <div class="col-md-10">
               <label>&nbsp; Other &nbsp;</label> 
-              <textarea name="pulpchamother" rows="5" cols="50" style="float:left;" disabled><?php echo $objresultPulpcham['pulpcham_other']; ?></textarea>
+              <font><?php echo $objresultPulpcham['pulpcham_other']; ?></font>
           </div>
         </div>
 
@@ -1095,7 +1122,7 @@
       ?>
        <div class="row">
           <div class="col-md-2">
-              <label>&nbsp;&nbsp;&nbsp;Root: </label>
+              <label>&nbsp;Root: </label>
           </div>
 
           <div class="col-md-2">
@@ -1166,7 +1193,7 @@
               <label>&nbsp; Ext. Resorption</label>
           </div>
 
-          <div style="height:50px;" class="col-md-2">
+          <div class="col-md-2">
               <input type="checkbox" name="fractroot" style="float:left;" value="1"
                 <?php 
                       if($objresultRoot['root_fracture'] == "1"){
@@ -1186,9 +1213,9 @@
 
       <div class="row">
           <div class="col-md-2"></div>
-          <div style="height:200px;" class="col-md-10">
+          <div class="col-md-10">
               <label>&nbsp; Other &nbsp; </label>
-              <textarea rows="5" cols="50" name="root_other" style="float:left;" disabled><?php echo $objresultRoot['root_other']; ?></textarea>
+              <font><?php echo $objresultRoot['root_other']; ?></font>
           </div>
       </div>
 
@@ -1200,7 +1227,7 @@
       ?>
       <div class="row">
           <div class="col-md-2"> 
-            <label>Pulp Canal: </label>
+            <label>&nbsp;Pulp Canal: </label>
           </div>
 
           <div class="col-md-2"> 
@@ -1290,7 +1317,7 @@
                 ?>
               <label>&nbsp; Broken Instrument</label>
           </div>
-          <div style="height:80px;" class="col-md-6">
+          <div class="col-md-6">
               <input type="checkbox" style="float:left;" name="calcificatecanel" value="1"
                 <?php 
                       if($objresultPulpcan['pulpcan_calPartOrComp'] != ""){
@@ -1300,9 +1327,9 @@
                            <label>&nbsp; Calcification: &nbsp;</label>                  
                           <?php
                           if($objresultPulpcan['pulpcan_calPartOrComp'] == "0"){
-                            echo "Partial";
+                            echo "<font>Partial</font>";
                           }else{
-                            echo "Complete";
+                            echo "<font>Complete</font>";
                           }
                       }else{
                           ?>
@@ -1316,9 +1343,9 @@
 
       <div class="row">
           <div class="col-md-2"></div>
-          <div style="height:150px;" class="col-md-10">
+          <div class="col-md-10">
               <label>&nbsp; Other &nbsp; </label>
-              <textarea type="text" rows="3" cols="50" name="pulpcanother" style="float:left;" disabled><?php echo $objresultPulpcan['pulpcan_other']; ?></textarea>
+              <font><?php echo $objresultPulpcan['pulpcan_other']; ?></font>
           </div>
       </div>
 
@@ -1330,7 +1357,7 @@
       ?>
       <div class="row">
           <div class="col-md-2">
-              <label>&nbsp;&nbsp;&nbsp;Periradicular: </label>
+              <label>&nbsp;Periradicular: </label>
           </div>
           <div class="col-md-2">
               <input type="checkbox" style="float:left;" name="normperirad" value="1"
@@ -1433,7 +1460,7 @@
                 ?>
               <label>&nbsp; OsteosIcerosis</label>
           </div>
-          <div style="height:40px;" class="col-md-6">
+          <div class="col-md-6">
               <input type="checkbox" style="float:left;" name="hyperperirad" value="1"
                 <?php 
                       if($objresultPerirad['perirad_hyper'] == "1"){
@@ -1460,36 +1487,34 @@
                           ?>
                            checked = "true"
                            disabled = "true" > 
-                           <label>&nbsp; Periapical Lesion &nbsp;</label>
-                           <input type="text" name="periradperialess" style="width: 200px; height: 50px; float:left;" value="<?php echo $objresultPerirad['perirad_periapical']; ?>" disabled> 
+                           <label>&nbsp; Periapical Lesion : &nbsp;</label>
+                           <font><?php echo $objresultPerirad['perirad_periapical']; ?></font>
 
                           <?php
                       }else{
                           ?>
                            disabled = "true" >
-                           <label>&nbsp; Periapical Lesion &nbsp;</label>
-                           <input type="text" name="periradperialess" style="width: 200px; height: 50px; float:left;" disabled> 
+                           <label>&nbsp; Periapical Lesion : &nbsp;</label>
                           <?php 
                       } 
                 ?>
               
           </div>
 
-          <div style="height:60px;" class="col-md-5">
+          <div class="col-md-5">
               <input type="checkbox" style="float:left;" name="laterlessperirad" value="1"
                 <?php 
                       if($objresultPerirad['perirad_lateral'] != ""){
                           ?>
                            checked = "true"
                            disabled = "true" >                      
-                           <label>&nbsp; Lateral Lesion &nbsp;</label>
-                           <input type="text" name="periradlaterless" style="width: 200px; height:50px; float:left;" value="<?php echo $objresultPerirad['perirad_lateral']; ?>" disabled>
+                           <label>&nbsp; Lateral Lesion : &nbsp;</label>
+                           <font><?php echo $objresultPerirad['perirad_lateral']; ?></font>
                           <?php
                       }else{
                           ?>
                            disabled = "true" >
-                           <label>&nbsp; Lateral Lesion &nbsp;</label>
-                           <input type="text" name="periradlaterless" style="width: 200px; height:50px; float:left;" disabled>
+                           <label>&nbsp; Lateral Lesion : &nbsp;</label>
                           <?php 
                       } 
                 ?>
@@ -1499,9 +1524,9 @@
 
       <div class="row">
           <div class="col-md-2"></div>
-          <div style="height:200px;" class="col-md-10">
+          <div class="col-md-10">
               <label>&nbsp; Other &nbsp; </label>
-              <textarea rows="5" cols="50" name="perother" style="float:left;" disabled><?php echo $objresultPerirad['perirad_other']; ?></textarea>
+              <font><?php echo $objresultPerirad['perirad_other']; ?></font>
           </div>
       </div>
 
@@ -1514,7 +1539,7 @@
       ?>
       <div class="row">
         <div class="col-md-2">
-          <label>&nbsp;&nbsp;&nbsp;Alveolar Bone: </label>
+          <label>&nbsp;Alveolar Bone: </label>
         </div>
         <div class="col-md-2">
               <input type="radio" style="float:left;" name="alveolar" value="normalveolar"
@@ -1571,12 +1596,12 @@
         <div class="col-md-2"></div>
         <div class="col-md-5">
               <label>&nbsp; Other &nbsp; </label>
-              <textarea rows="5" cols="40" style="float:left;" name="alveolarother" disabled><?php echo $objresultAlveolar['bone_other']; ?></textarea>
+              <font><?php echo $objresultAlveolar['bone_other']; ?></font>
         </div>
 
         <div class="col-md-5">
               <label>Remarks: </label>
-              <textarea rows="5" cols="40" style="float:left;" name="otherremark" disabled><?php echo $objresultAlveolar['remark']; ?></textarea>
+              <font><?php echo $objresultAlveolar['remark']; ?></font>
         </div>
       </div>
 </div>
@@ -1646,7 +1671,7 @@
           </div>
       </div>
 
-      <div class="row" style="height:20px;">
+      <div class="row">
           <div class="col-md-7"></div>
           <div class="col-md-5">
               <input type="radio" style="float:left;" name="sympOrasymp" value="1" 
@@ -1730,10 +1755,10 @@
                            <label>&nbsp; Previously treated: &nbsp;&nbsp;</label>                      
                           <?php
                           if($objresultPulpaldiag['prev_treated_improper'] == "1"){
-                            echo "Improper";
+                            echo "<font>Improper</font>";
                           }
                           else if($objresultPulpaldiag['prev_treated_incomplete'] == "1"){
-                            echo "Incomplete RCT";
+                            echo "<font>Incomplete RCT</font>";
                           }else{
                             echo "";
                           }
@@ -1843,7 +1868,7 @@
 
         <div class="col-md-5">
                   <label>&nbsp; Other : &nbsp;</label> 
-                  <textarea name="perdiagother" rows="3" cols="35" style="float:left;" disabled><?php $objresultPeriraddiag['other']; ?></textarea>
+                  <font><?php $objresultPeriraddiag['other']; ?></font>
         </div>
       </div>
 </div> 
@@ -1887,10 +1912,10 @@
                  <label>&nbsp;Pulpotomy: &nbsp;</label>
                 <?php
                 if($objresultTreatment['pulp_partOrfull'] != "" && $objresultTreatment['pulp_partOrfull'] == "0"){
-                  echo "Partial";
+                  echo "<font>Partial</font>";
                 }
                 else if($objresultTreatment['pulp_partOrfull'] != "" && $objresultTreatment['pulp_partOrfull'] == "1"){
-                  echo "Full";
+                  echo "<font>Full</font>";
                 }else{
                   echo "";
                 }
@@ -2027,16 +2052,16 @@
   </div>
 
   <div class="row">
-    <div style="height:150px;" class="col-md-12">
+    <div class="col-md-12">
             <label>&nbsp; Other : &nbsp;</label>
-            <textarea name="periradother" rows="3" cols="50" style="float:left;" disabled><?php echo $objresultTreatment['treat_other']; ?></textarea>
+            <font><?php echo $objresultTreatment['treat_other']; ?></font>
     </div>
   </div>
 
   <div class="row">
-    <div style="height:150px;" class="col-md-12">
+    <div class="col-md-12">
            <label>Plan for final restoration: </label>
-           <textarea name="planrestor" rows="3" cols="50" style="float:left;" disabled><?php echo $objresultTreatment['plan_for_final']; ?></textarea>
+           <font><?php echo $objresultTreatment['plan_for_final']; ?></font>
     </div>
   </div>
 
@@ -2081,7 +2106,7 @@
 
     <div class="col-md-6">
         <label>&nbsp; Other :  &nbsp;</label>
-        <textarea name="preopother" rows="3" cols="40" style="float:left; " disabled><?php echo $objresultTreatment['pre_op_treat_other']; ?></textarea>
+        <font><?php echo $objresultTreatment['pre_op_treat_other']; ?></font>
     </div>
   </div>
 
@@ -2124,8 +2149,7 @@
         <label>&nbsp; Not required </label>
     </div>  
   </div>
-
-</div>
+</div> 
 </div>
 </div>
 
@@ -2139,3 +2163,13 @@
 
 </body>
 </html>
+<?php
+$html = ob_get_contents();        
+ob_end_clean();
+$pdf = new mPDF('th', 'A4', '0', '');   
+$pdf->SetAutoFont();
+$pdf->SetDisplayMode('fullpage');
+$pdf->WriteHTML($html, 2);
+$pdf->Output("MyPDF/MyPDF.pdf"); 
+?>
+ดาวโหลดรายงานในรูปแบบ PDF <a href="MyPDF/MyPDF.pdf">คลิกที่นี้</a>
