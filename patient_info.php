@@ -151,7 +151,7 @@ if(isset($_SESSION['username'])){
                     <table>
                     <tr height="80">
                         <td width="30%"><b>Patient's name: </b></td>
-                        <td><input type="text" name="patientname"></td>
+                        <td><input type="text" name="patientname" maxlength="100"></td>
                     </tr>
 
                     <tr height="80">

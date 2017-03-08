@@ -1,3 +1,7 @@
+<?php
+session_start();
+if(isset($_SESSION['username'])){
+  ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -1350,4 +1354,8 @@ $(':radio').mousedown(function(e){
   }
 });
 </script>
-
+  <?php
+}else{
+  header('Location: Login.php');
+}
+?>

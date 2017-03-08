@@ -11,10 +11,10 @@ $image = addslashes(file_get_contents($_FILES['f1']['tmp_name']));
 
 // echo 'HN:'.$HN.'<br>student code: '.$stu.'<br>dent Id:'.$dent.'<br>date:'.$datedemo;
 
-$insert_endo = "INSERT INTO dent_hardcopy VALUES('$HN','$datedemo','$stu','$dent','$image')";
-$result_endo = $conn->query($insert_endo);
+ $insert_endo = "INSERT INTO dent_hardcopy VALUES('$HN','$datedemo','$stu','$dent','$image')";
+ $result_endo = $conn->query($insert_endo);
 
-//Patient's History----Medical History
+// //Patient's History----Medical History
  
 if(!isset($_POST['nonemed'])){
 	$none = 0;
@@ -72,18 +72,18 @@ $personal_doctor = $_POST['personalmed'];
 $tel = $_POST['telmed'];
 $remark_medical = $_POST['remarkmed'];
 
- // echo 'HN :'.$HN.'<br>date :'.$datedemo.'<br>none :'.$none.'<br>cardiovascular :'.$cardiovascular.'<br>pulmonary :'.$pulmonary.'<br>gastrointestinal :'.$gastrointestinal.'<br>hematologic :'.$hematologic.'<br>neurologic :'.$neurologic.'<br>allergic_to :'.$allergic_to.'<br>blood_pressure :'.$blood_pressure.'<br>other :'.$other_medical.'<br>taking_medicine :'.$taking_medicine.'<br>personal_doctor :'.$personal_doctor.'<br>tel :'.$tel.'<br>remark :'.$remark_medical;
+//  // echo 'HN :'.$HN.'<br>date :'.$datedemo.'<br>none :'.$none.'<br>cardiovascular :'.$cardiovascular.'<br>pulmonary :'.$pulmonary.'<br>gastrointestinal :'.$gastrointestinal.'<br>hematologic :'.$hematologic.'<br>neurologic :'.$neurologic.'<br>allergic_to :'.$allergic_to.'<br>blood_pressure :'.$blood_pressure.'<br>other :'.$other_medical.'<br>taking_medicine :'.$taking_medicine.'<br>personal_doctor :'.$personal_doctor.'<br>tel :'.$tel.'<br>remark :'.$remark_medical;
  $insert_medical = "INSERT INTO medical_his VALUES('$HN','$datedemo',b'$none',b'$cardiovascular',b'$pulmonary',b'$gastrointestinal',b'$hematologic',b'$neurologic','$allergic_to','$blood_pressure','$other_med','$taking_medicine','$personal_doctor','$tel','$remark_medical')";
 $result_med = $conn->query($insert_medical);
 
-//Patient's History----Dental History
+// //Patient's History----Dental History
 $chief_complaint = $_POST['chiefdent'];
 $present_illness = $_POST['presentilldent'];
 
 $insert_dental = "INSERT INTO dental_his VALUES('$HN','$datedemo','$chief_complaint','$present_illness')";
 $result_dental = $conn->query($insert_dental);
 
-//Examination----S.Subjective Symptoms
+// //Examination----S.Subjective Symptoms
 $pain_intensity = $_POST['paininten'];
 $pain_character = $_POST['paincharacter'];
 
@@ -113,14 +113,17 @@ if(isset($_POST['locat_referred'])){
 }
 
 
-// echo 'HN :'.$HN.'<br>date :'.$datedemo.'<br>pain inten :'.$pain_intensity.'<br>pain char :'.$pain_character.'<br>duration :'.$duration.'<br>location :'.$location.'<br>onset :'.$onset.'<br>onsetstimul :'.$onsetstimul.'<br>location_radiat : '.$location_radiat.'<br>refer :'.$refer;
+// // echo 'HN :'.$HN.'<br>date :'.$datedemo.'<br>pain inten :'.$pain_intensity.'<br>pain char :'.$pain_character.'<br>duration :'.$duration.'<br>location :'.$location.'<br>onset :'.$onset.'<br>onsetstimul :'.$onsetstimul.'<br>location_radiat : '.$location_radiat.'<br>refer :'.$refer;
   $insert_subject = "INSERT INTO subject_symptom VALUES('$HN','$datedemo','$pain_intensity','$pain_character','$duration','$location',b'$onset','$onsetstimul','$location_radiat','$refer')";
   $result_subject = $conn->query($insert_subject);
 
 //Examination----O.Objective Symptoms 
+// test variable
+
 if(!isset($_POST['extrafacial_check'])){
 	$extrafacial_check = 0;
 	$extrafacial = '';
+	
 }else{
 	$extrafacial_check = $_POST['extrafacial_check'];
 	$extrafacial = $_POST['extrafacial'];
@@ -129,6 +132,7 @@ if(!isset($_POST['extrafacial_check'])){
 if(!isset($_POST['extralymph_check'])){
 	$extralymph_check = 0;
 	$extralymphnode = '';
+
 }else{
 	$extralymph_check = $_POST['extralymph_check'];
 	$extralymphnode = $_POST['extralymphnode'];
@@ -198,10 +202,56 @@ if(isset($_POST['crowntooth'])){ //chek with checkbox name(fracturetoration is n
 
 $toothother = $_POST['toothother'];
 
-//echo 'HN: '.$HN.'<br>date: '.$datedemo.'<br>extrafacial_check: '.$extrafacial_check.'<br>extrafacial: '.$extrafacial.'<br>extralymph_check: '.$extralymph_check.'<br>extralymphnode: '.$extralymphnode.'<br>extrasinus_check: '.$extrasinus_check.'<br>extrasinus: '.$extrasinus.'<br>extraother: '.$extraother.'<br>swellsoftorfirm: '.$swellsoftorfirm.'<br>intraswell_area: '.$intraswell_area.'<br>intrasinus: '.$intrasinus.'<br>tooth_caries: '.$tooth_caries.'<br>restoration_with: '.$restoration_with.'<br>tooth_pulpexpo: '.$tooth_pulpexpo.'<br>tooth_pulppoly: '.$tooth_pulppoly.'<br>fracture_at: '.$fracture_at.'<br>crown_discoloration: '.$crown_discoloration.'<br>tooth_open: '.$tooth_open.'<br>tooth_temp: '.$tooth_temp.'<br>toothother: '.$toothother;
+  // echo 'HN: '.$HN.'<br>date: '.$datedemo.'<br>extrafacial_check: '.$extrafacial_check.'<br>extrafacial: '.$extrafacial.'<br>extralymph_check: '.$extralymph_check.'<br>extralymphnode: '.$extralymphnode.'<br>extrasinus_check: '.$extrasinus_check.'<br>extrasinus: '.$extrasinus.'<br>extraother: '.$extraother.'<br>swellsoftorfirm: '.$swellsoftorfirm.'<br>intraswell_area: '.$intraswell_area.'<br>intrasinus: '.$intrasinus.'<br>tooth_caries: '.$tooth_caries.'<br>restoration_with: '.$restoration_with.'<br>tooth_pulpexpo: '.$tooth_pulpexpo.'<br>tooth_pulppoly: '.$tooth_pulppoly.'<br>fracture_at: '.$fracture_at.'<br>crown_discoloration: '.$crown_discoloration.'<br>tooth_open: '.$tooth_open.'<br>tooth_temp: '.$tooth_temp.'<br>toothother: '.$toothother;
+if(isset($_POST['extrafacial_check']) && isset($_POST['extralymph_check']) && isset($_POST['extrasinus_check'])){
+	echo 'select all';
+ 	$insert_object = "INSERT INTO object_symptom VALUES('$HN','$datedemo',b'$extrafacial_check','$extrafacial',b'$extralymph_check','$extralymphnode',b'$extrasinus_check','$extrasinus','$extraother',b'$swellsoftorfirm','$intraswell_area','$intrasinus',b'$tooth_caries','$restoration_with',b'$tooth_pulpexpo',b'$tooth_pulppoly','$fracture_at','$crown_discoloration',b'$tooth_open',b'$tooth_temp','$toothother')";
+ 	// echo $insert_object;
+  	$result_object = $conn->query($insert_object);
+}
+else if(isset($_POST['extrafacial_check']) && !isset($_POST['extralymph_check']) && !isset($_POST['extrasinus_check'])){
+	echo 'select extraficial';
+	$insert_object = "INSERT INTO object_symptom(HN, Date, ext_facialswelling, facialswell_id, ext_lymphnode, ext_sinustract, ext_other, intra_swellsoftOrfirm, intra_swellarea, intra_sinustract, tooth_caries, tooth_restoration, tooth_pulpexposure, tooth_pulppolyp, tooth_fracture, tooth_crown, tooth_open, tooth_temp, tooth_other) VALUES('$HN','$datedemo',b'$extrafacial_check','$extrafacial',b'$extralymph_check',b'$extrasinus_check','$extraother',b'$swellsoftorfirm','$intraswell_area','$intrasinus',b'$tooth_caries','$restoration_with',b'$tooth_pulpexpo',b'$tooth_pulppoly','$fracture_at','$crown_discoloration',b'$tooth_open',b'$tooth_temp','$toothother')";
+ 	// echo $insert_object;
+  	$result_object = $conn->query($insert_object);
+}
+else if(!isset($_POST['extrafacial_check']) && isset($_POST['extralymph_check']) && !isset($_POST['extrasinus_check'])){
+	echo 'select extralymphnode';
+	$insert_object = "INSERT INTO object_symptom(HN, Date, ext_facialswelling, ext_lymphnode, lymphnode_id ext_sinustract, ext_other, intra_swellsoftOrfirm, intra_swellarea, intra_sinustract, tooth_caries, tooth_restoration, tooth_pulpexposure, tooth_pulppolyp, tooth_fracture, tooth_crown, tooth_open, tooth_temp, tooth_other) VALUES('$HN','$datedemo',b'$extrafacial_check',b'$extralymph_check', '$extralymphnode',b'$extrasinus_check','$extraother',b'$swellsoftorfirm','$intraswell_area','$intrasinus',b'$tooth_caries','$restoration_with',b'$tooth_pulpexpo',b'$tooth_pulppoly','$fracture_at','$crown_discoloration',b'$tooth_open',b'$tooth_temp','$toothother')";
+ 	// echo $insert_object;
+  	$result_object = $conn->query($insert_object);
+}
+else if(!isset($_POST['extrafacial_check']) && !isset($_POST['extralymph_check']) && isset($_POST['extrasinus_check'])){
+	echo 'select extrasinus';
+	$insert_object = "INSERT INTO object_symptom (HN, Date, ext_facialswelling, ext_lymphnode, ext_sinustract, sinustract_id, ext_other, intra_swellsoftOrfirm, intra_swellarea, intra_sinustract, tooth_caries, tooth_restoration, tooth_pulpexposure, tooth_pulppolyp, tooth_fracture, tooth_crown, tooth_open, tooth_temp, tooth_other)VALUES('$HN','$datedemo',b'$extrafacial_check',b'$extralymph_check',b'$extrasinus_check','$extrasinus','$extraother',b'$swellsoftorfirm','$intraswell_area','$intrasinus',b'$tooth_caries','$restoration_with',b'$tooth_pulpexpo',b'$tooth_pulppoly','$fracture_at','$crown_discoloration',b'$tooth_open',b'$tooth_temp','$toothother')";
+ 	// echo $insert_object;
+  	$result_object = $conn->query($insert_object);
+}
+else if(isset($_POST['extrafacial_check']) && isset($_POST['extralymph_check']) && !isset($_POST['extrasinus_check'])){
+	echo 'select extrafacial and extralymphnode';
+	$insert_object = "INSERT INTO object_symptom (HN, Date, ext_facialswelling, facialswell_id, ext_lymphnode, lymphnode_id,ext_sinustract, ext_other, intra_swellsoftOrfirm, intra_swellarea, intra_sinustract, tooth_caries, tooth_restoration, tooth_pulpexposure, tooth_pulppolyp, tooth_fracture, tooth_crown, tooth_open, tooth_temp, tooth_other)VALUES('$HN','$datedemo',b'$extrafacial_check','$extrafacial',b'$extralymph_check','$extralymphnode',b'$extrasinus_check','$extraother',b'$swellsoftorfirm','$intraswell_area','$intrasinus',b'$tooth_caries','$restoration_with',b'$tooth_pulpexpo',b'$tooth_pulppoly','$fracture_at','$crown_discoloration',b'$tooth_open',b'$tooth_temp','$toothother')";
+ 	// echo $insert_object;
+  	$result_object = $conn->query($insert_object);
+}
+else if(isset($_POST['extrafacial_check']) && !isset($_POST['extralymph_check']) && isset($_POST['extrasinus_check'])){
+	echo 'select extraficial and extrasinus';
+	$insert_object = "INSERT INTO object_symptom (HN, Date, ext_facialswelling, facialswell_id, ext_lymphnode,ext_sinustract, sinustract_id, ext_other, intra_swellsoftOrfirm, intra_swellarea, intra_sinustract, tooth_caries, tooth_restoration, tooth_pulpexposure, tooth_pulppolyp, tooth_fracture, tooth_crown, tooth_open, tooth_temp, tooth_other)VALUES('$HN','$datedemo',b'$extrafacial_check','$extrafacial',b'$extralymph_check',b'$extrasinus_check','$extrasinus','$extraother',b'$swellsoftorfirm','$intraswell_area','$intrasinus',b'$tooth_caries','$restoration_with',b'$tooth_pulpexpo',b'$tooth_pulppoly','$fracture_at','$crown_discoloration',b'$tooth_open',b'$tooth_temp','$toothother')";
+ 	// echo $insert_object;
+  	$result_object = $conn->query($insert_object);
+}
+else if(!isset($_POST['extrafacial_check']) && isset($_POST['extralymph_check']) && isset($_POST['extrasinus_check'])){
+	echo 'select extralymphnode and extrasinus';
+	$insert_object = "INSERT INTO object_symptom (HN, Date, ext_facialswelling, ext_lymphnode, lymphnode_id, ext_sinustract, sinustract_id, ext_other, intra_swellsoftOrfirm, intra_swellarea, intra_sinustract, tooth_caries, tooth_restoration, tooth_pulpexposure, tooth_pulppolyp, tooth_fracture, tooth_crown, tooth_open, tooth_temp, tooth_other)VALUES('$HN','$datedemo',b'$extrafacial_check', b'$extralymph_check','$extralymphnode',b'$extrasinus_check','$extrasinus','$extraother',b'$swellsoftorfirm','$intraswell_area','$intrasinus',b'$tooth_caries','$restoration_with',b'$tooth_pulpexpo',b'$tooth_pulppoly','$fracture_at','$crown_discoloration',b'$tooth_open',b'$tooth_temp','$toothother')";
+ 	// echo $insert_object;
+  	$result_object = $conn->query($insert_object);
+}
+else if(!isset($_POST['extrafacial_check']) && !isset($_POST['extralymph_check']) && !isset($_POST['extrasinus_check'])){
+	echo 'not select all';
+	$insert_object = "INSERT INTO object_symptom (HN, Date, ext_facialswelling, ext_lymphnode, ext_sinustract, ext_other, intra_swellsoftOrfirm, intra_swellarea, intra_sinustract, tooth_caries, tooth_restoration, tooth_pulpexposure, tooth_pulppolyp, tooth_fracture, tooth_crown, tooth_open, tooth_temp, tooth_other)VALUES('$HN','$datedemo',b'$extrafacial_check', b'$extralymph_check',b'$extrasinus_check','$extraother',b'$swellsoftorfirm','$intraswell_area','$intrasinus',b'$tooth_caries','$restoration_with',b'$tooth_pulpexpo',b'$tooth_pulppoly','$fracture_at','$crown_discoloration',b'$tooth_open',b'$tooth_temp','$toothother')";
+ 	// echo $insert_object;
+  	$result_object = $conn->query($insert_object);
+}
 
- $insert_object = "INSERT INTO object_symptom VALUES('$HN','$datedemo',b'$extrafacial_check','$extrafacial',b'$extralymph_check','$extralymphnode',b'$extrasinus_check','$extrasinus','$extraother',b'$swellsoftorfirm','$intraswell_area','$intrasinus',b'$tooth_caries','$restoration_with',b'$tooth_pulpexpo',b'$tooth_pulppoly','$fracture_at','$crown_discoloration',b'$tooth_open',b'$tooth_temp','$toothother')";
- $result_object = $conn->query($insert_object);
 
 //Examination----Examination 
 $numtooth = $_POST['numtooth'];
@@ -244,10 +294,14 @@ if(isset($_POST['spectest'])){
 }
 
 
-//echo 'HN: '.$HN.'<br>date:'.$datedemo.'<br>numtooth:'.$numtooth.'<br>ept:'.$ept.'<br>cold:'.$cold.'<br>heat:'.$heat.'<br>perc:'.$perc.'<br>palp:'.$palp.'<br>mobility:'.$mobility.'<br>probe_mb:'.$probe_mb.'<br>probe_b:'.$probe_b.'<br>probe_db:'.$probe_db.'<br>probe_ml:'.$probe_ml.'<br>probe_l:'.$probe_l.'<br>probe_dl:'.$probe_dl.'<br>special_test:'.$special_test;
-
- $insert_examination = "INSERT INTO examination VALUES('$HN','$datedemo','$numtooth','$ept',b'$cold',b'$heat',b'$perc',b'$palp','$mobility','$probe_mb','$probe_b','$probe_db','$probe_ml','$probe_l','$probe_dl','$special_test')";
- $result_examination = $conn->query($insert_examination);
+// // echo 'HN: '.$HN.'<br>date:'.$datedemo.'<br>numtooth:'.$numtooth.'<br>ept:'.$ept.'<br>cold:'.$cold.'<br>heat:'.$heat.'<br>perc:'.$perc.'<br>palp:'.$palp.'<br>mobility:'.$mobility.'<br>probe_mb:'.$probe_mb.'<br>probe_b:'.$probe_b.'<br>probe_db:'.$probe_db.'<br>probe_ml:'.$probe_ml.'<br>probe_l:'.$probe_l.'<br>probe_dl:'.$probe_dl.'<br>special_test:'.$special_test;
+if(isset($_POST['spectest'])){
+	$insert_examination = "INSERT INTO examination VALUES('$HN','$datedemo','$numtooth','$ept',b'$cold',b'$heat',b'$perc',b'$palp','$mobility','$probe_mb','$probe_b','$probe_db','$probe_ml','$probe_l','$probe_dl','$special_test')";
+	$result_examination = $conn->query($insert_examination);
+}else{
+	$insert_examination = "INSERT INTO examination(HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL) VALUES('$HN','$datedemo','$numtooth','$ept',b'$cold',b'$heat',b'$perc',b'$palp','$mobility','$probe_mb','$probe_b','$probe_db','$probe_ml','$probe_l','$probe_dl')";
+	$result_examination = $conn->query($insert_examination);
+}
 
 //Radiograph_Crown
 if(!isset($_POST['normcrown'])){
@@ -284,12 +338,12 @@ if($normcrown == 0 && $cariescrown == 1){
 
 $crownother = $_POST['crownother'];
 
-//echo 'HN: '.$HN.'<br>date: '.$datedemo.'<br>normcrown:'.$normcrown.'<br>cariescrown:'.$cariescrown.'<br>crowarea:'.$crowarea.'<br>crowdepth:'.$crowdepth.'<br>restcrown:'.$restcrown.'<br>fractcrown:'.$fractcrown.'<br>crownother:'.$crownother;
+// //echo 'HN: '.$HN.'<br>date: '.$datedemo.'<br>normcrown:'.$normcrown.'<br>cariescrown:'.$cariescrown.'<br>crowarea:'.$crowarea.'<br>crowdepth:'.$crowdepth.'<br>restcrown:'.$restcrown.'<br>fractcrown:'.$fractcrown.'<br>crownother:'.$crownother;
  $insert_radiocrown = "INSERT INTO radiograph_crown VALUES('$HN','$datedemo',b'$normcrown',b'$cariescrown','$crowarea','$crowdepth',b'$restcrown',b'$fractcrown','$crownother')";
  $result_radiocrown = $conn->query($insert_radiocrown);
 
 
-// //Radiograph_pulpcham
+// // //Radiograph_pulpcham
 if(!isset($_POST['normcham'])){
 	$pulpcham_normal=0;
 }else{
@@ -317,7 +371,7 @@ $pulpchamother = $_POST['pulpchamother'];
 $insert_radiopulpcham = "INSERT INTO radiograph_pulpcham VALUES('$HN','$datedemo',b'$pulpcham_normal','$pulpcham_partorcomp',b'$pulpcham_stone',b'$pulpcham_resorp','$pulpchamother')";
 $result_radiopulpcham = $conn->query($insert_radiopulpcham);
 
-// //Radiograph_root
+// // //Radiograph_root
 if(!isset($_POST['normroot'])){
 	$root_normal=0;
 }else{
@@ -506,14 +560,14 @@ if(isset($_POST['reverOrirrever']) && $pul_normal == 0 && $ReverOrIrrever == 1){
 	if(isset($_POST['sympOrasymp'])){
 		$sympOrasymp = $_POST['sympOrasymp'];
 	}else{
-		?>
-		<script> window.alert('Please select Symptomatic or Asymptomatic'); </script>
-		<?php
-		$sympOrasymp = "1";
-	}
-}else{
-	$sympOrasymp = "";
-}
+  		?>
+       	  <script> window.alert('Please select Symptomatic or Asymptomatic'); </script> 
+  		<?php
+ 		$sympOrasymp = "1";
+ 	}
+ }else{
+ 	$sympOrasymp = "";
+ }
 
 if(isset($_POST['pulpnecrosis']) && $pul_normal == 0){
 	$pulpnecrosis = $_POST['pulpnecrosis'];
@@ -684,21 +738,21 @@ $result_xray = $conn->query($insert_xray);
 
  if($result_endo === TRUE && $result_med === TRUE && $result_dental === TRUE && $result_subject === TRUE && $result_object === TRUE && $result_examination === TRUE && $result_radiocrown === TRUE && $result_radiopulpcham === TRUE && $result_radioroot === TRUE && $result_radiopulpcanal === TRUE && $result_radioperirad === TRUE && $result_alveolar === TRUE && $result_pulpaldiag === TRUE && $result_periraddiag === TRUE && $result_treatment === TRUE && $result_xray === TRUE){
 
- 	?>
- 		<script>
- 			window.alert('Success');
- 			//window.location = "endorecord.php";
- 		</script>
- 	<?php
+   	?>
+   		<script>
+   			window.alert('Success');
+   			//window.location = "endorecord.php";
+   		</script>
+   	<?php
 
- }else{
- 	?>
- 		<script>
- 			window.alert('Unsuccess');
- 			//window.location = "endorecord.php";
- 		</script>
- 	<?php
- 	echo "Error description: " . mysqli_error($conn);
- }
-
+   }else{
+   	?>
+   		<script>
+   			window.alert('Unsuccess');
+   			//window.location = "endorecord.php";
+   		</script>
+   	<?php
+   	echo "Error description: " . mysqli_error($conn);
+   }
+   	
 ?>

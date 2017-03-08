@@ -88,6 +88,9 @@
             }
         </style>
 <?php
+session_start();
+error_reporting(0);
+$user = $_SESSION['username'];
 	require('connect.php');
 	require('class_summary.php');
 	$sum = new Medicalrecord;
@@ -116,7 +119,7 @@
 	            <td>รายละเอียดการรักษา</td>
 	        </tr>
 	        <?php
-	        	$sum->searchpatient($conn)
+	        	$sum->searchpatient($conn,$user)
 	        ?>
 </body>
 </html>

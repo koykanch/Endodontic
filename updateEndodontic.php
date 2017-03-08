@@ -976,6 +976,13 @@ function insertendorec() {
              <option value="2">2</option>
              
             <?php
+          }else{
+            ?>
+             <option value="3">3</option>
+             <option value="1">1</option>
+             <option value="2">2</option>
+             
+            <?php
           }
           ?>
           </select>

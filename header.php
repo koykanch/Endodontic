@@ -56,7 +56,7 @@
                                 ?>
                                 <div class="collapse navbar-collapse" id="top-navbar-1">
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li><a href="Login.php" target="_top">Logout</a></li>
+                                        <li><a href="Logout.php" target="_top">Logout</a></li>
                                     </ul>
                                 </div>
                                 <?php
@@ -65,7 +65,7 @@
                                 ?>
                                 <div class="collapse navbar-collapse" id="top-navbar-1">
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li><a href="Login.php" target="_top">Logout</a></li>
+                                        <li><a href="Logout.php" target="_top">Logout</a></li>
                                     </ul>
                                 </div>
                                 <?php

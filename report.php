@@ -1,89 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Endodontic Record Report</title>
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dentistry Information Systems</title>
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:700,300,400">        
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/elegant-font/code/style.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-  <link rel="stylesheet" href="assets/css/form-elements.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/media-queries.css">
-    <link rel="stylesheet" href="assets/css/popup.css">
-    <!--  <link rel="stylesheet" href="assets/css/cuppa-datepicker-styles.css">
-    <script src="assets/js/moment.min.js"></script> 
-    <script src="assets/js/cuppa-calendar.js"></script>  -->
-
-  <!-- Favicon and touch icons -->
-        <link rel="shortcut icon" href="assets/ico/icon.png">
-
-<!-- include for multi-step -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <link rel="stylesheet" href="assets/css/multi-step-form.css">
-  <style type="text/css">
-
-
-/*css for textbox*/
-    input[type="text"], 
-        textarea, 
-        textarea.form-control {
-            margin: 0;
-            /*padding: 1px 80px;*/
-            vertical-align: middle;
-            background: none;
-            border: 1px solid #BDBDBD;
-            font-family: 'Open Sans', sans-serif;
-            font-size: 22px;
-            font-weight: 100;
-            color: #000000;
-            -moz-border-radius: 6px;
-            -webkit-border-radius: 6px;
-            border-radius: 6px;
-            -moz-box-shadow: none;
-            -webkit-box-shadow: none;
-            box-shadow: none;
-            -o-transition: all .3s;
-            -moz-transition: all .3s;
-            -webkit-transition: all .3s;
-            -ms-transition: all .3s;
-            transition: all .3s;
-        }
-
-        input[type="text"]:focus, 
-        textarea:focus, 
-        textarea.form-control:focus {
-            outline: 0;
-            border: 1px solid #BDBDBD;
-            -moz-box-shadow: none;
-            -webkit-box-shadow: none;
-            box-shadow: none;
-        }
-
-        /*.row{
-          height: 60px;
-        }*/
-
-        label{
-          float: left;
-        }
-
-        font{
-          float: left;
-          font-weight: bold;
-          color: red;
-          /*text-decoration: underline;*/
-          border-bottom: 2px dotted;
-        }
-    </style>
-</head>
 <body>
 <?php
 require_once('mpdf/mpdf.php');
@@ -96,17 +12,17 @@ $dent = $_POST['Dent_id'];
 $harddate = $_POST['hard_date'];
   
 ?>
-	<div>
-		  <label style="float:right; font-size:40px; margin-right:2em;"><b>Endodontic Record</b></label>
-	</div><br><br><br>
+	<div style="font-size:30px; margin-left: 14em;">
+		  <b>Endodontic Record</b>
+	</div>
 
-	<div>
-		  <p><label style="float:right; font-size:25px; margin-right:2em;"><b>Faculty of Dentistry, Chiang Mai University</b></label></p>
+	<div style="font-size:20px; margin-left:14em;">
+		  <b>Faculty of Dentistry, Chiang Mai University</b>
 	</div><br><br>
 
 	<div>
-		  <label style="font-size:20px; float:left; margin-left:2em;">HN : <?php echo $HN; ?></label>
-	</div><br><br>
+		  <label style="font-size:20px;">HN : <?php echo $HN; ?></label>
+	</div><br>
 
   <?php
     $sql = "SELECT * FROM patients_info WHERE HN = '$HN'";
@@ -119,303 +35,423 @@ $harddate = $_POST['hard_date'];
     $age = $from->diff($to)->y;
 
   ?>
-	<div>
-		  <p style="font-size:20px; float:left; margin-left:2em;"><label>Patient's name: <?php echo $objresult['patientName']; ?> Age: <?php echo $age; ?> Gender: <?php echo $objresult['gender']; ?>
+	<div style="font-size:20px;">
+		 <b>Patient's name: </b><?php echo $objresult['patientName']; ?> <b>Age:</b> <?php echo $age; ?> <b>Gender:</b> <?php echo $objresult['gender']; ?>
+	</div><br>
 
-      </label></p>
-	</div><br><br>
+  <table width="100%">
+    <tr>
+      <th style="font-size: 20px;" align="left" colspan="4">Patient's History</th>
+    </tr>
 
-	<div class="sect-container">
- 	<div class="panel panel-info" style="margin-right:2em; margin-left:2em;">
-	<div class="panel-heading"><h3>Patient's History</h3></div>
-  <div class="panel-body">
-  <?php
-    $searchMed = "SELECT * FROM medical_his WHERE HN = '$HN' AND Date = '$harddate'";
-    $resultMed = $conn->query($searchMed);
-    $objresultMed = mysqli_fetch_array($resultMed);
-  ?>
-     <h4>Medical History</h4>
-     <div class="row">
-        <div class="col-md-4"><input type="checkbox" style="float:left;" name="nonemed" value="1"
-          <?php
-             if($objresultMed['none'] == "1"){
-              ?>
-                checked="true" 
-                disabled="true">
-              <?php   
-             }else{
-              ?>
-                disabled="true">
-              <?php
-             }
-          ?>
-        <label>&nbsp;None</label></div>
-          
-        <div class="col-md-4"><input type="checkbox" style="float:left;" name="cardiodismed" value="1"
-          <?php
-             if($objresultMed['cardiovascular'] == "1"){
-              ?>
-                checked="true" 
-                disabled="true">
-              <?php   
-             }else{
-              ?>
-                disabled="true">
-              <?php
-             }
-          ?>
-        <label>&nbsp;Cardiovascular Diseases</label></div>
-		
-        <div class="col-md-4"><input type="checkbox" style="float:left;" name="pulmonarydismed" value="1"
-          <?php
-             if($objresultMed['pulmonary'] == "1"){
-              ?>
-                checked="true" 
-                disabled="true">
-              <?php   
-             }else{
-              ?>
-                disabled="true">
-              <?php
-             }
-          ?>
-        <label>&nbsp;Pulmonary Diseases</label></div>
-    </div>
-
-    <div class="row">
-
-		   <div class="col-md-4"><input type="checkbox" style="float:left;" name="gastrodismed" value="1" 
-          <?php
-             if($objresultMed['gastrointestinal'] == "1"){
-              ?>
-                checked="true" 
-                disabled="true">
-              <?php   
-             }else{
-              ?>
-                disabled="true">
-              <?php
-             }
-          ?>
-       <label>&nbsp;Gastrointestinal Diseases</label></div>
-
-		   <div class="col-md-4"><input type="checkbox" style="float:left;" name="hemadismed" value="1" 
-          <?php
-             if($objresultMed['hematologis'] == "1"){
-              ?>
-                checked="true" 
-                disabled="true">
-              <?php   
-             }else{
-              ?>
-                disabled="true">
-              <?php
-             }
-          ?>
-       <label>&nbsp;Hematologic Diseases</label></div>
-
-		   <div class="col-md-4"><input type="checkbox" style="float:left;" name="neurodismed" value="1" 
-          <?php
-             if($objresultMed['Neurologic'] == "1"){
-              ?>
-                checked="true" 
-                disabled="true">
-              <?php   
-             }else{
-              ?>
-                disabled="true">
-              <?php
-             }
-          ?>
-       <label>&nbsp;Neurologic Diseases</label></div>
-		</div>
-
-		<div class="row">
-		  <div class="col-md-6"><input type="checkbox" style="float:left;" name="allergicmed" value="1"
-          <?php
-             if($objresultMed['allergic'] != ""){
-              ?>
-                checked="true" 
-                disabled="true">
-
-              <?php   
-             }else{
-              ?>
-                disabled="true">
-              <?php
-             }
-          ?>
-       <label>&nbsp; Allergic to : &nbsp;&nbsp; </label> 
-       <font><?php echo $objresultMed['allergic']; ?> </font>
-      </div>
-
-  	   <div class="col-md-6"><input type="checkbox" style="float:left;" name="bloodpressmed" value="1" 
-          <?php
-           if($objresultMed['blood_pres'] != ""){
-            ?>
-              checked="true" 
-              disabled="true">
-            <?php   
-           }else{
-            ?>
-              disabled="true">
-            <?php
-           }
-        ?>
-       <label>&nbsp;Blood Pressure (if needed): &nbsp;&nbsp;</label> 
-       <font><?php echo $objresultMed['blood_pres']; ?></font> 
-     </div>
-		</div>
-
-		<div class="row">
-  	 <div class="col-md-6">
-       <input type="checkbox" style="float:left;" name="othermed" value="1"
-          <?php
-           if($objresultMed['Other'] != ""){
-            ?>
-              checked="true" 
-              disabled="true">
-            <?php   
-           }else{
-            ?>
-              disabled="true">
-            <?php
-           }
-        ?>
-        <label>&nbsp; Other : &nbsp; </label>
-        <font><?php echo $objresultMed['Other']; ?></font>
-     </div>
-
-	   <div class="col-md-6"><input type="checkbox" style="float:left;" name="takingmed" value="1" 
-        <?php
-        if($objresultMed['taking_med'] != ""){
-          ?>
-              checked="true" 
-              disabled="true">
-            <?php 
-        }else{
-           ?>
-            disabled="true">
-           <?php
-        }
+    <tr>
+      <th style="font-size: 15px;" align="left" colspan="4">
+      <?php
+        $searchMed = "SELECT * FROM medical_his WHERE HN = '$HN' AND Date = '$harddate'";
+        $resultMed = $conn->query($searchMed);
+        $objresultMed = mysqli_fetch_array($resultMed);
       ?>
-     <label>&nbsp; Taking medicine : &nbsp; </label>
-     <font><?php echo $objresultMed['taking_med']; ?></font>
-     </div>
-         
-		</div>
+          <u>Medical History</u>
+      </th>
+    </tr>
 
-		  <div class="row">   
-          <div class="col-md-6"><label>Personal Doctor : &nbsp;</label>
-            <font><?php echo $objresultMed['personal_doc']; ?></font>
-          </div>
+    <tr>
+      <td>
+            <input type="checkbox"
+              <?php
+                 if($objresultMed['none'] == "1"){
+                  ?>
+                    checked="true" disabled="true">
+                  <?php   
+                 }else{
+                  ?>
+                    disabled="true">
+                  <?php
+                 }
+              ?>
+            None
+      </td>
 
-          <div class="col-md-6"><label>Tel : &nbsp;</label>
-            <font><?php echo $objresultMed['Tel']; ?></font>
-          </div>
-      </div>
+      <td>
+            <input type="checkbox"
+              <?php
+                 if($objresultMed['cardiovascular'] == "1"){
+                  ?>
+                    checked="true" disabled="true">
+                  <?php   
+                 }else{
+                  ?>
+                    disabled="true">
+                  <?php
+                 }
+              ?>
+            Cardiovascular Diseases
+      </td>
 
-      <div class="row">
-          <div class="col-md-12"><label>Remark : &nbsp; </label>
-            <font><?php echo $objresultMed['remark']; ?></font>
-          </div>
-      </div>
+      <td>  
+            <input type="checkbox" 
+              <?php
+                 if($objresultMed['pulmonary'] == "1"){
+                  ?>
+                    checked="true" 
+                    disabled="true">
+                  <?php   
+                 }else{
+                  ?>
+                    disabled="true">
+                  <?php
+                 }
+              ?>
+            Pulmonary Diseases
+      </td>  
 
+      <td>
+           <input type="checkbox" 
+              <?php
+                 if($objresultMed['gastrointestinal'] == "1"){
+                  ?>
+                    checked="true" 
+                    disabled="true">
+                  <?php   
+                 }else{
+                  ?>
+                    disabled="true">
+                  <?php
+                 }
+              ?>
+           Gastrointestinal Diseases
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+          <input type="checkbox" 
+              <?php
+                 if($objresultMed['hematologis'] == "1"){
+                  ?>
+                    checked="true" 
+                    disabled="true">
+                  <?php   
+                 }else{
+                  ?>
+                    disabled="true">
+                  <?php
+                 }
+              ?>
+           Hematologic Diseases
+      </td>  
+
+      <td colspan="2">
+          <input type="checkbox" 
+              <?php
+                 if($objresultMed['Neurologic'] == "1"){
+                  ?>
+                    checked="true" 
+                    disabled="true">
+                  <?php   
+                 }else{
+                  ?>
+                    disabled="true">
+                  <?php
+                 }
+              ?>
+           Neurologic Diseases
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <input type="checkbox" 
+              <?php
+                 if($objresultMed['allergic'] != ""){
+                  ?>
+                    checked="true" 
+                    disabled="true">
+
+                  <?php   
+                 }else{
+                  ?>
+                    disabled="true">
+                  <?php
+                 }
+              ?>
+            Allergic to :
+           <?php echo $objresultMed['allergic']; ?>
+      </td>
+
+      <td colspan="2">
+         <input type="checkbox"
+              <?php
+               if($objresultMed['blood_pres'] != ""){
+                ?>
+                  checked="true" 
+                  disabled="true">
+                <?php   
+               }else{
+                ?>
+                  disabled="true">
+                <?php
+               }
+            ?>
+          Blood Pressure (if needed): 
+           <?php echo $objresultMed['blood_pres']; ?>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+           <input type="checkbox" 
+              <?php
+               if($objresultMed['Other'] != ""){
+                ?>
+                  checked="true" 
+                  disabled="true">
+                <?php   
+               }else{
+                ?>
+                  disabled="true">
+                <?php
+               }
+            ?>
+            Other : &nbsp; 
+            <?php echo $objresultMed['Other']; ?>
+      </td>
+
+      <td colspan="2">
+         <input type="checkbox" 
+            <?php
+            if($objresultMed['taking_med'] != ""){
+              ?>
+                  checked="true" 
+                  disabled="true">
+                <?php 
+            }else{
+               ?>
+                disabled="true">
+               <?php
+            }
+          ?>
+          Taking medicine : &nbsp; 
+         <?php echo $objresultMed['taking_med']; ?>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+            Personal Doctor :
+            <?php echo $objresultMed['personal_doc']; ?>
+      </td>
+
+      <td colspan="2">
+            Tel : 
+            <?php echo $objresultMed['Tel']; ?>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="4">
+          Remark : 
+          <?php echo $objresultMed['remark']; ?>
+      </td>
+    </tr>
+
+    <tr>
+      <th style="font-size: 15px;" align="left" colspan="4"><u>Dental History</u></th>
+    </tr>
+
+    <tr>
+      <td colspan="4">
+        <?php
+          $searchDen = "SELECT * FROM dental_his WHERE HN = '$HN' AND Date = '$harddate'";
+          $resultDen = $conn->query($searchDen);
+          $objresultDen = mysqli_fetch_array($resultDen);
+        ?>  
+          Chief Complaint :
+          <?php echo $objresultDen['chief_complaint']; ?>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="4">
+          History of Present Illness : 
+          <?php echo $objresultDen['his_of_presentill']; ?>
+      </td>
+    </tr>
+  </table><br>
+    
+  <table width="100%">
+    <tr>
+      <th style="font-size:20px;" align="left" colspan="3">Examination</th>
+    </tr>
+
+    <tr>
     <?php
-      $searchDen = "SELECT * FROM dental_his WHERE HN = '$HN' AND Date = '$harddate'";
-      $resultDen = $conn->query($searchDen);
-      $objresultDen = mysqli_fetch_array($resultDen);
+      $searchSubj = "SELECT * FROM subject_symptom WHERE HN = '$HN' AND Date = '$harddate'";
+      $resultSubj = $conn->query($searchSubj);
+      $objresultSubj = mysqli_fetch_array($resultSubj);
     ?>
 
-    <h4>Dental History</h4>
-      <div class="row">
-          <div class="col-md-12"><label>Chief Complaint : &nbsp;</label>
-            <font><?php echo $objresultDen['chief_complaint']; ?></font>
-          </div>
-      </div>
+      <th style="font-size:15px;" align="left"><u>S.Subjective Symptoms</u></th>
+
+      <?php
+        $searchObj = "SELECT * FROM object_symptom WHERE HN='$HN' AND Date = '$harddate'";
+        $resultObj = $conn->query($searchObj);
+        $objresultObj = mysqli_fetch_array($resultObj);
+      ?>
     
-      <div class="row"> 
-        <div class="col-md-12"><label>History of Present Illness : &nbsp; </label>
-          <font><?php echo $objresultDen['his_of_presentill']; ?></font>
-        </div>
-      </div>
-  </div>
-  </div>
-  </div>
-
-
-  <div class="sect-container">
-  <div class="panel panel-info" style="margin-right:2em; margin-left:2em;">
-  <div class="panel-heading"><h3>Examination</h3></div>     
-  <div class="panel panel-body">
-
-  <?php
-    $searchSubj = "SELECT * FROM subject_symptom WHERE HN = '$HN' AND Date = '$harddate'";
-    $resultSubj = $conn->query($searchSubj);
-    $objresultSubj = mysqli_fetch_array($resultSubj);
-
-  ?>
-    <h4>S.Subjective Symptoms</h4>
-      <div class="row">
-        <div class="col-md-2">
+      <th style="font-size: 15px;" colspan="2" align="left"><u>O.Objective Symptoms</u></th>
+    </tr>
+      
+    <tr>
+      <td>
         <?php
           $paininten = "SELECT * FROM pain_intensity WHERE paininten_id = '".$objresultSubj['paininten_id']."'";
           $resultpainin = $conn->query($paininten);
           $objresultpainin = mysqli_fetch_array($resultpainin);
         ?>
-         <label>Pain intensity: </label><font><?php echo $objresultpainin['paininten_detail']; ?></font>
-        </div>
-      </div>
+        Pain intensity: <?php echo $objresultpainin['paininten_detail']; ?>
+      </td>
+      
+      <td>Extraoral:</td>
+      <td>
+        <?php
+          if($objresultObj['ext_facialswelling'] == "1"){
+            ?>
+              <input type="checkbox" checked="true" disabled="true">
+              <?php
+                $facialswell = "SELECT * FROM extra_facial WHERE facialswell_id = '".$objresultObj['facialswell_id']."'";
+                $resultfacial = $conn->query($facialswell);
+                $objresultfacial = mysqli_fetch_array($resultfacial);
+              ?>
+              Facial Swelling:
+              <?php echo $objresultfacial['facialswell_detail']; ?> 
+            <?php
+          }else{
+            ?>
+              <input type="checkbox" disabled="true">
+              Facial Swelling:
+              <?php
+          }
+        ?>
+      </td>
+    </tr>
 
-      <div class="row">
-        <div class="col-md-2">
+    <tr>
+      <td>
         <?php
           $painchar = "SELECT * FROM pain_character WHERE painchar_id = '".$objresultSubj['painchar_id']."'";
           $resultpainchar = $conn->query($painchar);
           $objresultpainchar = mysqli_fetch_array($resultpainchar);
         ?>
-          <label>Pain Character: </label><font><?php echo $objresultpainchar['painchar_detail']; ?></font>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="col-md-3">
-          <label>Onset: </label>
+        Pain Character: <?php echo $objresultpainchar['painchar_detail']; ?>
+      </td>
+
+      <td></td>
+      <td>
+        <?php
+          if($objresultObj['ext_lymphnode'] == "1"){
+            ?>
+              <input type="checkbox" checked="true" disabled="true">
+            <?php
+                $lymphnode = "SELECT * FROM extra_lymphnode WHERE lymphnode_id = '".$objresultObj['lymphnode_id']."'";
+                $resultlymphnode = $conn->query($lymphnode);
+                $objresultlymphnode = mysqli_fetch_array($resultlymphnode);
+            ?>
+                Lymph Node: 
+                <?php echo $objresultlymphnode['lymphnode_detail']; ?>
+            <?php
+          }else{
+            ?>
+              <input type="checkbox" disabled="true">
+                Lymph Node: 
+            <?php
+          }
+        ?>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Onset: 
           <?php 
             if($objresultSubj['onset_spontOrstim'] == "0") {
-              echo "<font>Spontaneous</font>";
+              echo "Spontaneous";
             }else{
-              echo "<font>Stimulation Required(".$objresultSubj['stimulation_detail'].")</font>";
+              echo "Stimulation Required(".$objresultSubj['stimulation_detail'].")";
             }
 
-          ?>
-        </div> 
-      </div>
+          ?> 
+      </td>
 
-      <div class="row">
-      <?php
+      <td></td>
+      <td>
+        <?php
+          if($objresultObj['ext_sinustract'] == "1"){
+            ?>
+              <input type="checkbox" checked="true" disabled="true">
+            <?php
+                $sinus = "SELECT * FROM extra_sinus WHERE sinustract_id = '".$objresultObj['sinustract_id']."'";
+                $resultsinus = $conn->query($sinus);
+                $objresultsinus = mysqli_fetch_array($resultsinus);
+            ?>
+              Sinus Tract:
+              <?php echo $objresultsinus['sinustract_detail']; ?>  
+            <?php
+          }else{
+            ?>
+              <input type="checkbox" disabled="true">
+              Sinus Tract: 
+            <?php
+          } 
+        ?>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <?php
           $duration = "SELECT * FROM duration WHERE duration_id = '".$objresultSubj['duration_id']."'";
           $resultduration = $conn->query($duration);
           $objresultduration = mysqli_fetch_array($resultduration);
-      ?>
-       <div class="col-md-2"><label>Duration: </label>
-          <font><?php echo $objresultduration['duration_detail']; ?></div> </font>
-      </div>
+        ?>
 
-    	<div class="row">
-      <?php
+        Duration: <?php echo $objresultduration['duration_detail']; ?>
+      </td>
+
+      <td></td>
+      <td>
+        Other: <?php echo $objresultObj['ext_other']; ?>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <?php
           $location = "SELECT * FROM location WHERE location_id = '".$objresultSubj['locat_locOrdiff']."'";
           $resultlocation = $conn->query($location);
           $objresultlocation = mysqli_fetch_array($resultlocation);
-      ?>
-    	  <div class="col-md-2"><label>Location: </label>
-          <font><?php echo $objresultlocation['location_detail']; ?></div> </font>
-    	</div>
+        ?>
 
-      <div class="row">
-      <div class="col-md-1"></div>
-       <div class="col-md-10">
-        <input type="checkbox" name="locat_radiating" style="float:left;" value="radiatinglocat"
+        Location: <?php echo $objresultlocation['location_detail']; ?>
+      </td>
+
+      <td>Intraoral:</td>
+      <td>
+        <?php
+              if($objresultObj['intra_swellsoftOrfirm'] == "0"){
+                $swell = "Soft";
+              }else{
+                $swell = "Firm";
+              }
+            ?>
+              Sweling(<?php echo $swell; ?>) &nbsp; area : <?php echo $objresultObj['intra_swellarea']; ?>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding-left:60px">
+        <input type="checkbox"
           <?php
             if($objresultSubj['locat_radiating'] != ""){
               ?>
@@ -428,16 +464,33 @@ $harddate = $_POST['hard_date'];
                <?php
             }
           ?>
-        <label> &nbsp; Radiating to &nbsp; </label>
-        <font><?php echo $objresultSubj['locat_radiating']; ?></font>
-       </div> 
-        
-      </div>
+        &nbsp;Radiating to &nbsp;
+        <?php echo $objresultSubj['locat_radiating']; ?>
+      </td>
 
-      <div class="row">
-      <div class="col-md-1"></div>
-        <div class="col-md-10">
-          <input type="checkbox" name="locat_referred" style="float:left;" value="referredlocat"
+      <td></td>
+      <td>
+        <input type="radio" 
+          <?php
+            if($objresultObj['intra_sinustract'] != ""){
+              ?>
+                  checked="true" 
+                  disabled="true">
+              <?php 
+            }else{
+               ?>
+                disabled="true">
+               <?php
+            }
+          ?>
+        Sinus Tract at : 
+        <?php echo $objresultObj['intra_sinustract']; ?>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding-left:60px">
+        <input type="checkbox"
             <?php
             if($objresultSubj['locat_referred'] != ""){
               ?>
@@ -450,363 +503,324 @@ $harddate = $_POST['hard_date'];
                <?php
             }
           ?>
-          <label> &nbsp; Referred to &nbsp; </label>
-          <font><?php echo $objresultSubj['locat_referred']; ?></font>
-        
-      </div>
-      </div>
+        &nbsp;Referred to &nbsp;
+        <?php echo $objresultSubj['locat_referred']; ?>
 
-      <?php
-        $searchObj = "SELECT * FROM object_symptom WHERE HN='$HN' AND Date = '$harddate'";
-        $resultObj = $conn->query($searchObj);
-        $objresultObj = mysqli_fetch_array($resultObj);
+      </td>
 
-      ?>
-
-      <h4>&nbsp;&nbsp;O.Objective Symptoms</h4>
-        <div class="row">
-        <div class="col-md-3">
-        <?php
-          if($objresultObj['ext_facialswelling'] == "1"){
-            ?>
-              <input type="checkbox" name="extrafacial_check" style="float:left;" value="1" checked="true" disabled="true">
+      <td>Tooth:</td>
+      <td>
+        <input type="checkbox"
               <?php
-                $facialswell = "SELECT * FROM extra_facial WHERE facialswell_id = '".$objresultObj['facialswell_id']."'";
-                $resultfacial = $conn->query($facialswell);
-                $objresultfacial = mysqli_fetch_array($resultfacial);
-              ?>
-              <label>&nbsp;&nbsp;Extraoral Facial Swelling: </label>
-              <font><?php echo $objresultfacial['facialswell_detail']; ?></font>
-              </div> 
-            <?php
-          }else{
-            ?>
-              <input type="checkbox" name="extrafacial_check" style="float:left;" value="1" disabled="true">
-              <label>&nbsp;&nbsp;Extraoral Facial Swelling: </label>
-              </div>
-              <?php
-          }
-        ?>
-              
-        </div>
-
-        <div class="row">
-          <div class="col-md-3">
-        <?php
-          if($objresultObj['ext_lymphnode'] == "1"){
-            ?>
-              <input type="checkbox" name="extralymph_check" style="float:left;" value="1" checked="true" disabled="true">
-            <?php
-                $lymphnode = "SELECT * FROM extra_lymphnode WHERE lymphnode_id = '".$objresultObj['lymphnode_id']."'";
-                $resultlymphnode = $conn->query($lymphnode);
-                $objresultlymphnode = mysqli_fetch_array($resultlymphnode);
-            ?>
-                <label>&nbsp;&nbsp;Extraoral Lymph Node: </label>
-                <font><?php echo $objresultlymphnode['lymphnode_detail']; ?></font>
-            </div> 
-            <?php
-          }else{
-            ?>
-              <input type="checkbox" name="extralymph_check" style="float:left;" value="1" disabled="true">
-                <label>&nbsp;&nbsp;Extraoral Lymph Node: </label>
-            </div> 
-            <?php
-          }
-        ?>
-                
-        </div>
-
-        <div class="row">
-          <div class="col-md-3">
-          <?php
-          if($objresultObj['ext_sinustract'] == "1"){
-            ?>
-              <input type="checkbox" name="extrasinus_check" style="float:left;" value="1" checked="true" disabled="true">
-            <?php
-                $sinus = "SELECT * FROM extra_sinus WHERE sinustract_id = '".$objresultObj['sinustract_id']."'";
-                $resultsinus = $conn->query($sinus);
-                $objresultsinus = mysqli_fetch_array($resultsinus);
-            ?>
-              <label>&nbsp;&nbsp;Extra Sinus Tract: </label>
-              <font><?php echo $objresultsinus['sinustract_detail']; ?></font>
-            </div>  
-            <?php
-          }else{
-            ?>
-              <input type="checkbox" name="extrasinus_check" style="float:left;" value="1" disabled="true">
-              <label>&nbsp;&nbsp;Extra Sinus Tract: </label>
-            </div>  
-            <?php
-          } 
-        ?>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-3">
-                <label>&nbsp; Other: &nbsp;</label> 
-            </div>
-            <div class="col-md-9">
-                <font><?php echo $objresultObj['ext_other']; ?></font>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-2">
-              
-                <label>&nbsp;&nbsp; Intraoral:  </label>
-            </div>
-
-            <div class="col-md-5">
-              <?php
-                if($objresultObj['intra_swellsoftOrfirm'] == "0"){
-                  $swell = "Soft";
+                if($objresultObj['tooth_caries'] == "1"){
+                  ?>
+                    checked="true" 
+                    disabled="true">
+                  <?php 
                 }else{
-                  $swell = "Firm";
+                 ?>
+                  disabled="true">
+                 <?php
                 }
               ?>
-                <label>Sweling(<?php echo $swell; ?>)</label>
-                <label>&nbsp;&nbsp; area &nbsp; </label>
-                <font><?php echo $objresultObj['intra_swellarea']; ?></font>
-            </div>
+             Caries
+      </td>
+    </tr>
 
-            <div class="col-md-5">
- 
-              <input type="radio" style="float:left;" name="intra_sinus" value="1" 
-                <?php
-                  if($objresultObj['intra_sinustract'] != ""){
-                    ?>
-                        checked="true" 
-                        disabled="true">
-                    <?php 
-                  }else{
-                     ?>
-                      disabled="true">
-                     <?php
-                  }
-                ?>
-              <label>&nbsp; Sinus Tract at &nbsp; </label>
-              <font><?php echo $objresultObj['intra_sinustract']; ?></font>
-            </div>            
-        </div>
+    <tr>
+      <td></td>
+      <td></td>
+      <td>
+        <input type="checkbox"
+          <?php
+          if($objresultObj['tooth_restoration'] != ""){
+            ?>
+                  checked="true" 
+                  disabled="true">
+                <?php 
+              }else{
+               ?>
+                disabled="true">
+               <?php
+              }
+            ?>
+            Restoration with : &nbsp;
+            <?php echo $objresultObj['tooth_restoration']; ?>
+      </td>
+    </tr>
 
-        <div class="row">
-            <div class="col-md-2">
-              <label>&nbsp;&nbsp;&nbsp;Tooth: </label>
-            </div>
+    <tr>
+      <td></td>
+      <td></td>
+      <td>
+        <input type="checkbox"
+          <?php
+            if($objresultObj['tooth_pulpexposure'] == "1"){
+              ?>
+                checked="true" 
+                disabled="true">
+              <?php 
+            }else{
+             ?>
+              disabled="true">
+             <?php
+            }
+          ?>
+        Pulp Exposure      
+      </td>
+    </tr>
 
-            <div class="col-md-3">
-                <input type="checkbox" name="cariestooth" style="float:left;" value="1"
-                  <?php
-                    if($objresultObj['tooth_caries'] == "1"){
-                      ?>
-                        checked="true" 
-                        disabled="true">
-                      <?php 
-                    }else{
-                     ?>
-                      disabled="true">
-                     <?php
-                    }
-                  ?>
-                <label>&nbsp; Caries</label>
-                </div>
-              
-            <div class="col-md-2">
-            
-                <input type="checkbox" name="pulptoothex" style="float:left;" value="1"
-                  <?php
-                    if($objresultObj['tooth_pulpexposure'] == "1"){
-                      ?>
-                        checked="true" 
-                        disabled="true">
-                      <?php 
-                    }else{
-                     ?>
-                      disabled="true">
-                     <?php
-                    }
-                  ?>
-                <label>&nbsp; Pulp Exposure</label>
-                </div>              
-
-            <div class="col-md-2">
-                <input type="checkbox" name="pulptoothpoly" style="float:left;" value="1" 
-                  <?php
-                    if($objresultObj['tooth_pulppolyp'] == "1"){
-                      ?>
-                        checked="true" 
-                        disabled="true">
-                      <?php 
-                    }else{
-                     ?>
-                      disabled="true">
-                     <?php
-                    }
-                  ?>
-                <label>&nbsp; Pulp Polyp</label>
-                </div>
-
-            <div class="col-md-3">
-              <input type="checkbox" name="opentoothdrai" style="float:left;" value="1" 
-                <?php
-                  if($objresultObj['tooth_open'] == "1"){
-                    ?>
-                      checked="true" 
-                      disabled="true">
-                    <?php 
-                  }else{
-                   ?>
-                    disabled="true">
-                   <?php
-                  }
-                ?>
-              <label> &nbsp; Opened for Drainage</label>
-            </div>
-
-        </div>
-
-        <div class="row">
-            <div class="col-md-2"></div>
-
-            <div class="col-md-3">
-              <input type="checkbox" name="temptooth" style="float:left;" value="1" 
-                <?php
-                if($objresultObj['tooth_temp'] == "1"){
-                  ?>
-                      checked="true" 
-                      disabled="true">
-                    <?php 
-                  }else{
-                   ?>
-                    disabled="true">
-                   <?php
-                  }
-                ?>
-                  <label>&nbsp; Temp. Restoration</label>
-                </div>
-
-            <div class="col-md-7">
-              <input type="checkbox" name="restoothtoration" style="float:left;" value="1"
+    <tr>
+      <td></td>
+      <td></td>
+      <td>
+        <input type="checkbox"  
               <?php
-              if($objresultObj['tooth_restoration'] != ""){
-                ?>
-                      checked="true" 
-                      disabled="true">
-                    <?php 
-                  }else{
-                   ?>
+                if($objresultObj['tooth_pulppolyp'] == "1"){
+                  ?>
+                    checked="true" 
                     disabled="true">
-                   <?php
-                  }
-                ?>
-                  <label> &nbsp; Restoration with &nbsp; </label>
-                  <font><?php echo $objresultObj['tooth_restoration']; ?></font>
-                </div>
-        </div>
+                  <?php 
+                }else{
+                 ?>
+                  disabled="true">
+                 <?php
+                }
+              ?>
+            Pulp Polyp
+      </td>
+    </tr>
 
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-5">
-                <input type="checkbox" name="fracturetoration" style="float:left;" value="1"
-                <?php
-                  if($objresultObj['tooth_fracture'] != ""){
-                    ?>
-                      checked="true" 
-                      disabled="true">
-                    <?php 
-                  }else{
-                   ?>
+    <tr>
+      <td></td>
+      <td></td>
+      <td>
+        <input type="checkbox"
+            <?php
+              if($objresultObj['tooth_fracture'] != ""){
+                ?>
+                  checked="true" 
+                  disabled="true">
+                <?php 
+              }else{
+               ?>
+                disabled="true">
+               <?php
+              }
+            ?>
+            Fracture at &nbsp; <?php echo $objresultObj['tooth_fracture']; ?>
+      </td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td>
+        <input type="checkbox"
+            <?php
+              if($objresultObj['tooth_crown'] != ""){
+                ?>
+                  checked="true" 
+                  disabled="true">
+                <?php 
+              }else{
+               ?>
+                disabled="true">
+               <?php
+              }
+            ?>
+            Crown Discoloration to &nbsp; 
+            <?php echo $objresultObj['tooth_crown']; ?>
+      </td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td>
+        <input type="checkbox"  
+              <?php
+                if($objresultObj['tooth_open'] == "1"){
+                  ?>
+                    checked="true" 
                     disabled="true">
-                   <?php
-                  }
-                ?>
-                <label> &nbsp; Fracture at &nbsp; </label>
-                <font><?php echo $objresultObj['tooth_fracture']; ?></font>
-                </div>            
+                  <?php 
+                }else{
+                 ?>
+                  disabled="true">
+                 <?php
+                }
+              ?>
+            Opened for Drainage
+      </td>
+    </tr>
 
-            <div class="col-md-5">
-                <input type="checkbox" name="crowntooth" style="float:left;" value="1" 
-                <?php
-                  if($objresultObj['tooth_crown'] != ""){
-                    ?>
-                      checked="true" 
-                      disabled="true">
-                    <?php 
-                  }else{
-                   ?>
-                    disabled="true">
-                   <?php
-                  }
-                ?>
-                <label> &nbsp; Crown Discoloration to &nbsp; </label>
-                <font><?php echo $objresultObj['tooth_crown']; ?></font>
-                </div>
+    <tr>
+      <td></td>
+      <td></td>
+      <td>
+        <input type="checkbox"
+            <?php
+            if($objresultObj['tooth_temp'] == "1"){
+              ?>
+                  checked="true" 
+                  disabled="true">
+                <?php 
+              }else{
+               ?>
+                disabled="true">
+               <?php
+              }
+            ?>
+            Temp. Restoration
+      </td>
+    </tr>
 
-        </div>
+    <tr>
+      <td></td>
+      <td></td>
+      <td> Other: <?php echo $objresultObj['tooth_other']; ?> </td>
+    </tr>
+  </table>
 
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-10">
-                <label> &nbsp; Other: &nbsp; </label>
-                <font><?php echo $objresultObj['tooth_other']; ?></font>
-              </div>              
-        </div>
-
-      <h4>Examination</h4>
+  
+      <div style="font-size: 15px;"><b>Examination: </b></div>
       <?php
         $searchExam = "SELECT * FROM examination WHERE HN = '$HN' AND Date = '$harddate'";
         $resultExam = $conn->query($searchExam);
         $objresultExam = mysqli_fetch_array($resultExam);
       ?>
-        <div class="row">
-          <div class="col-md-2">
-              <label>Tooth : &nbsp;</label>
-              <font><?php echo $objresultExam['exam_tooth']; ?></font>
-          </div>
+      <div>
+        <table border="1" cellpadding="5" cellspacing="2">
+              <tr>
+                <th rowspan="2">Tooth</th>
+                <th rowspan="2">EPT</th>
+                <th rowspan="2">Cold</th>
+                <th rowspan="2">Heat</th>
+                <th rowspan="2">Perc<sup>n</sup></th>
+                <th rowspan="2">Palp<sup>n</sup></th>
+                <th rowspan="2">Mobility</th>
+                <th colspan="6">Pero Probe (mm)</th>
 
-          <div class="col-md-2">
-              <label>EPT : &nbsp;</label>
-              <font><?php echo $objresultExam['exam_EPT']; ?></font>
-          </div>
-
-          <div class="col-md-2">
-              <input type="checkbox" name="checkcold" value="1" style="float:left;" 
-                <?php 
-                  if($objresultExam['exam_cold'] == "1"){
-                      ?>
-                       checked = "true"
-                       disabled = "true" >
-                      <?php
-                  }else{
-                      ?>
-                       disabled = "true" >
-                      <?php 
-                  } ?>
-
-              <label>&nbsp; Cold </label>
-          </div>
-
-          <div class="col-md-2">
-              <input type="checkbox" name="checkheat" value="1" style="float:left;"
-                <?php 
-                  if($objresultExam['exam_heat'] == "1"){
-                      ?>
-                       checked = "true"
-                       disabled = "true" >
-                      <?php
-                  }else{
-                      ?>
-                       disabled = "true" >
-                      <?php 
-                  } ?>
+                <th rowspan="2">Special Test<br>(if necessary)</th>
+              </tr>
+              <tr>
+                <th>MB</th>
+                <th>B</th>
+                <th>DB</th>
+                <th>ML</th>
+                <th>L</th>
+                <th>DL</th>
+              </tr> 
               
-              <label>&nbsp; Heat </label>
-          </div>
+              <tr>
+                <td><?php echo $objresultExam['exam_tooth']; ?></td>
+                <td><?php echo $objresultExam['exam_EPT']; ?></td>
+                <td>
+                    <?php 
+                  if($objresultExam['exam_cold'] == "1"){
+                      echo '+';
+                  }else{
+                      echo '-';
+                  } ?>
+                </td>
 
-          <div class="col-md-2">
-              <input type="checkbox" name="checkperc" value="1" style="float:left;"
-                <?php 
+                <td>
+                  <?php 
+                    if($objresultExam['exam_heat'] == "1"){
+                        echo '+';
+                    }else{
+                        echo '-';
+                    } ?>
+                </td>
+
+                <td>
+                  <?php 
                   if($objresultExam['exam_perc'] == "1"){
+                      echo '+';
+                  }else{
+                      echo '-';
+                  } ?>
+                </td>
+
+                <td>
+                  <?php 
+                    if($objresultExam['exam_palp'] == "1"){
+                        echo '+';
+                    }else{
+                        echo '-';
+                    } ?>
+                </td>
+
+                <td>
+                  <?php 
+                    if($objresultExam['exam_mobility'] == "1"){
+                        echo '<font>1<sup>0</sup></font>'; 
+                    }
+                    else if($objresultExam['exam_mobility'] == "2"){
+                        echo '<font>2<sup>0</sup></font>'; 
+                    }
+                    else if($objresultExam['exam_mobility'] == "3"){
+                        echo '<font>3<sup>0</sup></font>';
+                    }
+                  ?>
+                </td>
+                    
+                <td>
+                  <?php echo $objresultExam['exam_perioMB']; ?>
+                </td>
+
+                <td>
+                  <?php echo $objresultExam['exam_perioB']; ?>
+                </td>
+
+                <td>
+                  <?php echo $objresultExam['exam_perioDB']; ?>
+                </td>
+
+                <td>
+                  <?php echo $objresultExam['exam_perioML']; ?>
+                </td>
+
+                <td>
+                  <?php echo $objresultExam['exam_perioL']; ?>
+                </td>
+
+                <td>
+                  <?php echo $objresultExam['exam_perioDL']; ?>
+                </td>
+
+                <td>
+                  <?php
+                    $specialtest = "SELECT * FROM special_test WHERE spectest_id = '".$objresultExam['spectest_id']."'";
+                    $resultspecialtest = $conn->query($specialtest);
+                    $objresultspecialtest = mysqli_fetch_array($resultspecialtest);
+
+                    echo $objresultspecialtest['spectest_detail'];
+                  ?>
+                </td>
+              </tr>
+          </table><br>
+
+        <table cellpadding="4">
+            <tr>
+              <th style="font-size:15px;" colspan="4" align="left"><u>Radiographic findings</u></th>
+            </tr>
+
+            <tr>
+              <td>
+                <b>Crown:</b>
+              </td>
+
+              <td>
+              <?php
+                $searchRadio = "SELECT * FROM radiograph_crown WHERE HN = '$HN' AND Date = '$harddate'";
+                $resultRadio = $conn->query($searchRadio);
+                $objresultRadio = mysqli_fetch_array($resultRadio);  
+              ?>
+                  <input type="checkbox"
+                <?php 
+                  if($objresultRadio['crown_normal'] == "1"){
                       ?>
                        checked = "true"
                        disabled = "true" >
@@ -816,165 +830,11 @@ $harddate = $_POST['hard_date'];
                        disabled = "true" >
                       <?php 
                   } ?>
+               Normal 
+              </td>
 
-              <label>&nbsp; Perc<sup>n</sup> </label>
-          </div>
-
-          <div class="col-md-2">
-              <input type="checkbox" name="checkpalp" value="1" style="float:left;"
-                <?php 
-                    if($objresultExam['exam_palp'] == "1"){
-                        ?>
-                         checked = "true"
-                         disabled = "true" >
-                        <?php
-                    }else{
-                        ?>
-                         disabled = "true" >
-                        <?php 
-                    } ?>
-              <label>&nbsp; Palp<sup>n</sup> </label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-2">
-            <label>Mobility : &nbsp;</label>
-            <?php 
-              if($objresultExam['exam_mobility'] == "1"){
-                  echo '<font>1<sup>0</sup></font>'; 
-              }
-              else if($objresultExam['exam_mobility'] == "2"){
-                  echo '<font>2<sup>0</sup></font>'; 
-              }
-              else if($objresultExam['exam_mobility'] == "3"){
-                  echo '<font>3<sup>0</sup></font>';
-              }
-            ?>
-          </div>
-
-          <div class="col-md-2">
-            <label>Perio Probe of MB : &nbsp;</label>
-            <font><?php echo $objresultExam['exam_perioMB']; ?></font>
-          </div>
-
-          <div class="col-md-2">
-            <label>Perio Probe of B : &nbsp;</label>
-            <font><?php echo $objresultExam['exam_perioB']; ?></font>
-          </div>
-
-          <div class="col-md-2">
-            <label>Perio Probe of DB : &nbsp;</label>
-            <font><?php echo $objresultExam['exam_perioDB']; ?></font>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-2">
-            <label>Perio Probe of ML : &nbsp;</label>
-            <font><?php echo $objresultExam['exam_perioML']; ?></font>
-          </div>
-
-          <div class="col-md-2">
-            <label>Perio Probe of L : &nbsp;</label>
-            <font><?php echo $objresultExam['exam_perioL']; ?></font>
-          </div>
-
-          <div class="col-md-2">
-            <label>Perio Probe of DL : &nbsp;</label>
-            <font><?php echo $objresultExam['exam_perioDL']; ?></font>
-          </div>
-
-          <div class="col-md-6">
-
-            <input type="checkbox" name="spectest" value="1" style="float:left;"
-              <?php 
-                    if($objresultExam['spectest_id'] != ""){
-                        ?>
-                         checked = "true"
-                         disabled = "true" >
-                        <?php
-                    }else{
-                        ?>
-                         disabled = "true" >
-                        <?php 
-                    } ?>
-
-            <?php
-              $specialtest = "SELECT * FROM special_test WHERE spectest_id = '".$objresultExam['spectest_id']."'";
-              $resultspecialtest = $conn->query($specialtest);
-              $objresultspecialtest = mysqli_fetch_array($resultspecialtest);
-
-            ?>
-            <label>Special Test: &nbsp;</label><?php echo $objresultspecialtest['spectest_detail']; ?>
-
-          </div>
-        </div>
-
-      <br><br>
-
-      <?php
-        $searchRadio = "SELECT * FROM radiograph_crown WHERE HN = '$HN' AND Date = '$harddate'";
-        $resultRadio = $conn->query($searchRadio);
-        $objresultRadio = mysqli_fetch_array($resultRadio);
-          
-      ?>
-      <h4>Radiographic findings</h4>
-        <div class="row">
-          <div class="col-md-2">
-              <label>&nbsp;Crown: </label>
-          </div>
-          <div class="col-md-2">
-                <input type="checkbox" name="normcrown" style="float:left;" value="1"
-                  <?php 
-                    if($objresultRadio['crown_normal'] == "1"){
-                        ?>
-                         checked = "true"
-                         disabled = "true" >
-                        <?php
-                    }else{
-                        ?>
-                         disabled = "true" >
-                        <?php 
-                    } ?>
-                <label>&nbsp; Normal </label>
-          </div>
-          <div class="col-md-2">
-                <input type="checkbox" name="restcrown" style="float:left;" value="1"
-                  <?php 
-                    if($objresultRadio['crown_restoration'] == "1"){
-                        ?>
-                         checked = "true"
-                         disabled = "true" >
-                        <?php
-                    }else{
-                        ?>
-                         disabled = "true" >
-                        <?php 
-                    } ?>
-                <label>&nbsp; Restoration </label>
-          </div>
-          <div class="col-md-2">
-                <input type="checkbox" name="fractcrown" style="float:left;" value="1"
-                  <?php 
-                    if($objresultRadio['crown_fracture'] == "1"){
-                        ?>
-                         checked = "true"
-                         disabled = "true" >
-                        <?php
-                    }else{
-                        ?>
-                         disabled = "true" >
-                        <?php 
-                    } ?>
-                <label>&nbsp; Fracture </label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-10">
-                <input type="checkbox" name="cariescrown" style="float:left;" value="1"
+              <td>
+                  <input type="checkbox"
                   <?php 
                     if($objresultRadio['crown_caries'] == "1"){
                         ?>
@@ -987,949 +847,998 @@ $harddate = $_POST['hard_date'];
                         <?php 
                     } ?>
                
-                <label>&nbsp; Caries &nbsp;&nbsp; area : &nbsp; </label>
-                
-                  <?php 
+                 Caries &nbsp; area : 
+                <?php 
                     if($objresultRadio['crown_caries'] == "1"){
                         ?>
                          <font><?php echo $objresultRadio['crown_cariesarea']; ?>"</font>                   
                         <?php
                     }else{
-                        echo '<font></font>';
+                        echo '';
                     } ?>
-                <label>&nbsp; &nbsp; depth : &nbsp; </label>
+                &nbsp; depth : 
                   <?php 
                     if($objresultRadio['crown_caries'] == "1"){
                         ?>
-                         <font><?php echo $objresultRadio['crown_cariesdepth']; ?></font>                  
+                         <?php echo $objresultRadio['crown_cariesdepth']; ?>                
                         <?php
                     }else{
-                        echo '<font></font>';
+                        echo '';
                     } ?>
-          </div>
-        </div>
+              </td>
 
-        <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-10">
-              <label> Other : &nbsp; </label>
-              <font><?php echo $objresultRadio['crown_other']; ?></font>
-          </div>
-        </div>
-
-
-      <?php
-        $searchPulpcham = "SELECT * FROM radiograph_pulpcham WHERE HN = '$HN' AND Date = '$harddate'";
-        $resultPulpcham = $conn->query($searchPulpcham);
-        $objresultPulpcham = mysqli_fetch_array($resultPulpcham);
-          
-      ?>
-        <div class="row">
-          <div class="col-md-2">
-            <label>&nbsp;Pulp Chambar: </label>
-          </div>
-          <div class="col-md-2">
-              <input type="checkbox" name="normcham" style="float:left;" value="1"
-                <?php 
-                      if($objresultPulpcham['pulpcham_normal'] == "1"){
+              <td>
+                <input type="checkbox"
+                    <?php 
+                      if($objresultRadio['crown_restoration'] == "1"){
                           ?>
                            checked = "true"
-                           disabled = "true" >                      
+                           disabled = "true" >
                           <?php
                       }else{
                           ?>
                            disabled = "true" >
                           <?php 
-                      } 
-                ?>
-              <label>&nbsp; Normal </label>
-          </div>
+                      } ?>
+                   Restoration 
+              </td>
+            </tr>
 
-          <div class="col-md-2">
-              <input type="checkbox" name="stonecham" style="float:left;" value="1"
-                <?php 
-                      if($objresultPulpcham['pulpcham_pulpstone'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Pulp Stone</label> 
-          </div>
-
-          <div class="col-md-2">
-              <input type="checkbox" name="rescham" style="float:left;" value="1"
-                <?php 
-                      if($objresultPulpcham['pulpcham_resorption'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Resorption </label>
-          </div>
-
-          <div class="col-md-4">
-          <input type="checkbox" name="calcificatecham" style="float:left;" value="1"
-                <?php 
-                      if($objresultPulpcham['pulpcham_calPartOrComp'] != ""){
+            <tr>
+              <td></td>
+              <td>
+                <input type="checkbox"
+                  <?php 
+                    if($objresultRadio['crown_fracture'] == "1"){
                         ?>
-                           checked = "true"
-                           disabled = "true" >       
-                           <label>&nbsp; Calcification : &nbsp;</label>               
-                          <?php
-                        if($objresultPulpcham['pulpcham_calPartOrComp'] == "0"){
-                          echo "<font>Partial</font>";
-                        }else{
-                          echo "<font>Complete</font>";
-                        }
-                          
-                      }else{
-                          ?>
-                           disabled = "true" >
-                           <label>&nbsp; Calcification &nbsp;</label> 
-                          <?php 
-                      } 
-                ?>
-                
-          </div>
-        </div>
+                         checked = "true"
+                         disabled = "true" >
+                        <?php
+                    }else{
+                        ?>
+                         disabled = "true" >
+                        <?php 
+                    } ?>
+                 Fracture
+              </td>
 
-        <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-10">
-              <label>&nbsp; Other &nbsp;</label> 
-              <font><?php echo $objresultPulpcham['pulpcham_other']; ?></font>
-          </div>
-        </div>
-
-
-      <?php
-        $searchRoot = "SELECT * FROM radiograph_root WHERE HN = '$HN' AND Date = '$harddate'";
-        $resultRoot = $conn->query($searchRoot);
-        $objresultRoot = mysqli_fetch_array($resultRoot);
+              <td colspan="2">
+                Other : &nbsp; 
+                <?php echo $objresultRadio['crown_other']; ?>
+              </td>
+            </tr>
           
-      ?>
-       <div class="row">
-          <div class="col-md-2">
-              <label>&nbsp;Root: </label>
-          </div>
 
-          <div class="col-md-2">
-              <input type="checkbox" name="normroot" style="float:left;" value="1" 
-                <?php 
-                      if($objresultRoot['root_normal'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
+        <tr>
+          <td><b>Pulp Chambar:</b></td>
+
+          <td>
+            <?php
+              $searchPulpcham = "SELECT * FROM radiograph_pulpcham WHERE HN = '$HN' AND Date = '$harddate'";
+              $resultPulpcham = $conn->query($searchPulpcham);
+              $objresultPulpcham = mysqli_fetch_array($resultPulpcham);
+            ?>
+
+            <input type="checkbox"
+            <?php 
+              if($objresultPulpcham['pulpcham_normal'] == "1"){
+                  ?>
+                   checked = "true"
+                   disabled = "true" >                      
+                  <?php
+              }else{
+                  ?>
+                   disabled = "true" >
+                  <?php 
+              } 
+            ?>
+            Normal 
+          </td>
+
+          <td>
+            <input type="checkbox"
+            <?php 
+              if($objresultPulpcham['pulpcham_calPartOrComp'] != ""){
                 ?>
-              <label>&nbsp; Normal </label>
-          </div>
-          
-          <div class="col-md-2">
-              <input type="checkbox" name="cariesroot" style="float:left;" value="1"
-                <?php 
-                      if($objresultRoot['root_caries'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Caries</label>
-          </div>
+                   checked = "true"
+                   disabled = "true" >       
+                   &nbsp; Calcification : &nbsp;        
+                  <?php
+                if($objresultPulpcham['pulpcham_calPartOrComp'] == "0"){
+                  echo "Partial";
+                }else{
+                  echo "Complete";
+                }
+                  
+              }else{
+                  ?>
+                   disabled = "true" >
+                 Calcification
+                  <?php 
+              } 
+            ?>
+          </td>
 
-          <div class="col-md-2">
-              <input type="checkbox" name="curvatureroot" style="float:left;" value="1"
-                <?php 
-                      if($objresultRoot['root_curvature'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Curvature</label>
-          </div>
-
-          <div class="col-md-2">
-              <input type="checkbox" name="extresroot" style="float:left;" value="1"
-                <?php 
-                      if($objresultRoot['root_extresorption'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Ext. Resorption</label>
-          </div>
-
-          <div class="col-md-2">
-              <input type="checkbox" name="fractroot" style="float:left;" value="1"
-                <?php 
-                      if($objresultRoot['root_fracture'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Fracture</label>
-          </div>
-      </div>
-
-      <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-10">
-              <label>&nbsp; Other &nbsp; </label>
-              <font><?php echo $objresultRoot['root_other']; ?></font>
-          </div>
-      </div>
-
-      <?php
-        $searchPulpcan = "SELECT * FROM radiograph_pulpcanal WHERE HN = '$HN' AND Date = '$harddate'";
-        $resultPulpcan = $conn->query($searchPulpcan);
-        $objresultPulpcan = mysqli_fetch_array($resultPulpcan);
-          
-      ?>
-      <div class="row">
-          <div class="col-md-2"> 
-            <label>&nbsp;Pulp Canal: </label>
-          </div>
-
-          <div class="col-md-2"> 
-              <input type="checkbox" style="float:left;" name="normcanel" value="1"
-                <?php 
-                      if($objresultPulpcan['pulpcan_normal'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Normal</label> 
-          </div>
-
-          <div class="col-md-2"> 
-              <input type="checkbox" style="float:left;" name="resorpcanel" value="1"
-                <?php 
-                      if($objresultPulpcan['pulpcan_resorption'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Resorption</label>
-          </div>
-
-          <div class="col-md-2"> 
-              <input type="checkbox" style="float:left;" name="perforcanel" value="1"
-                <?php 
-                      if($objresultPulpcan['pulpcan_perforation'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Perforation</label>
-          </div>
-
-          <div class="col-md-4">
-              <input type="checkbox" style="float:left;" name="prevcanel" value="1"
-                <?php 
-                      if($objresultPulpcan['pulpcan_previousRCT'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Previous RCT</label>
-          </div>
-      </div>
-
-      <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-4">
-              <input type="checkbox" style="float:left;" name="brokecanel" value="1"
-                <?php 
-                      if($objresultPulpcan['pulpcan_broken'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Broken Instrument</label>
-          </div>
-          <div class="col-md-6">
-              <input type="checkbox" style="float:left;" name="calcificatecanel" value="1"
-                <?php 
-                      if($objresultPulpcan['pulpcan_calPartOrComp'] != ""){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >    
-                           <label>&nbsp; Calcification: &nbsp;</label>                  
-                          <?php
-                          if($objresultPulpcan['pulpcan_calPartOrComp'] == "0"){
-                            echo "<font>Partial</font>";
-                          }else{
-                            echo "<font>Complete</font>";
-                          }
-                      }else{
-                          ?>
-                           disabled = "true" >
-                           <label>&nbsp; Calcification &nbsp;</label>
-                          <?php 
-                      } 
-                ?>
-          </div>
-      </div>
-
-      <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-10">
-              <label>&nbsp; Other &nbsp; </label>
-              <font><?php echo $objresultPulpcan['pulpcan_other']; ?></font>
-          </div>
-      </div>
-
-      <?php
-        $searchPerirad = "SELECT * FROM radiograph_perirad WHERE HN = '$HN' AND Date = '$harddate'";
-        $resultPerirad = $conn->query($searchPerirad);
-        $objresultPerirad = mysqli_fetch_array($resultPerirad);
-          
-      ?>
-      <div class="row">
-          <div class="col-md-2">
-              <label>&nbsp;Periradicular: </label>
-          </div>
-          <div class="col-md-2">
-              <input type="checkbox" style="float:left;" name="normperirad" value="1"
-                <?php 
-                      if($objresultPerirad['perirad_normal'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Normal </label>
-          </div>
-          <div class="col-md-2">
-              <input type="checkbox" style="float:left;" name="widenperirad" value="1"
-                <?php 
-                      if($objresultPerirad['perirad_wideningPDL'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Widening PDL </label>
-          </div>
-          <div class="col-md-3">
-              <input type="checkbox" style="float:left;" name="lossperirad" value="1"
-                <?php 
-                      if($objresultPerirad['perirad_lossoflam'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Loss of Lamina Dura </label>
-          </div>
-
-          <div class="col-md-3">
-              <input type="checkbox" style="float:left;" name="resorpperirad" value="1"
-                <?php 
-                      if($objresultPerirad['perirad_resorption'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Resorption </label>
-          </div>
-      </div>
-
-      <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-2">
-              <input type="checkbox" style="float:left;" name="apexperirad" value="1"
-                <?php 
-                      if($objresultPerirad['perirad_openapex'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Open Apex </label>
-          </div>
-          <div class="col-md-2">
-              <input type="checkbox" style="float:left;" name="osteoperirad" value="1"
-                <?php 
-                      if($objresultPerirad['perirad_osteos'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; OsteosIcerosis</label>
-          </div>
-          <div class="col-md-6">
-              <input type="checkbox" style="float:left;" name="hyperperirad" value="1"
-                <?php 
-                      if($objresultPerirad['perirad_hyper'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Hyperplasia of cementurn </label>
-          </div>
-      </div>          
-
-      <div class="row">
-        <div class="col-md-2"></div>
-          <div class="col-md-5">
-              <input type="checkbox" style="float:left;" name="perialessperirad" value="1"
-                <?php 
-                      if($objresultPerirad['perirad_periapical'] != ""){
-                          ?>
-                           checked = "true"
-                           disabled = "true" > 
-                           <label>&nbsp; Periapical Lesion : &nbsp;</label>
-                           <font><?php echo $objresultPerirad['perirad_periapical']; ?></font>
-
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                           <label>&nbsp; Periapical Lesion : &nbsp;</label>
-                          <?php 
-                      } 
-                ?>
-              
-          </div>
-
-          <div class="col-md-5">
-              <input type="checkbox" style="float:left;" name="laterlessperirad" value="1"
-                <?php 
-                      if($objresultPerirad['perirad_lateral'] != ""){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                           <label>&nbsp; Lateral Lesion : &nbsp;</label>
-                           <font><?php echo $objresultPerirad['perirad_lateral']; ?></font>
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                           <label>&nbsp; Lateral Lesion : &nbsp;</label>
-                          <?php 
-                      } 
-                ?>
-               
-          </div>
-      </div>
-
-      <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-10">
-              <label>&nbsp; Other &nbsp; </label>
-              <font><?php echo $objresultPerirad['perirad_other']; ?></font>
-          </div>
-      </div>
-
-
-      <?php
-        $searchAlveolar = "SELECT * FROM radiograph_alveolar WHERE HN = '$HN' AND Date = '$harddate'";
-        $resultAlveolar = $conn->query($searchAlveolar);
-        $objresultAlveolar = mysqli_fetch_array($resultAlveolar);
-          
-      ?>
-      <div class="row">
-        <div class="col-md-2">
-          <label>&nbsp;Alveolar Bone: </label>
-        </div>
-        <div class="col-md-2">
-              <input type="radio" style="float:left;" name="alveolar" value="normalveolar"
-                <?php 
-                      if($objresultAlveolar['bone_normal'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Normal </label>
-        </div>
-
-          <div class="col-md-4">
-              <input type="radio" style="float:left;" name="alveolar" value="generalalveolar" 
-                <?php
-                  if($objresultAlveolar['bone_genOrlocal'] != "" && $objresultAlveolar['bone_genOrlocal'] == "0"){
-                    ?>
-                      checked="true"
-                      disabled = "true" >
-                    <?php
+          <td>
+            <input type="checkbox"
+            <?php 
+                  if($objresultPulpcham['pulpcham_pulpstone'] == "1"){
+                      ?>
+                       checked = "true"
+                       disabled = "true" >                      
+                      <?php
                   }else{
-                    ?>
-                      disabled = "true" >
-                    <?php
-                  }
-                ?>
-              <label>&nbsp; Generalized Bone loss </label>
-          </div>
-          <div class="col-md-4">
-              <input type="radio" style="float:left;" name="alveolar" value="localalveolar"
-                <?php
-                  if($objresultAlveolar['bone_genOrlocal'] != "" && $objresultAlveolar['bone_genOrlocal'] == "1"){
-                    ?>
-                      checked="true"
-                      disabled = "true" >
-                    <?php
+                      ?>
+                       disabled = "true" >
+                      <?php 
+                  } 
+            ?>
+            Pulp Stone
+          </td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>
+            <input type="checkbox"
+            <?php 
+                  if($objresultPulpcham['pulpcham_resorption'] == "1"){
+                      ?>
+                       checked = "true"
+                       disabled = "true" >                      
+                      <?php
                   }else{
+                      ?>
+                       disabled = "true" >
+                      <?php 
+                  } 
+            ?>
+            Resorption
+          </td>
+
+          <td colspan="2">
+              Other : 
+              <?php echo $objresultPulpcham['pulpcham_other']; ?>
+          </td>
+        </tr>
+      
+        <tr>
+          <?php
+            $searchRoot = "SELECT * FROM radiograph_root WHERE HN = '$HN' AND Date = '$harddate'";
+            $resultRoot = $conn->query($searchRoot);
+            $objresultRoot = mysqli_fetch_array($resultRoot); 
+          ?>
+
+          <td>
+              <b>Root: </b>
+          </td>
+
+          <td>
+              <input type="checkbox" 
+                <?php 
+                    if($objresultRoot['root_normal'] == "1"){
+                        ?>
+                         checked = "true"
+                         disabled = "true" >                      
+                        <?php
+                    }else{
+                        ?>
+                         disabled = "true" >
+                        <?php 
+                    } 
+                ?>
+              Normal 
+          </td>
+
+          <td>
+              <input type="checkbox"
+            <?php 
+              if($objresultRoot['root_caries'] == "1"){
+                  ?>
+                   checked = "true"
+                   disabled = "true" >                      
+                  <?php
+              }else{
+                  ?>
+                   disabled = "true" >
+                  <?php 
+              } 
+            ?>
+              Caries
+          </td>
+
+          <td>
+              <input type="checkbox"
+              <?php 
+                if($objresultRoot['root_curvature'] == "1"){
                     ?>
-                      disabled = "true" >
+                     checked = "true"
+                     disabled = "true" >                      
                     <?php
-                  }
-                ?>
-              <label>&nbsp; Localized Bone loss</label>
-          </div>
-      </div>
+                }else{
+                    ?>
+                     disabled = "true" >
+                    <?php 
+                } 
+              ?>
+                Curvature
+          </td>
+        </tr>
 
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-5">
-              <label>&nbsp; Other &nbsp; </label>
-              <font><?php echo $objresultAlveolar['bone_other']; ?></font>
-        </div>
-
-        <div class="col-md-5">
-              <label>Remarks: </label>
-              <font><?php echo $objresultAlveolar['remark']; ?></font>
-        </div>
-      </div>
-</div>
-</div>
-</div>  
-
-<?php
-  $searchPulpaldiag = "SELECT * FROM pulpal_diagnosis WHERE HN = '$HN' AND Date = '$harddate'";
-  $resultPulpaldiag = $conn->query($searchPulpaldiag);
-  $objresultPulpaldiag = mysqli_fetch_array($resultPulpaldiag);
-?>
-<div class="sect-container">
-<div class="panel panel-info" style="margin-right:2em; margin-left:2em;">
-<div class="panel-heading"><h3>Diagnosis</h3></div>
-  <div class="panel-body">
-      <h4>Pulpal Diagnosis</h4>
-      <div class="row" style="height:30px;">
-          <div class="col-md-3">
-              <input type="checkbox" style="float:left;" name="puldiagnorm" value="1" 
+        <tr>
+          <td></td>
+          <td>
+              <input type="checkbox"
                 <?php 
-                      if($objresultPulpaldiag['normal'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
+                  if($objresultRoot['root_extresorption'] == "1"){
+                      ?>
+                       checked = "true"
+                       disabled = "true" >                      
+                      <?php
+                  }else{
+                      ?>
+                       disabled = "true" >
+                      <?php 
+                  } 
                 ?>
-              <label>&nbsp; Normal </label>
-          </div>
+                 Ext. Resorption
+          </td>
 
-          <div class="col-md-3">
-              <input type="radio" style="float:left;" name="reverOrirrever" value="0"
+          <td>
+              <input type="checkbox"
                 <?php 
-                      if($objresultPulpaldiag['ReverOrIrreversiblepulp'] != "" && $objresultPulpaldiag['ReverOrIrreversiblepulp'] == "0"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
+                  if($objresultRoot['root_fracture'] == "1"){
+                      ?>
+                       checked = "true"
+                       disabled = "true" >                      
+                      <?php
+                  }else{
+                      ?>
+                       disabled = "true" >
+                      <?php 
+                  } 
                 ?>
-              <label>&nbsp; Reversible Pulpitis </label>
-          </div>
+                 Fracture
+          </td>
 
-          <div class="col-md-6">
-              <input type="radio" style="float:left;" name="reverOrirrever" value="1"
-                <?php 
-                      if($objresultPulpaldiag['ReverOrIrreversiblepulp'] != "" && $objresultPulpaldiag['ReverOrIrreversiblepulp'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Irreversible Pulpitis </label>
-          </div>
-      </div>
+          <td>
+              Other : <?php echo $objresultRoot['root_other']; ?>
+          </td>
+        </tr>
 
-      <div class="row">
-          <div class="col-md-7"></div>
-          <div class="col-md-5">
-              <input type="radio" style="float:left;" name="sympOrasymp" value="1" 
-                <?php 
-                      if($objresultPulpaldiag['ReverOrIrreversiblepulp'] != "" && $objresultPulpaldiag['ReverOrIrreversiblepulp'] == "1" && $objresultPulpaldiag['Irreversible_sympOrasymp'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Symptomatic </label><br>
-          </div>
+        <tr>
+          <td>
+            <?php
+              $searchPulpcan = "SELECT * FROM radiograph_pulpcanal WHERE HN = '$HN' AND Date = '$harddate'";
+              $resultPulpcan = $conn->query($searchPulpcan);
+              $objresultPulpcan = mysqli_fetch_array($resultPulpcan); 
+            ?>
 
-      </div> 
+            <b>Pulp Canal:</b>
+          </td>
 
-      <div class="row">
-          <div class="col-md-7"></div>
-          <div class="col-md-5">
-              <input type="radio" style="float:left;" name="sympOrasymp" value="0"
-                 <?php 
-                      if($objresultPulpaldiag['ReverOrIrreversiblepulp'] != "" && $objresultPulpaldiag['ReverOrIrreversiblepulp'] == "1" && $objresultPulpaldiag['Irreversible_sympOrasymp'] == "0"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Asymtomatic </label>
-          </div>
-      </div> 
+          <td>
+            <input type="checkbox"
+            <?php 
+                if($objresultPulpcan['pulpcan_normal'] == "1"){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >                      
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                    <?php 
+                } 
+            ?>
+          Normal
+          </td>
 
-      <div class="row">
-          <div class="col-md-3"> 
-              <input type="checkbox" style="float:left;" name="pulpnecrosis" value="1"
-                <?php 
-                      if($objresultPulpaldiag['pulp_necrosis'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Pulp Necrosis </label>
-          </div>
-          <div class="col-md-3">
-              <input type="checkbox" style="float:left;" name="previnitiat" value="1"
-                <?php 
-                      if($objresultPulpaldiag['prev_initiat'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Previously Initiated Therapy </label>
-          </div>
-          <div class="col-md-6">
-              <input type="checkbox" style="float:left;" name="prevtreat" value="1"
-                <?php 
-                      if($objresultPulpaldiag['prev_treated'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >
-                           <label>&nbsp; Previously treated: &nbsp;&nbsp;</label>                      
-                          <?php
-                          if($objresultPulpaldiag['prev_treated_improper'] == "1"){
-                            echo "<font>Improper</font>";
-                          }
-                          else if($objresultPulpaldiag['prev_treated_incomplete'] == "1"){
-                            echo "<font>Incomplete RCT</font>";
-                          }else{
-                            echo "";
-                          }
-                      }else{
-                          ?>
-                           disabled = "true" >
-                           <label>&nbsp; Previously treated &nbsp;&nbsp;</label>
-                          <?php 
-                      } 
-                ?>
-          </div>
-      </div>
-     
-      <?php
-        $searchPeriraddiag = "SELECT * FROM periradicular_diagnosis WHERE HN = '$HN' AND Date = '$harddate'";
-        $resultPeriraddiag = $conn->query($searchPeriraddiag);
-        $objresultPeriraddiag = mysqli_fetch_array($resultPeriraddiag);
-      ?>
-      <h4>Periradicular Diagnosis</h4>
-      <div class="row">
-        <div class="col-md-3">
-              <input type="checkbox" style="float:left;" name="periraddiagnorm" value="1"
-                <?php 
-                      if($objresultPeriraddiag['Normal'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Normal </label>
-        </div>
+          <td>
+            <input type="checkbox"
+            <?php 
+                if($objresultPulpcan['pulpcan_calPartOrComp'] != ""){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >    
+                     Calcification:                  
+                    <?php
+                    if($objresultPulpcan['pulpcan_calPartOrComp'] == "0"){
+                      echo "Partial";
+                    }else{
+                      echo "Complete";
+                    }
+                }else{
+                    ?>
+                     disabled = "true" >
+                     Calcification
+                    <?php 
+                } 
+            ?>
+          </td>
 
-        <div class="col-md-4">
-              <input type="radio" style="float:left;" name="per_sympOrasymp" value="0"
-                <?php 
-                      if($objresultPeriraddiag['sympOrasympt_apical'] == "0"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Symptomatic Apical Periodontitis </label>
-        </div>
+          <td>
+            <input type="checkbox"
+            <?php 
+                if($objresultPulpcan['pulpcan_resorption'] == "1"){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >                      
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                    <?php 
+                } 
+            ?>
+            Resorption
+          </td>
+        </tr>
 
-        <div class="col-md-5">
-              <input type="radio" style="float:left;" name="per_sympOrasymp" value="1"
-                <?php 
-                      if($objresultPeriraddiag['sympOrasympt_apical'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Asymptomatic Apical Periodontitis</label>    
-        </div>
-      </div>
+        <tr>
+          <td></td>
 
-      <div class="row">
-        <div class="col-md-3">
-              <input type="radio" style="float:left;" name="acuteOrchronic" value="0"
-                <?php 
-                      if($objresultPeriraddiag['acuteOrchronic_apical'] == "0"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Acute Apical Abscess </label>
-        </div>
+          <td>
+            <input type="checkbox"
+            <?php 
+                if($objresultPulpcan['pulpcan_perforation'] == "1"){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >                      
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                    <?php 
+                } 
+            ?>
+            Perforation
+          </td>
 
-        <div class="col-md-4">
-              <input type="radio" style="float:left;" name="acuteOrchronic" value="1"
-                <?php 
-                      if($objresultPeriraddiag['acuteOrchronic_apical'] == "1"){
-                          ?>
-                           checked = "true"
-                           disabled = "true" >                      
-                          <?php
-                      }else{
-                          ?>
-                           disabled = "true" >
-                          <?php 
-                      } 
-                ?>
-              <label>&nbsp; Chronic Apical Abscess</label>
-        </div>
+          <td>
+            <input type="checkbox"
+            <?php 
+                if($objresultPulpcan['pulpcan_previousRCT'] == "1"){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >                      
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                    <?php 
+                } 
+            ?>
+           Previous RCT
+          </td>
 
-        <div class="col-md-5">
-                  <label>&nbsp; Other : &nbsp;</label> 
-                  <font><?php $objresultPeriraddiag['other']; ?></font>
-        </div>
-      </div>
-</div> 
-</div>
-</div>
+          <td>
+            <input type="checkbox"
+            <?php 
+                if($objresultPulpcan['pulpcan_broken'] == "1"){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >                      
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                    <?php 
+                } 
+            ?>
+            Broken Instrument
+          </td>
+        </tr>
 
-<?php
-  $searchTreatment = "SELECT * FROM treatment_plan WHERE HN = '$HN' AND Date = '$harddate'";
-  $resultTreatment = $conn->query($searchTreatment);
-  $objresultTreatment = mysqli_fetch_array($resultTreatment);
-?>
-<div class="sect-container">
-<div class="panel panel-info" style="margin-right:2em; margin-left:2em;">
-<div class="panel-heading"><h3>Treatment Planning</h3></div>
-<div class="panel-body">
-  <div class="row">
-    <div class="col-md-2">
-      <input type="checkbox" style="float:left;" name="notreat" value="1"
-        <?php 
-            if($objresultTreatment['no_treatment'] == "1"){
-                ?>
-                 checked = "true"
-                 disabled = "true" >                      
-                <?php
-            }else{
-                ?>
-                 disabled = "true" >
+        <tr>
+          <td></td>
+          <td colspan="3">
+            Other : <?php echo $objresultPulpcan['pulpcan_other']; ?>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <?php
+              $searchPerirad = "SELECT * FROM radiograph_perirad WHERE HN = '$HN' AND Date = '$harddate'";
+              $resultPerirad = $conn->query($searchPerirad);
+              $objresultPerirad = mysqli_fetch_array($resultPerirad);   
+            ?>
+            <b>Periradicular:</b>
+          </td>
+
+          <td>
+            <input type="checkbox" 
+              <?php 
+                  if($objresultPerirad['perirad_normal'] == "1"){
+                      ?>
+                       checked = "true"
+                       disabled = "true" >                      
+                      <?php
+                  }else{
+                      ?>
+                       disabled = "true" >
+                      <?php 
+                  } 
+              ?>
+           Normal 
+          </td>
+
+          <td>
+            <input type="checkbox"
+              <?php 
+                  if($objresultPerirad['perirad_wideningPDL'] == "1"){
+                      ?>
+                       checked = "true"
+                       disabled = "true" >                      
+                      <?php
+                  }else{
+                      ?>
+                       disabled = "true" >
+                      <?php 
+                  } 
+              ?>
+                Widening PDL
+          </td>
+
+          <td>
+            <input type="checkbox"
+              <?php 
+                    if($objresultPerirad['perirad_lossoflam'] == "1"){
+                        ?>
+                         checked = "true"
+                         disabled = "true" >                      
+                        <?php
+                    }else{
+                        ?>
+                         disabled = "true" >
+                        <?php 
+                    } 
+              ?>
+              Loss of Lamina Dura
+          </td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>
+            <input type="checkbox"
+              <?php 
+                if($objresultPerirad['perirad_periapical'] != ""){
+                    ?>
+                     checked = "true"
+                     disabled = "true" > 
+                    Periapical Lesion : 
+                     <?php echo $objresultPerirad['perirad_periapical']; ?>
+
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                     Periapical Lesion : 
+                    <?php 
+                } 
+              ?>
+          </td>
+
+          <td>
+            <input type="checkbox"
+              <?php 
+                if($objresultPerirad['perirad_lateral'] != ""){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >                      
+                     Lateral Lesion : 
+                     <?php echo $objresultPerirad['perirad_lateral']; ?>
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                     Lateral Lesion :
+                    <?php 
+                } 
+
+              ?>
+          </td>
+
+          <td>
+            <input type="checkbox"
+              <?php 
+                if($objresultPerirad['perirad_resorption'] == "1"){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >                      
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                    <?php 
+                } 
+              ?>
+            Resorption 
+          </td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>
+            <input type="checkbox"
+              <?php 
+                if($objresultPerirad['perirad_openapex'] == "1"){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >                      
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                    <?php 
+                } 
+              ?>
+              Open Apex 
+          </td>
+
+          <td>
+             <input type="checkbox"
                 <?php 
-            } 
+                  if($objresultPerirad['perirad_osteos'] == "1"){
+                      ?>
+                       checked = "true"
+                       disabled = "true" >                      
+                      <?php
+                  }else{
+                      ?>
+                       disabled = "true" >
+                      <?php 
+                  } 
+                ?>
+              OsteosIcerosis
+          </td>
+
+          <td>
+            <input type="checkbox"
+              <?php 
+                if($objresultPerirad['perirad_hyper'] == "1"){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >                      
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                    <?php 
+                } 
+              ?>
+             Hyperplasia of cementurn
+          </td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td colspan="3">
+              Other : <?php echo $objresultPerirad['perirad_other']; ?>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <?php
+              $searchAlveolar = "SELECT * FROM radiograph_alveolar WHERE HN = '$HN' AND Date = '$harddate'";
+              $resultAlveolar = $conn->query($searchAlveolar);
+              $objresultAlveolar = mysqli_fetch_array($resultAlveolar);
+            ?>
+            <b>Alveolar Bone: </b>
+          </td>
+
+          <td>
+            <input type="radio"
+              <?php 
+                if($objresultAlveolar['bone_normal'] == "1"){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >                      
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                    <?php 
+                } 
+              ?>
+            Normal 
+          </td>
+
+          <td>
+            <input type="radio" 
+              <?php
+                if($objresultAlveolar['bone_genOrlocal'] != "" && $objresultAlveolar['bone_genOrlocal'] == "0"){
+                  ?>
+                    checked="true"
+                    disabled = "true" >
+                  <?php
+                }else{
+                  ?>
+                    disabled = "true" >
+                  <?php
+                }
+              ?>
+             Generalized Bone loss
+          </td>
+
+          <td>
+            <input type="radio"
+              <?php
+                if($objresultAlveolar['bone_genOrlocal'] != "" && $objresultAlveolar['bone_genOrlocal'] == "1"){
+                  ?>
+                    checked="true"
+                    disabled = "true" >
+                  <?php
+                }else{
+                  ?>
+                    disabled = "true" >
+                  <?php
+                }
+              ?>
+            &nbsp; Localized Bone loss
+          </td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td colspan="3">
+            Other : <?php echo $objresultAlveolar['bone_other']; ?>
+          </td>
+        </tr>
+
+        <tr>
+          <td><b>Remarks: </b></td>
+          <td colspan="3"><?php echo $objresultAlveolar['remark']; ?></td>
+        </tr>
+      </table><br>
+
+      <table cellpadding="5">
+        <?php
+          $searchPulpaldiag = "SELECT * FROM pulpal_diagnosis WHERE HN = '$HN' AND Date = '$harddate'";
+          $resultPulpaldiag = $conn->query($searchPulpaldiag);
+          $objresultPulpaldiag = mysqli_fetch_array($resultPulpaldiag);
         ?>
-      <label>&nbsp; No Treatment</label>
-    </div>
+      <tr>
+        <th style="font-size: 20px;" align="left" colspan="2">Diagnosis</th>
+      </tr>
 
-    <div class="col-md-3">
-      <input type="checkbox" style="float:left;" name="pulpotomy" value="1"
+      <tr>
+        <td style="font-size: 15px;" width="80%">
+            <b>Pulpal Diagnosis</b>
+        </td>
+
+        <td style="font-size: 15px;" width="80%">
+          <?php
+            $searchPeriraddiag = "SELECT * FROM periradicular_diagnosis WHERE HN = '$HN' AND Date = '$harddate'";
+            $resultPeriraddiag = $conn->query($searchPeriraddiag);
+            $objresultPeriraddiag = mysqli_fetch_array($resultPeriraddiag);
+          ?>
+          <b>Periradicular Diagnosis</b>
+        </td>
+      </tr>
+
+      <tr>    
+        <td>
+          <input type="checkbox" 
+          <?php 
+                if($objresultPulpaldiag['normal'] == "1"){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >                      
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                    <?php 
+                } 
+          ?>
+          Normal 
+        </td>
+
+        <td>
+          <input type="checkbox"
+            <?php 
+                  if($objresultPeriraddiag['Normal'] == "1"){
+                      ?>
+                       checked = "true"
+                       disabled = "true" >                      
+                      <?php
+                  }else{
+                      ?>
+                       disabled = "true" >
+                      <?php 
+                  } 
+            ?>
+          Normal 
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input type="radio"
+          <?php 
+                if($objresultPulpaldiag['ReverOrIrreversiblepulp'] != "" && $objresultPulpaldiag['ReverOrIrreversiblepulp'] == "0"){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >                      
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                    <?php 
+                } 
+          ?>
+            Reversible Pulpitis
+        </td>
+
+        <td>
+          <input type="radio" 
+            <?php 
+                  if($objresultPeriraddiag['sympOrasympt_apical'] == "0"){
+                      ?>
+                       checked = "true"
+                       disabled = "true" >                      
+                      <?php
+                  }else{
+                      ?>
+                       disabled = "true" >
+                      <?php 
+                  } 
+            ?>
+          Symptomatic Apical Periodontitis
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input type="radio"
+          <?php 
+                if($objresultPulpaldiag['ReverOrIrreversiblepulp'] != "" && $objresultPulpaldiag['ReverOrIrreversiblepulp'] == "1"){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >                      
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                    <?php 
+                } 
+          ?>
+          Irreversible Pulpitis
+        </td>
+
+        <td>
+          <input type="radio" 
+            <?php 
+                  if($objresultPeriraddiag['sympOrasympt_apical'] == "1"){
+                      ?>
+                       checked = "true"
+                       disabled = "true" >                      
+                      <?php
+                  }else{
+                      ?>
+                       disabled = "true" >
+                      <?php 
+                  } 
+            ?>
+          Asymptomatic Apical Periodontitis   
+        </td>
+      </tr>
+
+      <tr style="margin-left:2em;">
+        <td>
+          <input type="radio"  
+          <?php 
+              if($objresultPulpaldiag['ReverOrIrreversiblepulp'] != "" && $objresultPulpaldiag['ReverOrIrreversiblepulp'] == "1" && $objresultPulpaldiag['Irreversible_sympOrasymp'] == "1"){
+                  ?>
+                   checked = "true"
+                   disabled = "true" >                      
+                  <?php
+              }else{
+                  ?>
+                   disabled = "true" >
+                  <?php 
+              } 
+          ?>
+          Symptomatic
+        </td>
+
+        <td>
+          <input type="radio"
+            <?php 
+                  if($objresultPeriraddiag['acuteOrchronic_apical'] == "0"){
+                      ?>
+                       checked = "true"
+                       disabled = "true" >                      
+                      <?php
+                  }else{
+                      ?>
+                       disabled = "true" >
+                      <?php 
+                  } 
+            ?>
+           Acute Apical Abscess
+        </td>
+      </tr>
+
+      <tr style="margin-left:2em;">
+        <td>
+          <input type="radio"
+           <?php 
+              if($objresultPulpaldiag['ReverOrIrreversiblepulp'] != "" && $objresultPulpaldiag['ReverOrIrreversiblepulp'] == "1" && $objresultPulpaldiag['Irreversible_sympOrasymp'] == "0"){
+                  ?>
+                   checked = "true"
+                   disabled = "true" >                      
+                  <?php
+              }else{
+                  ?>
+                   disabled = "true" >
+                  <?php 
+              } 
+          ?>
+         Asymtomatic
+        </td>
+
+        <td>
+           <input type="radio"
+            <?php 
+                if($objresultPeriraddiag['acuteOrchronic_apical'] == "1"){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >                      
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                    <?php 
+                } 
+            ?>
+          Chronic Apical Abscess
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input type="checkbox"
+            <?php 
+                if($objresultPulpaldiag['pulp_necrosis'] == "1"){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >                      
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                    <?php 
+                } 
+            ?>
+           Pulp Necrosis 
+        </td>
+
+        <td>
+          Other : <?php $objresultPeriraddiag['other']; ?>
+        </td>
+
+      </tr>
+
+      <tr>
+        <td>
+          <input type="checkbox"
+            <?php 
+                if($objresultPulpaldiag['prev_initiat'] == "1"){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >                      
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                    <?php 
+                } 
+            ?>
+          Previously Initiated Therapy
+        </td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <td>
+          <input type="checkbox"
+            <?php 
+                if($objresultPulpaldiag['prev_treated'] == "1"){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >
+                      Previously treated: &nbsp;                   
+                    <?php
+                    if($objresultPulpaldiag['prev_treated_improper'] == "1"){
+                      echo "Improper";
+                    }
+                    else if($objresultPulpaldiag['prev_treated_incomplete'] == "1"){
+                      echo "Incomplete RCT";
+                    }else{
+                      echo "";
+                    }
+                }else{
+                    ?>
+                     disabled = "true" >
+                      Previously treated &nbsp;
+                    <?php 
+                } 
+            ?>
+        </td>
+        <td></td>
+      </tr>
+    </table><br><br><br><br><br><br><br><br><br>
+
+    <table>
+      <?php
+        $searchTreatment = "SELECT * FROM treatment_plan WHERE HN = '$HN' AND Date = '$harddate'";
+        $resultTreatment = $conn->query($searchTreatment);
+        $objresultTreatment = mysqli_fetch_array($resultTreatment);
+      ?>
+
+      <tr>
+        <th style="font-size:20px;" align="left" colspan="3">Treatment Planning</th>
+      </tr>
+
+      <tr>
+        <td>
+          <input type="checkbox"
+          <?php 
+              if($objresultTreatment['no_treatment'] == "1"){
+                  ?>
+                   checked = "true"
+                   disabled = "true" >                      
+                  <?php
+              }else{
+                  ?>
+                   disabled = "true" >
+                  <?php 
+              } 
+          ?>
+         No Treatment
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <td>
+          <input type="checkbox"
         <?php 
             if($objresultTreatment['Pulpotomy'] == "1"){
                 ?>
                  checked = "true"
                  disabled = "true" >     
-                 <label>&nbsp;Pulpotomy: &nbsp;</label>
+                 Pulpotomy: 
                 <?php
                 if($objresultTreatment['pulp_partOrfull'] != "" && $objresultTreatment['pulp_partOrfull'] == "0"){
-                  echo "<font>Partial</font>";
+                  echo "Partial";
                 }
                 else if($objresultTreatment['pulp_partOrfull'] != "" && $objresultTreatment['pulp_partOrfull'] == "1"){
-                  echo "<font>Full</font>";
+                  echo "Full";
                 }else{
                   echo "";
                 }
             }else{
                 ?>
                  disabled = "true" >
-                 <label>&nbsp;Pulpotomy &nbsp;</label>
+                 Pulpotomy 
                 <?php 
             } 
         ?>
-    </div>
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
 
-    <div class="col-md-2">
-        <input type="checkbox" style="float:left;" name="pulpectomy" value="1"
+      <tr>
+        <td>
+          <input type="checkbox"
           <?php 
             if($objresultTreatment['pulpectomy'] == "1"){
                 ?>
@@ -1942,11 +1851,15 @@ $harddate = $_POST['hard_date'];
                 <?php 
             } 
         ?>
-        <label>&nbsp;Pulpectomy</label>
-    </div>
+        Pulpectomy
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
 
-    <div class="col-md-5">
-        <input type="checkbox" style="float:left;" name="nonrootcanel" value="1"
+      <tr>
+        <td>
+          <input type="checkbox"
           <?php 
             if($objresultTreatment['non_sur_root'] == "1"){
                 ?>
@@ -1959,14 +1872,15 @@ $harddate = $_POST['hard_date'];
                 <?php 
             } 
         ?>
-        <label>&nbsp;Non-surgical Root Canel Treatment</label>
-        
-    </div>
-  </div>
+        Non-surgical Root Canel Treatment
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
 
-  <div class="row">
-    <div class="col-md-3">
-        <input type="checkbox" style="float:left;" name="nonretreatment" value="1"
+      <tr>
+        <td>
+          <input type="checkbox"
         <?php 
             if($objresultTreatment['non_sur_retreat'] == "1"){
                 ?>
@@ -1979,11 +1893,15 @@ $harddate = $_POST['hard_date'];
                 <?php 
             } 
         ?>
-        <label>&nbsp;Non-surgical Retreatment</label>
-    </div>
+        Non-surgical Retreatment
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
 
-    <div class="col-md-2">
-        <input type="checkbox" style="float:left;" name="apexification" value="1"
+      <tr>
+        <td>
+          <input type="checkbox"
           <?php 
             if($objresultTreatment['apexification'] == "1"){
                 ?>
@@ -1996,11 +1914,15 @@ $harddate = $_POST['hard_date'];
                 <?php 
             } 
         ?>
-        <label>&nbsp;Apexification</label>
-    </div>
+        Apexification
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
 
-    <div class="col-md-2">
-        <input type="checkbox" style="float:left;" name="intentional" value="1"
+      <tr>
+        <td>
+          <input type="checkbox"
           <?php 
             if($objresultTreatment['intentionalRCT'] == "1"){
                 ?>
@@ -2013,11 +1935,15 @@ $harddate = $_POST['hard_date'];
                 <?php 
             } 
         ?>
-        <label>&nbsp;Intentional RCT</label>
-    </div>
+        Intentional RCT
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
 
-    <div class="col-md-3">
-        <input type="checkbox" style="float:left;" name="rootcaneltreat" value="1"
+      <tr>
+        <td>
+          <input type="checkbox"
           <?php 
             if($objresultTreatment['sur_root'] == "1"){
                 ?>
@@ -2030,11 +1956,15 @@ $harddate = $_POST['hard_date'];
                 <?php 
             } 
         ?>
-        <label>&nbsp;Surgical Root Canel Treatment</label>
-    </div>
+        Surgical Root Canel Treatment
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
 
-    <div class="col-md-2">
-        <input type="checkbox" style="float:left;" name="perio" value="1"
+      <tr>
+        <td>
+          <input type="checkbox"
           <?php 
             if($objresultTreatment['perio_consult'] == "1"){
                 ?>
@@ -2047,112 +1977,114 @@ $harddate = $_POST['hard_date'];
                 <?php 
             } 
         ?>
-        <label>&nbsp;Perio Consult</label>
-    </div>
-  </div>
+        Perio Consult
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
 
-  <div class="row">
-    <div class="col-md-12">
-            <label>&nbsp; Other : &nbsp;</label>
-            <font><?php echo $objresultTreatment['treat_other']; ?></font>
-    </div>
-  </div>
+      <tr>
+        <td>
+         Other : <?php echo $objresultTreatment['treat_other']; ?>
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
 
-  <div class="row">
-    <div class="col-md-12">
-           <label>Plan for final restoration: </label>
-           <font><?php echo $objresultTreatment['plan_for_final']; ?></font>
-    </div>
-  </div>
+      <tr>
+        <td colspan="3" height="20"></td>
+      </tr>
+      <tr>
+        <td>
+          <b> Plan for final restoration: </b>
+        <?php echo $objresultTreatment['plan_for_final']; ?>
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
 
-  <div class="row">
-    <div class="col-md-2">
-        <label>Pre-op treatment: </label>
-    </div>
+      <tr>
+        <td colspan="3" height="20"></td>
+      </tr>
+      <tr>
+        <td>
+          <b>Pre-op treatment: </b>
+      <input type="radio"
+        <?php 
+          if($objresultTreatment['pre_op_treat_caries'] == "1"){
+              ?>
+               checked = "true"
+               disabled = "true" >                      
+              <?php
+          }else{
+              ?>
+               disabled = "true" >
+              <?php 
+          } 
+      ?>
+       Caries Removal 
+        </td>
 
-    <div class="col-md-2">
-        <input type="radio" style="float:left;" name="preop" value="cariesremove"
-          <?php 
-            if($objresultTreatment['pre_op_treat_caries'] == "1"){
-                ?>
-                 checked = "true"
-                 disabled = "true" >                      
-                <?php
-            }else{
-                ?>
-                 disabled = "true" >
-                <?php 
-            } 
-        ?>
-        <label>&nbsp; Caries Removal</label>  
-    </div>
+        <td>
+          <input type="radio" 
+        <?php 
+          if($objresultTreatment['pre_op_treat_dam'] == "1"){
+              ?>
+               checked = "true"
+               disabled = "true" >                      
+              <?php
+          }else{
+              ?>
+               disabled = "true" >
+              <?php 
+          } 
+      ?>
+       Dam
+        </td>
 
-    <div class="col-md-2">
-        <input type="radio" style="float:left;" name="preop" value="dam"
-          <?php 
-            if($objresultTreatment['pre_op_treat_dam'] == "1"){
-                ?>
-                 checked = "true"
-                 disabled = "true" >                      
-                <?php
-            }else{
-                ?>
-                 disabled = "true" >
-                <?php 
-            } 
-        ?>
-        <label>&nbsp; Dam </label>
-    </div>
+        <td>
+           Other : <?php echo $objresultTreatment['pre_op_treat_other']; ?>
+        </td>
+      </tr>
 
-    <div class="col-md-6">
-        <label>&nbsp; Other :  &nbsp;</label>
-        <font><?php echo $objresultTreatment['pre_op_treat_other']; ?></font>
-    </div>
-  </div>
+      <tr>
+        <td>
+          <b>Anesthesia: </b>
+            <input type="radio"
+              <?php 
+                if($objresultTreatment['Anest_reqOrnotreq'] == "1"){
+                    ?>
+                     checked = "true"
+                     disabled = "true" >                      
+                    <?php
+                }else{
+                    ?>
+                     disabled = "true" >
+                    <?php 
+                } 
+            ?>
+            Required 
+        </td>
 
-  <div class="row">
-    <div class="col-md-2">
-        <label>Anesthesia: </label>
-    </div>
-    
-    <div class="col-md-2">
-        <input type="radio" style="float:left;" name="anesthesis" value="anesrequired"
-          <?php 
-            if($objresultTreatment['Anest_reqOrnotreq'] == "1"){
-                ?>
-                 checked = "true"
-                 disabled = "true" >                      
-                <?php
-            }else{
-                ?>
-                 disabled = "true" >
-                <?php 
-            } 
-        ?>
-        <label>&nbsp; Required</label>
-    </div>    
-
-    <div class="col-md-8">
-         <input type="radio" style="float:left;" name="anesthesis" value="anesnotrequired"
-          <?php 
-            if($objresultTreatment['Anest_reqOrnotreq'] == "0"){
-                ?>
-                 checked = "true"
-                 disabled = "true" >                      
-                <?php
-            }else{
-                ?>
-                 disabled = "true" >
-                <?php 
-            } 
-        ?>
-        <label>&nbsp; Not required </label>
-    </div>  
-  </div>
-</div> 
-</div>
-</div>
-
+        <td>
+          <input type="radio" style="float:left;"
+            <?php 
+              if($objresultTreatment['Anest_reqOrnotreq'] == "0"){
+                  ?>
+                   checked = "true"
+                   disabled = "true" >                      
+                  <?php
+              }else{
+                  ?>
+                   disabled = "true" >
+                  <?php 
+              } 
+          ?>
+          Not required
+        </td>
+        <td></td>
+      </tr>
+    </table>
 
 <!-- Javascript -->
 <script src="assets/js/multi-step-form.js" type="text/javascript"></script>
