@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://bootswatch.com/yeti/bootstrap.min.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+	<script type="text/javascript" src="dbcontroller.js"></script>
+</head> 
+<body>
+<div ng-controller="showdatacontroller ">
+	<form class="navbar-form" role="search">
+        <div class="form-group">
+			<p><input ng-model="sData"  class="form-control"  placeholder="ค้นหา"/></p>
+		</div>
+     </form>
+
+	<table class="table table-striped">
+	    <tr><th>Name</th></tr>
+	    <tr ng-repeat="c in showData| filter:sData">
+	        <td>{{c.patientName}}</td>
+	        </tr>
+	</table>
+
+</div>
+</body>
+</html>

@@ -12,9 +12,9 @@ class Check{
 		else{
 			//Checkbox of None
 		  $palette = array();
-		  $img = imagecreatefromjpeg($image);
+		  //$img = imagecreatefromjpeg($image);
 			
-		  if(!$img) {
+		  if(!$image) {
 		    return FALSE;
 		  }
 		 $count0 = 0;
@@ -24,8 +24,8 @@ class Check{
 		  	for($j = 927; $j <= 944 ; $j++) //y coordinate
 		    {
 
-		      $thisColor = imagecolorat($img, $i, $j);
-		      $rgb = imagecolorsforindex($img, $thisColor); 
+		      $thisColor = imagecolorat($image, $i, $j);
+		      $rgb = imagecolorsforindex($image, $thisColor); 
 		      $color = sprintf('%02X%02X%02X', (round(round(($rgb['red'] / 0x33)) * 0x33)), round(round(($rgb['green'] / 0x33)) * 0x33), round(round(($rgb['blue'] / 0x33)) * 0x33));
 
 		      if('#'.$color == '#000000') 
@@ -71,9 +71,9 @@ class Check{
 		else{
 			//Checkbox of None
 		  $palette = array();
-		  $img = imagecreatefromjpeg($image);
+		//  $img = imagecreatefromjpeg($image);
 			
-		  if(!$img) {
+		  if(!$image) {
 		    return FALSE;
 		  }
 		 $count0 = 0;
@@ -83,8 +83,8 @@ class Check{
 		  	for($j = 927; $j <= 944 ; $j++) //y coordinate
 		    {
 
-		      $thisColor = imagecolorat($img, $i, $j);
-		      $rgb = imagecolorsforindex($img, $thisColor); 
+		      $thisColor = imagecolorat($image, $i, $j);
+		      $rgb = imagecolorsforindex($image, $thisColor); 
 		      $color = sprintf('%02X%02X%02X', (round(round(($rgb['red'] / 0x33)) * 0x33)), round(round(($rgb['green'] / 0x33)) * 0x33), round(round(($rgb['blue'] / 0x33)) * 0x33));
 
 		      if('#'.$color == '#000000') 
@@ -130,9 +130,9 @@ class Check{
 		else{
 			//Checkbox of None
 		  $palette = array();
-		  $img = imagecreatefromjpeg($image);
+		//  $img = imagecreatefromjpeg($image);
 			
-		  if(!$img) {
+		  if(!$image) {
 		    return FALSE;
 		  }
 		 $count0 = 0;
@@ -142,8 +142,8 @@ class Check{
 		  	for($j = 927; $j <= 944 ; $j++) //y coordinate
 		    {
 
-		      $thisColor = imagecolorat($img, $i, $j);
-		      $rgb = imagecolorsforindex($img, $thisColor); 
+		      $thisColor = imagecolorat($image, $i, $j);
+		      $rgb = imagecolorsforindex($image, $thisColor); 
 		      $color = sprintf('%02X%02X%02X', (round(round(($rgb['red'] / 0x33)) * 0x33)), round(round(($rgb['green'] / 0x33)) * 0x33), round(round(($rgb['blue'] / 0x33)) * 0x33));
 
 		      if('#'.$color == '#000000') 
@@ -189,9 +189,9 @@ class Check{
 		else{
 			//Checkbox of None
 		  $palette = array();
-		  $img = imagecreatefromjpeg($image);
+		  //$img = imagecreatefromjpeg($image);
 			
-		  if(!$img) {
+		  if(!$image) {
 		    return FALSE;
 		  }
 		 $count0 = 0;
@@ -201,8 +201,8 @@ class Check{
 		  	for($j = 927; $j <= 943 ; $j++) //y coordinate
 		    {
 
-		      $thisColor = imagecolorat($img, $i, $j);
-		      $rgb = imagecolorsforindex($img, $thisColor); 
+		      $thisColor = imagecolorat($image, $i, $j);
+		      $rgb = imagecolorsforindex($image, $thisColor); 
 		      $color = sprintf('%02X%02X%02X', (round(round(($rgb['red'] / 0x33)) * 0x33)), round(round(($rgb['green'] / 0x33)) * 0x33), round(round(($rgb['blue'] / 0x33)) * 0x33));
 
 		      if('#'.$color == '#000000') 
@@ -248,9 +248,9 @@ class Check{
 		else{
 			//Checkbox of None
 		  $palette = array();
-		  $img = imagecreatefromjpeg($image);
+		 // $img = imagecreatefromjpeg($image);
 			
-		  if(!$img) {
+		  if(!$image) {
 		    return FALSE;
 		  }
 		 $count0 = 0;
@@ -260,8 +260,8 @@ class Check{
 		  	for($j = 927; $j <= 943 ; $j++) //y coordinate
 		    {
 
-		      $thisColor = imagecolorat($img, $i, $j);
-		      $rgb = imagecolorsforindex($img, $thisColor); 
+		      $thisColor = imagecolorat($image, $i, $j);
+		      $rgb = imagecolorsforindex($image, $thisColor); 
 		      $color = sprintf('%02X%02X%02X', (round(round(($rgb['red'] / 0x33)) * 0x33)), round(round(($rgb['green'] / 0x33)) * 0x33), round(round(($rgb['blue'] / 0x33)) * 0x33));
 
 		      if('#'.$color == '#000000') 
@@ -307,9 +307,9 @@ class Check{
 		else{
 			//Checkbox of None
 		  $palette = array();
-		  $img = imagecreatefromjpeg($image);
+		  //$img = imagecreatefromjpeg($image);
 			
-		  if(!$img) {
+		  if(!$image) {
 		    return FALSE;
 		  }
 		 $count0 = 0;
@@ -319,8 +319,8 @@ class Check{
 		  	for($j = 960; $j <= 978 ; $j++) //y coordinate
 		    {
 
-		      $thisColor = imagecolorat($img, $i, $j);
-		      $rgb = imagecolorsforindex($img, $thisColor); 
+		      $thisColor = imagecolorat($image, $i, $j);
+		      $rgb = imagecolorsforindex($image, $thisColor); 
 		      $color = sprintf('%02X%02X%02X', (round(round(($rgb['red'] / 0x33)) * 0x33)), round(round(($rgb['green'] / 0x33)) * 0x33), round(round(($rgb['blue'] / 0x33)) * 0x33));
 
 		      if('#'.$color == '#000000') 
@@ -366,9 +366,9 @@ class Check{
 		else{
 			//Checkbox of None
 		  $palette = array();
-		  $img = imagecreatefromjpeg($image);
+		  //$img = imagecreatefromjpeg($image);
 			
-		  if(!$img) {
+		  if(!$image) {
 		    return FALSE;
 		  }
 		 $count0 = 0;
@@ -378,8 +378,8 @@ class Check{
 		  	for($j = 960; $j <= 978 ; $j++) //y coordinate
 		    {
 
-		      $thisColor = imagecolorat($img, $i, $j);
-		      $rgb = imagecolorsforindex($img, $thisColor); 
+		      $thisColor = imagecolorat($image, $i, $j);
+		      $rgb = imagecolorsforindex($image, $thisColor); 
 		      $color = sprintf('%02X%02X%02X', (round(round(($rgb['red'] / 0x33)) * 0x33)), round(round(($rgb['green'] / 0x33)) * 0x33), round(round(($rgb['blue'] / 0x33)) * 0x33));
 
 		      if('#'.$color == '#000000') 
@@ -425,9 +425,9 @@ class Check{
 		else{
 			//Checkbox of None
 		  $palette = array();
-		  $img = imagecreatefromjpeg($image);
+		  //$img = imagecreatefromjpeg($image);
 			
-		  if(!$img) {
+		  if(!$image) {
 		    return FALSE;
 		  }
 		 $count0 = 0;
@@ -437,8 +437,8 @@ class Check{
 		  	for($j = 960; $j <= 978 ; $j++) //y coordinate
 		    {
 
-		      $thisColor = imagecolorat($img, $i, $j);
-		      $rgb = imagecolorsforindex($img, $thisColor); 
+		      $thisColor = imagecolorat($image, $i, $j);
+		      $rgb = imagecolorsforindex($image, $thisColor); 
 		      $color = sprintf('%02X%02X%02X', (round(round(($rgb['red'] / 0x33)) * 0x33)), round(round(($rgb['green'] / 0x33)) * 0x33), round(round(($rgb['blue'] / 0x33)) * 0x33));
 
 		      if('#'.$color == '#000000') 
@@ -484,9 +484,9 @@ class Check{
 		else{
 			//Checkbox of None
 		  $palette = array();
-		  $img = imagecreatefromjpeg($image);
+		  //$img = imagecreatefromjpeg($image);
 			
-		  if(!$img) {
+		  if(!$image) {
 		    return FALSE;
 		  }
 		 $count0 = 0;
@@ -496,8 +496,8 @@ class Check{
 		  	for($j = 960; $j <= 977 ; $j++) //y coordinate
 		    {
 
-		      $thisColor = imagecolorat($img, $i, $j);
-		      $rgb = imagecolorsforindex($img, $thisColor); 
+		      $thisColor = imagecolorat($image, $i, $j);
+		      $rgb = imagecolorsforindex($image, $thisColor); 
 		      $color = sprintf('%02X%02X%02X', (round(round(($rgb['red'] / 0x33)) * 0x33)), round(round(($rgb['green'] / 0x33)) * 0x33), round(round(($rgb['blue'] / 0x33)) * 0x33));
 
 		      if('#'.$color == '#000000') 
@@ -543,9 +543,9 @@ class Check{
 		else{
 			//Checkbox of None
 		  $palette = array();
-		  $img = imagecreatefromjpeg($image);
+		  //$img = imagecreatefromjpeg($image);
 			
-		  if(!$img) {
+		  if(!$image) {
 		    return FALSE;
 		  }
 		 $count0 = 0;
@@ -555,8 +555,8 @@ class Check{
 		  	for($j = 960; $j <= 978 ; $j++) //y coordinate
 		    {
 
-		      $thisColor = imagecolorat($img, $i, $j);
-		      $rgb = imagecolorsforindex($img, $thisColor); 
+		      $thisColor = imagecolorat($image, $i, $j);
+		      $rgb = imagecolorsforindex($image, $thisColor); 
 		      $color = sprintf('%02X%02X%02X', (round(round(($rgb['red'] / 0x33)) * 0x33)), round(round(($rgb['green'] / 0x33)) * 0x33), round(round(($rgb['blue'] / 0x33)) * 0x33));
 
 		      if('#'.$color == '#000000') 

@@ -3,7 +3,6 @@ Class Medicalrecord
 {
 	public function searchpatient($conn,$user)
 	{
-
 		if($user != ''){
 			$sql = "SELECT * FROM dent_hardcopy INNER JOIN patients_info ON dent_hardcopy.HN = patients_info.HN WHERE dentId = '$user' OR student_code = '$user'";
 			$result = $conn->query($sql);
@@ -69,3 +68,4 @@ Class Medicalrecord
 	}
 }
 ?>
+

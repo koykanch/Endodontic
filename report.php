@@ -2096,6 +2096,7 @@ $harddate = $_POST['hard_date'];
 </body>
 </html>
 <?php
+error_reporting(0);
 $html = ob_get_contents();        
 ob_end_clean();
 $pdf = new mPDF('th', 'A4', '0', '');   
@@ -2104,4 +2105,7 @@ $pdf->SetDisplayMode('fullpage');
 $pdf->WriteHTML($html, 2);
 $pdf->Output("MyPDF/MyPDF.pdf"); 
 ?>
-ดาวโหลดรายงานในรูปแบบ PDF <a href="MyPDF/MyPDF.pdf">คลิกที่นี้</a>
+<script type="text/javascript">
+  window.location="MyPDF/MyPDF.pdf";
+</script>
+<!-- ดาวโหลดรายงานในรูปแบบ PDF <a href="MyPDF/MyPDF.pdf">คลิกที่นี้</a> -->

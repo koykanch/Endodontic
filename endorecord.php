@@ -170,6 +170,10 @@ function insertendorec() {
     document.endodontic.action = 'insertendorec.php';
 }
 
+function processendorec() {
+    document.endodontic.action = 'processpict.php';
+}
+
 </script>
 
   <?php
@@ -214,7 +218,13 @@ function insertendorec() {
 
   if(isset($_POST['submit3'])){
     require('class.php');
-    $image = $_FILES['f1']['name'];
+    $image1 = $_FILES['f1']['name'];
+
+    $image = imagecreatefromjpeg($image1);
+    imagefilter($image, IMG_FILTER_GRAYSCALE); //first, convert to grayscale
+    imagefilter($image, IMG_FILTER_CONTRAST, -255); //then, apply a full contrast
+    //imagejpeg($image);
+
     $check = new Check;
 
     echo "<--------------------------------------None------------------------------------------------><br><br>";
@@ -353,7 +363,7 @@ $endo = new Endodontic;
     <div class="row">
       <div class="col-md-12">
       <!-- <input type="submit" class="btn btn-info" name="upload" value="UPLOAD" disabled> -->
-      <input type="submit" class="btn btn-success" name="submit3" value="PROCESS" >
+      <input type="submit" class="btn btn-success" name="submit3" value="PROCESS">
       <input type="reset" name="clear" class="btn btn-danger" value="RESET">
       </div>
     </div>

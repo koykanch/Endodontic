@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myapp">
 <head>
 	<title>Summary</title>
 	<meta charset="utf-8">
@@ -26,6 +26,16 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+        <!-- Filter of name -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="stylesheet" href="http://bootswatch.com/yeti/bootstrap.min.css"> -->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+        <script type="text/javascript" src="dbcontroller.js"></script>
 
         <!-- Favicon and touch icons -->
         <link rel="shortcut icon" href="assets/ico/icon.png">
@@ -88,12 +98,12 @@
             }
         </style>
 <?php
-session_start();
 error_reporting(0);
+session_start();
+
 $user = $_SESSION['username'];
 	require('connect.php');
-	require('class_summary.php');
-	$sum = new Medicalrecord;
+	
 ?>
 </head>
 <body>
@@ -109,6 +119,14 @@ $user = $_SESSION['username'];
 	<div class="panel panel-info">
 	<div class="panel-heading"><h3>ข้อมูลการรักษา</h3></div>
 	<div class="panel-body">
+
+    <div ng-controller="showdatacontroller ">
+    <form class="navbar-form" role="search">
+        <div class="form-group">
+            <p><input ng-model="sData"  class="form-control"  placeholder="ค้นหา"/></p>
+        </div>
+     </form>
+
 	    <table class="table table-bordered" border="1">
 	        <tr bgcolor="#D1C4E9">
 	            <td>รหัสผู้ป่วย</td>
@@ -118,9 +136,64 @@ $user = $_SESSION['username'];
 	            <td>ทันตแพทย์ผู้รักษา</td>
 	            <td>รายละเอียดการรักษา</td>
 	        </tr>
-	        <?php
-	        	$sum->searchpatient($conn,$user)
-	        ?>
+
+            <?php
+                if($user != ""){
+                    ?>
+                    <tr ng-repeat="c in showData| filter:sData">
+                      <td>{{c.HN}}</td>
+                      <td>{{c.patientName}}</td>
+                      <td>{{c.hard_Date| date:'dd-MM-yyyy'}}</td>
+                      <td>{{c.student_code}}</td>
+                      <td>{{c.dentId}}</td>
+                      <td><form action="report.php" method="post" name="summary" target="_blank">
+                        <input type="hidden" name="PatientHN" value="{{c.HN}}">
+                        <input type="hidden" name="Stu_code" value="{{c.student_code}}">
+                        <input type="hidden" name="Dent_id" value="{{c.dentId}}">
+                        <input type="hidden" name="hard_date" value="{{c.hard_Date}}">
+
+                        <input type="submit" class="btn btn-success" style="width:100px;" name="detail" value="VIEW">
+                      </form><br>
+
+                      <form action="updateEndodontic.php" method="post" name="edit_detail" target="_blank">
+                        <input type="hidden" name="PatientHN" value="{{c.HN}}">
+                        <input type="hidden" name="Stu_code" value="{{c.student_code}}">
+                        <input type="hidden" name="Dent_id" value="{{c.dentId}}">
+                        <input type="hidden" name="hard_date" value="{{c.hard_Date}}">
+
+                        <input type="submit" class="btn btn-info" style="width:100px;" name="edit" value="EDIT">
+                      </form><br>
+
+                      <form action="deleteEndodontic.php" method="post" name="delete_detail">
+                        <input type="hidden" name="PatientHN" value="{{c.HN}}">
+                        <input type="hidden" name="Stu_code" value="{{c.student_code}}">
+                        <input type="hidden" name="Dent_id" value="{{c.dentId}}">
+                        <input type="hidden" name="hard_date" value="{{c.hard_Date}}">
+
+                        <input type="submit" class="btn btn-danger" style="width:100px;" name="delete" value="DELETE"></tr>
+                      </form></tr>
+                    <?php
+                }else{
+                    ?>
+                    <tr ng-repeat="c in showData| filter:sData">
+                      <td>{{c.HN}}</td>
+                      <td>{{c.patientName}}</td>
+                      <td>{{c.hard_Date| date:'dd-MM-yyyy'}}</td>
+                      <td>{{c.student_code}}</td>
+                      <td>{{c.dentId}}</td>
+                      <td><form action="report.php" method="post" name="summary" target="_blank">
+                            <input type="hidden" name="PatientHN" value="{{c.HN}}">
+                            <input type="hidden" name="Stu_code" value="{{c.student_code}}">
+                            <input type="hidden" name="Dent_id" value="{{c.dentId}}">
+                            <input type="hidden" name="hard_date" value="{{c.hard_Date}}">
+
+                            <input type="submit" class="btn btn-success" style="width:100px;" name="detail" value="VIEW">
+                            </form></td>
+                    </tr>
+                    <?php
+                }
+            ?>
+    </div>
 </body>
 </html>
 <!-- Javascript -->
@@ -138,3 +211,6 @@ $user = $_SESSION['username'];
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
         <![endif]-->
+
+        <!-- filter name for search-->
+        
