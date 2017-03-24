@@ -21,6 +21,12 @@
         <link rel="stylesheet" href="assets/css/popup.css">
         <link rel="stylesheet" href="assets/css/cuppa-datepicker-styles.css">
 
+        <!-- filter when type-->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
+
+        <!-- pagination แบ่งหน้าแสดงข้อมูล -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/list.pagination.js/0.1.1/list.pagination.min.js"></script>
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -92,9 +98,6 @@
     </head>
 <?php
     require("connect.php");
-    require("class_patient.php");
-
-    $patientinfo = new Patient;
 ?>
  <body><!-- change background image at assets/js/scripts.js --> 
     <!-- Loader -->
@@ -118,8 +121,10 @@ if(isset($_SESSION['username'])){
         <div class="first-container">
         <div class="panel panel-info">
         <div class="panel-heading"><h3>ข้อมูลผู้ป่วย (Patient Information)</h3></div>
-        <div class="panel-body">
+        <div class="panel-body" id="patient-list">
+            <input class="search" placeholder="Search" /><br><br>
             <table class="table table-bordered" border="1">
+            <tbody class="list">
                 <tr bgcolor="#D1C4E9">
                     <td>รหัสผู้ป่วย</td>
                     <td>ชื่อผู้ป่วย</td>
@@ -131,10 +136,47 @@ if(isset($_SESSION['username'])){
                 }
                 ?>
                 </tr>
-                <?php
-                    $patientinfo->Patientinfo($conn)
-                 ?>
-            
+        <?php
+            $sql = "SELECT * FROM patients_info";
+            $resSql = $conn->query($sql);
+      
+            while($row = mysqli_fetch_array($resSql)){
+              $studentId = $row['HN'];
+              $date=date('d/m/Y',strtotime($row['birthdate']));
+              if($row['gender'] == 'F'){
+                    $gender = 'หญิง';
+                  }else{
+                    $gender = 'ชาย';
+                  }
+              echo '<td class="hn">'.$row['HN'].'</td>
+                <td class="name">'.$row['patientName'].'</td>
+                <td class="sex">'.$gender.'</td>
+                <td class="birth">'.$date.'</td>';
+
+              if(isset($_SESSION['username'])){ 
+                echo'<td>
+                  <form action="updatePatient.php" method="post" name="updatebtn">
+                      <input type="hidden" name="PatientHN" value="'.$row['HN'].'">
+                    
+                      
+                      <input type="submit" class="btn btn-primary" style="width: 100px; name="'.$row['HN'].'" value="Edit" >
+                    
+                  </form><br>';?>
+
+                  <form action="deletePatient.php" method="post" name="deletebtn" onSubmit="return confirm('are you sure?')">
+                      <input type="hidden" name="HN" value="<?php echo $row['HN']; ?>">
+                      <input type="submit" class="btn btn-danger" value="Delete" style="width: 100px;"name="<?php echo $row['HN']; ?>">
+
+                  </form>   
+                </td> <?php } ?>  
+              </tr><?php  } ?>
+             </tbody>
+             </table>
+             <ul class="pagination"></ul>
+        </div>    
+        </div>    
+        </div>
+        
 
         <!-- The Modal -->
     <div id="myModal" class="modal">
@@ -227,4 +269,24 @@ if(isset($_SESSION['username'])){
         }
     }
 
+</script>
+
+<!-- script for filter name when type -->
+<script type="text/javascript">
+    var options = {
+        valueNames: [ 'hn', 'name', 'sex', 'birth' ]
+        };
+    var patient = new List('patient-list', options);
+</script>
+
+<!-- script for pagination แบ่งหน้าแสดงข้อมูล -->
+<script type="text/javascript">
+    var options = {
+        valueNames: [ 'hn', 'name', 'sex', 'birth' ],
+        page: 5,
+        plugins: [
+          ListPagination({})
+          ]
+        };
+    var patient = new List('patient-list', options);
 </script>

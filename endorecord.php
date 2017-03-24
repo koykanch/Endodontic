@@ -1,6 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION['username'])){
+  $user = $_SESSION['username'];
   ?>
 <!DOCTYPE html>
 <html>
@@ -8,7 +9,7 @@ if(isset($_SESSION['username'])){
   <title>import picture</title>
   <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <title>Dentistry Information Systems</title>
 
     <!-- CSS -->
@@ -18,7 +19,7 @@ if(isset($_SESSION['username'])){
     <link rel="stylesheet" href="assets/elegant-font/code/style.css">
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
-  <link rel="stylesheet" href="assets/css/form-elements.css">
+    <link rel="stylesheet" href="assets/css/form-elements.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/media-queries.css">
     <link rel="stylesheet" href="assets/css/popup.css">
@@ -91,8 +92,6 @@ status=status;  // true or false
   document.endodontic.hemadismed.disabled = status;
   document.endodontic.neurodismed.disabled = status;
   document.endodontic.neurodismed.disabled = status;
-  document.endodontic.allergicmed.disabled = status;
-  document.endodontic.allermed.disabled =status;
 
 }
 
@@ -227,96 +226,96 @@ function processendorec() {
 
     $check = new Check;
 
-    echo "<--------------------------------------None------------------------------------------------><br><br>";
+   // echo "<--------------------------------------None------------------------------------------------><br><br>";
     $check->CheckNone($image,$conn);
       $cnone0 = $_SESSION['count0'];
-      // echo "Number of black color (0) = ".$cnone0."<br>";
+     // // echo "Number of black color (0) = ".$cnone0."<br>";
 
        $avgnone = $_SESSION['avgnone'];
-       echo "average percent of white color = ".$avgnone."<br>";
-       echo "<br><br><br><br>";
+       // echo "average percent of white color = ".$avgnone."<br>";
+       // echo "<br><br><br><br>";
        $_SESSION['avgnone'] = $avgnone;
 
-    echo "<---------------------------------Cardiovascular Diseases----------------------------------><br><br>";
+   // echo "<---------------------------------Cardiovascular Diseases----------------------------------><br><br>";
     $check->Checkcardiovascular($image,$conn);
       $ccardio0 = $_SESSION['count0'];
       $avgcardio = $_SESSION['avgcardio'];
-    //  echo "Number of black color (0) = ".$cpul0."<br>";
-      echo "average percent of white color = ".$avgcardio."<br>";
-      echo "<br><br><br><br>";
+    // // echo "Number of black color (0) = ".$cpul0."<br>";
+      // echo "average percent of white color = ".$avgcardio."<br>";
+      // echo "<br><br><br><br>";
       $_SESSION['avgcardio'] = $avgcardio;
 
-    echo "<-------------------------------------Pulmonary Diseases-----------------------------------><br><br>";
+   // echo "<-------------------------------------Pulmonary Diseases-----------------------------------><br><br>";
     $check->CheckPulmonary($image,$conn);
       $cpul0 = $_SESSION['count0'];
       $avgpul = $_SESSION['avgpul'];
-    //  echo "Number of black color (0) = ".$cpul0."<br>";
-      echo "average percent of white color = ".$avgpul."<br>";
-      echo "<br><br><br><br>";
+  //  //  echo "Number of black color (0) = ".$cpul0."<br>";
+      // echo "average percent of white color = ".$avgpul."<br>";
+      // echo "<br><br><br><br>";
       $_SESSION['avgpul'] = $avgpul;
 
 
-    echo "<--------------------------------Gastrointestinal Diseases---------------------------------><br><br>";
+   // echo "<--------------------------------Gastrointestinal Diseases---------------------------------><br><br>";
     $check->CheckGastro($image,$conn);
       $cgastro0 = $_SESSION['count0'];
       $avggastro = $_SESSION['avggastro'];
-    //  echo "Number of black color (0) = ".$cpul0."<br>";
-      echo "average percent of white color = ".$avggastro."<br>";
-      echo "<br><br><br><br>";
+   // //  echo "Number of black color (0) = ".$cpul0."<br>";
+      // echo "average percent of white color = ".$avggastro."<br>";
+      // echo "<br><br><br><br>";
       $_SESSION['avggastro'] = $avggastro;
 
-    echo "<------------------------------------Hematologic Diseases---------------------------------><br><br>";
+   // echo "<------------------------------------Hematologic Diseases---------------------------------><br><br>";
     $check->CheckHematologic($image,$conn);
       $chema0 = $_SESSION['count0'];
       $avghema = $_SESSION['avghema'];
-    //  echo "Number of black color (0) = ".$cpul0."<br>";
-      echo "average percent of white color = ".$avghema."<br>";
-      echo "<br><br><br><br>";
+   // //  echo "Number of black color (0) = ".$cpul0."<br>";
+      // echo "average percent of white color = ".$avghema."<br>";
+      // echo "<br><br><br><br>";
       $_SESSION['avghema'] = $avghema;
 
-    echo "<------------------------------------Neurologic Diseases---------------------------------><br><br>";
+   // echo "<------------------------------------Neurologic Diseases---------------------------------><br><br>";
     $check->CheckNeurologic($image,$conn);
       $cneuro0 = $_SESSION['count0'];
       $avgneuro = $_SESSION['avgneuro'];
-    //  echo "Number of black color (0) = ".$cpul0."<br>";
-      echo "average percent of white color = ".$avgneuro."<br>";
-      echo "<br><br><br><br>";
+   // //  echo "Number of black color (0) = ".$cpul0."<br>";
+      // echo "average percent of white color = ".$avgneuro."<br>";
+      // echo "<br><br><br><br>";
       $_SESSION['avgneuro'] = $avgneuro;
 
-    echo "<------------------------------------Allergic to---------------------------------><br><br>";
+   // echo "<------------------------------------Allergic to---------------------------------><br><br>";
     $check->CheckAllergic($image,$conn);
       $callergic0 = $_SESSION['count0'];
       $avgallergic = $_SESSION['avgallergic'];
-    //  echo "Number of black color (0) = ".$cpul0."<br>";
-      echo "average percent of white color = ".$avgallergic."<br>";
-      echo "<br><br><br><br>";
+   // //  echo "Number of black color (0) = ".$cpul0."<br>";
+      // echo "average percent of white color = ".$avgallergic."<br>";
+      // echo "<br><br><br><br>";
       $_SESSION['avgallergic'] = $avgallergic;
 
-    echo "<------------------------------------Blood Pressure------------------------------><br><br>";
+   // echo "<------------------------------------Blood Pressure------------------------------><br><br>";
     $check->CheckBlood($image,$conn);
       $cblood0 = $_SESSION['count0'];
       $avgblood = $_SESSION['avgblood'];
-    //  echo "Number of black color (0) = ".$cpul0."<br>";
-      echo "average percent of white color = ".$avgblood."<br>";
-      echo "<br><br><br><br>";
+   // //  echo "Number of black color (0) = ".$cpul0."<br>";
+      // echo "average percent of white color = ".$avgblood."<br>";
+      // echo "<br><br><br><br>";
       $_SESSION['avgblood'] = $avgblood;
 
-    echo "<---------------------------------------Other------------------------------------><br><br>";
+   // echo "<---------------------------------------Other------------------------------------><br><br>";
     $check->CheckOther($image,$conn);
       $cother0 = $_SESSION['count0'];
       $avgother = $_SESSION['avgother'];
-    //  echo "Number of black color (0) = ".$cpul0."<br>";
-      echo "average percent of white color = ".$avgallergic."<br>";
-      echo "<br><br><br><br>";
+  //  //  echo "Number of black color (0) = ".$cpul0."<br>";
+      // echo "average percent of white color = ".$avgallergic."<br>";
+      // echo "<br><br><br><br>";
       $_SESSION['avgother'] = $avgother;
 
-    echo "<-----------------------------------Taking Medicine------------------------------><br><br>";
+  //  echo "<-----------------------------------Taking Medicine------------------------------><br><br>";
     $check->CheckTaking($image,$conn);
       $ctaking0 = $_SESSION['count0'];
       $avgtaking = $_SESSION['avgtaking'];
-    //  echo "Number of black color (0) = ".$cpul0."<br>";
-      echo "average percent of white color = ".$avgtaking."<br>";
-      echo "<br><br><br><br>";
+   // //  echo "Number of black color (0) = ".$cpul0."<br>";
+      // echo "average percent of white color = ".$avgtaking."<br>";
+      // echo "<br><br><br><br>";
       $_SESSION['avgtaking'] = $avgtaking;
   } 
 
@@ -416,6 +415,12 @@ $endo = new Endodontic;
                 </div>
             </div>
                
+            <div class="row">
+                <div class="col-md-12">
+                  <label>Time:&nbsp;</label>
+                  <input type="time" name="endo_time" style="float:left;">
+                </div>
+            </div>
         </div>
     </div>
      </div>
@@ -435,19 +440,19 @@ $endo = new Endodontic;
               error_reporting(0);
               if($avgnone >= 30){
                 echo'
-              <div class="col-md-4"><input type="checkbox" onclick="enable_text(this.checked)" style="float:left;" name="nonemed" value="1" checked><label>&nbsp;None</label></div>';
+              <div class="col-md-2"><input type="checkbox" onclick="enable_text(this.checked)" style="float:left;" name="nonemed" value="1" checked><label>&nbsp;None</label></div>';
               }else{
                 echo'
-              <div class="col-md-4"><input type="checkbox" onclick="enable_text(this.checked)" style="float:left;" name="nonemed" value="1"><label>&nbsp;None</label></div>';
+              <div class="col-md-2"><input type="checkbox" onclick="enable_text(this.checked)" style="float:left;" name="nonemed" value="1"><label>&nbsp;None</label></div>';
               }
             ?>
 
             <?php 
             error_reporting(0);
-              if($avgcardio >= 30){
-                echo '<div class="col-md-4"><input type="checkbox" style="float:left;" name="cardiodismed" value="1" checked><label>&nbsp;Cardiovascular Diseases</label></div>';
+              if($avgcardio >= 30){ 
+                echo '<div class="col-md-3"><input type="checkbox" style="float:left;" name="cardiodismed" value="1" checked><label>&nbsp;Cardiovascular Diseases</label></div>';
               }else{
-                echo '<div class="col-md-4"><input type="checkbox" style="float:left;" name="cardiodismed" value="1"><label>&nbsp;Cardiovascular Diseases</label></div>';
+                echo '<div class="col-md-3"><input type="checkbox" style="float:left;" name="cardiodismed" value="1"><label>&nbsp;Cardiovascular Diseases</label></div>';
               }
             ?>
 
@@ -455,82 +460,108 @@ $endo = new Endodontic;
             error_reporting(0);
               if($avgpul >= 30){
                 echo'
-                <div class="col-md-4"><input type="checkbox" style="float:left;" name="pulmonarydismed" value="1" checked><label>&nbsp;Pulmonary Diseases</label></div>';
+                <div class="col-md-3"><input type="checkbox" style="float:left;" name="pulmonarydismed" value="1" checked><label>&nbsp;Pulmonary Diseases</label></div>';
               }else{
                 echo'
-                <div class="col-md-4"><input type="checkbox" style="float:left;" name="pulmonarydismed" value="1"><label>&nbsp;Pulmonary Diseases</label></div>';
+                <div class="col-md-3"><input type="checkbox" style="float:left;" name="pulmonarydismed" value="1"><label>&nbsp;Pulmonary Diseases</label></div>';
               }
             ?>
-              
-            </div>  
-          
-
-            <div class="row">
+            
             <?php
             error_reporting(0);
               if($avggastro >= 30){
-                echo '<div class="col-md-4"><input type="checkbox" style="float:left;" name="gastrodismed" value="1" checked><label>&nbsp;Gastrointestinal Diseases</label></div>';
+                echo '<div class="col-md-3"><input type="checkbox" style="float:left;" name="gastrodismed" value="1" checked><label>&nbsp;Gastrointestinal Diseases</label></div>';
               }else{
-                echo '<div class="col-md-4"><input type="checkbox" style="float:left;" name="gastrodismed" value="1"><label>&nbsp;Gastrointestinal Diseases</label></div>';
+                echo '<div class="col-md-3"><input type="checkbox" style="float:left;" name="gastrodismed" value="1"><label>&nbsp;Gastrointestinal Diseases</label></div>';
               }
-            ?>
+            ?>  
 
+            </div>  
+          
+            <div class="row">
             <?php
             error_reporting(0);
               if($avghema >= 30){
-                echo '<div class="col-md-4"><input type="checkbox" style="float:left;" name="hemadismed" value="1" checked><label>&nbsp;Hematologic Diseases</label></div>';
+                echo '<div class="col-md-3"><input type="checkbox" style="float:left;" name="hemadismed" value="1" checked><label>&nbsp;Hematologic Diseases</label></div>';
               }else{
-                echo '<div class="col-md-4"><input type="checkbox" style="float:left;" name="hemadismed" value="1"><label>&nbsp;Hematologic Diseases</label></div>';
+                echo '<div class="col-md-3"><input type="checkbox" style="float:left;" name="hemadismed" value="1"><label>&nbsp;Hematologic Diseases</label></div>';
               }
             ?> 
 
             <?php
             error_reporting(0);
               if($avgneuro >= 30){
-                echo '<div class="col-md-4"><input type="checkbox" style="float:left;" name="neurodismed" value="1" checked><label>&nbsp;Neurologic Diseases</label></div>';
+                echo '<div class="col-md-3"><input type="checkbox" style="float:left;" name="neurodismed" value="1" checked><label>&nbsp;Neurologic Diseases</label></div>';
               }else{
-                echo '<div class="col-md-4"><input type="checkbox" style="float:left;" name="neurodismed" value="1"><label>&nbsp;Neurologic Diseases</label></div>';
+                echo '<div class="col-md-3"><input type="checkbox" style="float:left;" name="neurodismed" value="1"><label>&nbsp;Neurologic Diseases</label></div>';
               }
             ?>
-            </div>
-
-            <div class="row">
 
             <?php 
             error_reporting(0);
               if($avgallergic >= 30){
-                echo '<div class="col-md-6"><input type="checkbox" style="float:left;" name="allergicmed" value="allergicmed" checked><label>&nbsp; Allergic to : &nbsp;&nbsp;</label><input type="text" name="allermed" style="width: 280px; height: 50px; float:left;"></div>';
+                echo '<div class="col-md-3"><input type="checkbox" style="float:left;" name="allergicmed" value="allergicmed" checked><label>&nbsp; Allergic to : &nbsp;&nbsp;</label><input type="text" name="allermed" style="width: 100px; height: 30px; float:left;"></div>';
               }else{
-                echo '<div class="col-md-6"><input type="checkbox" style="float:left;" name="allergicmed" value="allergicmed"><label>&nbsp; Allergic to : &nbsp;&nbsp;</label><input type="text" name="allermed" style="width: 280px; height: 50px; float:left;"></div>';
+                echo '<div class="col-md-3"><input type="checkbox" style="float:left;" name="allergicmed" value="allergicmed"><label>&nbsp; Allergic to : &nbsp;&nbsp;</label><input type="text" name="allermed" style="width: 100px; height: 30px; float:left;"></div>';
               }
               ?>
 
-            <?php
-            error_reporting(0);
-              if($avgblood >= 30){
-                echo '<div class="col-md-6"><input type="checkbox" style="float:left;" name="bloodpressmed" value="bloodpressmed" checked><label>&nbsp;Blood Pressure (if needed): &nbsp;&nbsp;</label> <input type="text" name="blood" style="width: 180px; height: 50px; float:left;"></div>';
-              }else{
-                echo '<div class="col-md-6"><input type="checkbox" style="float:left;" name="bloodpressmed" value="bloodpressmed"><label>&nbsp;Blood Pressure (if needed): &nbsp;&nbsp;</label> <input type="text" name="blood" style="width: 180px; height: 50px; float:left;"></div>';
-              }
-            ?>
             </div>
 
             <div class="row">
+            <?php
+            error_reporting(0);
+              if($avgblood >= 30){
+                echo '<div class="col-md-4"><input type="checkbox" style="float:left;" name="bloodpressmed" value="bloodpressmed" checked><label>&nbsp;Blood Pressure: &nbsp;</label> 
+                <select name="blood1" style="width:60px; height:30px; float:left;">';
+                  for($i=0; $i<=250; $i++){
+                    echo '<option>'.$i.'</option>';
+                  }
+
+                echo '</select>
+
+                <label style="font-size: 25px;">/</label>
+                <select name="blood2" style="width:60px; height:30px; float:left;">';
+                  for($i=0; $i<=250; $i++){
+                    echo '<option>'.$i.'</option>';
+                  }
+                echo '</select>
+                </div>';
+              }else{
+                echo '<div class="col-md-4"><input type="checkbox" style="float:left;" name="bloodpressmed" value="bloodpressmed"><label>&nbsp;Blood Pressure: &nbsp;</label> 
+
+                <select name="blood1" style="width:60px; height:30px; float:left;">';
+                  for($i=0; $i<=250; $i++){
+                    echo '<option>'.$i.'</option>';
+                  }
+
+                echo '</select>
+          
+                <label style="font-size: 25px;">/</label>
+                <select name="blood2" style="width:60px; height:30px; float:left;">';
+                  for($i=0; $i<=250; $i++){
+                    echo '<option>'.$i.'</option>';
+                  }
+                echo '</select>
+                </div>';
+              }
+            ?>
+
             <?php     
             error_reporting(0);       
               if($avgother >= 30){
-                echo '<div class="col-md-6"><input type="checkbox" style="float:left;" name="othermed" value="othermed" checked><label>&nbsp; Other : &nbsp; </label><textarea rows="5" cols="50" style="float:left;" name="medother" ></textarea></div>';
+                echo '<div class="col-md-4"><input type="checkbox" style="float:left;" name="othermed" value="othermed" checked><label>&nbsp; Other : &nbsp; </label><textarea rows="2" cols="20" style="float:left;" name="medother" ></textarea></div>';
               }else{
-                echo '<div class="col-md-6"><input type="checkbox" style="float:left;" name="othermed" value="othermed"><label>&nbsp; Other : &nbsp; </label><textarea rows="5" cols="50" style="float:left;" name="medother" ></textarea></div>';
+                echo '<div class="col-md-4"><input type="checkbox" style="float:left;" name="othermed" value="othermed"><label>&nbsp; Other : &nbsp; </label><textarea rows="2" cols="20" style="float:left;" name="medother" ></textarea></div>';
               }
             ?>
 
             <?php
             error_reporting(0);
               if($avgtaking >= 30){
-                echo '<div class="col-md-6"><input type="checkbox" style="float:left;" name="takingmed" value="takingmed" checked><label>&nbsp; Taking medicine : &nbsp; </label><input type="text" name="medtaking" style="width: 250px; height: 50px; float:left;"></div>';
+                echo '<div class="col-md-4"><input type="checkbox" style="float:left;" name="takingmed" value="takingmed" checked><label>&nbsp; Taking medicine : &nbsp; </label><input type="text" name="medtaking" style="width: 150px; height: 50px; float:left;"></div>';
               }else{
-                echo '<div class="col-md-6"><input type="checkbox" style="float:left;" name="takingmed" value="takingmed"><label>&nbsp; Taking medicine : &nbsp; </label><input type="text" name="medtaking" style="width: 250px; height: 50px; float:left;"></div>';
+                echo '<div class="col-md-4"><input type="checkbox" style="float:left;" name="takingmed" value="takingmed"><label>&nbsp; Taking medicine : &nbsp; </label><input type="text" name="medtaking" style="width: 150px; height: 50px; float:left;"></div>';
               }
             ?>
             </div>
@@ -542,17 +573,17 @@ $endo = new Endodontic;
           </div>
 
           <div class="row">
-            <div class="col-md-12"><label>Remark : &nbsp; </label><textarea name="remarkmed" rows="5" cols="50" style="float:left;"></textarea></div>
+            <div class="col-md-12"><label>Remark : &nbsp; </label><textarea name="remarkmed" rows="4" cols="50" style="float:left;"></textarea></div>
             
           </div>
 
           <h4>Dental History</h4>
           <div class="row">
-            <div class="col-md-12"><label>Chief Complaint : &nbsp;</label><input type="text" name="chiefdent" style="width: 700px; height: 50px; float:left;"></div>
+            <div class="col-md-12"><label>Chief Complaint : &nbsp;</label><input type="text" name="chiefdent" style="width: 450px; height: 50px; float:left;"></div>
           </div>
           
           <div class="row"> 
-            <div class="col-md-12"><label>History of Present Illness : &nbsp; </label></b><textarea name="presentilldent" style="float:left;" rows="5" cols="50"></textarea></div>
+            <div class="col-md-12"><label>History of Present Illness : &nbsp; </label></b><textarea name="presentilldent" style="float:left;" rows="4" cols="50"></textarea></div>
          </div> 
           
 </div>
@@ -574,21 +605,20 @@ $endo = new Endodontic;
          <label>Pain intensity: </label> 
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-10">
          <select name="paininten" style="float:left; padding: .5em;">
            <?php $endo->selpaininten($conn); ?>
          </select>
         </div>
 
-         <div class="col-md-2"></div>
-      </div>
+    </div>
 
-      <div class="row">
+    <div class="row">
       <div class="col-md-2">
         <label>Pain Character: </label>
       </div>
 
-      <div class="col-md-2">
+      <div class="col-md-10">
          <select name="paincharacter" style="float:left; padding: .5em;">
            <?php $endo->selpaincharact($conn); ?>
          </select>
@@ -596,24 +626,31 @@ $endo = new Endodontic;
     </div>
 
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-1">
             <label>Onset: </label>
         </div> 
 
         <div class="col-md-2">
-          <input type="radio" name="onset" style="float:left;" value="0"><label>&nbsp; Spontaneous</label>
+          <input type="checkbox" name="onset_spont" style="float:left;" value="1"><label>&nbsp; Spontaneous</label>
         </div>
 
-        <div class="col-md-8">
-          <input type="radio" name="onset" style="float:left;" value="1"><label> &nbsp; Stimulation Required &nbsp;</label>
-          <input type="text" id="onsetsti" name="onsetstimul" style="width: 300px; height: 50px; float:left;">
+        <div class="col-md-5">
+          <input type="checkbox" name="onset_stimu" style="float:left;" value="1"><label> &nbsp; Stimulation Required &nbsp;</label>
+          <select name="stimulation" style="float:left; padding: .5em;">
+           <?php $endo->selstimulation($conn); ?>
+         </select>
+          <!--<input type="text" id="onsetsti" name="onsetstimul" style="width: 300px; height: 50px; float:left;"> -->
         </div>
-     </div>
 
-      <div class="row">
+        <div class="col-md-4">
+          <label>Other &nbsp;</label><input type="text" name="onset_other" style="float:left;">
+        </div>
+    </div>
+
+    <div class="row">
          <div class="col-md-2"><label>Duration: </label></div> 
 
-         <div class="col-md-2">
+         <div class="col-md-10">
          <select name="duration" style="float:left; padding: .5em;">
            <?php $endo->selduration($conn); ?>
          </select>
@@ -624,7 +661,7 @@ $endo = new Endodontic;
       <div class="row">
          <div class="col-md-2"><label>Location: </label></div> 
 
-         <div class="col-md-2">
+         <div class="col-md-10">
          <select name="location" style="float:left; padding: .5em;">
            <?php $endo->sellocation($conn); ?>
          </select>
@@ -647,50 +684,53 @@ $endo = new Endodontic;
       </div>
 
       <br><br>
-        <h4>&nbsp;&nbsp;O.Objective Symptoms</h4>
+        <h4>O.Objective Symptoms</h4>
       <div class="row">
       <div class="col-md-3">
+         <label>&nbsp; Extraoral: </label>
+      </div>
+
+      <div class="col-md-3">
           <input type="checkbox" name="extrafacial_check" style="float:left;" value="1">
-          <label>&nbsp;&nbsp;Extraoral Facial Swelling: </label>
+          <label>&nbsp;&nbsp;Facial Swelling </label>
       </div>   
 
-      <div class="col-md-9">
+      <!--<div class="col-md-9">
         <select name="extrafacial" style="float:left; padding: .5em;">
-        <?php
-          $endo->selextrafacial($conn);
-        ?>
+        
+          // $endo->selextrafacial($conn);
+        
         </select>
-      </div>
-      </div>
+      </div> 
+      </div>-->
 
-      <div class="row">
         <div class="col-md-3">
             <input type="checkbox" name="extralymph_check" style="float:left;" value="1">
-            <label>&nbsp;&nbsp;Extraoral Lymph Node: </label>
+            <label>&nbsp;&nbsp;Lymph Node </label>
         </div>   
 
-        <div class="col-md-9">
+      <!--  <div class="col-md-9">
           <select name="extralymphnode" style="float:left; padding: .5em;">
-          <?php
-            $endo->selextralymphnode($conn);
-          ?>
+          
+          //  $endo->selextralymphnode($conn);
+          
           </select>
-        </div>
-      </div>
+        </div> 
+      </div>-->
 
-      <div class="row">
+      
         <div class="col-md-3">
             <input type="checkbox" name="extrasinus_check" style="float:left;" value="1">
-            <label>&nbsp;&nbsp;Extra Sinus Tract: </label>
+            <label>&nbsp;&nbsp;Sinus Tract </label>
         </div>   
 
-        <div class="col-md-9">
+      <!--  <div class="col-md-9">
           <select name="extrasinus" style="float:left; padding: .5em;">
-          <?php
-            $endo->selextrasinus($conn);
-          ?>
-          </select>
-        </div>
+          
+           // $endo->selextrasinus($conn);
+          
+          </select> 
+        </div>-->
       </div>
       
       <div class="row">
@@ -698,7 +738,7 @@ $endo = new Endodontic;
               <label>&nbsp; Other: &nbsp;</label> 
           </div>
           <div class="col-md-9">
-              <textarea name="extraother" rows="5" cols="50" style="float:left;"></textarea>
+              <textarea name="extraother" rows="3" cols="50" style="float:left;"></textarea>
           </div>
       </div>
       
@@ -714,11 +754,11 @@ $endo = new Endodontic;
             <option value="1">Firm</option>
           </select>
          
-          <label>&nbsp;&nbsp; area &nbsp; </label><input type="text" name="intraswell_area" style="width: 150px; height: 50px; float:left;">
+          <label>&nbsp;&nbsp; area &nbsp; </label><input type="text" name="intraswell_area" style="width: 100px; height: 40px; float:left;">
           </div>
 
           <div class="col-md-5">
-          <input type="radio" style="float:left;" name="intra_sinus" value="1"><label>&nbsp; Sinus Tract at &nbsp; </label><input type="text" name="intrasinus" style="width: 250px; height: 50px; float:left;">
+          <input type="radio" style="float:left;" name="intra_sinus" value="1"><label>&nbsp; Sinus Tract at &nbsp; </label><input type="text" name="intrasinus" style="width: 100px; height: 40px; float:left;">
           </div>
 
       </div>
@@ -728,9 +768,13 @@ $endo = new Endodontic;
             <label>&nbsp;&nbsp;&nbsp;Tooth: </label>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-2">
           <input type="checkbox" name="cariestooth" style="float:left;" value="1"><label>&nbsp; Caries</label>
           </div>
+
+          <div class="col-md-4">
+              <input type="checkbox" name="restoothtoration" style="float:left;" value="1"><label> &nbsp; Restoration with &nbsp; </label><input type="text" name="toothrestoration" style="width: 100px; height: 20px; float:left; ">
+          </div>   
 
           <div class="col-md-2">
           <input type="checkbox" name="pulptoothex" style="float:left;" value="1"><label>&nbsp; Pulp Exposure</label>
@@ -739,47 +783,179 @@ $endo = new Endodontic;
           <div class="col-md-2">
           <input type="checkbox" name="pulptoothpoly" style="float:left;" value="1"><label>&nbsp; Pulp Polyp</label>
           </div>
+      </div>
+
+      <br>
+      <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-3">
+              <input type="checkbox" name="fracturetoration" style="float:left;" value="1"><label> &nbsp; Fracture at &nbsp; </label>
+              <input type="text" name="toothfractoration" style="width: 100px; height: 20px; float:left;">
+          </div>
+
+          <div class="col-md-4">
+              <input type="checkbox" name="crowntooth" style="float:left;" value="1"><label> &nbsp; Crown Discoloration to &nbsp; </label><input type="text" name="toothcrown" style="width: 100px; height: 20px; float:left;">
+          </div> 
 
           <div class="col-md-3">
           <input type="checkbox" name="opentoothdrai" style="float:left;" value="1"><label> &nbsp; Opened for Drainage</label>
           </div>
-
       </div>
 
       <div class="row">
           <div class="col-md-2"></div>
+        
 
           <div class="col-md-3">
           <input type="checkbox" name="temptooth" style="float:left;" value="1"><label>&nbsp; Temp. Restoration</label>
           </div>
 
           <div class="col-md-7">
-              <input type="checkbox" name="restoothtoration" style="float:left;" value="1"><label> &nbsp; Restoration with &nbsp; </label><input type="text" name="toothrestoration" style="width: 300px; height: 50px; float:left; ">
-          </div>   
-      </div>
-
-      <div class="row">
-          <div class="col-md-2"></div>
-
-          <div class="col-md-5">
-              <input type="checkbox" name="fracturetoration" style="float:left;" value="1"><label> &nbsp; Fracture at &nbsp; </label><input type="text" name="toothfractoration" style="width: 300px; height: 50px; float:left;">
-          </div>            
-
-          <div class="col-md-5">
-              <input type="checkbox" name="crowntooth" style="float:left;" value="1"><label> &nbsp; Crown Discoloration to &nbsp; </label><input type="text" name="toothcrown" style="width: 200px; height: 50px; float:left;">
-          </div> 
-      </div>
-
-      <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-10">
-              <label> &nbsp; Other: &nbsp; </label><textarea type="text" name="toothother" rows="5" cols="50" style="float:left;"></textarea>
+              <label> &nbsp; Other: &nbsp; </label><textarea type="text" name="toothother" rows="3" cols="50" style="float:left;"></textarea>
           </div>                
       </div>
 
       <br><br>
       <h4>Examination</h4>
-      <div class="row" style="height: 80px;">
+        <table class="table table-bordered"> 
+          <tr>
+            <th rowspan="2"> <div align="center">Tooth </div></th>
+            <th rowspan="2"> <div align="center">EPT</div></th>
+            <th rowspan="2"> <div align="center">Cold</div></th>
+            <th rowspan="2"> <div align="center">Heat</div></th>
+            <th rowspan="2"> <div align="center">Perc<sup>n</sup></div></th>
+            <th rowspan="2"> <div align="center">Palp<sup>n</sup></div></th>
+            <th rowspan="2"> <div align="center">Mobility</div></th>
+            <th colspan="6"> <div align="center">Perio Probe (mm)</div></th>
+            <th rowspan="2"> <div align="center">Special Test <p>(if necessary)</p></div></th>
+          </tr>
+
+          <tr>
+            <th><div align="center">MB</div></th>
+            <th><div align="center">B</div></th>
+            <th><div align="center">DB</div></th>
+            <th><div align="center">ML</div></th>
+            <th><div align="center">L</div></th>
+            <th><div align="center">DL</div></th>
+          </tr>
+
+            <tr>
+              <td><input type="text" name="numtooth1" style="width: 50px; height:30px;"></td>
+              <td><input type="text" name="epttooth1" style="width: 50px; height:30px;"></td>
+              <td>
+                <select name="cold1" style="width: 55px;">
+                  <option value="WNL">WNL</option>
+                  <option value="positive">positive</option>
+                  <option value="negative">negative</option>
+                </select>
+              </td>
+
+              <td>
+                <select name="heat1" style="width: 55px;">
+                  <option value="WNL">WNL</option>
+                  <option value="positive">positive</option>
+                  <option value="negative">negative</option>
+                </select>
+              </td>
+
+              <td>
+                <select name="perc1" style="width: 55px;">
+                  <option value="WNL">WNL</option>
+                  <option value="positive">positive</option>
+                  <option value="negative">negative</option>
+                </select>
+              </td>
+
+              <td>
+                <select name="palp1" style="width: 55px;">
+                  <option value="WNL">WNL</option>
+                  <option value="positive">positive</option>
+                  <option value="negative">negative</option>
+                </select>
+              </td>
+
+              <td>
+                <select name="mobility1" style="width: 55px;">
+                   <option value="1">1</option>
+                   <option value="2">2</option>
+                   <option value="3">3</option>
+                </select>
+              </td>
+              <td><input type="text" name="probe_mb1" style="width: 50px; height:30px;"></td>
+              <td><input type="text" name="probe_b1" style="width: 50px; height:30px;"></td>
+              <td><input type="text" name="probe_db1" style="width: 50px; height:30px;"></td>
+              <td><input type="text" name="probe_ml1" style="width: 50px; height:30px;"></td>
+              <td><input type="text" name="probe_l1" style="width: 50px; height:30px;"></td>
+              <td><input type="text" name="probe_dl1" style="width: 50px; height:30px;"></td>
+              <td>
+                <select name="special_test1" style="float:left; width:100px;">
+                  <?php
+                    $endo->selspecialtest($conn);
+                  ?>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <td><input type="text" name="numtooth2" style="width: 50px; height:30px;"></td>
+              <td><input type="text" name="epttooth2" style="width: 50px; height:30px;"></td>
+              <td>
+                <select name="cold2" style="width: 55px;">
+                  <option value="WNL">WNL</option>
+                  <option value="positive">positive</option>
+                  <option value="negative">negative</option>
+                </select>
+              </td>
+
+              <td>
+                <select name="heat2" style="width: 55px;">
+                  <option value="WNL">WNL</option>
+                  <option value="positive">positive</option>
+                  <option value="negative">negative</option>
+                </select>
+              </td>
+
+              <td>
+                <select name="perc2" style="width: 55px;">
+                  <option value="WNL">WNL</option>
+                  <option value="positive">positive</option>
+                  <option value="negative">negative</option>
+                </select>
+              </td>
+
+              <td>
+                <select name="palp2" style="width: 55px;">
+                  <option value="WNL">WNL</option>
+                  <option value="positive">positive</option>
+                  <option value="negative">negative</option>
+                </select>
+              </td>
+
+              <td>
+                <select name="mobility2" style="width: 55px;">
+                   <option value="1">1</option>
+                   <option value="2">2</option>
+                   <option value="3">3</option>
+                </select>
+              </td>
+              <td><input type="text" name="probe_mb2" style="width: 50px; height:30px;"></td>
+              <td><input type="text" name="probe_b2" style="width: 50px; height:30px;"></td>
+              <td><input type="text" name="probe_db2" style="width: 50px; height:30px;"></td>
+              <td><input type="text" name="probe_ml2" style="width: 50px; height:30px;"></td>
+              <td><input type="text" name="probe_l2" style="width: 50px; height:30px;"></td>
+              <td><input type="text" name="probe_dl2" style="width: 50px; height:30px;"></td>
+              <td>
+                <select name="special_test2" style="float:left; width:100px;">
+                  <?php
+                    $endo->selspecialtest($conn);
+                  ?>
+                </select>
+              </td>
+            </tr>
+            
+        </table>
+
+      <!-- <div class="row" style="height: 80px;">
         <div class="col-md-2">
             <label>Tooth : &nbsp;</label>
             <input type="text" name="numtooth" style="width: 80px; height: 50px; float:left;">
@@ -857,12 +1033,12 @@ $endo = new Endodontic;
           <input type="checkbox" name="spectest" value="1" style="float:left;">
           <label>Special Test: &nbsp;</label>
           <select name="special_test" style="float:left; width:100px; height:50px;">
-            <?php
-               $endo->selspecialtest($conn);
-            ?>
+            
+             //  $endo->selspecialtest($conn);
+            
           </select>
         </div>
-      </div>
+      </div> -->
 
       <br><br>
       <h4>&nbsp;&nbsp;Radiographic findings</h4>
@@ -870,9 +1046,17 @@ $endo = new Endodontic;
         <div class="col-md-2">
             <label>&nbsp;&nbsp;&nbsp;Crown: </label>
         </div>
+
         <div class="col-md-2">
               <input type="checkbox" name="normcrown" style="float:left;" value="1" onclick="enable_radiocrown(this.checked)"><label>&nbsp; Normal </label>
         </div>
+
+        <div class="col-md-4">
+              <input type="checkbox" name="cariescrown" style="float:left;" value="1"><label>&nbsp; Caries &nbsp;&nbsp;
+              area &nbsp; </label><input type="text" name="crowarea" style="width: 60px; height: 30px; float:left;"><label>&nbsp; &nbsp;
+              depth &nbsp; </label><input type="text" name="crowdepth" style="width: 60px; height: 30px; float:left;">
+        </div>
+
         <div class="col-md-2">
               <input type="checkbox" name="restcrown" style="float:left;" value="1"><label>&nbsp; Restoration </label>
         </div>
@@ -883,19 +1067,10 @@ $endo = new Endodontic;
       </div>
 
       <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-10">
-              <input type="checkbox" name="cariescrown" style="float:left;" value="1"><label>&nbsp; Caries &nbsp;&nbsp;
-              area &nbsp; </label><input type="text" name="crowarea" style="width: 100px; height: 50px; float:left;"><label>&nbsp; &nbsp;
-              depth &nbsp; </label><input type="text" name="crowdepth" style="width: 100px; height: 50px; float:left;">
-        </div>
-      </div>
-
-      <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-10">
-              <label>&nbsp; Other : &nbsp; </label>
-              <textarea name="crownother" rows="5" cols="50" style="float:left;"></textarea>
+              <label>Other : &nbsp; </label>
+              <textarea name="crownother" rows="3" cols="50" style="float:left;"></textarea>
           </div>
       </div>
 
@@ -907,6 +1082,14 @@ $endo = new Endodontic;
               <input type="checkbox" name="normcham" style="float:left;" value="1" onclick="enable_radiopulpcham(this.checked)"><label>&nbsp; Normal </label>
           </div>
 
+          <div class="col-md-4">
+          <input type="checkbox" name="calcificatecham" style="float:left;" value="1"><label>&nbsp; Calcification &nbsp;</label>
+              <select name="partialorcomp" style="height: 40px; float:left;">
+                  <option value="0">Partial</option>
+                  <option value="1">Complete</option>
+              </select>
+          </div>
+
           <div class="col-md-2">
               <input type="checkbox" name="stonecham" style="float:left;" value="1"><label>&nbsp; Pulp Stone</label> 
           </div>
@@ -914,21 +1097,14 @@ $endo = new Endodontic;
           <div class="col-md-2">
               <input type="checkbox" name="rescham" style="float:left;" value="1"><label>&nbsp; Resorption </label>
           </div>
-
-          <div class="col-md-4">
-          <input type="checkbox" name="calcificatecham" style="float:left;" value="1"><label>&nbsp; Calcification &nbsp;</label>
-              <select name="partialorcomp" style="height: 50px; float:left;">
-                  <option value="0">Partial</option>
-                  <option value="1">Complete</option>
-              </select>
-          </div>
       </div>
 
+      <br>
       <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-10">
-              <label>&nbsp; Other &nbsp;</label> 
-              <textarea name="pulpchamother" rows="5" cols="50" style="float:left;"></textarea>
+              <label>Other &nbsp;</label> 
+              <textarea name="pulpchamother" rows="3" cols="50" style="float:left;"></textarea>
           </div>
       </div>
 
@@ -961,18 +1137,26 @@ $endo = new Endodontic;
       <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-10">
-            <label>&nbsp; Other &nbsp; </label>
-            <textarea rows="5" cols="50" name="root_other" style="float:left;"></textarea>
+            <label>Other &nbsp; </label>
+            <textarea rows="3" cols="50" name="root_other" style="float:left;"></textarea>
         </div>
       </div>
 
       <div class="row">
           <div class="col-md-2"> 
-            <label>Pulp Canal: </label>
+            <label>&nbsp;&nbsp;&nbsp;Pulp Canal: </label>
           </div>
 
           <div class="col-md-2"> 
               <input type="checkbox" style="float:left;" name="normcanel" value="1" onclick="enable_pulpcanal(this.checked)"><label>&nbsp; Normal</label> 
+          </div>
+
+          <div class="col-md-4">
+              <input type="checkbox" style="float:left;" name="calcificatecanel" value="1"><label>&nbsp; Calcification &nbsp;</label>
+              <select name="select_cal" style="height: 40px; float:left;">
+                  <option value="0">Partial</option>
+                  <option value="1">Complete</option>
+              </select>
           </div>
 
           <div class="col-md-2"> 
@@ -982,32 +1166,22 @@ $endo = new Endodontic;
           <div class="col-md-2"> 
               <input type="checkbox" style="float:left;" name="perforcanel" value="1"><label>&nbsp; Perforation</label>
           </div>
+      </div>
 
-          <div class="col-md-4">
+      <br>
+      <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-2">
               <input type="checkbox" style="float:left;" name="prevcanel" value="1"><label>&nbsp; Previous RCT</label>
           </div>
 
-      </div>
-
-      <div class="row">
-          <div class="col-md-2"></div>
           <div class="col-md-4">
               <input type="checkbox" style="float:left;" name="brokecanel" value="1"><label>&nbsp; Broken Instrument</label>
           </div>
-          <div class="col-md-6">
-              <input type="checkbox" style="float:left;" name="calcificatecanel" value="1"><label>&nbsp; Calcification &nbsp;</label>
-              <select name="select_cal" style="height: 50px; float:left;">
-                  <option value="0">Partial</option>
-                  <option value="1">Complete</option>
-              </select>
-          </div>
-      </div>
 
-      <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-10">
-              <label>&nbsp; Other &nbsp; </label>
-              <textarea type="text" rows="5" cols="50" name="pulpcanother" style="float:left;"></textarea>
+          <div class="col-md-4">
+              <label>Other &nbsp; </label>
+              <textarea type="text" rows="3" cols="30" name="pulpcanother" style="float:left;"></textarea>
           </div>
       </div>
 
@@ -1024,43 +1198,50 @@ $endo = new Endodontic;
           <div class="col-md-3">
               <input type="checkbox" style="float:left;" name="lossperirad" value="1"><label>&nbsp; Loss of Lamina Dura </label>
           </div>
-
-          <div class="col-md-3">
-              <input type="checkbox" style="float:left;" name="resorpperirad" value="1"><label>&nbsp; Resorption </label>
-          </div>
       </div>
 
+      <br>
       <div class="row">
           <div class="col-md-2"></div>
-          <div class="col-md-2">
-              <input type="checkbox" style="float:left;" name="apexperirad" value="1"><label>&nbsp; Open Apex </label>
+          <div class="col-md-4">
+              <input type="checkbox" style="float:left;" name="perialessperirad" value="1"><label>&nbsp; Periapical Lesion &nbsp;</label>
+              <input type="text" name="periradperialess1" style="width: 50px; height: 20px; float:left;"><label><label style="font-size: 20px;"> X </label>&nbsp;
+              <input type="text" name="periradperialess2" style="width: 50px; height: 20px; float:left;">
+                <label>&nbsp; mm &nbsp;</label> 
           </div>
-          <div class="col-md-2">
-              <input type="checkbox" style="float:left;" name="osteoperirad" value="1"><label>&nbsp; OsteosIcerosis</label>
+
+          <div class="col-md-4">
+              <input type="checkbox" style="float:left;" name="laterlessperirad" value="1"><label>&nbsp; Lateral Lesion &nbsp;</label>
+              <input type="text" name="laterlessperirad1" style="width: 60px; height:20px; float:left;">&nbsp;<label style="font-size: 20px;"> X </label>&nbsp;
+              <input type="text" name="laterlessperirad2" style="width: 60px; height:20px; float:left;"><label>
+              &nbsp; mm &nbsp;</label> 
           </div>
-          <div class="col-md-6">
-              <input type="checkbox" style="float:left;" name="hyperperirad" value="1"><label>&nbsp; Hyperplasia of cementurn </label>
+
+          <div class="col-md-2">
+              <input type="checkbox" style="float:left;" name="resorpperirad" value="1"><label>&nbsp; Resorption </label>
           </div>
       </div>          
 
       <div class="row">
         <div class="col-md-2"></div>
-          <div class="col-md-5">
-              <input type="checkbox" style="float:left;" name="perialessperirad" value="1"><label>&nbsp; Periapical Lesion &nbsp;</label>
-              <input type="text" name="periradperialess" style="width: 200px; height: 50px; float:left;"> 
+          <div class="col-md-4">
+              <input type="checkbox" style="float:left;" name="apexperirad" value="1"><label>&nbsp; Open Apex width &nbsp;</label>
+              <input type="text" name="apexperirad_width" style="width: 100px; height:20px; float:left;"><label>&nbsp; mm &nbsp;</label> 
           </div>
 
-          <div class="col-md-5">
-              <input type="checkbox" style="float:left;" name="laterlessperirad" value="1"><label>&nbsp; Lateral Lesion &nbsp;</label>
-              <input type="text" name="periradlaterless" style="width: 200px; height:50px; float:left;"> 
+          <div class="col-md-2">
+              <input type="checkbox" style="float:left;" name="osteoperirad" value="1"><label>&nbsp; OsteosIcerosis</label>
+          </div>
+          <div class="col-md-4">
+              <input type="checkbox" style="float:left;" name="hyperperirad" value="1"><label>&nbsp; Hyperplasia of cementurn </label>
           </div>
       </div>
 
       <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-10">
-              <label>&nbsp; Other &nbsp; </label>
-              <textarea rows="5" cols="50" name="perother" style="float:left;"></textarea>
+              <label>Other &nbsp; </label>
+              <textarea rows="3" cols="50" name="perother" style="float:left;"></textarea>
           </div>
       </div>
 
@@ -1082,15 +1263,15 @@ $endo = new Endodontic;
       <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-5">
-              <label>&nbsp; Other &nbsp; </label>
-              <textarea rows="5" cols="50" style="float:left;" name="alveolarother"></textarea>
-        </div>
-
-        <div class="col-md-5">
-              <label>Remarks: </label>
-              <textarea rows="5" cols="50" style="float:left;" name="otherremark"></textarea>
+              <label>Other &nbsp; </label>
+              <textarea rows="3" cols="40" style="float:left;" name="alveolarother"></textarea>
         </div>
       </div>
+
+      <br><br>
+      <h4>&nbsp;&nbsp;Remarks &nbsp;</h4>
+        <textarea rows="3" cols="40" style="float:left; margin-left:2em;" name="otherremark"></textarea>
+
 </div>
 </div>
 </div>
@@ -1104,81 +1285,114 @@ $endo = new Endodontic;
 <div class="panel panel-info">
 <div class="panel-heading"><h3>Diagnosis</h3></div>
   <div class="panel-body">
+  <div class="row">
+    <div class="col-md-6">
       <h4>Pulpal Diagnosis</h4>
-      <div class="row" style="height:30px;">
-          <div class="col-md-3">
-              <input type="checkbox" style="float:left;" name="puldiagnorm" value="1" onclick="enable_pulpaldiag(this.checked)"><label>&nbsp; Normal </label>
-          </div>
-
-          <div class="col-md-3">
-              <input type="radio" style="float:left;" name="reverOrirrever" value="0"><label>&nbsp; Reversible Pulpitis </label>
-          </div>
-
-          <div class="col-md-6">
-              <input type="radio" style="float:left;" name="reverOrirrever" value="1"><label>&nbsp; Irreversible Pulpitis </label>
+      <div class="row" style="height:20px;">
+          <div class="col-md-11">
+              <input type="checkbox" style="float:left; margin-left: 2em;" name="puldiagnorm" value="1" onclick="enable_pulpaldiag(this.checked)"><label>&nbsp; Normal </label>
           </div>
       </div>
 
+      <br>
       <div class="row" style="height:20px;">
-          <div class="col-md-7"></div>
-          <div class="col-md-5">
-              <input type="radio" style="float:left;" name="sympOrasymp" value="1" ><label>&nbsp; Symptomatic </label><br>
-          </div>
-
-      </div> 
-
-      <div class="row">
-          <div class="col-md-7"></div>
-          <div class="col-md-5">
-              <input type="radio" style="float:left;" name="sympOrasymp" value="0"> <label>&nbsp; Asymtomatic </label>
-          </div>
-      </div> 
-
-      <div class="row">
-          <div class="col-md-3"> 
-              <input type="checkbox" style="float:left;" name="pulpnecrosis" value="1"><label>&nbsp; Pulp Necrosis </label>
-          </div>
-          <div class="col-md-3">
-              <input type="checkbox" style="float:left;" name="previnitiat" value="1"><label>&nbsp; Previously Initiated Therapy </label>
-          </div>
           <div class="col-md-6">
-              <input type="checkbox" style="float:left;" name="prevtreat" value="1"><label>&nbsp; Previously treated &nbsp;&nbsp;</label>
-              <select style="height:50px; width: 110px; float:left;" name="prevselect">
+              <input type="radio" style="float:left; margin-left: 2em;" name="reverOrirrever" value="0"><label>&nbsp; Reversible Pulpitis </label>
+          </div>
+      </div>
+
+      <br>
+      <div class="row" style="height:20px;">
+          <div class="col-md-6">
+              <input type="radio" style="float:left; margin-left: 2em;" name="reverOrirrever" value="1"><label>&nbsp; Irreversible Pulpitis </label>
+          </div>
+      </div>
+
+      <br>
+      <div class="row" style="height:20px;">
+          <div class="col-md-5">
+              <input type="radio" style="float:left; margin-left: 4em;" name="sympOrasymp" value="1" ><label>&nbsp; Symptomatic </label><br>
+          </div>
+      </div> 
+
+      <br>
+      <div class="row" style="height:20px;">
+          <div class="col-md-5">
+              <input type="radio" style="float:left; margin-left: 4em;" name="sympOrasymp" value="0"> <label>&nbsp; Asymtomatic </label>
+          </div>
+      </div> 
+
+      <br>
+      <div class="row" style="height:20px;">
+          <div class="col-md-6"> 
+              <input type="checkbox" style="float:left; margin-left: 2em;" name="pulpnecrosis" value="1"><label>&nbsp; Pulp Necrosis </label>
+          </div>
+      </div>
+
+      <br>
+      <div class="row" style="height:20px;">
+          <div class="col-md-7">
+              <input type="checkbox" style="float:left; margin-left: 2em;" name="previnitiat" value="1"><label>&nbsp; Previously Initiated Therapy </label>
+          </div>
+      </div>
+
+      <br>
+      <div class="row" style="height:20px;">
+          <div class="col-md-10">
+              <input type="checkbox" style="float:left; margin-left: 2em;" name="prevtreat" value="1"><label>&nbsp; Previously treated &nbsp;&nbsp;</label>
+              <select style="height:40px; width: 120px; float:left;" name="prevselect">
                   <option value="0">Improper</option>
                   <option value="1">Incomplete RCT</option>
               </select>
           </div>
       </div>
-     
-      
+     </div>
+
+
+     <div class="col-md-6">
       <h4>Periradicular Diagnosis</h4>
-      <div class="row">
+      <div class="row" style="height:20px;">
         <div class="col-md-3">
-              <input type="checkbox" style="float:left;" name="periraddiagnorm" value="1" onclick="enable_periraddiag(this.checked)"><label>&nbsp; Normal </label>
-        </div>
-
-        <div class="col-md-4">
-              <input type="radio" style="float:left;" name="per_sympOrasymp" value="0"><label>&nbsp; Symptomatic Apical Periodontitis </label>
-        </div>
-
-        <div class="col-md-5">
-              <input type="radio" style="float:left;" name="per_sympOrasymp" value="1"><label>&nbsp; Asymptomatic Apical Periodontitis</label>    
+              <input type="checkbox" style="float:left; margin-left: 2em;" name="periraddiagnorm" value="1" onclick="enable_periraddiag(this.checked)"><label>&nbsp; Normal </label>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-3">
-              <input type="radio" style="float:left;" name="acuteOrchronic" value="0"><label>&nbsp; Acute Apical Abscess </label>
-        </div>
-
-        <div class="col-md-4">
-              <input type="radio" style="float:left;" name="acuteOrchronic" value="1"><label>&nbsp; Chronic Apical Abscess</label>
-        </div>
-
-        <div class="col-md-5">
-                  <label>&nbsp; Other : &nbsp;</label> <textarea name="perdiagother" rows="5" cols="40" style="float:left;"></textarea>
+      <br>
+      <div class="row" style="height:20px;">
+        <div class="col-md-10">
+              <input type="radio" style="float:left; margin-left: 2em;" name="per_sympOrasymp" value="0"><label>&nbsp; Symptomatic Apical Periodontitis </label>
         </div>
       </div>
+
+      <br>
+      <div class="row" style="height:20px;">
+        <div class="col-md-10">
+              <input type="radio" style="float:left; margin-left: 2em;" name="per_sympOrasymp" value="1"><label>&nbsp; Asymptomatic Apical Periodontitis</label>    
+        </div>
+      </div>
+
+      <br>
+      <div class="row" style="height:20px;">
+        <div class="col-md-6">
+              <input type="radio" style="float:left; margin-left: 2em;" name="acuteOrchronic" value="0"><label>&nbsp; Acute Apical Abscess </label>
+        </div>
+      </div>
+
+      <br>
+      <div class="row" style="height:20px;">
+        <div class="col-md-6">
+              <input type="radio" style="float:left; margin-left: 2em;" name="acuteOrchronic" value="1"><label>&nbsp; Chronic Apical Abscess</label>
+        </div>
+      </div>
+
+      <br>
+      <div class="row" style="height:20px;">
+        <div class="col-md-12">
+                <label style="margin-left: 2em;">&nbsp; Other : &nbsp;</label> <textarea name="perdiagother" rows="3" cols="40" style="float:left;"></textarea>
+        </div>
+      </div>
+    </div>
+    </div>
 </div> 
 </div>
 </div>
@@ -1238,16 +1452,18 @@ $endo = new Endodontic;
 
   <div class="row">
     <div class="col-md-12">
-            <label>&nbsp; Other : &nbsp;</label> <textarea name="periradother" rows="5" cols="50" style="float:left;"></textarea>
+            <label>&nbsp; Other : &nbsp;</label> <textarea name="periradother" rows="3" cols="50" style="float:left;"></textarea>
     </div>
-  </div>
+  </div><br><br><br><br><br><br>
+
 
   <div class="row">
     <div class="col-md-12">
            <label>Plan for final restoration: </label>
            <textarea name="planrestor" rows="5" cols="50" style="float:left;"></textarea>
     </div>
-  </div>
+  </div><br><br><br><br><br><br><br>
+
 
   <div class="row">
     <div class="col-md-2">
@@ -1255,16 +1471,16 @@ $endo = new Endodontic;
     </div>
 
     <div class="col-md-2">
-        <input type="radio" style="float:left;" name="preop" value="cariesremove"><label>&nbsp; Caries Removal</label>  
+        <input type="checkbox" style="float:left;" name="preop_carie" value="1"><label>&nbsp; Caries Removal</label>  
     </div>
 
     <div class="col-md-2">
-        <input type="radio" style="float:left;" name="preop" value="dam"><label>&nbsp; Dam </label>
+        <input type="checkbox" style="float:left;" name="preop_dam" value="1"><label>&nbsp; Dam </label>
     </div>
 
     <div class="col-md-6">
         <label>&nbsp; Other :  &nbsp;</label>
-        <textarea name="preopother" rows="5" cols="50" style="float:left; "></textarea>
+        <textarea name="preopother" rows="3" cols="50" style="float:left; "></textarea>
     </div>
   </div>
 
@@ -1280,12 +1496,12 @@ $endo = new Endodontic;
     <div class="col-md-8">
          <input type="radio" style="float:left;" name="anesthesis" value="anesnotrequired"><label>&nbsp; Not required </label>
     </div>  
-  </div>
+  </div><br><br><br>
 
   <div class="row">
     <div class="col-md-5">
         <label>X-ray file:&nbsp;</label>
-        <input type="file" name="xrayfile" style="float:left;">
+        <input type="file" name="xrayfile" style="float:left; width:200px;">
     </div>
 
     <div class="col-md-4">
@@ -1293,7 +1509,7 @@ $endo = new Endodontic;
         <input type="date" name="xraydate" style="float:left;">
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
         <label>X-ray time:&nbsp;</label>
         <input type="time" name="xraytime" style="float:left;">
     </div>

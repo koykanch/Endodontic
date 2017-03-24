@@ -96,7 +96,7 @@
 	<ul class="rounded-list">
 		 <li><a href="patient_info.php" class="list-group-item-warning" target="part">ข้อมูลผู้ป่วย<br />Manage data of Patients</a></li>
 		 <li><a href="dentist_info.php" class="list-group-item-warning" target="part">ข้อมูลทันตแพทย์<br />Manage data of Dentist</a></li>
-		 <li><a href="Student_info.php" class="list-group-item-warning" target="part">ข้อมูลนักศึกษาทันตแพทย์<br />Manage data of Dentist</a></li>
+		 <li><a href="Student_info.php" class="list-group-item-warning" target="part">ข้อมูลนักศึกษาทันตแพทย์<br />Manage data of Dental student</a></li>
 <?php 
     if(isset($_SESSION['username'])){
         ?>

@@ -27,6 +27,12 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+        <!-- filter when type-->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
+
+        <!-- pagination แบ่งหน้าแสดงข้อมูล -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/list.pagination.js/0.1.1/list.pagination.min.js"></script>
+
         <!-- Favicon and touch icons -->
         <link rel="shortcut icon" href="assets/ico/icon.png">
         <style type="text/css">
@@ -94,9 +100,6 @@
     </head>
 <?php
     require("connect.php");
-    require("class_dent.php");
-
-    $dentinfo = new Dentist;
 ?>
  <body><!-- change background image at assets/js/scripts.js --> 
     <!-- Loader -->
@@ -119,8 +122,10 @@ if(isset($_SESSION['username'])){
         <div class="first-container">
         <div class="panel panel-info">
         <div class="panel-heading"><h3>ข้อมูลทันตแพทย์ (Dentist Information)</h3></div>
-        <div class="panel-body">
+        <div class="panel-body" id="dent-list">
+            <input class="search" placeholder="Search" /><br><br>
             <table class="table table-bordered" border="1">
+                <tbody class="list">
                 <tr bgcolor="#D1C4E9">
                     <td>รหัสทันตแพทย์</td>
                     <td>ชื่อทันตแพทย์</td>
@@ -132,9 +137,37 @@ if(isset($_SESSION['username'])){
                 ?>
                 </tr>
                 <?php
-                    $dentinfo->Dentistinfo($conn)
-                 ?>
-            
+                    $sql = "SELECT * FROM dentist_info";
+                    $resSql = $conn->query($sql);
+
+                    while ($row = mysqli_fetch_array($resSql)) {
+                        $dentistId = $row['dentId'];
+
+                        echo '<tr>
+                            <td class="Id">'.$row['dentId'].'</td>
+                            <td class="name">'.$row['dent_name'].'</td>';
+                            
+                            if($row['status'] == '0'){
+                                echo '<td class="stat">พนักงาน</td>';
+                            }else{
+                                echo '<td class="stat">ทันตแพทย์</td>';
+                            }
+                        
+                        if(isset($_SESSION['username'])){
+                        echo '<td>
+                                <form action="updateDentist.php" method="post" name="updatebtn">
+                                        <input type="hidden" name="dentId" value="'.$row['dentId'].'">
+                                        <input type="submit" class="btn btn-primary" name="'.$row['dentId'].'" value="Edit" style="width: 100px;">
+                                </form><br>'; ?>
+                                <form action="deleteDentist.php" method="post" name="deletebtn" onSubmit="return confirm('are you sure?')">
+                                        <input type="hidden" name="dentId" value="<?php echo $row['dentId']; ?>">
+                                        <input type="submit" class="btn btn-danger"  value="Delete" style="width: 100px;"name="<?php echo $row['dentId']; ?>">
+                                </form>
+                             </td> <?php } ?>
+                        </tr><?php } ?>   
+                        </tbody>
+                     </table>         
+                <ul class="pagination"></ul>   
         </div>    
         </div>    
         </div>
@@ -234,4 +267,24 @@ if(isset($_SESSION['username'])){
             modal.style.display = "none";
         }
     }
+</script>
+
+<!-- script for filter name when type -->
+<script type="text/javascript">
+    var options = {
+        valueNames: [ 'Id', 'name', 'stat' ]
+        };
+    var dentist = new List('dent-list', options);
+</script>
+
+<!-- script for pagination แบ่งหน้าแสดงข้อมูล -->
+<script type="text/javascript">
+    var options = {
+        valueNames: [ 'Id', 'name', 'stat' ],
+        page: 5,
+        plugins: [
+          ListPagination({})
+          ]
+        };
+    var dentist = new List('dent-list', options);
 </script>

@@ -30,7 +30,7 @@ class Check{
 
 		      if('#'.$color == '#000000') 
 		      {
-		      	 echo "0";
+		      	// echo "0";
 		      	 
 		      	 if($i>=278 && $i<=294){
 		      	 	if($j>=928 && $j<=943){
@@ -40,7 +40,7 @@ class Check{
 		      } 
 		      else
 		      {
-		      	  echo "1";
+		      	//  echo "1";
 		      	 if($i>=278 && $i<=294){
 		      	 	if($j>=928 && $j<=943){
 		      	 		$count1 = $count1 + 1;
@@ -50,10 +50,10 @@ class Check{
 		      
 		    }
 		   
-		  echo "<br>";
+		//  echo "<br>";
 		  }
-		  echo "Number of black color (0) = ". $count0."<br>";
-		  echo "Number of white color (1) = ". $count1."<br>";
+		//  echo "Number of black color (0) = ". $count0."<br>";
+		//  echo "Number of white color (1) = ". $count1."<br>";
 		  $_SESSION['count0'] = $count0;
 		  $average = ($count0/$count1) * 100;
 		  $_SESSION['avgnone'] = $average;
@@ -89,7 +89,7 @@ class Check{
 
 		      if('#'.$color == '#000000') 
 		      {
-		      	 echo "0";
+		      	// echo "0";
 		      	 
 		      	 if($i>=424 && $i<=440){
 		      	 	if($j>=928 && $j<=943){
@@ -99,7 +99,7 @@ class Check{
 		      } 
 		      else
 		      {
-		      	  echo "1";
+		      	//  echo "1";
 		      	 if($i>=424 && $i<=440){
 		      	 	if($j>=928 && $j<=943){
 		      	 		$count1 = $count1 + 1;
@@ -109,10 +109,10 @@ class Check{
 		      
 		    }
 		   
-		  echo "<br>";
+		 // echo "<br>";
 		  }
-		  echo "Number of black color (0) = ". $count0."<br>";
-		  echo "Number of white color (1) = ". $count1."<br>";
+		 // echo "Number of black color (0) = ". $count0."<br>";
+		 // echo "Number of white color (1) = ". $count1."<br>";
 		  $_SESSION['count0'] = $count0;
 		  $average = ($count0/$count1) * 100;
 		  $_SESSION['avgcardio'] = $average;
@@ -148,7 +148,7 @@ class Check{
 
 		      if('#'.$color == '#000000') 
 		      {
-		      	 echo "0";
+		      //	 echo "0";
 		      	 
 		      	 if($i>=803 && $i<=817){
 		      	 	if($j>=928 && $j<=943){
@@ -158,7 +158,7 @@ class Check{
 		      } 
 		      else
 		      {
-		      	  echo "1";
+		      //	  echo "1";
 		      	 if($i>=803 && $i<=817){
 		      	 	if($j>=928 && $j<=943){
 		      	 		$count1 = $count1 + 1;
@@ -168,10 +168,10 @@ class Check{
 		      
 		    }
 		   
-		  echo "<br>";
+		//  echo "<br>";
 		  }
-		  echo "Number of black color (0) = ". $count0."<br>";
-		  echo "Number of white color (1) = ". $count1."<br>";
+		//  echo "Number of black color (0) = ". $count0."<br>";
+		//  echo "Number of white color (1) = ". $count1."<br>";
 		  $_SESSION['count0'] = $count0;
 		  $average = ($count0/$count1) * 100;
 		  $_SESSION['avgpul'] = $average;
@@ -207,7 +207,7 @@ class Check{
 
 		      if('#'.$color == '#000000') 
 		      {
-		      	 echo "0";
+		      //	 echo "0";
 		      	 
 		      	 if($i>=1131 && $i<=1146){
 		      	 	if($j>=928 && $j<=942){
@@ -217,7 +217,7 @@ class Check{
 		      } 
 		      else
 		      {
-		      	  echo "1";
+		      //	  echo "1";
 		      	 if($i>=1131 && $i<=1146){
 		      	 	if($j>=928 && $j<=942){
 		      	 		$count1 = $count1 + 1;
@@ -227,10 +227,10 @@ class Check{
 		      
 		    }
 		   
-		  echo "<br>";
+		 // echo "<br>";
 		  }
-		  echo "Number of black color (0) = ". $count0."<br>";
-		  echo "Number of white color (1) = ". $count1."<br>";
+		 // echo "Number of black color (0) = ". $count0."<br>";
+		 // echo "Number of white color (1) = ". $count1."<br>";
 		  $_SESSION['count0'] = $count0;
 		  $average = ($count0/$count1) * 100;
 		  $_SESSION['avggastro'] = $average;
@@ -266,7 +266,7 @@ class Check{
 
 		      if('#'.$color == '#000000') 
 		      {
-		      	 echo "0";
+		      	// echo "0";
 		      	 
 		      	 if($i>=1508 && $i<=1524){
 		      	 	if($j>=928 && $j<=942){
@@ -276,7 +276,7 @@ class Check{
 		      } 
 		      else
 		      {
-		      	  echo "1";
+		      	//  echo "1";
 		      	 if($i>=1508 && $i<=1524){
 		      	 	if($j>=928 && $j<=942){
 		      	 		$count1 = $count1 + 1;
@@ -286,10 +286,10 @@ class Check{
 		      
 		    }
 		   
-		  echo "<br>";
+		 // echo "<br>";
 		  }
-		  echo "Number of black color (0) = ". $count0."<br>";
-		  echo "Number of white color (1) = ". $count1."<br>";
+		 // echo "Number of black color (0) = ". $count0."<br>";
+		 // echo "Number of white color (1) = ". $count1."<br>";
 		  $_SESSION['count0'] = $count0;
 		  $average = ($count0/$count1) * 100;
 		  $_SESSION['avghema'] = $average;
@@ -325,7 +325,7 @@ class Check{
 
 		      if('#'.$color == '#000000') 
 		      {
-		      	 echo "0";
+		      	// echo "0";
 		      	 
 		      	 if($i>=278 && $i<=293){
 		      	 	if($j>=961 && $j<=977){
@@ -335,7 +335,7 @@ class Check{
 		      } 
 		      else
 		      {
-		      	  echo "1";
+		      	//  echo "1";
 		      	 if($i>=278 && $i<=293){
 		      	 	if($j>=961 && $j<=977){
 		      	 		$count1 = $count1 + 1;
@@ -345,10 +345,10 @@ class Check{
 		      
 		    }
 		   
-		  echo "<br>";
+		 // echo "<br>";
 		  }
-		  echo "Number of black color (0) = ". $count0."<br>";
-		  echo "Number of white color (1) = ". $count1."<br>";
+		 // echo "Number of black color (0) = ". $count0."<br>";
+		 // echo "Number of white color (1) = ". $count1."<br>";
 		  $_SESSION['count0'] = $count0;
 		  $average = ($count0/$count1) * 100;
 		  $_SESSION['avgneuro'] = $average;
@@ -384,7 +384,7 @@ class Check{
 
 		      if('#'.$color == '#000000') 
 		      {
-		      	 echo "0";
+		      	// echo "0";
 		      	 
 		      	 if($i>=578 && $i<=594){
 		      	 	if($j>=961 && $j<=977){
@@ -394,7 +394,7 @@ class Check{
 		      } 
 		      else
 		      {
-		      	  echo "1";
+		      	//  echo "1";
 		      	 if($i>=578 && $i<=594){
 		      	 	if($j>=961 && $j<=977){
 		      	 		$count1 = $count1 + 1;
@@ -404,10 +404,10 @@ class Check{
 		      
 		    }
 		   
-		  echo "<br>";
+		//  echo "<br>";
 		  }
-		  echo "Number of black color (0) = ". $count0."<br>";
-		  echo "Number of white color (1) = ". $count1."<br>";
+		//  echo "Number of black color (0) = ". $count0."<br>";
+		//  echo "Number of white color (1) = ". $count1."<br>";
 		  $_SESSION['count0'] = $count0;
 		  $average = ($count0/$count1) * 100;
 		  $_SESSION['avgallergic'] = $average;
@@ -443,7 +443,7 @@ class Check{
 
 		      if('#'.$color == '#000000') 
 		      {
-		      	 echo "0";
+		      	// echo "0";
 		      	 
 		      	 if($i>=985 && $i<=1000){
 		      	 	if($j>=961 && $j<=977){
@@ -453,7 +453,7 @@ class Check{
 		      } 
 		      else
 		      {
-		      	  echo "1";
+		      	//  echo "1";
 		      	 if($i>=985 && $i<=1000){
 		      	 	if($j>=961 && $j<=977){
 		      	 		$count1 = $count1 + 1;
@@ -463,10 +463,10 @@ class Check{
 		      
 		    }
 		   
-		  echo "<br>";
+		//  echo "<br>";
 		  }
-		  echo "Number of black color (0) = ". $count0."<br>";
-		  echo "Number of white color (1) = ". $count1."<br>";
+		//  echo "Number of black color (0) = ". $count0."<br>";
+		//  echo "Number of white color (1) = ". $count1."<br>";
 		  $_SESSION['count0'] = $count0;
 		  $average = ($count0/$count1) * 100;
 		  $_SESSION['avgblood'] = $average;
@@ -502,7 +502,7 @@ class Check{
 
 		      if('#'.$color == '#000000') 
 		      {
-		      	 echo "0";
+		      	// echo "0";
 		      	 
 		      	 if($i>=1473 && $i<=1489){
 		      	 	if($j>=961 && $j<=976){
@@ -512,7 +512,7 @@ class Check{
 		      } 
 		      else
 		      {
-		      	  echo "1";
+		      	//  echo "1";
 		      	 if($i>=1473 && $i<=1489){
 		      	 	if($j>=961 && $j<=976){
 		      	 		$count1 = $count1 + 1;
@@ -522,10 +522,10 @@ class Check{
 		      
 		    }
 		   
-		  echo "<br>";
+		//  echo "<br>";
 		  }
-		  echo "Number of black color (0) = ". $count0."<br>";
-		  echo "Number of white color (1) = ". $count1."<br>";
+		//  echo "Number of black color (0) = ". $count0."<br>";
+		//  echo "Number of white color (1) = ". $count1."<br>";
 		  $_SESSION['count0'] = $count0;
 		  $average = ($count0/$count1) * 100;
 		  $_SESSION['avgother'] = $average;
@@ -561,7 +561,7 @@ class Check{
 
 		      if('#'.$color == '#000000') 
 		      {
-		      	 echo "0";
+		      	// echo "0";
 		      	 
 		      	 if($i>=278 && $i<=294){
 		      	 	if($j>=961 && $j<=977){
@@ -571,7 +571,7 @@ class Check{
 		      } 
 		      else
 		      {
-		      	  echo "1";
+		      	//  echo "1";
 		      	 if($i>=278 && $i<=294){
 		      	 	if($j>=961 && $j<=977){
 		      	 		$count1 = $count1 + 1;
@@ -581,10 +581,10 @@ class Check{
 		      
 		    }
 		   
-		  echo "<br>";
+		//  echo "<br>";
 		  }
-		  echo "Number of black color (0) = ". $count0."<br>";
-		  echo "Number of white color (1) = ". $count1."<br>";
+		//  echo "Number of black color (0) = ". $count0."<br>";
+		//  echo "Number of white color (1) = ". $count1."<br>";
 		  $_SESSION['count0'] = $count0;
 		  $average = ($count0/$count1) * 100;
 		  $_SESSION['avgtaking'] = $average;

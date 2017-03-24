@@ -26,6 +26,20 @@ class Endodontic{
 		}
 	}
 
+	public function selstimulation($conn)
+	{
+		$sql = "SELECT * FROM stimulation_required";
+		$result = $conn->query($sql);
+		?>
+			<option value="">select stimulation required</option>
+		<?php
+		while($row = mysqli_fetch_array($result)){
+			?>
+			<option value="<?php echo $row['stimulation_id'] ?>"><?php echo $row['stimulation_detail'] ?></option>
+			<?php
+		}
+	}
+
 	public function selduration($conn){
 		$sql = "SELECT * FROM duration";
 		$result = $conn->query($sql);

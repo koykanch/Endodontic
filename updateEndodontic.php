@@ -242,7 +242,7 @@ function insertendorec() {
                 <div class="row">
                     <div class="col-md-12">
                       <label>Date: &nbsp;&nbsp;</label>
-                      <input type="date" name="datedemo" style="width:200px; float:left;" value="<?php echo $harddate; ?>" disabled>
+                      <input type="date" name="datedemo" style="width:200px; float:left;" value="<?php echo substr($harddate, 0,10); ?>" disabled>
                     </div>
                 </div>
 
@@ -270,7 +270,7 @@ function insertendorec() {
             $objresultMed = mysqli_fetch_array($resultMed);
        ?>
     <div class="row">
-        <div class="col-md-4"><input type="checkbox" style="float:left;" name="nonemed" value="1"
+        <div class="col-md-2"><input type="checkbox" style="float:left;" name="nonemed" value="1"
           <?php
              if($objresultMed['none'] == "1"){
               ?>
@@ -284,7 +284,7 @@ function insertendorec() {
         <label>&nbsp;None</label>
         </div>
           
-        <div class="col-md-4"><input type="checkbox" style="float:left;" name="cardiodismed" value="1"
+        <div class="col-md-3"><input type="checkbox" style="float:left;" name="cardiodismed" value="1"
           <?php
              if($objresultMed['cardiovascular'] == "1"){
               ?>
@@ -298,7 +298,7 @@ function insertendorec() {
         <label>&nbsp;Cardiovascular Diseases</label>
         </div>
         
-        <div class="col-md-4"><input type="checkbox" style="float:left;" name="pulmonarydismed" value="1"
+        <div class="col-md-3"><input type="checkbox" style="float:left;" name="pulmonarydismed" value="1"
           <?php
              if($objresultMed['pulmonary'] == "1"){
               ?>
@@ -311,10 +311,8 @@ function insertendorec() {
           ?>
         <label>&nbsp;Pulmonary Diseases</label>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-4"><input type="checkbox" style="float:left;" name="gastrodismed" value="1" 
+        <div class="col-md-3"><input type="checkbox" style="float:left;" name="gastrodismed" value="1" 
           <?php
              if($objresultMed['gastrointestinal'] == "1"){
               ?>
@@ -327,8 +325,10 @@ function insertendorec() {
           ?>
        <label>&nbsp;Gastrointestinal Diseases</label>
        </div>
+      </div>
 
-        <div class="col-md-4"><input type="checkbox" style="float:left;" name="hemadismed" value="1" 
+      <div class="row">
+        <div class="col-md-3"><input type="checkbox" style="float:left;" name="hemadismed" value="1" 
           <?php
              if($objresultMed['hematologis'] == "1"){
               ?>
@@ -342,7 +342,7 @@ function insertendorec() {
        <label>&nbsp;Hematologic Diseases</label>
        </div>
 
-        <div class="col-md-4"><input type="checkbox" style="float:left;" name="neurodismed" value="1" 
+        <div class="col-md-3"><input type="checkbox" style="float:left;" name="neurodismed" value="1" 
           <?php
              if($objresultMed['Neurologic'] == "1"){
               ?>
@@ -355,10 +355,8 @@ function insertendorec() {
           ?>
             <label>&nbsp;Neurologic Diseases</label>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-3">
             <input type="checkbox" style="float:left;" name="allergicmed" value="1"
           <?php
              if($objresultMed['allergic'] != ""){
@@ -371,10 +369,12 @@ function insertendorec() {
              
           ?>
             <label>&nbsp; Allergic to : &nbsp;&nbsp; </label> 
-            <input type="text" name="allermed" style="width: 280px; height: 50px; float:left;" value="<?php echo $objresultMed['allergic']; ?>">
+            <input type="text" name="allermed" style="width: 100px; height: 30px; float:left;" value="<?php echo $objresultMed['allergic']; ?>">
+        </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="row">
+        <div class="col-md-4">
             <input type="checkbox" style="float:left;" name="bloodpressmed" value="1" 
             <?php
                if($objresultMed['blood_pres'] != ""){
@@ -386,27 +386,25 @@ function insertendorec() {
                }
             ?>
            <label>&nbsp;Blood Pressure (if needed): &nbsp;&nbsp;</label> 
-           <input type="text" name="blood" style="width: 180px; height: 50px; float:left;" value="<?php echo  $objresultMed['blood_pres']; ?>">
+           <input type="text" name="blood1" style="width: 60px; height: 30px; float:left;" value="<?php echo  $objresultMed['blood_pres1']; ?>">
         </div>
-    </div>
 
-    <div class="row">
-     <div class="col-md-6">
-       <input type="checkbox" style="float:left;" name="othermed" value="1"
-          <?php
-           if($objresultMed['Other'] != ""){
-            ?>
-              checked="true" >
-            <?php   
-           }else{
-              echo ">";
-           }
-        ?>
-        <label>&nbsp; Other : &nbsp; </label>
-        <textarea rows="5" cols="50" style="float:left;" name="medother" ><?php echo $objresultMed['Other']; ?></textarea>
-     </div>
+       <div class="col-md-4">
+         <input type="checkbox" style="float:left;" name="othermed" value="1"
+            <?php
+             if($objresultMed['Other'] != ""){
+              ?>
+                checked="true" >
+              <?php   
+             }else{
+                echo ">";
+             }
+          ?>
+          <label>&nbsp; Other : &nbsp; </label>
+          <textarea rows="2" cols="20" style="float:left;" name="medother" ><?php echo $objresultMed['Other']; ?></textarea>
+       </div>
 
-     <div class="col-md-6"><input type="checkbox" style="float:left;" name="takingmed" value="1" 
+     <div class="col-md-4"><input type="checkbox" style="float:left;" name="takingmed" value="1" 
         <?php
         if($objresultMed['taking_med'] != ""){
           ?>
@@ -417,13 +415,13 @@ function insertendorec() {
         }
       ?>
      <label>&nbsp; Taking medicine : &nbsp; </label>
-     <input type="text" name="medtaking" style="width: 250px; height: 50px; float:left;" value="<?php echo $objresultMed['taking_med']; ?>">
+     <input type="text" name="medtaking" style="width: 150px; height: 50px; float:left;" value="<?php echo $objresultMed['taking_med']; ?>">
      </div> 
     </div>
 
     <div class="row">   
       <div class="col-md-6"><label>Personal Doctor : &nbsp;</label>
-        <input type="text" name="personalmed" style="width: 350px; height: 50px; float:left;" value="<?php echo $objresultMed['personal_doc']; ?>">
+        <input type="text" name="personalmed" style="width: 250px; height: 50px; float:left;" value="<?php echo $objresultMed['personal_doc']; ?>">
       </div>
 
       <div class="col-md-6"><label>Tel : &nbsp;</label>
@@ -433,7 +431,7 @@ function insertendorec() {
 
     <div class="row">
       <div class="col-md-12"><label>Remark : &nbsp; </label>
-        <textarea name="remarkmed" rows="5" cols="50" style="float:left;"><?php echo $objresultMed['remark']; ?></textarea>
+        <textarea name="remarkmed" rows="4" cols="50" style="float:left;"><?php echo $objresultMed['remark']; ?></textarea>
       </div>
     </div>
 

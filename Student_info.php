@@ -22,6 +22,12 @@
         <link rel="stylesheet" href="datepicker/datepicker.css">
         <script src="datepicker/datepicker.js"></script>
 
+        <!-- filter when type-->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
+
+        <!-- pagination แบ่งหน้าแสดงข้อมูล -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/list.pagination.js/0.1.1/list.pagination.min.js"></script>
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -100,9 +106,6 @@
     </head>
 <?php
     require("connect.php");
-    require("class_stu.php");
-
-    $stuinfo = new Student;
 ?>
  <body><!-- change background image at assets/js/scripts.js --> 
     <!-- Loader -->
@@ -124,8 +127,10 @@
         <div class="first-container">
         <div class="panel panel-info">
         <div class="panel-heading"><h3>ข้อมูลนักศึกษา (Student Information)</h3></div>
-        <div class="panel-body">
+        <div class="panel-body" id="student-list">
+            <input class="search" placeholder="Search" /><br><br>
             <table class="table table-bordered" border="1">
+            <tbody class="list">
                 <tr bgcolor="#D1C4E9">
                     <td>รหัสนักศึกษา</td>
                     <td>ชื่อนักศึกษา</td>
@@ -138,9 +143,35 @@
                 ?>
                 </tr>
                 <?php
-                    $stuinfo->Studentinfo($conn)
-                 ?>
-            
+                    $sql = "SELECT * FROM dentalstudent_info";
+                    $resSql = $conn->query($sql);
+
+                    while ($row = mysqli_fetch_array($resSql)) {
+                        $studentId = $row['student_code'];
+                        $begin=date('d/m/Y',strtotime($row['student_timebegin']));
+                        $end=date('d/m/Y',strtotime($row['student_timeend']));
+                        echo '<tr>
+                            <td class="stu_code">'.$row['student_code'].'</td>
+                            <td class="stu_name">'.$row['student_name'].'</td>
+                            <td class="start">'.$begin.'</td>
+                            <td class="end">'.$end.'</td>';
+
+                        if(isset($_SESSION['username'])){
+                        echo '<td>
+                                <form action="updateStudent.php" method="post" name="updatebtn">
+                                        <input type="hidden" name="studentId" value="'.$row['student_code'].'">
+                                        <input type="submit" class="btn btn-primary" style="width: 100px;" name="'.$row['student_code'].'" value="Edit">
+                                </form><br>';
+                            ?>
+                                <form action="deleteStu.php" method="post" name="deletebtn" onSubmit="return confirm('are you sure?')">
+                                        <input type="hidden" name="stu_code" value="<?php echo $row['student_code']; ?>">
+                                        <input type="submit" class="btn btn-danger"  value="Delete" style="width: 100px;"name="<?php echo $row['student_code']; ?>">
+                                </form> 
+                            </td> <?php } ?>
+                        </tr><?php } ?>   
+                        </tbody>
+                     </table>
+                     <ul class="pagination"></ul>
         </div>    
         </div>    
         </div>
@@ -259,4 +290,24 @@
         }
     }
 
+</script>
+
+<!-- script for filter name when type -->
+<script type="text/javascript">
+    var options = {
+        valueNames: [ 'stu_code', 'stu_name', 'start', 'end' ]
+        };
+    var student = new List('student-list', options);
+</script>
+
+<!-- script for pagination แบ่งหน้าแสดงข้อมูล -->
+<script type="text/javascript">
+    var options = {
+        valueNames: [ 'stu_code', 'stu_name', 'start', 'end' ],
+        page: 5,
+        plugins: [
+          ListPagination({})
+          ]
+        };
+    var student = new List('student-list', options);
 </script>

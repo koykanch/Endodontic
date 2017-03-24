@@ -106,7 +106,7 @@ $user = $_SESSION['username'];
 	
 ?>
 </head>
-<body>
+<body ng-controller="showdatacontroller">
 
 
 <!-- change background image at assets/js/scripts.js --> 
