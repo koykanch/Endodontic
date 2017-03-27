@@ -175,6 +175,23 @@ class Endodontic{
 		}
 	}
 
+	public function selstimulation_edit($conn,$stimulation_id){
+		$searchStimulationname = "SELECT * FROM stimulation_required WHERE stimulation_id = '$stimulation_id'";
+		$resultStimulationname = $conn->query($searchStimulationname);
+		$objresultStimulationname = mysqli_fetch_array($resultStimulationname);
+		?>
+			<option value="<?php echo $objresultStimulationname['stimulation_id'] ?>"><?php echo $objresultStimulationname['stimulation_detail']?></option>
+		<?php
+
+		$strSQL = "SELECT * FROM stimulation_required WHERE stimulation_id != '$stimulation_id' ORDER BY stimulation_id";
+		$objQuery = $conn->query($strSQL); 
+		while($row = mysqli_fetch_array($objQuery)){
+			?>
+			<option value="<?php echo $row['stimulation_id'] ?>"><?php echo $row['stimulation_detail'] ?></option>
+			<?php
+		}
+	}
+
 	public function selduration_edit($conn,$durationId){
 		$searchDurationname = "SELECT * FROM duration WHERE duration_id = '$durationId'";
 		$resultDurationname = $conn->query($searchDurationname);
@@ -265,6 +282,131 @@ class Endodontic{
 		}
 	}
 
+	public function selexamcold_edit($conn,$exam_cold){
+		if($exam_cold=='WNL'){
+			?>
+			<option value="WNL">WNL</option>
+			<option value="">Plaese select</option>
+	        <option value="positive">positive</option>
+	        <option value="negative">negative</option>
+	        <?php
+		}else if($exam_cold=='positive'){
+			?>
+			<option value="positive">positive</option>
+			<option value="">Plaese select</option>
+	        <option value="WNL">WNL</option>
+	        <option value="negative">negative</option>
+	        <?php
+		}else{
+			?>
+			<option value="negative">negative</option>
+			<option value="">Plaese select</option>
+	        <option value="WNL">WNL</option>
+	        <option value="positive">positive</option>
+	        <?php
+		}
+	}
+				
+	public function selexamheat_edit($conn, $exam_heat){
+		if($exam_heat=='WNL'){
+			?>
+			<option value="WNL">WNL</option>
+			<option value="">Plaese select</option>
+	        <option value="positive">positive</option>
+	        <option value="negative">negative</option>
+	        <?php
+		}else if($exam_heat=='positive'){
+			?>
+			<option value="positive">positive</option>
+			<option value="">Plaese select</option>
+	        <option value="WNL">WNL</option>
+	        <option value="negative">negative</option>
+	        <?php
+		}else{
+			?>
+			<option value="negative">negative</option>
+			<option value="">Plaese select</option>
+	        <option value="WNL">WNL</option>
+	        <option value="positive">positive</option>
+	        <?php
+		}
+	}
+
+	public function selexamperc_edit($conn, $exam_perc){
+		if($exam_perc=='WNL'){
+			?>
+			<option value="WNL">WNL</option>
+			<option value="">Plaese select</option>
+	        <option value="positive">positive</option>
+	        <option value="negative">negative</option>
+	        <?php
+		}else if($exam_perc=='positive'){
+			?>
+			<option value="positive">positive</option>
+			<option value="">Plaese select</option>
+	        <option value="WNL">WNL</option>
+	        <option value="negative">negative</option>
+	        <?php
+		}else{
+			?>
+			<option value="negative">negative</option>
+			<option value="">Plaese select</option>
+	        <option value="WNL">WNL</option>
+	        <option value="positive">positive</option>
+	        <?php
+		}
+	}
+
+	public function selexampalp_edit($conn, $exam_palp){
+		if($exam_palp=='WNL'){
+			?>
+			<option value="WNL">WNL</option>
+			<option value="">Plaese select</option>
+	        <option value="positive">positive</option>
+	        <option value="negative">negative</option>
+	        <?php
+		}else if($exam_palp=='positive'){
+			?>
+			<option value="positive">positive</option>
+			<option value="">Plaese select</option>
+	        <option value="WNL">WNL</option>
+	        <option value="negative">negative</option>
+	        <?php
+		}else{
+			?>
+			<option value="negative">negative</option>
+			<option value="">Plaese select</option>
+	        <option value="WNL">WNL</option>
+	        <option value="positive">positive</option>
+	        <?php
+		}
+	}
+
+	public function selexammobility_edit($conn, $exam_mobility){
+		if($exam_mobility=='1'){
+			?>
+			<option value="1">1</option>
+			<option value="">Plaese select</option>
+	        <option value="2">2</option>
+	        <option value="3">3</option>
+	        <?php
+		}else if($exam_mobility=='2'){
+			?>
+			<option value="2">2</option>
+			<option value="">Plaese select</option>
+	        <option value="1">1</option>
+	        <option value="3">3</option>
+	        <?php
+		}else{
+			?>
+			<option value="3">3</option>
+			<option value="">Plaese select</option>
+	        <option value="1">1</option>
+	        <option value="2">2</option>
+	        <?php
+		}
+	}
+
 	public function selspecialtest_edit($conn,$spectestId){
 		$searchSpecial = "SELECT * FROM special_test WHERE spectest_id = '$spectestId'";
 		$resultSpecial = $conn->query($searchSpecial);
@@ -275,6 +417,7 @@ class Endodontic{
 		$strSQL = "SELECT * FROM special_test WHERE spectest_id != '$spectestId' ORDER BY spectest_id";
 		$objQuery = $conn->query($strSQL); 
 	
+				echo '<option value="">select special test</option>';
 		while($objResult = mysqli_fetch_array($objQuery))
 		{
 			?>

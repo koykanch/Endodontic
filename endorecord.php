@@ -515,7 +515,7 @@ $endo = new Endodontic;
                 echo '<div class="col-md-4"><input type="checkbox" style="float:left;" name="bloodpressmed" value="bloodpressmed" checked><label>&nbsp;Blood Pressure: &nbsp;</label> 
                 <select name="blood1" style="width:60px; height:30px; float:left;">';
                   for($i=0; $i<=250; $i++){
-                    echo '<option>'.$i.'</option>';
+                    echo '<option value="<?php echo $i ?>">'.$i.'</option>';
                   }
 
                 echo '</select>
@@ -523,7 +523,7 @@ $endo = new Endodontic;
                 <label style="font-size: 25px;">/</label>
                 <select name="blood2" style="width:60px; height:30px; float:left;">';
                   for($i=0; $i<=250; $i++){
-                    echo '<option>'.$i.'</option>';
+                    echo '<option value="<?php echo $i ?>">'.$i.'</option>';
                   }
                 echo '</select>
                 </div>';
@@ -844,6 +844,7 @@ $endo = new Endodontic;
               <td><input type="text" name="epttooth1" style="width: 50px; height:30px;"></td>
               <td>
                 <select name="cold1" style="width: 55px;">
+                  <option value="">Please select</option>
                   <option value="WNL">WNL</option>
                   <option value="positive">positive</option>
                   <option value="negative">negative</option>
@@ -852,6 +853,7 @@ $endo = new Endodontic;
 
               <td>
                 <select name="heat1" style="width: 55px;">
+                  <option value="">Please select</option>
                   <option value="WNL">WNL</option>
                   <option value="positive">positive</option>
                   <option value="negative">negative</option>
@@ -860,6 +862,7 @@ $endo = new Endodontic;
 
               <td>
                 <select name="perc1" style="width: 55px;">
+                  <option value="">Please select</option>
                   <option value="WNL">WNL</option>
                   <option value="positive">positive</option>
                   <option value="negative">negative</option>
@@ -868,6 +871,7 @@ $endo = new Endodontic;
 
               <td>
                 <select name="palp1" style="width: 55px;">
+                  <option value="">Please select</option>
                   <option value="WNL">WNL</option>
                   <option value="positive">positive</option>
                   <option value="negative">negative</option>
@@ -876,9 +880,10 @@ $endo = new Endodontic;
 
               <td>
                 <select name="mobility1" style="width: 55px;">
-                   <option value="1">1</option>
-                   <option value="2">2</option>
-                   <option value="3">3</option>
+                 <option value="">Please select</option>
+                 <option value="1">1</option>
+                 <option value="2">2</option>
+                 <option value="3">3</option>
                 </select>
               </td>
               <td><input type="text" name="probe_mb1" style="width: 50px; height:30px;"></td>
@@ -901,6 +906,7 @@ $endo = new Endodontic;
               <td><input type="text" name="epttooth2" style="width: 50px; height:30px;"></td>
               <td>
                 <select name="cold2" style="width: 55px;">
+                  <option value="">Please select</option>
                   <option value="WNL">WNL</option>
                   <option value="positive">positive</option>
                   <option value="negative">negative</option>
@@ -909,6 +915,7 @@ $endo = new Endodontic;
 
               <td>
                 <select name="heat2" style="width: 55px;">
+                  <option value="">Please select</option>
                   <option value="WNL">WNL</option>
                   <option value="positive">positive</option>
                   <option value="negative">negative</option>
@@ -917,6 +924,7 @@ $endo = new Endodontic;
 
               <td>
                 <select name="perc2" style="width: 55px;">
+                  <option value="">Please select</option>
                   <option value="WNL">WNL</option>
                   <option value="positive">positive</option>
                   <option value="negative">negative</option>
@@ -925,6 +933,7 @@ $endo = new Endodontic;
 
               <td>
                 <select name="palp2" style="width: 55px;">
+                  <option value="">Please select</option>
                   <option value="WNL">WNL</option>
                   <option value="positive">positive</option>
                   <option value="negative">negative</option>
@@ -933,9 +942,10 @@ $endo = new Endodontic;
 
               <td>
                 <select name="mobility2" style="width: 55px;">
-                   <option value="1">1</option>
-                   <option value="2">2</option>
-                   <option value="3">3</option>
+                 <option value="">Please select</option>
+                 <option value="1">1</option>
+                 <option value="2">2</option>
+                 <option value="3">3</option>
                 </select>
               </td>
               <td><input type="text" name="probe_mb2" style="width: 50px; height:30px;"></td>

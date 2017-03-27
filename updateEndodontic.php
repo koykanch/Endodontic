@@ -188,7 +188,7 @@ function insertendorec() {
 
 
 <!-- multistep form -->
-<form id="msform" name="endodontic_update" method="post" enctype="multipart/form-data" action="updateEndodontic1.php">
+<form id="msform" name="endodontic_update" method="post" enctype="multipart/form-data" action="update_endo.php">
   <!-- progressbar -->
   <ul id="progressbar">
     <li class="active">Endodontic Record</li>
@@ -242,7 +242,14 @@ function insertendorec() {
                 <div class="row">
                     <div class="col-md-12">
                       <label>Date: &nbsp;&nbsp;</label>
-                      <input type="date" name="datedemo" style="width:200px; float:left;" value="<?php echo substr($harddate, 0,10); ?>" disabled>
+                      <input type="date" name="datedemo" style="width:200px; float:left;" value="<?php echo substr($harddate, 0,10); ?>">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                      <label>Time:&nbsp;</label>
+                      <input type="time" name="endo_time" style="float:left;" value="<?php echo substr($harddate, 11) ?>">
                     </div>
                 </div>
 
@@ -377,7 +384,7 @@ function insertendorec() {
         <div class="col-md-4">
             <input type="checkbox" style="float:left;" name="bloodpressmed" value="1" 
             <?php
-               if($objresultMed['blood_pres'] != ""){
+               if($objresultMed['blood_pres1'] != "" && $objresultMed['blood_pres2'] != ""){
                 ?>
                   checked="true" >
                 <?php   
@@ -385,8 +392,30 @@ function insertendorec() {
                    echo ">";
                }
             ?>
-           <label>&nbsp;Blood Pressure (if needed): &nbsp;&nbsp;</label> 
-           <input type="text" name="blood1" style="width: 60px; height: 30px; float:left;" value="<?php echo  $objresultMed['blood_pres1']; ?>">
+           <label>&nbsp;Blood Pressure: &nbsp;&nbsp;</label> 
+           <!-- <input type="text" name="blood1" style="width: 60px; height: 30px; float:left;" value="<?php echo  $objresultMed['blood_pres1']; ?>"> --> 
+            
+            <select name="blood1" style="width:60px; height:30px; float:left;">';
+              <?php  
+                if($objresultMed['blood_pres1'] != ""){
+                     echo '<option>'.$objresultMed['blood_pres1'].'</option>';
+                  }
+                  for($i=0; $i<=250; $i++){
+                      echo '<option>'.$i.'</option>';
+                  } ?>
+            </select>
+          
+          <label style="font-size: 25px;">/</label>
+            <select name="blood2" style="width:60px; height:30px; float:left;">';
+            <?php
+              if($objresultMed['blood_pres2'] != ""){
+                     echo '<option>'.$objresultMed['blood_pres2'].'</option>';
+                  }
+                for($i=0; $i<=250; $i++){
+                  echo '<option>'.$i.'</option>';
+                }
+            ?>
+            </select>
         </div>
 
        <div class="col-md-4">
@@ -444,13 +473,13 @@ function insertendorec() {
     <h4>Dental History</h4>
       <div class="row">
           <div class="col-md-12"><label>Chief Complaint : &nbsp;</label>
-            <input type="text" name="chiefdent" style="width: 700px; height: 50px; float:left;" value="<?php echo $objresultDen['chief_complaint']; ?>">
+            <input type="text" name="chiefdent" style="width: 450px; height: 50px; float:left;" value="<?php echo $objresultDen['chief_complaint']; ?>">
           </div>
       </div>
     
       <div class="row"> 
         <div class="col-md-12"><label>History of Present Illness : &nbsp; </label>
-          <textarea name="presentilldent" style="float:left;" rows="5" cols="50"><?php echo $objresultDen['his_of_presentill']; ?></textarea>
+          <textarea name="presentilldent" style="float:left;" rows="4" cols="50"><?php echo $objresultDen['his_of_presentill']; ?></textarea>
         </div>
       </div>
 
@@ -479,7 +508,7 @@ function insertendorec() {
          <label>Pain intensity: </label> 
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-10">
         <select name="paininten" style="float:left; padding: .5em;">
            <?php $endo->selpaininten_edit($conn,$objresultSubj['paininten_id']); ?>
          </select>
@@ -491,7 +520,7 @@ function insertendorec() {
         <label>Pain Character: </label>
       </div>
 
-      <div class="col-md-2">
+      <div class="col-md-10">
          <select name="paincharacter" style="float:left; padding: .5em;">
            <?php $endo->selpaincharact_edit($conn,$objresultSubj['painchar_id']); ?>
          </select>
@@ -499,15 +528,15 @@ function insertendorec() {
     </div>
 
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-1">
             <label>Onset: </label>
         </div> 
 
         
         <div class="col-md-2">
-          <input type="radio" name="onset" style="float:left;" value="0" 
+          <input type="checkbox" name="onset_spont" style="float:left;" value="1" 
             <?php
-                if($objresultSubj['onset_spontOrstim'] == "0"){
+                if($objresultSubj['onset_spontaneous'] == "1"){
                     ?>
                     checked = "true" >
                     <?php
@@ -519,10 +548,10 @@ function insertendorec() {
           <label>&nbsp; Spontaneous</label>
         </div>
 
-        <div class="col-md-8">
-          <input type="radio" name="onset" style="float:left;" value="1"
+        <div class="col-md-5">
+          <input type="checkbox" name="onset_stimu" style="float:left;" value="1"
             <?php
-                if($objresultSubj['onset_spontOrstim'] == "1"){
+                if($objresultSubj['stimulation_id'] != ""){
                     ?>
                     checked = "true" >
                     <?php
@@ -531,7 +560,17 @@ function insertendorec() {
                 }
             ?>
           <label> &nbsp; Stimulation Required &nbsp;</label>
-          <input type="text" id="onsetsti" name="onsetstimul" style="width: 300px; height: 50px; float:left;" value="<?php echo $objresultSubj['stimulation_detail']; ?>" >
+
+          <select name="stimulation" style="float:left; padding: .5em;">
+          <?php
+              $endo->selstimulation_edit($conn,$objresultSubj['stimulation_id']);
+          ?>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label>Other &nbsp;</label>
+          <input type="text" name="onset_other" style="float:left;" value="<?php echo $objresultSubj['onset_other'] ?>">
         </div>
      </div>
 
@@ -599,6 +638,10 @@ function insertendorec() {
     <h4>O.Objective Symptoms</h4>
     <div class="row">
       <div class="col-md-3">
+         <label>&nbsp; Extraoral: </label>
+      </div>
+
+      <div class="col-md-3">
           <input type="checkbox" name="extrafacial_check" style="float:left;" value="1"
             <?php
                 if($objresultObj['ext_facialswelling'] == "1"){
@@ -611,92 +654,50 @@ function insertendorec() {
                     <?php
                 }
             ?>
-            <label>&nbsp;&nbsp;Extraoral Facial Swelling: </label>
+            <label>&nbsp;&nbsp;Facial Swelling </label>
       </div>
 
-      <div class="col-md-9">
-        <select name="extrafacial" style="float:left; padding: .5em;">
-        <?php
-          if($objresultObj['ext_facialswelling'] == "1"){
-            $endo->selextrafacial_edit($conn,$objresultObj['facialswell_id']);
-          }else{
-            $endo->selextrafacial($conn);
-          }
-         
-        ?>
-        </select>
-      </div>
+      <div class="col-md-3">
+          <input type="checkbox" name="extralymph_check" style="float:left;" value="1"
+          <?php
+              if($objresultObj['ext_lymphnode'] == "1"){
+                  ?>
+                      checked = "true" >
+                  <?php
+              }else{
+                  echo ">";
+                  ?>
+                  <?php
+              }
+          ?>
+          <label>&nbsp;&nbsp;Lymph Node: </label>
+      </div>   
+
+      <div class="col-md-3">
+          <input type="checkbox" name="extrasinus_check" style="float:left;" value="1"
+          <?php
+              if($objresultObj['ext_sinustract'] == "1"){
+                  ?>
+                      checked = "true" >
+                  <?php
+              }else{
+                  echo ">";
+                  ?>
+                  <?php
+              }
+          ?>
+          <label>&nbsp;&nbsp;Sinus Tract: </label>
+      </div> 
     </div>
 
     <div class="row">
         <div class="col-md-3">
-            <input type="checkbox" name="extralymph_check" style="float:left;" value="1"
-            <?php
-                if($objresultObj['ext_lymphnode'] == "1"){
-                    ?>
-                        checked = "true" >
-                    <?php
-                }else{
-                    echo ">";
-                    ?>
-                    <?php
-                }
-            ?>
-            <label>&nbsp;&nbsp;Extraoral Lymph Node: </label>
-        </div>   
-
-        <div class="col-md-9">
-          <select name="extralymphnode" style="float:left; padding: .5em;">
-          <?php
-            if($objresultObj['ext_lymphnode'] == "1"){
-                $endo->selextralymphnode_edit($conn,$objresultObj['lymphnode_id']);
-            }else{
-                $endo->selextralymphnode($conn);
-            }
-            
-          ?>
-          </select>
+            <label>&nbsp; Other: &nbsp;</label> 
         </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-3">
-            <input type="checkbox" name="extrasinus_check" style="float:left;" value="1"
-            <?php
-                if($objresultObj['ext_sinustract'] == "1"){
-                    ?>
-                        checked = "true" >
-                    <?php
-                }else{
-                    echo ">";
-                    ?>
-                    <?php
-                }
-            ?>
-            <label>&nbsp;&nbsp;Extra Sinus Tract: </label>
-        </div>   
-
         <div class="col-md-9">
-          <select name="extrasinus" style="float:left; padding: .5em;">
-          <?php
-          if($objresultObj['ext_sinustract'] == "1"){
-            $endo->selextrasinus_edit($conn,$objresultObj['sinustract_id']);
-          }else{
-            $endo->selextrasinus($conn);
-          }
-          ?>
-          </select>
+            <textarea name="extraother" rows="5" cols="50" style="float:left;"><?php echo $objresultObj['ext_other']; ?></textarea>
         </div>
-      </div>
-
-      <div class="row">
-          <div class="col-md-3">
-              <label>&nbsp; Other: &nbsp;</label> 
-          </div>
-          <div class="col-md-9">
-              <textarea name="extraother" rows="5" cols="50" style="float:left;"><?php echo $objresultObj['ext_other']; ?></textarea>
-          </div>
-      </div>
+    </div>
 
       <div class="row">
           <div class="col-md-2">
@@ -741,7 +742,7 @@ function insertendorec() {
             <label>&nbsp;&nbsp;&nbsp;Tooth: </label>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-2">
           <input type="checkbox" name="cariestooth" style="float:left;" value="1"
             <?php
                 if($objresultObj['tooth_caries'] == "1"){
@@ -754,6 +755,21 @@ function insertendorec() {
             ?>
           <label>&nbsp; Caries</label>
           </div>
+
+          <div class="col-md-4">
+              <input type="checkbox" name="restoothtoration" style="float:left;" value="1"
+                <?php
+                    if($objresultObj['tooth_restoration'] != ""){
+                      ?>
+                        checked="true" >
+                      <?php 
+                    }else{
+                      echo ">";
+                    }
+                ?>
+              <label> &nbsp; Restoration with &nbsp; </label>
+              <input type="text" name="toothrestoration" style="width: 100px; height: 20px; float:left; " value="<?php echo $objresultObj['tooth_restoration']; ?>">
+          </div>   
 
           <div class="col-md-2">
           <input type="checkbox" name="pulptoothex" style="float:left;" value="1"
@@ -782,97 +798,78 @@ function insertendorec() {
             ?>
           <label>&nbsp; Pulp Polyp</label>
           </div>
+      </div>
 
-          <div class="col-md-3">
-          <input type="checkbox" name="opentoothdrai" style="float:left;" value="1"
-            <?php
-                if($objresultObj['tooth_open'] == "1"){
-                  ?>
-                    checked="true" >
-                  <?php 
-                }else{
-                  echo ">";
-                }
-            ?>
-          <label> &nbsp; Opened for Drainage</label>
-          </div>
+      <br><br><br><br>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            <input type="checkbox" name="fracturetoration" style="float:left;" value="1"
+              <?php
+                  if($objresultObj['tooth_fracture'] != ""){
+                    ?>
+                      checked="true" >
+                    <?php 
+                  }else{
+                    echo ">";
+                  }
+              ?>
+            <label> &nbsp; Fracture at &nbsp; </label>
+            <input type="text" name="toothfractoration" style="width: 100px; height: 20px; float:left;" value="<?php echo $objresultObj['tooth_fracture']; ?>">
+        </div>
+
+        <div class="col-md-4">
+            <input type="checkbox" name="crowntooth" style="float:left;" value="1"
+              <?php
+                  if($objresultObj['tooth_crown'] != ""){
+                    ?>
+                      checked="true" >
+                    <?php 
+                  }else{
+                    echo ">";
+                  }
+              ?>
+            <label> &nbsp; Crown Discoloration to &nbsp; </label>
+            <input type="text" name="toothcrown" style="width: 100px; height: 20px; float:left;" value="<?php echo $objresultObj['tooth_crown']; ?>">
+        </div> 
+
+        <div class="col-md-3">
+        <input type="checkbox" name="opentoothdrai" style="float:left;" value="1"
+          <?php
+              if($objresultObj['tooth_open'] == "1"){
+                ?>
+                  checked="true" >
+                <?php 
+              }else{
+                echo ">";
+              }
+          ?>
+        <label> &nbsp; Opened for Drainage</label>
+        </div>
       </div>
 
       <div class="row">
-          <div class="col-md-2"></div>
-
-          <div class="col-md-3">
-          <input type="checkbox" name="temptooth" style="float:left;" value="1"
-            <?php
-                if($objresultObj['tooth_temp'] == "1"){
-                  ?>
-                    checked="true" >
-                  <?php 
-                }else{
-                  echo ">";
-                }
-            ?>
-          <label>&nbsp; Temp. Restoration</label>
-          </div>
-
-          <div class="col-md-7">
-              <input type="checkbox" name="restoothtoration" style="float:left;" value="1"
-                <?php
-                    if($objresultObj['tooth_restoration'] != ""){
-                      ?>
-                        checked="true" >
-                      <?php 
-                    }else{
-                      echo ">";
-                    }
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+        <input type="checkbox" name="temptooth" style="float:left;" value="1"
+          <?php
+              if($objresultObj['tooth_temp'] == "1"){
                 ?>
-              <label> &nbsp; Restoration with &nbsp; </label>
-              <input type="text" name="toothrestoration" style="width: 300px; height: 50px; float:left; " value="<?php echo $objresultObj['tooth_restoration']; ?>">
-          </div>   
+                  checked="true" >
+                <?php 
+              }else{
+                echo ">";
+              }
+          ?>
+        <label>&nbsp; Temp. Restoration</label>
+        </div>
+
+        <div class="col-md-7">
+            <label> &nbsp; Other: &nbsp; </label>
+            <textarea type="text" name="toothother" rows="3" cols="50" style="float:left;"><?php echo $objresultObj['tooth_other']; ?></textarea>
+        </div> 
       </div>
-
-      <div class="row">
-          <div class="col-md-2"></div>
-
-          <div class="col-md-5">
-              <input type="checkbox" name="fracturetoration" style="float:left;" value="1"
-                <?php
-                    if($objresultObj['tooth_fracture'] != ""){
-                      ?>
-                        checked="true" >
-                      <?php 
-                    }else{
-                      echo ">";
-                    }
-                ?>
-              <label> &nbsp; Fracture at &nbsp; </label>
-              <input type="text" name="toothfractoration" style="width: 300px; height: 50px; float:left;" value="<?php echo $objresultObj['tooth_fracture']; ?>">
-          </div>            
-
-          <div class="col-md-5">
-              <input type="checkbox" name="crowntooth" style="float:left;" value="1"
-                <?php
-                    if($objresultObj['tooth_crown'] != ""){
-                      ?>
-                        checked="true" >
-                      <?php 
-                    }else{
-                      echo ">";
-                    }
-                ?>
-              <label> &nbsp; Crown Discoloration to &nbsp; </label>
-              <input type="text" name="toothcrown" style="width: 200px; height: 50px; float:left;" value="<?php echo $objresultObj['tooth_crown']; ?>">
-          </div> 
-      </div>
-
-      <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-10">
-              <label> &nbsp; Other: &nbsp; </label>
-              <textarea type="text" name="toothother" rows="5" cols="50" style="float:left;"><?php echo $objresultObj['tooth_other']; ?></textarea>
-          </div>                
-      </div>
-
+                        
       <br><br>
       <h4>Examination</h4>
       <?php
@@ -880,167 +877,251 @@ function insertendorec() {
         $resultExam = $conn->query($searchExam);
         $objresultExam = mysqli_fetch_array($resultExam);
       ?>
-      <div class="row" style="height: 80px;">
-        <div class="col-md-2">
-            <label>Tooth : &nbsp;</label>
-            <input type="text" name="numtooth" style="width: 80px; height: 50px; float:left;" value="<?php echo $objresultExam['exam_tooth']; ?>">
-        </div>
 
-        <div class="col-md-2">
-            <label>EPT : &nbsp;</label>
-            <input type="text" name="epttooth" style="width: 80px; height: 50px; float:left;" value="<?php echo $objresultExam['exam_EPT']; ?>">
-        </div>
+        <table class="table table-bordered"> 
+          <tr>
+            <th rowspan="2"> <div align="center">Tooth </div></th>
+            <th rowspan="2"> <div align="center">EPT</div></th>
+            <th rowspan="2"> <div align="center">Cold</div></th>
+            <th rowspan="2"> <div align="center">Heat</div></th>
+            <th rowspan="2"> <div align="center">Perc<sup>n</sup></div></th>
+            <th rowspan="2"> <div align="center">Palp<sup>n</sup></div></th>
+            <th rowspan="2"> <div align="center">Mobility</div></th>
+            <th colspan="6"> <div align="center">Perio Probe (mm)</div></th>
+            <th rowspan="2"> <div align="center">Special Test <p>(if necessary)</p></div></th>
+          </tr>
 
-        <div class="col-md-2">
-            <input type="checkbox" name="checkcold" value="1" style="float:left;"
+          <tr>
+            <th><div align="center">MB</div></th>
+            <th><div align="center">B</div></th>
+            <th><div align="center">DB</div></th>
+            <th><div align="center">ML</div></th>
+            <th><div align="center">L</div></th>
+            <th><div align="center">DL</div></th>
+          </tr>
+
+          <tr>
+            <td>
+              <input type="text" name="numtooth1" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_tooth']; ?>">
+            </td>
+            <td>
+              <input type="text" name="epttooth1" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_EPT']?>"></td>
+            <td>
+              <select name="cold1" style="width: 55px;">
                 <?php
-                    if($objresultExam['exam_cold'] == "1"){
-                      ?>
-                        checked="true" >
-                      <?php 
-                    }else{
-                      echo ">";
-                    }
+                  if($objresultExam['exam_cold'] != ""){
+                    $endo->selexamcold_edit($conn, $objresultExam['exam_cold']);
+                  }else{
+                    ?>
+                    <select name="cold1" style="width: 55px;">
+                      <option value="">Please select</option>
+                      <option value="WNL">WNL</option>
+                      <option value="positive">positive</option>
+                      <option value="negative">negative</option>
+                    </select>
+                    <?php
+                  }
+                  
                 ?>
-            <label>&nbsp; Cold </label>
-        </div>
+              </select>
+            </td>
 
-        <div class="col-md-2">
-            <input type="checkbox" name="checkheat" value="1" style="float:left;"
+            <td>
+              <select name="heat1" style="width: 55px;">
+              <?php
+                  if($objresultExam['exam_heat'] != ""){
+                    $endo->selexamheat_edit($conn, $objresultExam['exam_heat']);
+                  }else{
+                    ?>
+                      <option value="">Please select</option>
+                      <option value="WNL">WNL</option>
+                      <option value="positive">positive</option>
+                      <option value="negative">negative</option>
+                    <?php
+                  }
+              ?>
+              </select>
+            </td>
+
+            <td>
+                <select name="perc1" style="width: 55px;">
                 <?php
-                    if($objresultExam['exam_heat'] == "1"){
-                      ?>
-                        checked="true" >
-                      <?php 
-                    }else{
-                      echo ">";
-                    }
-                ?>
-            <label>&nbsp; Heat </label>
-        </div>
+                  if($objresultExam['exam_perc'] != ""){
+                    $endo->selexamperc_edit($conn, $objresultExam['exam_perc']);
+                  }else{
+                    ?>
+                  <option value="">Please select</option>
+                  <option value="WNL">WNL</option>
+                  <option value="positive">positive</option>
+                  <option value="negative">negative</option>
+                   <?php
+                  }
+              ?>
+                </select>
+            </td>
 
-        <div class="col-md-2">
-            <input type="checkbox" name="checkperc" value="1" style="float:left;"
-                <?php
-                    if($objresultExam['exam_perc'] == "1"){
-                      ?>
-                        checked="true" >
-                      <?php 
-                    }else{
-                      echo ">";
-                    }
-                ?>
-            <label>&nbsp; Perc<sup>n</sup> </label>
-        </div>
-
-        <div class="col-md-2">
-            <input type="checkbox" name="checkpalp" value="1" style="float:left;"
-                <?php
-                    if($objresultExam['exam_palp'] == "1"){
-                      ?>
-                        checked="true" >
-                      <?php 
-                    }else{
-                      echo ">";
-                    }
-                ?>
-            <label>&nbsp; Palp<sup>n</sup> </label>
-        </div>
-      </div>
-
-      <div class="row" style="height: 80px;">
-        <div class="col-md-2">
-          <label>Mobility : &nbsp;</label>
-          <select name="mobility" style="float:left; height:50px;">
-          <?php
-          if($objresultExam['exam_mobility'] == "1"){
-            ?>
-             <option value="1">1</option>
-             <option value="2">2</option>
-             <option value="3">3</option>
-            <?php
-          }
-          else if($objresultExam['exam_mobility'] == "2"){
-            ?>
-             <option value="2">2</option>
-             <option value="1">1</option>
-             <option value="3">3</option>
-            <?php
-          }
-          else if($objresultExam['exam_mobility'] == "3"){
-            ?>
-             <option value="3">3</option>
-             <option value="1">1</option>
-             <option value="2">2</option>
-             
-            <?php
-          }else{
-            ?>
-             <option value="3">3</option>
-             <option value="1">1</option>
-             <option value="2">2</option>
-             
-            <?php
-          }
-          ?>
-          </select>
-        </div>
-
-        <div class="col-md-3">
-          <label>Perio Probe of MB : &nbsp;</label>
-          <input type="text" name="probe_mb" style="width: 80px; height: 50px; float:left;" value="<?php echo $objresultExam['exam_perioMB']; ?>">
-        </div>
-
-        <div class="col-md-3">
-          <label>Perio Probe of B : &nbsp;</label>
-          <input type="text" name="probe_b" style="width: 80px; height: 50px; float:left;" value="<?php echo $objresultExam['exam_perioB']; ?>">
-        </div>
-
-        <div class="col-md-4">
-          <label>Perio Probe of DB : &nbsp;</label>
-          <input type="text" name="probe_db" style="width: 80px; height: 50px; float:left;" value="<?php echo $objresultExam['exam_perioDB']; ?>">
-        </div>
-      </div>
-
-      <div class="row" style="height: 80px;">
-        <div class="col-md-3">
-          <label>Perio Probe of ML : &nbsp;</label>
-          <input type="text" name="probe_ml" style="width: 80px; height: 50px; float:left;" value="<?php echo $objresultExam['exam_perioML']; ?>">
-        </div>
-
-        <div class="col-md-3">
-          <label>Perio Probe of L : &nbsp;</label>
-          <input type="text" name="probe_l" style="width: 80px; height: 50px; float:left;" value="<?php echo $objresultExam['exam_perioL']; ?>">
-        </div>
-
-        <div class="col-md-3">
-          <label>Perio Probe of DL : &nbsp;</label>
-          <input type="text" name="probe_dl" style="width: 80px; height: 50px; float:left;" value="<?php echo $objresultExam['exam_perioDL']; ?>">
-        </div>
-
-        <div class="col-md-3">
-          <input type="checkbox" name="spectest" value="1" style="float:left;"
-            <?php
-                if($objresultExam['spectest_id'] != ""){
-                  ?>
-                    checked="true" >
-                  <?php 
+            <td>
+              <select name="palp1" style="width: 55px;">
+              <?php
+                if($objresultExam['exam_palp'] != ""){
+                  $endo->selexampalp_edit($conn, $objresultExam['exam_palp']);
                 }else{
-                  echo ">";
+                  ?>
+                <option value="">Please select</option>
+                <option value="WNL">WNL</option>
+                <option value="positive">positive</option>
+                <option value="negative">negative</option>
+                <?php
                 }
-            ?>
-          <label>Special Test: &nbsp;</label>
-          <select name="special_test" style="float:left; width:100px; height:50px;">
-            <?php
-             if($objresultExam['spectest_id'] != ""){
-                $endo->selspecialtest_edit($conn,$objresultExam['spectest_id']);
-             }else{
-                $endo->selspecialtest($conn);
-             }
-            ?>
-          </select>
-        </div>
-      </div>
+              ?>
+              </select>
+            </td>
+
+            <td>
+              <select name="mobility1" style="width: 55px;">
+              <?php
+                if($objresultExam['exam_mobility'] != ""){
+                  $endo->selexammobility_edit($conn, $objresultExam['exam_mobility']);
+                }else{
+                  ?>
+               <option value="">Please select</option>
+               <option value="1">1</option>
+               <option value="2">2</option>
+               <option value="3">3</option>
+               <?php
+                }
+              ?>
+              </select>
+            </td>
+
+            <td><input type="text" name="probe_mb1" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioMB'] ?>"></td>
+            <td><input type="text" name="probe_b1" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioB'] ?>"></td>
+            <td><input type="text" name="probe_db1" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioDB'] ?>"></td>
+            <td><input type="text" name="probe_ml1" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioML'] ?>"></td>
+            <td><input type="text" name="probe_l1" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioL'] ?>"></td>
+            <td><input type="text" name="probe_dl1" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioDL'] ?>"></td>
+            <td>
+              <select name="special_test1" style="float:left; width:100px;">
+                <?php
+               
+                  $endo->selspecialtest_edit($conn,$objresultExam['spectest_id']);
+      
+                ?>
+              </select>
+            </td>      
+          </tr>
+
+          <tr>
+            <td>
+              <input type="text" name="numtooth2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_tooth']; ?>">
+            </td>
+            <td>
+              <input type="text" name="epttooth2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_EPT']?>"></td>
+            <td>
+              <select name="cold1" style="width: 55px;">
+                <?php
+                  if($objresultExam['exam_cold'] != ""){
+                    $endo->selexamcold_edit($conn, $objresultExam['exam_cold']);
+                  }else{
+                    ?>
+                    <select name="cold2" style="width: 55px;">
+                      <option value="">Please select</option>
+                      <option value="WNL">WNL</option>
+                      <option value="positive">positive</option>
+                      <option value="negative">negative</option>
+                    </select>
+                    <?php
+                  }
+                  
+                ?>
+              </select>
+            </td>
+
+            <td>
+              <select name="heat2" style="width: 55px;">
+              <?php
+                  if($objresultExam['exam_heat'] != ""){
+                    $endo->selexamheat_edit($conn, $objresultExam['exam_heat']);
+                  }else{
+                    ?>
+                      <option value="">Please select</option>
+                      <option value="WNL">WNL</option>
+                      <option value="positive">positive</option>
+                      <option value="negative">negative</option>
+                    <?php
+                  }
+              ?>
+              </select>
+            </td>
+
+            <td>
+                <select name="perc2" style="width: 55px;">
+                <?php
+                  if($objresultExam['exam_perc'] != ""){
+                    $endo->selexamperc_edit($conn, $objresultExam['exam_perc']);
+                  }else{
+                    ?>
+                  <option value="">Please select</option>
+                  <option value="WNL">WNL</option>
+                  <option value="positive">positive</option>
+                  <option value="negative">negative</option>
+                   <?php
+                  }
+              ?>
+                </select>
+            </td>
+
+            <td>
+              <select name="palp2" style="width: 55px;">
+              <?php
+                if($objresultExam['exam_palp'] != ""){
+                  $endo->selexampalp_edit($conn, $objresultExam['exam_palp']);
+                }else{
+                  ?>
+                <option value="">Please select</option>
+                <option value="WNL">WNL</option>
+                <option value="positive">positive</option>
+                <option value="negative">negative</option>
+                <?php
+                }
+              ?>
+              </select>
+            </td>
+
+            <td>
+              <select name="mobility2" style="width: 55px;">
+              <?php
+                if($objresultExam['exam_mobility'] != ""){
+                  $endo->selexammobility_edit($conn, $objresultExam['exam_mobility']);
+                }else{
+                  ?>
+               <option value="">Please select</option>
+               <option value="1">1</option>
+               <option value="2">2</option>
+               <option value="3">3</option>
+               <?php
+                }
+              ?>
+              </select>
+            </td>
+
+            <td><input type="text" name="probe_mb2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioMB'] ?>"></td>
+            <td><input type="text" name="probe_b2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioB'] ?>"></td>
+            <td><input type="text" name="probe_db2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioDB'] ?>"></td>
+            <td><input type="text" name="probe_ml2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioML'] ?>"></td>
+            <td><input type="text" name="probe_l2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioL'] ?>"></td>
+            <td><input type="text" name="probe_dl2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioDL'] ?>"></td>
+            <td>
+              <select name="special_test2" style="float:left; width:100px;">
+                <?php
+               
+                  $endo->selspecialtest_edit($conn,$objresultExam['spectest_id']);
+      
+                ?>
+              </select>
+            </td>      
+          </tr>
+        </table>
 
       <br><br>
       <h4>Radiographic findings</h4>
@@ -1066,6 +1147,25 @@ function insertendorec() {
             ?>
               <label>&nbsp; Normal </label>
         </div>
+
+        <div class="col-md-4">
+              <input type="checkbox" name="cariescrown" style="float:left;" value="1"
+            <?php
+                if($objresultRadio['crown_caries'] == "1"){
+                  ?>
+                    checked="true" >
+                  <?php 
+                }else{
+                  echo ">";
+                }
+            ?>
+              <label>&nbsp; Caries &nbsp;&nbsp; area &nbsp; </label>
+              <input type="text" name="crowarea" style="width: 60px; height: 30px; float:left;" value="<?php echo $objresultRadio['crown_cariesarea']; ?>">
+
+              <label>&nbsp; &nbsp;depth &nbsp; </label>
+              <input type="text" name="crowdepth" style="width: 60px; height: 30px; float:left;" value="<?php echo $objresultRadio['crown_cariesdepth']; ?>">
+        </div>
+
         <div class="col-md-2">
               <input type="checkbox" name="restcrown" style="float:left;" value="1"
             <?php
@@ -1079,6 +1179,7 @@ function insertendorec() {
             ?>
               <label>&nbsp; Restoration </label>
         </div>
+
         <div class="col-md-2">
               <input type="checkbox" name="fractcrown" style="float:left;" value="1"
             <?php
@@ -1097,30 +1198,9 @@ function insertendorec() {
       <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-10">
-              <input type="checkbox" name="cariescrown" style="float:left;" value="1"
-            <?php
-                if($objresultRadio['crown_caries'] == "1"){
-                  ?>
-                    checked="true" >
-                  <?php 
-                }else{
-                  echo ">";
-                }
-            ?>
-              <label>&nbsp; Caries &nbsp;&nbsp; area &nbsp; </label>
-              <input type="text" name="crowarea" style="width: 100px; height: 50px; float:left;" value="<?php echo $objresultRadio['crown_cariesarea']; ?>">
-
-              <label>&nbsp; &nbsp;depth &nbsp; </label>
-              <input type="text" name="crowdepth" style="width: 100px; height: 50px; float:left;" value="<?php echo $objresultRadio['crown_cariesdepth']; ?>">
+          <label>&nbsp; Other : &nbsp; </label>
+          <textarea name="crownother" rows="3" cols="50" style="float:left;"><?php echo $objresultRadio['crown_other']; ?></textarea>
         </div>
-      </div>
-
-      <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-10">
-              <label>&nbsp; Other : &nbsp; </label>
-              <textarea name="crownother" rows="5" cols="50" style="float:left;"><?php echo $objresultRadio['crown_other']; ?></textarea>
-          </div>
       </div>
 
       <?php
@@ -1145,6 +1225,42 @@ function insertendorec() {
                 }
             ?>
               <label>&nbsp; Normal </label>
+          </div>
+
+          <div class="col-md-4">
+          <input type="checkbox" name="calcificatecham" style="float:left;" value="1"
+            <?php
+                if($objresultPulpcham['pulpcham_calPartOrComp'] != ""){
+                  ?>
+                    checked="true" >
+                    <label>&nbsp; Calcification &nbsp;</label>
+                  <?php 
+                    if($objresultPulpcham['pulpcham_calPartOrComp'] == "0"){
+                        ?>
+                      <select name="partialorcomp" style="height: 40px; float:left;">
+                          <option value="0">Partial</option>
+                          <option value="1">Complete</option>
+                      </select>
+                        <?php
+                    }else{
+                        ?>
+                      <select name="partialorcomp" style="height: 40px; float:left;">
+                          <option value="1">Complete</option>
+                          <option value="0">Partial</option>
+                      </select>
+                        <?php
+                    }
+                }else{
+                  echo ">";
+                  ?>
+                  <label>&nbsp; Calcification &nbsp;</label>
+                  <select name="partialorcomp" style="height: 40px; float:left;">
+                      <option value="0">Partial</option>
+                      <option value="1">Complete</option>
+                  </select>
+                 <?php
+                }
+            ?>
           </div>
 
           <div class="col-md-2">
@@ -1174,51 +1290,15 @@ function insertendorec() {
               ?>
               <label>&nbsp; Resorption </label>
           </div>
-
-          <div class="col-md-4">
-          <input type="checkbox" name="calcificatecham" style="float:left;" value="1"
-            <?php
-                if($objresultPulpcham['pulpcham_calPartOrComp'] != ""){
-                  ?>
-                    checked="true" >
-                    <label>&nbsp; Calcification &nbsp;</label>
-                  <?php 
-                    if($objresultPulpcham['pulpcham_calPartOrComp'] == "0"){
-                        ?>
-                      <select name="partialorcomp" style="height: 50px; float:left;">
-                          <option value="0">Partial</option>
-                          <option value="1">Complete</option>
-                      </select>
-                        <?php
-                    }else{
-                        ?>
-                      <select name="partialorcomp" style="height: 50px; float:left;">
-                          <option value="1">Complete</option>
-                          <option value="0">Partial</option>
-                      </select>
-                        <?php
-                    }
-                }else{
-                  echo ">";
-                  ?>
-                  <label>&nbsp; Calcification &nbsp;</label>
-                  <select name="partialorcomp" style="height: 50px; float:left;">
-                      <option value="0">Partial</option>
-                      <option value="1">Complete</option>
-                  </select>
-                 <?php
-                }
-            ?>
-          </div>
-      </div>
+      </div><br>
 
       <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-10">
               <label>&nbsp; Other &nbsp;</label> 
-              <textarea name="pulpchamother" rows="5" cols="50" style="float:left;"><?php echo $objresultPulpcham['pulpcham_other']; ?></textarea>
+              <textarea name="pulpchamother" rows="3" cols="50" style="float:left;"><?php echo $objresultPulpcham['pulpcham_other']; ?></textarea>
           </div>
-      </div>
+      </div><br>
 
       <?php
         $searchRoot = "SELECT * FROM radiograph_root WHERE HN = '$HN' AND Date = '$harddate'";
@@ -1306,7 +1386,7 @@ function insertendorec() {
         <div class="col-md-2"></div>
         <div class="col-md-10">
             <label>&nbsp; Other &nbsp; </label>
-            <textarea rows="5" cols="50" name="root_other" style="float:left;"><?php echo $objresultRoot['root_other']; ?></textarea>
+            <textarea rows="3" cols="50" name="root_other" style="float:left;"><?php echo $objresultRoot['root_other']; ?></textarea>
         </div>
       </div>
 
@@ -1336,6 +1416,42 @@ function insertendorec() {
                <label>&nbsp; Normal</label> 
           </div>
 
+          <div class="col-md-4">
+              <input type="checkbox" style="float:left;" name="calcificatecanel" value="1"
+                <?php
+                if($objresultPulpcan['pulpcan_calPartOrComp'] != ""){
+                  ?>
+                    checked="true">
+                    <label>&nbsp; Calcification &nbsp;</label>
+                  <?php 
+                  if($objresultPulpcan['pulpcan_calPartOrComp'] == "1"){
+                    ?>
+                    <select name="select_cal" style="height: 40px; float:left;">
+                      <option value="1">Complete</option>
+                      <option value="0">Partial</option>
+                    </select>
+                    <?php
+                  }else{
+                    ?>
+                    <select name="select_cal" style="height: 40px; float:left;">
+                      <option value="0">Partial</option>
+                      <option value="1">Complete</option>
+                    </select>
+                    <?php
+                  }
+                }else{
+                  echo ">";
+                  ?>
+                  <label>&nbsp; Calcification &nbsp;</label>
+                    <select name="select_cal" style="height: 40px; float:left;">
+                      <option value="0">Partial</option>
+                      <option value="1">Complete</option>
+                    </select>
+                  <?php
+                }
+              ?>
+          </div>
+
           <div class="col-md-2"> 
               <input type="checkbox" style="float:left;" name="resorpcanel" value="1"
               <?php
@@ -1363,8 +1479,12 @@ function insertendorec() {
               ?>
               <label>&nbsp; Perforation</label>
           </div>
+        </div>
 
-          <div class="col-md-4">
+        <br>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-2">
               <input type="checkbox" style="float:left;" name="prevcanel" value="1"
               <?php
                 if($objresultPulpcan['pulpcan_previousRCT'] == "1"){
@@ -1377,10 +1497,7 @@ function insertendorec() {
               ?>
               <label>&nbsp; Previous RCT</label>
           </div>
-      </div>
 
-      <div class="row">
-          <div class="col-md-2"></div>
           <div class="col-md-4">
               <input type="checkbox" style="float:left;" name="brokecanel" value="1"
               <?php
@@ -1394,48 +1511,10 @@ function insertendorec() {
               ?>
               <label>&nbsp; Broken Instrument</label>
           </div>
-          <div class="col-md-6">
-              <input type="checkbox" style="float:left;" name="calcificatecanel" value="1"
-                <?php
-                if($objresultPulpcan['pulpcan_calPartOrComp'] != ""){
-                  ?>
-                    checked="true">
-                    <label>&nbsp; Calcification &nbsp;</label>
-                  <?php 
-                  if($objresultPulpcan['pulpcan_calPartOrComp'] == "1"){
-                    ?>
-                    <select name="select_cal" style="height: 50px; float:left;">
-                      <option value="1">Complete</option>
-                      <option value="0">Partial</option>
-                    </select>
-                    <?php
-                  }else{
-                    ?>
-                    <select name="select_cal" style="height: 50px; float:left;">
-                      <option value="0">Partial</option>
-                      <option value="1">Complete</option>
-                    </select>
-                    <?php
-                  }
-                }else{
-                  echo ">";
-                  ?>
-                  <label>&nbsp; Calcification &nbsp;</label>
-                    <select name="select_cal" style="height: 50px; float:left;">
-                      <option value="0">Partial</option>
-                      <option value="1">Complete</option>
-                    </select>
-                  <?php
-                }
-              ?>
-          </div>
-      </div>
-
-      <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-10">
+        
+          <div class="col-md-4">
               <label>&nbsp; Other &nbsp; </label>
-              <textarea type="text" rows="5" cols="50" name="pulpcanother" style="float:left;"><?php echo $objresultPulpcan['pulpcan_other']; ?></textarea>
+              <textarea type="text" rows="3" cols="30" name="pulpcanother" style="float:left;"><?php echo $objresultPulpcan['pulpcan_other']; ?></textarea>
           </div>
       </div>
 
@@ -1487,8 +1566,46 @@ function insertendorec() {
               ?>
               <label>&nbsp; Loss of Lamina Dura </label>
           </div>
+      </div>
 
-          <div class="col-md-3">
+        <br>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-4">
+              <input type="checkbox" style="float:left;" name="perialessperirad" value="1"
+                <?php
+                if($objresultPerirad['perirad_periapical1'] != ""){
+                  ?>
+                    checked="true" >
+                  <?php 
+                }else{
+                  echo ">";
+                }
+              ?>
+              <label>&nbsp; Periapical Lesion &nbsp;</label>
+              <input type="text" name="periradperialess1" style="width: 50px; height: 20px; float:left;" value="<?php echo $objresultPerirad['perirad_periapical1']; ?>">
+              <label style="font-size: 20px;"> X </label>&nbsp; 
+              <input type="text" name="periradperialess2" style="width: 50px; height: 20px; float:left;" value="<?php echo $objresultPerirad['perirad_periapical2']; ?>">
+          </div>
+
+          <div class="col-md-4">
+              <input type="checkbox" style="float:left;" name="laterlessperirad" value="1"
+              <?php
+                if($objresultPerirad['perirad_lateral1'] != ""){
+                  ?>
+                    checked="true" >
+                  <?php 
+                }else{
+                  echo ">";
+                }
+              ?>
+              <label>&nbsp; Lateral Lesion &nbsp;</label>
+              <input type="text" name="laterlessperirad1" style="width: 50px; height:20px; float:left;" value="<?php echo $objresultPerirad['perirad_lateral1']; ?>">
+              <label style="font-size: 20px;"> X </label>&nbsp;  
+              <input type="text" name="laterlessperirad1" style="width: 50px; height:20px; float:left;" value="<?php echo $objresultPerirad['perirad_lateral2']; ?>">
+          </div>
+
+          <div class="col-md-2">
               <input type="checkbox" style="float:left;" name="resorpperirad" value="1"
               <?php
                 if($objresultPerirad['perirad_resorption'] == "1"){
@@ -1505,10 +1622,10 @@ function insertendorec() {
 
       <div class="row">
           <div class="col-md-2"></div>
-          <div class="col-md-2">
+          <div class="col-md-4">
               <input type="checkbox" style="float:left;" name="apexperirad" value="1"
               <?php
-                if($objresultPerirad['perirad_openapex'] == "1"){
+                if($objresultPerirad['perirad_openapex'] != ""){
                   ?>
                     checked="true" >
                   <?php 
@@ -1516,8 +1633,10 @@ function insertendorec() {
                   echo ">";
                 }
               ?>
-              <label>&nbsp; Open Apex </label>
+              <label>&nbsp; Open Apex width</label>
+              <input type="text" name="apexperirad_width" style="width: 100px; height:20px; float:left;" value="<?php echo $objresultPerirad['perirad_openapex'] ?>"><label>&nbsp; mm &nbsp;</label> 
           </div>
+
           <div class="col-md-2">
               <input type="checkbox" style="float:left;" name="osteoperirad" value="1"
               <?php
@@ -1531,7 +1650,8 @@ function insertendorec() {
               ?>
               <label>&nbsp; OsteosIcerosis</label>
           </div>
-          <div class="col-md-6">
+
+          <div class="col-md-4">
               <input type="checkbox" style="float:left;" name="hyperperirad" value="1"
               <?php
                 if($objresultPerirad['perirad_hyper'] == "1"){
@@ -1547,43 +1667,10 @@ function insertendorec() {
       </div>         
 
       <div class="row">
-        <div class="col-md-2"></div>
-          <div class="col-md-5">
-              <input type="checkbox" style="float:left;" name="perialessperirad" value="1"
-                <?php
-                if($objresultPerirad['perirad_periapical'] != ""){
-                  ?>
-                    checked="true" >
-                  <?php 
-                }else{
-                  echo ">";
-                }
-              ?>
-              <label>&nbsp; Periapical Lesion &nbsp;</label>
-              <input type="text" name="periradperialess" style="width: 200px; height: 50px; float:left;" value="<?php echo $objresultPerirad['perirad_periapical']; ?>"> 
-          </div>
-
-          <div class="col-md-5">
-              <input type="checkbox" style="float:left;" name="laterlessperirad" value="1"
-              <?php
-                if($objresultPerirad['perirad_lateral'] != ""){
-                  ?>
-                    checked="true" >
-                  <?php 
-                }else{
-                  echo ">";
-                }
-              ?>
-              <label>&nbsp; Lateral Lesion &nbsp;</label>
-              <input type="text" name="periradlaterless" style="width: 200px; height:50px; float:left;" value="<?php echo $objresultPerirad['perirad_lateral']; ?>"> 
-          </div>
-      </div>
-
-      <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-10">
               <label>&nbsp; Other &nbsp; </label>
-              <textarea rows="5" cols="50" name="perother" style="float:left;"><?php echo $objresultPerirad['perirad_other']; ?></textarea>
+              <textarea rows="3" cols="50" name="perother" style="float:left;"><?php echo $objresultPerirad['perirad_other']; ?></textarea>
           </div>
       </div>
 
@@ -1643,14 +1730,14 @@ function insertendorec() {
         <div class="col-md-2"></div>
         <div class="col-md-5">
               <label>&nbsp; Other &nbsp; </label>
-              <textarea rows="5" cols="50" style="float:left;" name="alveolarother"><?php echo $objresultAlveolar['bone_other']; ?></textarea>
-        </div>
-
-        <div class="col-md-5">
-              <label>Remarks: </label>
-              <textarea rows="5" cols="50" style="float:left;" name="otherremark"><?php echo $objresultAlveolar['remark']; ?></textarea>
+              <textarea rows="3" cols="40" style="float:left;" name="alveolarother"><?php echo $objresultAlveolar['bone_other']; ?></textarea>
         </div>
       </div>
+
+      <br><br>
+      <h4>Remarks &nbsp;</h4>
+        <textarea rows="3" cols="40" style="float:left; margin-left:2em;" name="otherremark"><?php echo $objresultAlveolar['remark']; ?></textarea>
+
   </div>
   </div>
   </div>
@@ -1668,11 +1755,13 @@ function insertendorec() {
       $resultPulpaldiag = $conn->query($searchPulpaldiag);
       $objresultPulpaldiag = mysqli_fetch_array($resultPulpaldiag);
     ?>
+    <div class="row">
+    <div class="col-md-6">
     <h4>Pulpal Diagnosis</h4>
-    <div class="row" style="height:30px;">
-          <div class="col-md-3">
-              <input type="checkbox" style="float:left;" name="puldiagnorm" value="1"
-               <?php 
+      <div class="row" style="height:20px;">
+          <div class="col-md-11">
+              <input type="checkbox" style="float:left; margin-left: 2em;" name="puldiagnorm" value="1"
+              <?php 
                       if($objresultPulpaldiag['normal'] == "1"){
                           ?>
                            checked = "true" onclick="enable_pulpaldiag(this.checked)">                   
@@ -1683,9 +1772,12 @@ function insertendorec() {
                 ?>
                <label>&nbsp; Normal </label>
           </div>
+      </div>
 
-          <div class="col-md-3">
-              <input type="radio" style="float:left;" name="reverOrirrever" value="0"
+      <br>
+      <div class="row" style="height:20px;">
+          <div class="col-md-6">
+              <input type="radio" style="float:left; margin-left: 2em;" name="reverOrirrever" value="0"
               <?php 
                   if($objresultPulpaldiag['ReverOrIrreversiblepulp'] != "" && $objresultPulpaldiag['ReverOrIrreversiblepulp'] == "0"){
                       ?>
@@ -1697,9 +1789,12 @@ function insertendorec() {
                 ?>
               <label>&nbsp; Reversible Pulpitis </label>
           </div>
+      </div>
 
+      <br>
+      <div class="row" style="height:20px;">
           <div class="col-md-6">
-              <input type="radio" style="float:left;" name="reverOrirrever" value="1"
+              <input type="radio" style="float:left; margin-left: 2em;" name="reverOrirrever" value="1"
               <?php 
                   if($objresultPulpaldiag['ReverOrIrreversiblepulp'] != "" && $objresultPulpaldiag['ReverOrIrreversiblepulp'] == "1"){
                       ?>
@@ -1713,11 +1808,11 @@ function insertendorec() {
           </div>
       </div>
 
+      <br>
       <div class="row" style="height:20px;">
-          <div class="col-md-7"></div>
           <div class="col-md-5">
-              <input type="radio" style="float:left;" name="sympOrasymp" value="1" 
-              <?php 
+              <input type="radio" style="float:left; margin-left: 4em;" name="sympOrasymp" value="1" 
+                <?php 
                   if($objresultPulpaldiag['ReverOrIrreversiblepulp'] != "" && $objresultPulpaldiag['ReverOrIrreversiblepulp'] == "1" && $objresultPulpaldiag['Irreversible_sympOrasymp'] == "1"){
                       ?>
                        checked = "true" >
@@ -1726,14 +1821,14 @@ function insertendorec() {
                      echo ">";
                   } 
                 ?>
-              <label>&nbsp; Symptomatic </label><br>
+              <label>&nbsp; Symptomatic </label><br><br>
           </div>
       </div> 
 
-      <div class="row">
-          <div class="col-md-7"></div>
+      <br>
+      <div class="row" style="height:20px;">
           <div class="col-md-5">
-              <input type="radio" style="float:left;" name="sympOrasymp" value="0"
+              <input type="radio" style="float:left; margin-left: 4em;" name="sympOrasymp" value="0"
               <?php 
                   if($objresultPulpaldiag['ReverOrIrreversiblepulp'] != "" && $objresultPulpaldiag['ReverOrIrreversiblepulp'] == "1" && $objresultPulpaldiag['Irreversible_sympOrasymp'] == "0"){
                       ?>
@@ -1747,10 +1842,11 @@ function insertendorec() {
           </div>
       </div> 
 
-      <div class="row">
-          <div class="col-md-3"> 
-              <input type="checkbox" style="float:left;" name="pulpnecrosis" value="1"
-               <?php 
+      <br>
+      <div class="row" style="height:20px;">
+          <div class="col-md-6"> 
+              <input type="checkbox" style="float:left; margin-left: 2em;" name="pulpnecrosis" value="1"
+              <?php 
                   if($objresultPulpaldiag['pulp_necrosis'] == "1"){
                       ?>
                        checked = "true" >                      
@@ -1761,8 +1857,12 @@ function insertendorec() {
                 ?>
               <label>&nbsp; Pulp Necrosis </label>
           </div>
-          <div class="col-md-3">
-              <input type="checkbox" style="float:left;" name="previnitiat" value="1"
+      </div>
+
+      <br>
+      <div class="row" style="height:20px;">
+          <div class="col-md-7">
+              <input type="checkbox" style="float:left; margin-left: 2em;" name="previnitiat" value="1" 
               <?php 
                   if($objresultPulpaldiag['prev_initiat'] == "1"){
                       ?>
@@ -1774,9 +1874,13 @@ function insertendorec() {
               ?>
               <label>&nbsp; Previously Initiated Therapy </label>
           </div>
-          <div class="col-md-6">
-              <input type="checkbox" style="float:left;" name="prevtreat" value="1"
-              <?php 
+      </div>
+
+      <br>
+      <div class="row" style="height:20px;">
+          <div class="col-md-10">
+              <input type="checkbox" style="float:left; margin-left: 2em;" name="prevtreat" value="1"
+                <?php 
                       if($objresultPulpaldiag['prev_treated'] == "1"){
                           ?>
                            checked = "true" >
@@ -1784,7 +1888,7 @@ function insertendorec() {
                            <?php
                           if($objresultPulpaldiag['prev_treated_improper'] == "1"){
                             ?>
-                            <select style="height:50px; width: 110px; float:left;" name="prevselect">
+                            <select style="height:40px; width: 120px; float:left;" name="prevselect">
                               <option value="0">Improper</option>
                               <option value="1">Incomplete RCT</option>
                             </select>
@@ -1792,7 +1896,7 @@ function insertendorec() {
                           }
                           else if($objresultPulpaldiag['prev_treated_incomplete'] == "1"){
                             ?>
-                            <select style="height:50px; width: 110px; float:left;" name="prevselect">
+                            <select style="height:40px; width: 120px; float:left;" name="prevselect">
                               <option value="1">Incomplete RCT</option>
                               <option value="0">Improper</option>
                             </select>
@@ -1802,7 +1906,7 @@ function insertendorec() {
                             echo ">";
                           ?>
                            <label>&nbsp; Previously treated &nbsp;&nbsp;</label>
-                           <select style="height:50px; width: 110px; float:left;" name="prevselect">
+                           <select style="height:40px; width: 120px; float:left;" name="prevselect">
                               <option value="0">Improper</option>
                               <option value="1">Incomplete RCT</option>
                             </select>
@@ -1811,16 +1915,19 @@ function insertendorec() {
                 ?>              
           </div>
       </div>
+     </div>
 
       <?php
         $searchPeriraddiag = "SELECT * FROM periradicular_diagnosis WHERE HN = '$HN' AND Date = '$harddate'";
         $resultPeriraddiag = $conn->query($searchPeriraddiag);
         $objresultPeriraddiag = mysqli_fetch_array($resultPeriraddiag);
       ?>
+
+     <div class="col-md-6">
       <h4>Periradicular Diagnosis</h4>
-      <div class="row">
+      <div class="row" style="height:20px;">
         <div class="col-md-3">
-              <input type="checkbox" style="float:left;" name="periraddiagnorm" value="1"
+              <input type="checkbox" style="float:left; margin-left: 2em;" name="periraddiagnorm" value="1" 
               <?php 
                   if($objresultPeriraddiag['Normal'] == "1"){
                       ?>
@@ -1832,9 +1939,12 @@ function insertendorec() {
                 ?>
                <label>&nbsp; Normal </label>
         </div>
+      </div>
 
-        <div class="col-md-4">
-              <input type="radio" style="float:left;" name="per_sympOrasymp" value="0"
+      <br>
+      <div class="row" style="height:20px;">
+        <div class="col-md-10">
+              <input type="radio" style="float:left; margin-left: 2em;" name="per_sympOrasymp" value="0"
               <?php 
                   if($objresultPeriraddiag['sympOrasympt_apical'] == "0"){
                       ?>
@@ -1846,9 +1956,12 @@ function insertendorec() {
                 ?>
               <label>&nbsp; Symptomatic Apical Periodontitis </label>
         </div>
+      </div>
 
-        <div class="col-md-5">
-              <input type="radio" style="float:left;" name="per_sympOrasymp" value="1"
+      <br>
+      <div class="row" style="height:20px;">
+        <div class="col-md-10">
+              <input type="radio" style="float:left; margin-left: 2em;" name="per_sympOrasymp" value="1"
               <?php 
                   if($objresultPeriraddiag['sympOrasympt_apical'] == "1"){
                       ?>
@@ -1858,13 +1971,14 @@ function insertendorec() {
                       echo ">";
                   } 
                 ?>
-              <label>&nbsp; Asymptomatic Apical Periodontitis</label>    
+              <label>&nbsp; Asymptomatic Apical Periodontitis</label>  
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-3">
-              <input type="radio" style="float:left;" name="acuteOrchronic" value="0"
+      <br>
+      <div class="row" style="height:20px;">
+        <div class="col-md-6">
+              <input type="radio" style="float:left; margin-left: 2em;" name="acuteOrchronic" value="0"
               <?php 
                   if($objresultPeriraddiag['acuteOrchronic_apical'] == "0"){
                       ?>
@@ -1876,9 +1990,12 @@ function insertendorec() {
                 ?>
               <label>&nbsp; Acute Apical Abscess </label>
         </div>
+      </div>
 
-        <div class="col-md-4">
-              <input type="radio" style="float:left;" name="acuteOrchronic" value="1"
+      <br>
+      <div class="row" style="height:20px;">
+        <div class="col-md-6">
+              <input type="radio" style="float:left; margin-left: 2em;" name="acuteOrchronic" value="1" 
               <?php 
                   if($objresultPeriraddiag['acuteOrchronic_apical'] == "1"){
                       ?>
@@ -1890,11 +2007,16 @@ function insertendorec() {
                 ?>
               <label>&nbsp; Chronic Apical Abscess</label>
         </div>
+      </div>
 
-        <div class="col-md-5">
-              <label>&nbsp; Other : &nbsp;</label> <textarea name="perdiagother" rows="5" cols="40" style="float:left;"><?php echo $objresultPeriraddiag['other']; ?></textarea>
+      <br>
+      <div class="row" style="height:20px;">
+        <div class="col-md-12">
+                <label style="margin-left: 2em;">&nbsp; Other : &nbsp;</label> <textarea name="perdiagother" rows="3" cols="40" style="float:left;"><?php echo $objresultPeriraddiag['other']; ?></textarea>
         </div>
       </div>
+    </div>
+    </div>
 
   </div>
 </div>
@@ -2070,7 +2192,7 @@ function insertendorec() {
   <div class="row">
     <div class="col-md-12">
             <label>&nbsp; Other : &nbsp;</label> 
-            <textarea name="periradother" rows="5" cols="50" style="float:left;"><?php echo $objresultTreatment['treat_other']; ?></textarea>
+            <textarea name="periradother" rows="3" cols="50" style="float:left;"><?php echo $objresultTreatment['treat_other']; ?></textarea>
     </div>
   </div>
 
@@ -2079,7 +2201,7 @@ function insertendorec() {
            <label>Plan for final restoration: </label>
            <textarea name="planrestor" rows="5" cols="50" style="float:left;"><?php echo $objresultTreatment['plan_for_final']; ?></textarea>
     </div>
-  </div>
+  </div><br><br><br><br><br><br><br>
 
   <div class="row">
     <div class="col-md-2">
@@ -2116,7 +2238,7 @@ function insertendorec() {
 
     <div class="col-md-6">
         <label>&nbsp; Other :  &nbsp;</label>
-        <textarea name="preopother" rows="5" cols="50" style="float:left; "><?php echo $objresultTreatment['pre_op_treat_other']; ?></textarea>
+        <textarea name="preopother" rows="3" cols="50" style="float:left; "><?php echo $objresultTreatment['pre_op_treat_other']; ?></textarea>
     </div>
   </div>
 
@@ -2152,7 +2274,7 @@ function insertendorec() {
         ?>
          <label>&nbsp; Not required </label>
     </div>  
-  </div>
+  </div><br><br><br>
 
 <?php
   $searchXray = "SELECT * FROM patients_xray WHERE HN = '$HN' AND Date = '$harddate'";
@@ -2174,7 +2296,7 @@ function insertendorec() {
         <input type="date" name="xraydate" style="float:left;" value="<?php echo $date_Xray; ?>">
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
         <label>X-ray time:&nbsp;</label>
         <input type="time" name="xraytime" style="float:left;" value="<?php echo $time_Xray; ?>">
     </div>
@@ -2194,6 +2316,7 @@ function insertendorec() {
   <input type="hidden" name="dent_id" value="<?php echo $dent; ?>">
   <input type="hidden" name="harddate" value="<?php echo $harddate; ?>">
   <input type="submit" name="submit_insert" value="Submit"/>
+  
 </fieldset>
 
 
