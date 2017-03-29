@@ -12,17 +12,17 @@ $dent = $_POST['Dent_id'];
 $harddate = $_POST['hard_date'];
   
 ?>
-	<div style="font-size:30px; margin-left: 14em;">
+  <div>
+    <label style="font-size:20px;">HN : <?php echo $HN; ?></label>
+  </div>
+
+	<div style="font-size:30px; margin-left: 14em">
 		  <b>Endodontic Record</b>
 	</div>
 
 	<div style="font-size:20px; margin-left:14em;">
 		  <b>Faculty of Dentistry, Chiang Mai University</b>
 	</div><br><br>
-
-	<div>
-		  <label style="font-size:20px;">HN : <?php echo $HN; ?></label>
-	</div><br>
 
   <?php
     $sql = "SELECT * FROM patients_info WHERE HN = '$HN'";
@@ -41,11 +41,11 @@ $harddate = $_POST['hard_date'];
 
   <table width="100%">
     <tr>
-      <th style="font-size: 20px;" align="left" colspan="4">Patient's History</th>
+      <th style="font-size: 18px;" align="left" colspan="5">Patient's History</th>
     </tr>
 
     <tr>
-      <th style="font-size: 15px;" align="left" colspan="4">
+      <th style="font-size: 15px;" align="left" colspan="5">
       <?php
         $searchMed = "SELECT * FROM medical_his WHERE HN = '$HN' AND Date = '$harddate'";
         $resultMed = $conn->query($searchMed);
@@ -56,7 +56,7 @@ $harddate = $_POST['hard_date'];
     </tr>
 
     <tr>
-      <td>
+      <td style="font-size: 12px;">
             <input type="checkbox"
               <?php
                  if($objresultMed['none'] == "1"){
@@ -72,7 +72,7 @@ $harddate = $_POST['hard_date'];
             None
       </td>
 
-      <td>
+      <td style="font-size: 12px;"> 
             <input type="checkbox"
               <?php
                  if($objresultMed['cardiovascular'] == "1"){
@@ -88,7 +88,7 @@ $harddate = $_POST['hard_date'];
             Cardiovascular Diseases
       </td>
 
-      <td>  
+      <td style="font-size: 12px;">  
             <input type="checkbox" 
               <?php
                  if($objresultMed['pulmonary'] == "1"){
@@ -105,7 +105,7 @@ $harddate = $_POST['hard_date'];
             Pulmonary Diseases
       </td>  
 
-      <td>
+      <td style="font-size: 12px;">
            <input type="checkbox" 
               <?php
                  if($objresultMed['gastrointestinal'] == "1"){
@@ -124,7 +124,7 @@ $harddate = $_POST['hard_date'];
     </tr>
 
     <tr>
-      <td colspan="2">
+      <td style="font-size: 12px;">
           <input type="checkbox" 
               <?php
                  if($objresultMed['hematologis'] == "1"){
@@ -139,9 +139,9 @@ $harddate = $_POST['hard_date'];
                  }
               ?>
            Hematologic Diseases
-      </td>  
+      </td>
 
-      <td colspan="2">
+      <td style="font-size:12px;">
           <input type="checkbox" 
               <?php
                  if($objresultMed['Neurologic'] == "1"){
@@ -157,10 +157,8 @@ $harddate = $_POST['hard_date'];
               ?>
            Neurologic Diseases
       </td>
-    </tr>
 
-    <tr>
-      <td colspan="2">
+      <td style="font-size:12px;">
         <input type="checkbox" 
               <?php
                  if($objresultMed['allergic'] != ""){
@@ -179,10 +177,10 @@ $harddate = $_POST['hard_date'];
            <?php echo $objresultMed['allergic']; ?>
       </td>
 
-      <td colspan="2">
+      <td style="font-size:12px;">
          <input type="checkbox"
               <?php
-               if($objresultMed['blood_pres'] != ""){
+               if($objresultMed['blood_pres1'] != ""){
                 ?>
                   checked="true" 
                   disabled="true">
@@ -193,13 +191,14 @@ $harddate = $_POST['hard_date'];
                 <?php
                }
             ?>
-          Blood Pressure (if needed): 
-           <?php echo $objresultMed['blood_pres']; ?>
+          Blood Pressure : 
+           <?php echo $objresultMed['blood_pres1']; ?>/<?php echo $objresultMed['blood_pres2']; ?>
       </td>
+
     </tr>
 
     <tr>
-      <td colspan="2">
+      <td style="font-size:12px;">
            <input type="checkbox" 
               <?php
                if($objresultMed['Other'] != ""){
@@ -217,7 +216,7 @@ $harddate = $_POST['hard_date'];
             <?php echo $objresultMed['Other']; ?>
       </td>
 
-      <td colspan="2">
+      <td style="font-size: 12px;">
          <input type="checkbox" 
             <?php
             if($objresultMed['taking_med'] != ""){
@@ -234,22 +233,20 @@ $harddate = $_POST['hard_date'];
           Taking medicine : &nbsp; 
          <?php echo $objresultMed['taking_med']; ?>
       </td>
-    </tr>
 
-    <tr>
-      <td colspan="2">
+      <td style="font-size:12px;">
             Personal Doctor :
             <?php echo $objresultMed['personal_doc']; ?>
       </td>
 
-      <td colspan="2">
+      <td style="font-size:12px;">
             Tel : 
             <?php echo $objresultMed['Tel']; ?>
       </td>
     </tr>
 
     <tr>
-      <td colspan="4">
+      <td colspan="4" style="font-size:12px;">
           Remark : 
           <?php echo $objresultMed['remark']; ?>
       </td>
@@ -260,7 +257,7 @@ $harddate = $_POST['hard_date'];
     </tr>
 
     <tr>
-      <td colspan="4">
+      <td colspan="4" style="font-size:12px;">
         <?php
           $searchDen = "SELECT * FROM dental_his WHERE HN = '$HN' AND Date = '$harddate'";
           $resultDen = $conn->query($searchDen);
@@ -272,16 +269,16 @@ $harddate = $_POST['hard_date'];
     </tr>
 
     <tr>
-      <td colspan="4">
+      <td colspan="4" style="font-size:12px;">
           History of Present Illness : 
           <?php echo $objresultDen['his_of_presentill']; ?>
       </td>
     </tr>
-  </table><br>
+  </table>
     
-  <table width="100%">
+  <table width="100%" border="1">
     <tr>
-      <th style="font-size:20px;" align="left" colspan="3">Examination</th>
+      <th style="font-size:18px;" align="left" colspan="3">Examination</th>
     </tr>
 
     <tr>
@@ -303,7 +300,7 @@ $harddate = $_POST['hard_date'];
     </tr>
       
     <tr>
-      <td>
+      <td style="font-size: 12px;" width="310">
         <?php
           $paininten = "SELECT * FROM pain_intensity WHERE paininten_id = '".$objresultSubj['paininten_id']."'";
           $resultpainin = $conn->query($paininten);
@@ -312,32 +309,55 @@ $harddate = $_POST['hard_date'];
         Pain intensity: <?php echo $objresultpainin['paininten_detail']; ?>
       </td>
       
-      <td>Extraoral:</td>
-      <td>
+      <td style="font-size: 12px;" width="400">Extraoral:
         <?php
           if($objresultObj['ext_facialswelling'] == "1"){
             ?>
               <input type="checkbox" checked="true" disabled="true">
-              <?php
-                $facialswell = "SELECT * FROM extra_facial WHERE facialswell_id = '".$objresultObj['facialswell_id']."'";
-                $resultfacial = $conn->query($facialswell);
-                $objresultfacial = mysqli_fetch_array($resultfacial);
-              ?>
-              Facial Swelling:
-              <?php echo $objresultfacial['facialswell_detail']; ?> 
+              Facial Swelling
             <?php
           }else{
             ?>
               <input type="checkbox" disabled="true">
-              Facial Swelling:
+              Facial Swelling
               <?php
           }
         ?>
+
+        <?php
+          if($objresultObj['ext_lymphnode'] == "1"){
+            ?>
+              <input type="checkbox" checked="true" disabled="true">
+              Lymph Node
+            <?php
+          }else{
+            ?>
+              <input type="checkbox" disabled="true">
+                Lymph Node
+            <?php
+          }
+        ?>
+
+        <?php
+          if($objresultObj['ext_sinustract'] == "1"){
+            ?>
+              <input type="checkbox" checked="true" disabled="true">
+               Sinus Tract
+            <?php
+          }else{
+            ?>
+              <input type="checkbox" disabled="true">
+              Sinus Tract
+            <?php
+          } 
+        ?>
+
+        Other: <?php echo $objresultObj['ext_other']; ?>
       </td>
     </tr>
 
     <tr>
-      <td>
+      <td style="font-size: 12px;">
         <?php
           $painchar = "SELECT * FROM pain_character WHERE painchar_id = '".$objresultSubj['painchar_id']."'";
           $resultpainchar = $conn->query($painchar);
@@ -347,97 +367,7 @@ $harddate = $_POST['hard_date'];
         Pain Character: <?php echo $objresultpainchar['painchar_detail']; ?>
       </td>
 
-      <td></td>
-      <td>
-        <?php
-          if($objresultObj['ext_lymphnode'] == "1"){
-            ?>
-              <input type="checkbox" checked="true" disabled="true">
-            <?php
-                $lymphnode = "SELECT * FROM extra_lymphnode WHERE lymphnode_id = '".$objresultObj['lymphnode_id']."'";
-                $resultlymphnode = $conn->query($lymphnode);
-                $objresultlymphnode = mysqli_fetch_array($resultlymphnode);
-            ?>
-                Lymph Node: 
-                <?php echo $objresultlymphnode['lymphnode_detail']; ?>
-            <?php
-          }else{
-            ?>
-              <input type="checkbox" disabled="true">
-                Lymph Node: 
-            <?php
-          }
-        ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        Onset: 
-          <?php 
-            if($objresultSubj['onset_spontOrstim'] == "0") {
-              echo "Spontaneous";
-            }else{
-              echo "Stimulation Required(".$objresultSubj['stimulation_detail'].")";
-            }
-
-          ?> 
-      </td>
-
-      <td></td>
-      <td>
-        <?php
-          if($objresultObj['ext_sinustract'] == "1"){
-            ?>
-              <input type="checkbox" checked="true" disabled="true">
-            <?php
-                $sinus = "SELECT * FROM extra_sinus WHERE sinustract_id = '".$objresultObj['sinustract_id']."'";
-                $resultsinus = $conn->query($sinus);
-                $objresultsinus = mysqli_fetch_array($resultsinus);
-            ?>
-              Sinus Tract:
-              <?php echo $objresultsinus['sinustract_detail']; ?>  
-            <?php
-          }else{
-            ?>
-              <input type="checkbox" disabled="true">
-              Sinus Tract: 
-            <?php
-          } 
-        ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <?php
-          $duration = "SELECT * FROM duration WHERE duration_id = '".$objresultSubj['duration_id']."'";
-          $resultduration = $conn->query($duration);
-          $objresultduration = mysqli_fetch_array($resultduration);
-        ?>
-
-        Duration: <?php echo $objresultduration['duration_detail']; ?>
-      </td>
-
-      <td></td>
-      <td>
-        Other: <?php echo $objresultObj['ext_other']; ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <?php
-          $location = "SELECT * FROM location WHERE location_id = '".$objresultSubj['locat_locOrdiff']."'";
-          $resultlocation = $conn->query($location);
-          $objresultlocation = mysqli_fetch_array($resultlocation);
-        ?>
-
-        Location: <?php echo $objresultlocation['location_detail']; ?>
-      </td>
-
-      <td>Intraoral:</td>
-      <td>
+      <td style="font-size: 12px;">Intraoral:
         <?php
               if($objresultObj['intra_swellsoftOrfirm'] == "0"){
                 $swell = "Soft";
@@ -445,31 +375,8 @@ $harddate = $_POST['hard_date'];
                 $swell = "Firm";
               }
             ?>
-              Sweling(<?php echo $swell; ?>) &nbsp; area : <?php echo $objresultObj['intra_swellarea']; ?>
-      </td>
-    </tr>
+              Sweling ( <?php echo $swell; ?> ) &nbsp; area : <?php echo $objresultObj['intra_swellarea']; ?> &nbsp;&nbsp;
 
-    <tr>
-      <td style="padding-left:60px">
-        <input type="checkbox"
-          <?php
-            if($objresultSubj['locat_radiating'] != ""){
-              ?>
-                  checked="true" 
-                  disabled="true">
-                <?php 
-            }else{
-               ?>
-                disabled="true">
-               <?php
-            }
-          ?>
-        &nbsp;Radiating to &nbsp;
-        <?php echo $objresultSubj['locat_radiating']; ?>
-      </td>
-
-      <td></td>
-      <td>
         <input type="radio" 
           <?php
             if($objresultObj['intra_sinustract'] != ""){
@@ -489,10 +396,11 @@ $harddate = $_POST['hard_date'];
     </tr>
 
     <tr>
-      <td style="padding-left:60px">
-        <input type="checkbox"
-            <?php
-            if($objresultSubj['locat_referred'] != ""){
+      <td style="font-size: 12px;">
+        Onset: 
+          <input type="checkbox"
+          <?php
+            if($objresultSubj['onset_spontaneous'] == 1){
               ?>
                   checked="true" 
                   disabled="true">
@@ -503,34 +411,52 @@ $harddate = $_POST['hard_date'];
                <?php
             }
           ?>
-        &nbsp;Referred to &nbsp;
-        <?php echo $objresultSubj['locat_referred']; ?>
+         Spontaneous &nbsp;
 
-      </td>
+         <?php
+         $stimu_id = $objresultSubj['stimulation_id'];
+         $stimulation = "SELECT * FROM stimulation_required WHERE stimulation_id = '$stimu_id'";
+         $resultObjstimu = $conn->query($stimulation);
+         $Objstimu = mysqli_fetch_array($resultObjstimu);
 
-      <td>Tooth:</td>
-      <td>
-        <input type="checkbox"
-              <?php
-                if($objresultObj['tooth_caries'] == "1"){
-                  ?>
-                    checked="true" 
-                    disabled="true">
-                  <?php 
-                }else{
-                 ?>
-                  disabled="true">
-                 <?php
-                }
+         ?>
+        
+          <input type="checkbox"
+          <?php 
+            if($objresultSubj['stimulation_id'] != "") {
               ?>
-             Caries
-      </td>
-    </tr>
+                  checked="true" 
+                  disabled="true">
+                  
+                <?php 
+                echo "Stimulation Required ( ".$Objstimu['stimulation_detail']." )";
+            }else{
+              ?>
+                disabled="true">
+                Stimulation Required()
+              <?php
+            }
 
-    <tr>
-      <td></td>
-      <td></td>
-      <td>
+          ?> 
+      </td>
+
+      <td style="font-size: 12px;">
+        Tooth:
+        <input type="checkbox"
+          <?php
+            if($objresultObj['tooth_caries'] == "1"){
+              ?>
+                checked="true" 
+                disabled="true">
+              <?php 
+            }else{
+             ?>
+              disabled="true">
+             <?php
+            }
+          ?>
+           Caries
+
         <input type="checkbox"
           <?php
           if($objresultObj['tooth_restoration'] != ""){
@@ -546,13 +472,7 @@ $harddate = $_POST['hard_date'];
             ?>
             Restoration with : &nbsp;
             <?php echo $objresultObj['tooth_restoration']; ?>
-      </td>
-    </tr>
 
-    <tr>
-      <td></td>
-      <td></td>
-      <td>
         <input type="checkbox"
           <?php
             if($objresultObj['tooth_pulpexposure'] == "1"){
@@ -566,56 +486,39 @@ $harddate = $_POST['hard_date'];
              <?php
             }
           ?>
-        Pulp Exposure      
-      </td>
-    </tr>
+        Pulp Exposure
 
-    <tr>
-      <td></td>
-      <td></td>
-      <td>
         <input type="checkbox"  
-              <?php
-                if($objresultObj['tooth_pulppolyp'] == "1"){
-                  ?>
-                    checked="true" 
-                    disabled="true">
-                  <?php 
-                }else{
-                 ?>
-                  disabled="true">
-                 <?php
-                }
+          <?php
+            if($objresultObj['tooth_pulppolyp'] == "1"){
               ?>
-            Pulp Polyp
-      </td>
-    </tr>
-
-    <tr>
-      <td></td>
-      <td></td>
-      <td>
-        <input type="checkbox"
-            <?php
-              if($objresultObj['tooth_fracture'] != ""){
-                ?>
-                  checked="true" 
-                  disabled="true">
-                <?php 
-              }else{
-               ?>
+                checked="true" 
                 disabled="true">
-               <?php
-              }
-            ?>
-            Fracture at &nbsp; <?php echo $objresultObj['tooth_fracture']; ?>
-      </td>
-    </tr>
+              <?php 
+            }else{
+             ?>
+              disabled="true">
+             <?php
+            }
+          ?>
+        Pulp Polyp
 
-    <tr>
-      <td></td>
-      <td></td>
-      <td>
+        <br>
+        <input type="checkbox"
+          <?php
+            if($objresultObj['tooth_fracture'] != ""){
+              ?>
+                checked="true" 
+                disabled="true">
+              <?php 
+            }else{
+             ?>
+              disabled="true">
+             <?php
+            }
+          ?>
+          Fracture at: &nbsp; <?php echo $objresultObj['tooth_fracture']; ?>
+
         <input type="checkbox"
             <?php
               if($objresultObj['tooth_crown'] != ""){
@@ -629,16 +532,10 @@ $harddate = $_POST['hard_date'];
                <?php
               }
             ?>
-            Crown Discoloration to &nbsp; 
+            Crown Discoloration to: &nbsp; 
             <?php echo $objresultObj['tooth_crown']; ?>
-      </td>
-    </tr>
 
-    <tr>
-      <td></td>
-      <td></td>
-      <td>
-        <input type="checkbox"  
+          <input type="checkbox"  
               <?php
                 if($objresultObj['tooth_open'] == "1"){
                   ?>
@@ -652,14 +549,8 @@ $harddate = $_POST['hard_date'];
                 }
               ?>
             Opened for Drainage
-      </td>
-    </tr>
 
-    <tr>
-      <td></td>
-      <td></td>
-      <td>
-        <input type="checkbox"
+          <input type="checkbox"
             <?php
             if($objresultObj['tooth_temp'] == "1"){
               ?>
@@ -673,13 +564,66 @@ $harddate = $_POST['hard_date'];
               }
             ?>
             Temp. Restoration
+
+          Other: <?php echo $objresultObj['tooth_other']; ?>
       </td>
     </tr>
 
     <tr>
-      <td></td>
-      <td></td>
-      <td> Other: <?php echo $objresultObj['tooth_other']; ?> </td>
+      <td style="font-size: 12px;">
+        <?php
+          $duration = "SELECT * FROM duration WHERE duration_id = '".$objresultSubj['duration_id']."'";
+          $resultduration = $conn->query($duration);
+          $objresultduration = mysqli_fetch_array($resultduration);
+        ?>
+
+        Duration: <?php echo $objresultduration['duration_detail']; ?>
+      </td>
+
+    </tr>
+
+    <tr>
+      <td style="font-size: 12px;">
+        <?php
+          $location = "SELECT * FROM location WHERE location_id = '".$objresultSubj['locat_locOrdiff']."'";
+          $resultlocation = $conn->query($location);
+          $objresultlocation = mysqli_fetch_array($resultlocation);
+        ?>
+
+        Location: <?php echo $objresultlocation['location_detail']; ?>
+
+        <input type="checkbox"
+          <?php
+            if($objresultSubj['locat_radiating'] != ""){
+              ?>
+                  checked="true" 
+                  disabled="true">
+                <?php 
+            }else{
+               ?>
+                disabled="true">
+               <?php
+            }
+          ?>
+        Radiating to: &nbsp;
+        <?php echo $objresultSubj['locat_radiating']; ?>
+
+        <input type="checkbox"
+            <?php
+            if($objresultSubj['locat_referred'] != ""){
+              ?>
+                  checked="true" 
+                  disabled="true">
+                <?php 
+            }else{
+               ?>
+                disabled="true">
+               <?php
+            }
+          ?>
+        Referred to: &nbsp;
+        <?php echo $objresultSubj['locat_referred']; ?>
+      </td>
     </tr>
   </table>
 

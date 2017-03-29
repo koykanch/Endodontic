@@ -120,13 +120,12 @@ $user = $_SESSION['username'];
 	<div class="panel-heading"><h3>ข้อมูลการรักษา</h3></div>
 	<div class="panel-body">
 
-    <div ng-controller="showdatacontroller ">
+    <div ng-controller="showdatacontroller">
     <form class="navbar-form" role="search">
         <div class="form-group">
             <p><input ng-model="sData"  class="form-control"  placeholder="ค้นหา"/></p>
         </div>
-     </form>
-
+     </form>       
 	    <table class="table table-bordered" border="1">
 	        <tr bgcolor="#D1C4E9">
 	            <td>รหัสผู้ป่วย</td>
@@ -140,6 +139,7 @@ $user = $_SESSION['username'];
             <?php
                 if($user != ""){
                     ?>
+                    {{showData | json}}
                     <tr ng-repeat="c in showData| filter:sData">
                       <td>{{c.HN}}</td>
                       <td>{{c.patientName}}</td>
@@ -175,7 +175,7 @@ $user = $_SESSION['username'];
                     <?php
                 }else{
                     ?>
-                    <tr ng-repeat="c in showData| filter:sData">
+                    <tr ng-repeat="c in showData| filter:sData">                     
                       <td>{{c.HN}}</td>
                       <td>{{c.patientName}}</td>
                       <td>{{c.hard_Date| date:'dd-MM-yyyy'}}</td>

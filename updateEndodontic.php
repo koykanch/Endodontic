@@ -875,8 +875,9 @@ function insertendorec() {
       <?php
         $searchExam = "SELECT * FROM examination WHERE HN = '$HN' AND Date = '$harddate'";
         $resultExam = $conn->query($searchExam);
-        $objresultExam = mysqli_fetch_array($resultExam);
+        
       ?>
+
 
         <table class="table table-bordered"> 
           <tr>
@@ -900,25 +901,27 @@ function insertendorec() {
             <th><div align="center">DL</div></th>
           </tr>
 
-          <tr>
+          <?php
+            $i=1;
+            while ($objresultExam = mysqli_fetch_array($resultExam)) {
+              ?>
+              <tr>
             <td>
-              <input type="text" name="numtooth1" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_tooth']; ?>">
+              <input type="text" name="numtooth<?php echo $i ?>" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_tooth']; ?>">
             </td>
             <td>
-              <input type="text" name="epttooth1" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_EPT']?>"></td>
+              <input type="text" name="epttooth<?php echo $i ?>" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_EPT']?>"></td>
             <td>
-              <select name="cold1" style="width: 55px;">
+              <select name="cold<?php echo $i ?>" style="width: 55px;">
                 <?php
                   if($objresultExam['exam_cold'] != ""){
                     $endo->selexamcold_edit($conn, $objresultExam['exam_cold']);
                   }else{
                     ?>
-                    <select name="cold1" style="width: 55px;">
                       <option value="">Please select</option>
                       <option value="WNL">WNL</option>
                       <option value="positive">positive</option>
                       <option value="negative">negative</option>
-                    </select>
                     <?php
                   }
                   
@@ -927,7 +930,7 @@ function insertendorec() {
             </td>
 
             <td>
-              <select name="heat1" style="width: 55px;">
+              <select name="heat<?php echo $i ?>" style="width: 55px;">
               <?php
                   if($objresultExam['exam_heat'] != ""){
                     $endo->selexamheat_edit($conn, $objresultExam['exam_heat']);
@@ -944,7 +947,7 @@ function insertendorec() {
             </td>
 
             <td>
-                <select name="perc1" style="width: 55px;">
+                <select name="perc<?php echo $i ?>" style="width: 55px;">
                 <?php
                   if($objresultExam['exam_perc'] != ""){
                     $endo->selexamperc_edit($conn, $objresultExam['exam_perc']);
@@ -961,7 +964,7 @@ function insertendorec() {
             </td>
 
             <td>
-              <select name="palp1" style="width: 55px;">
+              <select name="palp<?php echo $i ?>" style="width: 55px;">
               <?php
                 if($objresultExam['exam_palp'] != ""){
                   $endo->selexampalp_edit($conn, $objresultExam['exam_palp']);
@@ -978,7 +981,7 @@ function insertendorec() {
             </td>
 
             <td>
-              <select name="mobility1" style="width: 55px;">
+              <select name="mobility<?php echo $i ?>" style="width: 55px;">
               <?php
                 if($objresultExam['exam_mobility'] != ""){
                   $endo->selexammobility_edit($conn, $objresultExam['exam_mobility']);
@@ -994,14 +997,14 @@ function insertendorec() {
               </select>
             </td>
 
-            <td><input type="text" name="probe_mb1" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioMB'] ?>"></td>
-            <td><input type="text" name="probe_b1" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioB'] ?>"></td>
-            <td><input type="text" name="probe_db1" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioDB'] ?>"></td>
-            <td><input type="text" name="probe_ml1" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioML'] ?>"></td>
-            <td><input type="text" name="probe_l1" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioL'] ?>"></td>
-            <td><input type="text" name="probe_dl1" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioDL'] ?>"></td>
+            <td><input type="text" name="probe_mb<?php echo $i ?>" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioMB'] ?>"></td>
+            <td><input type="text" name="probe_b<?php echo $i ?>" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioB'] ?>"></td>
+            <td><input type="text" name="probe_db<?php echo $i ?>" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioDB'] ?>"></td>
+            <td><input type="text" name="probe_ml<?php echo $i ?>" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioML'] ?>"></td>
+            <td><input type="text" name="probe_l<?php echo $i ?>" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioL'] ?>"></td>
+            <td><input type="text" name="probe_dl<?php echo $i ?>" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioDL'] ?>"></td>
             <td>
-              <select name="special_test1" style="float:left; width:100px;">
+              <select name="special_test<?php echo $i ?>" style="float:left; width:100px;">
                 <?php
                
                   $endo->selspecialtest_edit($conn,$objresultExam['spectest_id']);
@@ -1010,117 +1013,11 @@ function insertendorec() {
               </select>
             </td>      
           </tr>
-
-          <tr>
-            <td>
-              <input type="text" name="numtooth2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_tooth']; ?>">
-            </td>
-            <td>
-              <input type="text" name="epttooth2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_EPT']?>"></td>
-            <td>
-              <select name="cold1" style="width: 55px;">
-                <?php
-                  if($objresultExam['exam_cold'] != ""){
-                    $endo->selexamcold_edit($conn, $objresultExam['exam_cold']);
-                  }else{
-                    ?>
-                    <select name="cold2" style="width: 55px;">
-                      <option value="">Please select</option>
-                      <option value="WNL">WNL</option>
-                      <option value="positive">positive</option>
-                      <option value="negative">negative</option>
-                    </select>
-                    <?php
-                  }
-                  
-                ?>
-              </select>
-            </td>
-
-            <td>
-              <select name="heat2" style="width: 55px;">
-              <?php
-                  if($objresultExam['exam_heat'] != ""){
-                    $endo->selexamheat_edit($conn, $objresultExam['exam_heat']);
-                  }else{
-                    ?>
-                      <option value="">Please select</option>
-                      <option value="WNL">WNL</option>
-                      <option value="positive">positive</option>
-                      <option value="negative">negative</option>
-                    <?php
-                  }
-              ?>
-              </select>
-            </td>
-
-            <td>
-                <select name="perc2" style="width: 55px;">
-                <?php
-                  if($objresultExam['exam_perc'] != ""){
-                    $endo->selexamperc_edit($conn, $objresultExam['exam_perc']);
-                  }else{
-                    ?>
-                  <option value="">Please select</option>
-                  <option value="WNL">WNL</option>
-                  <option value="positive">positive</option>
-                  <option value="negative">negative</option>
-                   <?php
-                  }
-              ?>
-                </select>
-            </td>
-
-            <td>
-              <select name="palp2" style="width: 55px;">
-              <?php
-                if($objresultExam['exam_palp'] != ""){
-                  $endo->selexampalp_edit($conn, $objresultExam['exam_palp']);
-                }else{
-                  ?>
-                <option value="">Please select</option>
-                <option value="WNL">WNL</option>
-                <option value="positive">positive</option>
-                <option value="negative">negative</option>
-                <?php
-                }
-              ?>
-              </select>
-            </td>
-
-            <td>
-              <select name="mobility2" style="width: 55px;">
-              <?php
-                if($objresultExam['exam_mobility'] != ""){
-                  $endo->selexammobility_edit($conn, $objresultExam['exam_mobility']);
-                }else{
-                  ?>
-               <option value="">Please select</option>
-               <option value="1">1</option>
-               <option value="2">2</option>
-               <option value="3">3</option>
-               <?php
-                }
-              ?>
-              </select>
-            </td>
-
-            <td><input type="text" name="probe_mb2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioMB'] ?>"></td>
-            <td><input type="text" name="probe_b2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioB'] ?>"></td>
-            <td><input type="text" name="probe_db2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioDB'] ?>"></td>
-            <td><input type="text" name="probe_ml2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioML'] ?>"></td>
-            <td><input type="text" name="probe_l2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioL'] ?>"></td>
-            <td><input type="text" name="probe_dl2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioDL'] ?>"></td>
-            <td>
-              <select name="special_test2" style="float:left; width:100px;">
-                <?php
-               
-                  $endo->selspecialtest_edit($conn,$objresultExam['spectest_id']);
-      
-                ?>
-              </select>
-            </td>      
-          </tr>
+          <?php
+           $i = $i+1;
+            }
+          ?>
+            
         </table>
 
       <br><br>
@@ -1602,7 +1499,7 @@ function insertendorec() {
               <label>&nbsp; Lateral Lesion &nbsp;</label>
               <input type="text" name="laterlessperirad1" style="width: 50px; height:20px; float:left;" value="<?php echo $objresultPerirad['perirad_lateral1']; ?>">
               <label style="font-size: 20px;"> X </label>&nbsp;  
-              <input type="text" name="laterlessperirad1" style="width: 50px; height:20px; float:left;" value="<?php echo $objresultPerirad['perirad_lateral2']; ?>">
+              <input type="text" name="laterlessperirad2" style="width: 50px; height:20px; float:left;" value="<?php echo $objresultPerirad['perirad_lateral2']; ?>">
           </div>
 
           <div class="col-md-2">
@@ -2092,7 +1989,7 @@ function insertendorec() {
         <?php 
             if($objresultTreatment['pulpectomy'] == "1"){
                 ?>
-                 checked = "true"                     
+                 checked = "true" >                    
                 <?php
             }else{
                echo ">";
@@ -2106,7 +2003,7 @@ function insertendorec() {
         <?php 
             if($objresultTreatment['non_sur_root'] == "1"){
                 ?>
-                 checked = "true"                   
+                 checked = "true" >                  
                 <?php
             }else{
                 echo ">";
@@ -2190,10 +2087,25 @@ function insertendorec() {
   </div>
 
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
             <label>&nbsp; Other : &nbsp;</label> 
             <textarea name="periradother" rows="3" cols="50" style="float:left;"><?php echo $objresultTreatment['treat_other']; ?></textarea>
     </div>
+
+<?php
+  $xray_harddate = substr($harddate, 0,10);
+  $searchXray = "SELECT * FROM patients_xray WHERE HN = '$HN' AND Date = '$xray_harddate'";
+  $resultXray = $conn->query($searchXray);
+  $objresultXray = mysqli_fetch_array($resultXray);
+  $datetime_Xray = $objresultXray['xray_datetime']; 
+
+?>
+
+    <div class="col-md-6">
+      <?php
+        echo '<img src="data:image/jpeg;base64,'.base64_encode( $objresultXray['xrayData'] ).'"style="width:350px; height:450px;"/>';
+      ?>
+  </div> 
   </div>
 
   <div class="row">
@@ -2276,15 +2188,7 @@ function insertendorec() {
     </div>  
   </div><br><br><br>
 
-<?php
-  $searchXray = "SELECT * FROM patients_xray WHERE HN = '$HN' AND Date = '$harddate'";
-  $resultXray = $conn->query($searchXray);
-  $objresultXray = mysqli_fetch_array($resultXray);
-  $datetime_Xray = $objresultXray['xray_datetime']; 
-  $date_Xray = substr($datetime_Xray, 0,10);
-  $time_Xray = substr($datetime_Xray, 11);
 
-?>
   <div class="row">
     <div class="col-md-5">
         <label>X-ray file:&nbsp;</label>
@@ -2293,20 +2197,16 @@ function insertendorec() {
 
     <div class="col-md-4">
         <label>X-ray date:&nbsp;</label>
-        <input type="date" name="xraydate" style="float:left;" value="<?php echo $date_Xray; ?>">
+        <input type="date" name="xraydate" style="float:left;" value="<?php echo substr($datetime_Xray, 0,10) ?>">
     </div>
 
     <div class="col-md-3">
         <label>X-ray time:&nbsp;</label>
-        <input type="time" name="xraytime" style="float:left;" value="<?php echo $time_Xray; ?>">
+        <input type="time" name="xraytime" style="float:left;" value="<?php echo substr($datetime_Xray, 11) ?>">
     </div>
   </div>
 
-  <div class="row">
-  <?php
-    echo '<img src="data:image/jpeg;base64,'.base64_encode( $objresultXray['xrayData'] ).'"style="width:100px; height:150px;"/>';
-    ?>
-  </div> 
+  
 </div>
 </div>
 </div>

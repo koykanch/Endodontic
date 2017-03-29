@@ -231,6 +231,7 @@ $probe_ml1 = $_POST['probe_ml1'];
 $probe_l1 = $_POST['probe_l1'];
 $probe_dl1 = $_POST['probe_dl1'];
 
+error_reporting(0);
 $numtooth2 = $_POST['numtooth2'];
 $ept2 = $_POST['epttooth2'];
 $cold2 = $_POST['cold2'];
@@ -694,8 +695,25 @@ $xrayfile = addslashes(file_get_contents($_FILES['xrayfile']['tmp_name']));
 $xraydate = $_POST['xraydate'];
 $xraytime = $_POST['xraytime'];
 
-$update_xray = "INSERT INTO patients_xray VALUES('$HN','$datedemo','$xrayfile','$xraydate'"."'$xraytime','$edit_time','$edit_by')";
+$update_xray = "INSERT INTO patients_xray(HN,Date,xrayData,xray_datetime,edit_date,edit_by) VALUES('$HN','$datedemo','$xrayfile','$xraydate'"."'$xraytime','$edit_time','$edit_by')";
 $result_xray = $conn->query($update_xray);
 
-echo 'Error description: '.mysqli_error($conn);
+if($result_endo === TRUE && $result_med === TRUE && $result_dental === TRUE && $result_subject === TRUE && $result_object === TRUE && $result_examination1 === TRUE && $result_radiocrown === TRUE && $result_radiopulpcham === TRUE && $result_radioroot === TRUE && $result_radiopulpcanal=== TRUE && $result_radioperirad === TRUE && $result_alveolar === TRUE && $result_pulpaldiag === TRUE && $result_periraddiag === TRUE && $result_treatment === TRUE && $result_xray === TRUE ){
+
+    	?>
+    		<script>
+    			window.alert('Success');
+   				//window.location = "endorecord.php";
+    		</script>
+    	<?php
+
+    }else{
+    	?>
+    		<script>
+    			window.alert('Unsuccess');
+    			//window.location = "endorecord.php";
+    		</script>
+    	<?php
+    	echo "Error description: " . mysqli_error($conn);
+    }
 ?>
