@@ -1,11 +1,12 @@
 <?php
 require('connect.php');
+$hn = $_POST['hn'];
 $name = $_POST['patientname'];
 $gender = $_POST['gender'];
 $birth = $_POST['patientbirth'];
 $sub_gender = substr($gender, 0,1);
 
- $sql = "INSERT INTO patients_info (patientName, gender, birthdate) VALUES('$name','$sub_gender','$birth')";
+ $sql = "INSERT INTO patients_info VALUES('$hn','$name','$sub_gender','$birth')";
  if($conn->query($sql) === TRUE){
  	?>
    <script type="text/javascript">

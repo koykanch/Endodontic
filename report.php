@@ -6,6 +6,7 @@ require_once('mpdf/mpdf.php');
 ob_start();
 
 require('connect.php');
+$sq = $_POST['seqnum'];
 $HN = $_POST['PatientHN'];
 $stucode = $_POST['Stu_code'];
 $dent = $_POST['Dent_id'];
@@ -47,7 +48,7 @@ $harddate = $_POST['hard_date'];
     <tr>
       <th style="font-size: 15px;" align="left" colspan="5">
       <?php
-        $searchMed = "SELECT * FROM medical_his WHERE HN = '$HN' AND Date = '$harddate'";
+        $searchMed = "SELECT * FROM medical_his WHERE Seq_no = '$sq'";
         $resultMed = $conn->query($searchMed);
         $objresultMed = mysqli_fetch_array($resultMed);
       ?>
@@ -259,7 +260,7 @@ $harddate = $_POST['hard_date'];
     <tr>
       <td colspan="4" style="font-size:12px;">
         <?php
-          $searchDen = "SELECT * FROM dental_his WHERE HN = '$HN' AND Date = '$harddate'";
+          $searchDen = "SELECT * FROM dental_his WHERE Seq_no = '$sq'";
           $resultDen = $conn->query($searchDen);
           $objresultDen = mysqli_fetch_array($resultDen);
         ?>  
@@ -276,14 +277,14 @@ $harddate = $_POST['hard_date'];
     </tr>
   </table>
     
-  <table width="100%" border="1">
+  <table width="100%">
     <tr>
       <th style="font-size:18px;" align="left" colspan="3">Examination</th>
     </tr>
 
     <tr>
     <?php
-      $searchSubj = "SELECT * FROM subject_symptom WHERE HN = '$HN' AND Date = '$harddate'";
+      $searchSubj = "SELECT * FROM subject_symptom WHERE Seq_no = '$sq'";
       $resultSubj = $conn->query($searchSubj);
       $objresultSubj = mysqli_fetch_array($resultSubj);
     ?>
@@ -291,7 +292,7 @@ $harddate = $_POST['hard_date'];
       <th style="font-size:15px;" align="left"><u>S.Subjective Symptoms</u></th>
 
       <?php
-        $searchObj = "SELECT * FROM object_symptom WHERE HN='$HN' AND Date = '$harddate'";
+        $searchObj = "SELECT * FROM object_symptom WHERE Seq_no = '$sq'";
         $resultObj = $conn->query($searchObj);
         $objresultObj = mysqli_fetch_array($resultObj);
       ?>
@@ -420,7 +421,7 @@ $harddate = $_POST['hard_date'];
          $Objstimu = mysqli_fetch_array($resultObjstimu);
 
          ?>
-        
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <input type="checkbox"
           <?php 
             if($objresultSubj['stimulation_id'] != "") {
@@ -503,7 +504,7 @@ $harddate = $_POST['hard_date'];
           ?>
         Pulp Polyp
 
-        <br>
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input type="checkbox"
           <?php
             if($objresultObj['tooth_fracture'] != ""){
@@ -517,7 +518,7 @@ $harddate = $_POST['hard_date'];
              <?php
             }
           ?>
-          Fracture at: &nbsp; <?php echo $objresultObj['tooth_fracture']; ?>
+          Fracture at : <?php echo $objresultObj['tooth_fracture']; ?>
 
         <input type="checkbox"
             <?php
@@ -532,9 +533,10 @@ $harddate = $_POST['hard_date'];
                <?php
               }
             ?>
-            Crown Discoloration to: &nbsp; 
+            Crown Discoloration to: 
             <?php echo $objresultObj['tooth_crown']; ?>
 
+          <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <input type="checkbox"  
               <?php
                 if($objresultObj['tooth_open'] == "1"){
@@ -565,7 +567,7 @@ $harddate = $_POST['hard_date'];
             ?>
             Temp. Restoration
 
-          Other: <?php echo $objresultObj['tooth_other']; ?>
+          Other : <?php echo $objresultObj['tooth_other']; ?>
       </td>
     </tr>
 
@@ -605,7 +607,7 @@ $harddate = $_POST['hard_date'];
                <?php
             }
           ?>
-        Radiating to: &nbsp;
+        Radiating to : 
         <?php echo $objresultSubj['locat_radiating']; ?>
 
         <input type="checkbox"
@@ -621,7 +623,7 @@ $harddate = $_POST['hard_date'];
                <?php
             }
           ?>
-        Referred to: &nbsp;
+        Referred to : 
         <?php echo $objresultSubj['locat_referred']; ?>
       </td>
     </tr>
@@ -630,73 +632,95 @@ $harddate = $_POST['hard_date'];
   
       <div style="font-size: 15px;"><b>Examination: </b></div>
       <?php
-        $searchExam = "SELECT * FROM examination WHERE HN = '$HN' AND Date = '$harddate'";
+        $searchExam = "SELECT * FROM examination WHERE Seq_no = '$sq'";
         $resultExam = $conn->query($searchExam);
-        $objresultExam = mysqli_fetch_array($resultExam);
+        
       ?>
       <div>
         <table border="1" cellpadding="5" cellspacing="2">
               <tr>
-                <th rowspan="2">Tooth</th>
-                <th rowspan="2">EPT</th>
-                <th rowspan="2">Cold</th>
-                <th rowspan="2">Heat</th>
-                <th rowspan="2">Perc<sup>n</sup></th>
-                <th rowspan="2">Palp<sup>n</sup></th>
-                <th rowspan="2">Mobility</th>
-                <th colspan="6">Pero Probe (mm)</th>
+                <th rowspan="2" style="font-size: 12px;">Tooth</th>
+                <th rowspan="2" style="font-size: 12px;">EPT</th>
+                <th rowspan="2" style="font-size: 12px;">Cold</th>
+                <th rowspan="2" style="font-size: 12px;">Heat</th>
+                <th rowspan="2" style="font-size: 12px;">Perc<sup>n</sup></th>
+                <th rowspan="2" style="font-size: 12px;">Palp<sup>n</sup></th>
+                <th rowspan="2" style="font-size: 12px;">Mobility</th>
+                <th colspan="6" style="font-size: 12px;">Pero Probe (mm)</th>
 
-                <th rowspan="2">Special Test<br>(if necessary)</th>
+                <th rowspan="2" style="font-size: 12px;">Special Test<br>(if necessary)</th>
               </tr>
               <tr>
-                <th>MB</th>
-                <th>B</th>
-                <th>DB</th>
-                <th>ML</th>
-                <th>L</th>
-                <th>DL</th>
+                <th style="font-size: 12px;">MB</th>
+                <th style="font-size: 12px;">B</th>
+                <th style="font-size: 12px;">DB</th>
+                <th style="font-size: 12px;">ML</th>
+                <th style="font-size: 12px;">L</th>
+                <th style="font-size: 12px;">DL</th>
               </tr> 
               
-              <tr>
-                <td><?php echo $objresultExam['exam_tooth']; ?></td>
-                <td><?php echo $objresultExam['exam_EPT']; ?></td>
-                <td>
-                    <?php 
-                  if($objresultExam['exam_cold'] == "1"){
-                      echo '+';
-                  }else{
-                      echo '-';
-                  } ?>
-                </td>
-
-                <td>
+              <?php while ($objresultExam = mysqli_fetch_array($resultExam)) {
+                ?>
+                <tr>
+                <td style="font-size: 12px;"><?php echo $objresultExam['exam_tooth']; ?></td>
+                <td style="font-size: 12px;"><?php echo $objresultExam['exam_EPT']; ?></td>
+                <td style="font-size: 12px;">
                   <?php 
-                    if($objresultExam['exam_heat'] == "1"){
+                    if($objresultExam['exam_cold'] == "WNL"){
+                        echo 'WNL';
+                    }else if($objresultExam['exam_cold'] == "positive"){
                         echo '+';
-                    }else{
+                    }else if($objresultExam['exam_cold'] == "negative"){
                         echo '-';
-                    } ?>
+                    }else{
+                        echo '';
+                    }
+                  ?>
                 </td>
 
-                <td>
+                <td style="font-size: 12px;">
                   <?php 
-                  if($objresultExam['exam_perc'] == "1"){
-                      echo '+';
-                  }else{
-                      echo '-';
-                  } ?>
-                </td>
-
-                <td>
-                  <?php 
-                    if($objresultExam['exam_palp'] == "1"){
+                    if($objresultExam['exam_heat'] == "WNL"){
+                        echo 'WNL';
+                    }else if($objresultExam['exam_heat'] == "positive"){
                         echo '+';
-                    }else{
+                    }else if($objresultExam['exam_heat'] == "negative"){
                         echo '-';
-                    } ?>
+                    }else{
+                        echo '';
+                    }
+                  ?>
                 </td>
 
-                <td>
+                <td style="font-size: 12px;">
+                  <?php 
+                    if($objresultExam['exam_perc'] == "WNL"){
+                        echo 'WNL';
+                    }else if($objresultExam['exam_perc'] == "positive"){
+                        echo '+';
+                    }else if($objresultExam['exam_perc'] == "negative"){
+                        echo '-';
+                    }else{
+                        echo '';
+                    }
+                  ?>
+                </td>
+
+                <td style="font-size: 12px;">
+                  <?php 
+                    if($objresultExam['exam_palp'] == "WNL"){
+                        echo 'WNL';
+                    }else if($objresultExam['exam_palp'] == "positive"){
+                        echo '+';
+                    }else if($objresultExam['exam_palp'] == "negative"){
+                        echo '-';
+                    }else{
+                        echo '';
+                    }
+                  ?>
+                </td>
+
+                <td style="font-size: 12px;">
                   <?php 
                     if($objresultExam['exam_mobility'] == "1"){
                         echo '<font>1<sup>0</sup></font>'; 
@@ -710,31 +734,31 @@ $harddate = $_POST['hard_date'];
                   ?>
                 </td>
                     
-                <td>
+                <td style="font-size: 12px;">
                   <?php echo $objresultExam['exam_perioMB']; ?>
                 </td>
 
-                <td>
+                <td style="font-size: 12px;">
                   <?php echo $objresultExam['exam_perioB']; ?>
                 </td>
 
-                <td>
+                <td style="font-size: 12px;">
                   <?php echo $objresultExam['exam_perioDB']; ?>
                 </td>
 
-                <td>
+                <td style="font-size: 12px;">
                   <?php echo $objresultExam['exam_perioML']; ?>
                 </td>
 
-                <td>
+                <td style="font-size: 12px;">
                   <?php echo $objresultExam['exam_perioL']; ?>
                 </td>
 
-                <td>
+                <td style="font-size: 12px;">
                   <?php echo $objresultExam['exam_perioDL']; ?>
                 </td>
 
-                <td>
+                <td style="font-size: 12px;">
                   <?php
                     $specialtest = "SELECT * FROM special_test WHERE spectest_id = '".$objresultExam['spectest_id']."'";
                     $resultspecialtest = $conn->query($specialtest);
@@ -744,21 +768,22 @@ $harddate = $_POST['hard_date'];
                   ?>
                 </td>
               </tr>
-          </table><br>
+                <?php
+              }
+              ?>
+        </table>
 
         <table cellpadding="4">
             <tr>
-              <th style="font-size:15px;" colspan="4" align="left"><u>Radiographic findings</u></th>
+              <th style="font-size:15px;" align="left"><u>Radiographic findings</u></th>
             </tr>
 
             <tr>
-              <td>
+              <td style="font-size:12px;">
                 <b>Crown:</b>
-              </td>
-
-              <td>
+             
               <?php
-                $searchRadio = "SELECT * FROM radiograph_crown WHERE HN = '$HN' AND Date = '$harddate'";
+                $searchRadio = "SELECT * FROM radiograph_crown WHERE Seq_no = '$sq'";
                 $resultRadio = $conn->query($searchRadio);
                 $objresultRadio = mysqli_fetch_array($resultRadio);  
               ?>
@@ -775,9 +800,7 @@ $harddate = $_POST['hard_date'];
                       <?php 
                   } ?>
                Normal 
-              </td>
 
-              <td>
                   <input type="checkbox"
                   <?php 
                     if($objresultRadio['crown_caries'] == "1"){
@@ -809,9 +832,8 @@ $harddate = $_POST['hard_date'];
                     }else{
                         echo '';
                     } ?>
-              </td>
 
-              <td>
+          
                 <input type="checkbox"
                     <?php 
                       if($objresultRadio['crown_restoration'] == "1"){
@@ -825,12 +847,7 @@ $harddate = $_POST['hard_date'];
                           <?php 
                       } ?>
                    Restoration 
-              </td>
-            </tr>
-
-            <tr>
-              <td></td>
-              <td>
+              
                 <input type="checkbox"
                   <?php 
                     if($objresultRadio['crown_fracture'] == "1"){
@@ -843,22 +860,18 @@ $harddate = $_POST['hard_date'];
                          disabled = "true" >
                         <?php 
                     } ?>
-                 Fracture
-              </td>
+                 Fracture  / &nbsp;
 
-              <td colspan="2">
                 Other : &nbsp; 
                 <?php echo $objresultRadio['crown_other']; ?>
               </td>
             </tr>
           
-
         <tr>
-          <td><b>Pulp Chambar:</b></td>
+          <td style="font-size:12px;"><b>Pulp Chambar:</b>
 
-          <td>
             <?php
-              $searchPulpcham = "SELECT * FROM radiograph_pulpcham WHERE HN = '$HN' AND Date = '$harddate'";
+              $searchPulpcham = "SELECT * FROM radiograph_pulpcham WHERE Seq_no = '$sq'";
               $resultPulpcham = $conn->query($searchPulpcham);
               $objresultPulpcham = mysqli_fetch_array($resultPulpcham);
             ?>
@@ -877,9 +890,7 @@ $harddate = $_POST['hard_date'];
               } 
             ?>
             Normal 
-          </td>
 
-          <td>
             <input type="checkbox"
             <?php 
               if($objresultPulpcham['pulpcham_calPartOrComp'] != ""){
@@ -901,9 +912,7 @@ $harddate = $_POST['hard_date'];
                   <?php 
               } 
             ?>
-          </td>
 
-          <td>
             <input type="checkbox"
             <?php 
                   if($objresultPulpcham['pulpcham_pulpstone'] == "1"){
@@ -918,12 +927,7 @@ $harddate = $_POST['hard_date'];
                   } 
             ?>
             Pulp Stone
-          </td>
-        </tr>
 
-        <tr>
-          <td></td>
-          <td>
             <input type="checkbox"
             <?php 
                   if($objresultPulpcham['pulpcham_resorption'] == "1"){
@@ -937,10 +941,8 @@ $harddate = $_POST['hard_date'];
                       <?php 
                   } 
             ?>
-            Resorption
-          </td>
+            Resorption / &nbsp;
 
-          <td colspan="2">
               Other : 
               <?php echo $objresultPulpcham['pulpcham_other']; ?>
           </td>
@@ -948,16 +950,14 @@ $harddate = $_POST['hard_date'];
       
         <tr>
           <?php
-            $searchRoot = "SELECT * FROM radiograph_root WHERE HN = '$HN' AND Date = '$harddate'";
+            $searchRoot = "SELECT * FROM radiograph_root WHERE Seq_no = '$sq'";
             $resultRoot = $conn->query($searchRoot);
             $objresultRoot = mysqli_fetch_array($resultRoot); 
           ?>
 
-          <td>
+          <td style="font-size:12px;">
               <b>Root: </b>
-          </td>
-
-          <td>
+      
               <input type="checkbox" 
                 <?php 
                     if($objresultRoot['root_normal'] == "1"){
@@ -972,9 +972,7 @@ $harddate = $_POST['hard_date'];
                     } 
                 ?>
               Normal 
-          </td>
-
-          <td>
+        
               <input type="checkbox"
             <?php 
               if($objresultRoot['root_caries'] == "1"){
@@ -989,9 +987,7 @@ $harddate = $_POST['hard_date'];
               } 
             ?>
               Caries
-          </td>
-
-          <td>
+       
               <input type="checkbox"
               <?php 
                 if($objresultRoot['root_curvature'] == "1"){
@@ -1006,12 +1002,7 @@ $harddate = $_POST['hard_date'];
                 } 
               ?>
                 Curvature
-          </td>
-        </tr>
 
-        <tr>
-          <td></td>
-          <td>
               <input type="checkbox"
                 <?php 
                   if($objresultRoot['root_extresorption'] == "1"){
@@ -1026,9 +1017,7 @@ $harddate = $_POST['hard_date'];
                   } 
                 ?>
                  Ext. Resorption
-          </td>
 
-          <td>
               <input type="checkbox"
                 <?php 
                   if($objresultRoot['root_fracture'] == "1"){
@@ -1042,26 +1031,22 @@ $harddate = $_POST['hard_date'];
                       <?php 
                   } 
                 ?>
-                 Fracture
-          </td>
-
-          <td>
+                 Fracture / &nbsp;
+        
               Other : <?php echo $objresultRoot['root_other']; ?>
           </td>
         </tr>
 
         <tr>
-          <td>
+          <td style="font-size:12px;">
             <?php
-              $searchPulpcan = "SELECT * FROM radiograph_pulpcanal WHERE HN = '$HN' AND Date = '$harddate'";
+              $searchPulpcan = "SELECT * FROM radiograph_pulpcanal WHERE Seq_no = '$sq'";
               $resultPulpcan = $conn->query($searchPulpcan);
               $objresultPulpcan = mysqli_fetch_array($resultPulpcan); 
             ?>
 
             <b>Pulp Canal:</b>
-          </td>
-
-          <td>
+          
             <input type="checkbox"
             <?php 
                 if($objresultPulpcan['pulpcan_normal'] == "1"){
@@ -1076,9 +1061,7 @@ $harddate = $_POST['hard_date'];
                 } 
             ?>
           Normal
-          </td>
-
-          <td>
+        
             <input type="checkbox"
             <?php 
                 if($objresultPulpcan['pulpcan_calPartOrComp'] != ""){
@@ -1099,9 +1082,7 @@ $harddate = $_POST['hard_date'];
                     <?php 
                 } 
             ?>
-          </td>
 
-          <td>
             <input type="checkbox"
             <?php 
                 if($objresultPulpcan['pulpcan_resorption'] == "1"){
@@ -1116,13 +1097,7 @@ $harddate = $_POST['hard_date'];
                 } 
             ?>
             Resorption
-          </td>
-        </tr>
 
-        <tr>
-          <td></td>
-
-          <td>
             <input type="checkbox"
             <?php 
                 if($objresultPulpcan['pulpcan_perforation'] == "1"){
@@ -1137,9 +1112,7 @@ $harddate = $_POST['hard_date'];
                 } 
             ?>
             Perforation
-          </td>
-
-          <td>
+         
             <input type="checkbox"
             <?php 
                 if($objresultPulpcan['pulpcan_previousRCT'] == "1"){
@@ -1154,9 +1127,8 @@ $harddate = $_POST['hard_date'];
                 } 
             ?>
            Previous RCT
-          </td>
-
-          <td>
+    
+     
             <input type="checkbox"
             <?php 
                 if($objresultPulpcan['pulpcan_broken'] == "1"){
@@ -1170,28 +1142,21 @@ $harddate = $_POST['hard_date'];
                     <?php 
                 } 
             ?>
-            Broken Instrument
-          </td>
-        </tr>
+            Broken Instrument <br> &emsp;&emsp;&emsp;&emsp;&emsp;
 
-        <tr>
-          <td></td>
-          <td colspan="3">
             Other : <?php echo $objresultPulpcan['pulpcan_other']; ?>
           </td>
         </tr>
 
         <tr>
-          <td>
+          <td style="font-size:12px;">
             <?php
-              $searchPerirad = "SELECT * FROM radiograph_perirad WHERE HN = '$HN' AND Date = '$harddate'";
+              $searchPerirad = "SELECT * FROM radiograph_perirad WHERE Seq_no = '$sq'";
               $resultPerirad = $conn->query($searchPerirad);
               $objresultPerirad = mysqli_fetch_array($resultPerirad);   
             ?>
             <b>Periradicular:</b>
-          </td>
-
-          <td>
+    
             <input type="checkbox" 
               <?php 
                   if($objresultPerirad['perirad_normal'] == "1"){
@@ -1206,9 +1171,7 @@ $harddate = $_POST['hard_date'];
                   } 
               ?>
            Normal 
-          </td>
-
-          <td>
+   
             <input type="checkbox"
               <?php 
                   if($objresultPerirad['perirad_wideningPDL'] == "1"){
@@ -1223,9 +1186,7 @@ $harddate = $_POST['hard_date'];
                   } 
               ?>
                 Widening PDL
-          </td>
-
-          <td>
+ 
             <input type="checkbox"
               <?php 
                     if($objresultPerirad['perirad_lossoflam'] == "1"){
@@ -1240,12 +1201,7 @@ $harddate = $_POST['hard_date'];
                     } 
               ?>
               Loss of Lamina Dura
-          </td>
-        </tr>
 
-        <tr>
-          <td></td>
-          <td>
             <input type="checkbox"
               <?php 
                 if($objresultPerirad['perirad_periapical'] != ""){
@@ -1263,9 +1219,7 @@ $harddate = $_POST['hard_date'];
                     <?php 
                 } 
               ?>
-          </td>
 
-          <td>
             <input type="checkbox"
               <?php 
                 if($objresultPerirad['perirad_lateral'] != ""){
@@ -1283,9 +1237,7 @@ $harddate = $_POST['hard_date'];
                 } 
 
               ?>
-          </td>
 
-          <td>
             <input type="checkbox"
               <?php 
                 if($objresultPerirad['perirad_resorption'] == "1"){
@@ -1300,12 +1252,8 @@ $harddate = $_POST['hard_date'];
                 } 
               ?>
             Resorption 
-          </td>
-        </tr>
 
-        <tr>
-          <td></td>
-          <td>
+            <br> &emsp;&emsp;&emsp;&emsp;&emsp;
             <input type="checkbox"
               <?php 
                 if($objresultPerirad['perirad_openapex'] == "1"){
@@ -1320,9 +1268,7 @@ $harddate = $_POST['hard_date'];
                 } 
               ?>
               Open Apex 
-          </td>
 
-          <td>
              <input type="checkbox"
                 <?php 
                   if($objresultPerirad['perirad_osteos'] == "1"){
@@ -1337,9 +1283,7 @@ $harddate = $_POST['hard_date'];
                   } 
                 ?>
               OsteosIcerosis
-          </td>
 
-          <td>
             <input type="checkbox"
               <?php 
                 if($objresultPerirad['perirad_hyper'] == "1"){
@@ -1353,28 +1297,21 @@ $harddate = $_POST['hard_date'];
                     <?php 
                 } 
               ?>
-             Hyperplasia of cementurn
-          </td>
-        </tr>
+             Hyperplasia of cementurn / &nbsp;
 
-        <tr>
-          <td></td>
-          <td colspan="3">
               Other : <?php echo $objresultPerirad['perirad_other']; ?>
           </td>
         </tr>
 
         <tr>
-          <td>
+          <td style="font-size:12px;">
             <?php
-              $searchAlveolar = "SELECT * FROM radiograph_alveolar WHERE HN = '$HN' AND Date = '$harddate'";
+              $searchAlveolar = "SELECT * FROM radiograph_alveolar WHERE Seq_no = '$sq'";
               $resultAlveolar = $conn->query($searchAlveolar);
               $objresultAlveolar = mysqli_fetch_array($resultAlveolar);
             ?>
             <b>Alveolar Bone: </b>
-          </td>
-
-          <td>
+     
             <input type="radio"
               <?php 
                 if($objresultAlveolar['bone_normal'] == "1"){
@@ -1389,9 +1326,7 @@ $harddate = $_POST['hard_date'];
                 } 
               ?>
             Normal 
-          </td>
-
-          <td>
+     
             <input type="radio" 
               <?php
                 if($objresultAlveolar['bone_genOrlocal'] != "" && $objresultAlveolar['bone_genOrlocal'] == "0"){
@@ -1406,9 +1341,7 @@ $harddate = $_POST['hard_date'];
                 }
               ?>
              Generalized Bone loss
-          </td>
-
-          <td>
+         
             <input type="radio"
               <?php
                 if($objresultAlveolar['bone_genOrlocal'] != "" && $objresultAlveolar['bone_genOrlocal'] == "1"){
@@ -1422,41 +1355,36 @@ $harddate = $_POST['hard_date'];
                   <?php
                 }
               ?>
-            &nbsp; Localized Bone loss
-          </td>
-        </tr>
-
-        <tr>
-          <td></td>
-          <td colspan="3">
+            &nbsp; Localized Bone loss / &nbsp;
+  
             Other : <?php echo $objresultAlveolar['bone_other']; ?>
           </td>
         </tr>
 
         <tr>
-          <td><b>Remarks: </b></td>
-          <td colspan="3"><?php echo $objresultAlveolar['remark']; ?></td>
+          <td style="font-size:12px;"><b>Remarks: </b>
+          <?php echo $objresultAlveolar['remark']; ?></td>
         </tr>
       </table><br>
 
-      <table cellpadding="5">
+      <table style="margin-top: 8em;">
         <?php
-          $searchPulpaldiag = "SELECT * FROM pulpal_diagnosis WHERE HN = '$HN' AND Date = '$harddate'";
+          $searchPulpaldiag = "SELECT * FROM pulpal_diagnosis WHERE Seq_no = '$sq'";
           $resultPulpaldiag = $conn->query($searchPulpaldiag);
           $objresultPulpaldiag = mysqli_fetch_array($resultPulpaldiag);
         ?>
       <tr>
-        <th style="font-size: 20px;" align="left" colspan="2">Diagnosis</th>
+        <th style="font-size: 15px;" align="left" colspan="2">Diagnosis</th>
       </tr>
 
-      <tr>
-        <td style="font-size: 15px;" width="80%">
+      <tr> 
+        <td style="font-size: 12px; width: 230px;">
             <b>Pulpal Diagnosis</b>
         </td>
 
-        <td style="font-size: 15px;" width="80%">
+        <td style="font-size: 12px;">
           <?php
-            $searchPeriraddiag = "SELECT * FROM periradicular_diagnosis WHERE HN = '$HN' AND Date = '$harddate'";
+            $searchPeriraddiag = "SELECT * FROM periradicular_diagnosis WHERE Seq_no = '$sq'";
             $resultPeriraddiag = $conn->query($searchPeriraddiag);
             $objresultPeriraddiag = mysqli_fetch_array($resultPeriraddiag);
           ?>
@@ -1465,8 +1393,8 @@ $harddate = $_POST['hard_date'];
       </tr>
 
       <tr>    
-        <td>
-          <input type="checkbox" 
+        <td style="font-size: 12px;">
+          <input type="checkbox"  
           <?php 
                 if($objresultPulpaldiag['normal'] == "1"){
                     ?>
@@ -1482,7 +1410,7 @@ $harddate = $_POST['hard_date'];
           Normal 
         </td>
 
-        <td>
+        <td style="font-size: 12px;">
           <input type="checkbox"
             <?php 
                   if($objresultPeriraddiag['Normal'] == "1"){
@@ -1501,7 +1429,7 @@ $harddate = $_POST['hard_date'];
       </tr>
 
       <tr>
-        <td>
+        <td style="font-size: 12px;">
           <input type="radio"
           <?php 
                 if($objresultPulpaldiag['ReverOrIrreversiblepulp'] != "" && $objresultPulpaldiag['ReverOrIrreversiblepulp'] == "0"){
@@ -1518,7 +1446,7 @@ $harddate = $_POST['hard_date'];
             Reversible Pulpitis
         </td>
 
-        <td>
+        <td style="font-size: 12px;">
           <input type="radio" 
             <?php 
                   if($objresultPeriraddiag['sympOrasympt_apical'] == "0"){
@@ -1537,7 +1465,7 @@ $harddate = $_POST['hard_date'];
       </tr>
 
       <tr>
-        <td>
+        <td style="font-size: 12px;">
           <input type="radio"
           <?php 
                 if($objresultPulpaldiag['ReverOrIrreversiblepulp'] != "" && $objresultPulpaldiag['ReverOrIrreversiblepulp'] == "1"){
@@ -1554,7 +1482,7 @@ $harddate = $_POST['hard_date'];
           Irreversible Pulpitis
         </td>
 
-        <td>
+        <td style="font-size: 12px;">
           <input type="radio" 
             <?php 
                   if($objresultPeriraddiag['sympOrasympt_apical'] == "1"){
@@ -1572,8 +1500,8 @@ $harddate = $_POST['hard_date'];
         </td>
       </tr>
 
-      <tr style="margin-left:2em;">
-        <td>
+      <tr>
+        <td style="font-size: 12px; padding-left:2em;">
           <input type="radio"  
           <?php 
               if($objresultPulpaldiag['ReverOrIrreversiblepulp'] != "" && $objresultPulpaldiag['ReverOrIrreversiblepulp'] == "1" && $objresultPulpaldiag['Irreversible_sympOrasymp'] == "1"){
@@ -1590,7 +1518,7 @@ $harddate = $_POST['hard_date'];
           Symptomatic
         </td>
 
-        <td>
+        <td style="font-size: 12px;">
           <input type="radio"
             <?php 
                   if($objresultPeriraddiag['acuteOrchronic_apical'] == "0"){
@@ -1608,8 +1536,8 @@ $harddate = $_POST['hard_date'];
         </td>
       </tr>
 
-      <tr style="margin-left:2em;">
-        <td>
+      <tr>
+        <td style="padding-left:2em; font-size: 12px;">
           <input type="radio"
            <?php 
               if($objresultPulpaldiag['ReverOrIrreversiblepulp'] != "" && $objresultPulpaldiag['ReverOrIrreversiblepulp'] == "1" && $objresultPulpaldiag['Irreversible_sympOrasymp'] == "0"){
@@ -1626,7 +1554,7 @@ $harddate = $_POST['hard_date'];
          Asymtomatic
         </td>
 
-        <td>
+        <td style="font-size: 12px;"> 
            <input type="radio"
             <?php 
                 if($objresultPeriraddiag['acuteOrchronic_apical'] == "1"){
@@ -1645,7 +1573,7 @@ $harddate = $_POST['hard_date'];
       </tr>
 
       <tr>
-        <td>
+        <td style="font-size: 12px;">
           <input type="checkbox"
             <?php 
                 if($objresultPulpaldiag['pulp_necrosis'] == "1"){
@@ -1662,14 +1590,14 @@ $harddate = $_POST['hard_date'];
            Pulp Necrosis 
         </td>
 
-        <td>
+        <td style="font-size: 12px;">
           Other : <?php $objresultPeriraddiag['other']; ?>
         </td>
 
       </tr>
 
       <tr>
-        <td>
+        <td style="font-size: 12px;">
           <input type="checkbox"
             <?php 
                 if($objresultPulpaldiag['prev_initiat'] == "1"){
@@ -1689,7 +1617,7 @@ $harddate = $_POST['hard_date'];
       </tr>
 
       <tr>
-        <td>
+        <td style="font-size: 12px;">
           <input type="checkbox"
             <?php 
                 if($objresultPulpaldiag['prev_treated'] == "1"){
@@ -1716,21 +1644,21 @@ $harddate = $_POST['hard_date'];
         </td>
         <td></td>
       </tr>
-    </table><br><br><br><br><br><br><br><br><br>
+    </table>
 
-    <table>
+    <table style="margin-top: 1em;">
       <?php
-        $searchTreatment = "SELECT * FROM treatment_plan WHERE HN = '$HN' AND Date = '$harddate'";
+        $searchTreatment = "SELECT * FROM treatment_plan WHERE Seq_no = '$sq'";
         $resultTreatment = $conn->query($searchTreatment);
         $objresultTreatment = mysqli_fetch_array($resultTreatment);
       ?>
 
       <tr>
-        <th style="font-size:20px;" align="left" colspan="3">Treatment Planning</th>
+        <th style="font-size:15px;" align="left">Treatment Planning</th>
       </tr>
 
       <tr>
-        <td>
+        <td style="font-size: 12px;">
           <input type="checkbox"
           <?php 
               if($objresultTreatment['no_treatment'] == "1"){
@@ -1746,12 +1674,10 @@ $harddate = $_POST['hard_date'];
           ?>
          No Treatment
         </td>
-        <td></td>
-        <td></td>
       </tr>
 
       <tr>
-        <td>
+        <td style="font-size: 12px;">
           <input type="checkbox"
         <?php 
             if($objresultTreatment['Pulpotomy'] == "1"){
@@ -1776,12 +1702,10 @@ $harddate = $_POST['hard_date'];
             } 
         ?>
         </td>
-        <td></td>
-        <td></td>
       </tr>
 
       <tr>
-        <td>
+        <td style="font-size: 12px;">
           <input type="checkbox"
           <?php 
             if($objresultTreatment['pulpectomy'] == "1"){
@@ -1797,12 +1721,10 @@ $harddate = $_POST['hard_date'];
         ?>
         Pulpectomy
         </td>
-        <td></td>
-        <td></td>
       </tr>
 
       <tr>
-        <td>
+        <td style="font-size: 12px;">
           <input type="checkbox"
           <?php 
             if($objresultTreatment['non_sur_root'] == "1"){
@@ -1818,12 +1740,10 @@ $harddate = $_POST['hard_date'];
         ?>
         Non-surgical Root Canel Treatment
         </td>
-        <td></td>
-        <td></td>
       </tr>
 
       <tr>
-        <td>
+        <td style="font-size: 12px;">
           <input type="checkbox"
         <?php 
             if($objresultTreatment['non_sur_retreat'] == "1"){
@@ -1839,12 +1759,10 @@ $harddate = $_POST['hard_date'];
         ?>
         Non-surgical Retreatment
         </td>
-        <td></td>
-        <td></td>
       </tr>
 
       <tr>
-        <td>
+        <td style="font-size: 12px;">
           <input type="checkbox"
           <?php 
             if($objresultTreatment['apexification'] == "1"){
@@ -1860,12 +1778,10 @@ $harddate = $_POST['hard_date'];
         ?>
         Apexification
         </td>
-        <td></td>
-        <td></td>
       </tr>
 
       <tr>
-        <td>
+        <td style="font-size: 12px;">
           <input type="checkbox"
           <?php 
             if($objresultTreatment['intentionalRCT'] == "1"){
@@ -1881,12 +1797,10 @@ $harddate = $_POST['hard_date'];
         ?>
         Intentional RCT
         </td>
-        <td></td>
-        <td></td>
       </tr>
 
       <tr>
-        <td>
+        <td style="font-size: 12px;">
           <input type="checkbox"
           <?php 
             if($objresultTreatment['sur_root'] == "1"){
@@ -1902,12 +1816,10 @@ $harddate = $_POST['hard_date'];
         ?>
         Surgical Root Canel Treatment
         </td>
-        <td></td>
-        <td></td>
       </tr>
 
       <tr>
-        <td>
+        <td style="font-size: 12px;">
           <input type="checkbox"
           <?php 
             if($objresultTreatment['perio_consult'] == "1"){
@@ -1923,37 +1835,32 @@ $harddate = $_POST['hard_date'];
         ?>
         Perio Consult
         </td>
-        <td></td>
-        <td></td>
       </tr>
 
       <tr>
-        <td>
+        <td style="font-size: 12px;">
          Other : <?php echo $objresultTreatment['treat_other']; ?>
         </td>
-        <td></td>
-        <td></td>
       </tr>
 
       <tr>
-        <td colspan="3" height="20"></td>
+        <td height="15"></td>
       </tr>
+
       <tr>
-        <td>
+        <td style="font-size: 12px;">
           <b> Plan for final restoration: </b>
         <?php echo $objresultTreatment['plan_for_final']; ?>
         </td>
-        <td></td>
-        <td></td>
       </tr>
 
       <tr>
-        <td colspan="3" height="20"></td>
+        <td height="15"></td>
       </tr>
       <tr>
-        <td>
+        <td style="font-size: 12px;">
           <b>Pre-op treatment: </b>
-      <input type="radio"
+      <input type="checkbox"
         <?php 
           if($objresultTreatment['pre_op_treat_caries'] == "1"){
               ?>
@@ -1967,10 +1874,8 @@ $harddate = $_POST['hard_date'];
           } 
       ?>
        Caries Removal 
-        </td>
 
-        <td>
-          <input type="radio" 
+          <input type="checkbox" 
         <?php 
           if($objresultTreatment['pre_op_treat_dam'] == "1"){
               ?>
@@ -1984,15 +1889,13 @@ $harddate = $_POST['hard_date'];
           } 
       ?>
        Dam
-        </td>
 
-        <td>
            Other : <?php echo $objresultTreatment['pre_op_treat_other']; ?>
         </td>
       </tr>
 
       <tr>
-        <td>
+        <td style="font-size: 12px;">
           <b>Anesthesia: </b>
             <input type="radio"
               <?php 
@@ -2008,9 +1911,7 @@ $harddate = $_POST['hard_date'];
                 } 
             ?>
             Required 
-        </td>
 
-        <td>
           <input type="radio" style="float:left;"
             <?php 
               if($objresultTreatment['Anest_reqOrnotreq'] == "0"){
@@ -2026,9 +1927,34 @@ $harddate = $_POST['hard_date'];
           ?>
           Not required
         </td>
-        <td></td>
       </tr>
-    </table>
+    </table><br><br>
+
+    <?php
+      $xray_harddate = substr($harddate, 0,10);
+      $searchXray = "SELECT * FROM patients_xray WHERE Seq_no = '$sq'";
+      $resultXray = $conn->query($searchXray);
+      $objresultXray = mysqli_fetch_array($resultXray); 
+    ?>
+
+    <?php
+        echo '<img src="data:image/jpeg;base64,'.base64_encode( $objresultXray['xrayData'] ).'"style="width:200px; height:300px; float:center;"/>';
+
+    $searchStuname = "SELECT * FROM dentalstudent_info WHERE student_code = '$stucode'";
+    $resultStuname = $conn->query($searchStuname);
+    $objresultStuname = mysqli_fetch_array($resultStuname);
+
+    $searchDentname = "SELECT * FROM dentist_info WHERE dentId = '$dent'";
+    $resultDentname = $conn->query($searchDentname);
+    $objresultDentname = mysqli_fetch_array($resultDentname);
+
+    $date = substr($harddate, 0,10);
+    ?>
+    <p style="font-size: 14px; margin-left: 32em"><b>Dental student: </b><?php echo $objresultStuname['student_name']; ?></p>
+    <p style="font-size: 14px; margin-left: 32em"><b>Instructor: </b><?php echo $objresultDentname['dent_name']; ?></p>
+    <p style="font-size: 14px; margin-left: 32em"><b>Date: </b><?php echo $date; ?></p>
+
+
 
 <!-- Javascript -->
 <script src="assets/js/multi-step-form.js" type="text/javascript"></script>

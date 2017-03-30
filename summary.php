@@ -128,6 +128,7 @@ $user = $_SESSION['username'];
      </form>       
 	    <table class="table table-bordered" border="1">
 	        <tr bgcolor="#D1C4E9">
+                <td>ลำดับที่</td>
 	            <td>รหัสผู้ป่วย</td>
 	            <td>ชื่อผู้ป่วย</td>
 	            <td>ประจำวันที่</td>
@@ -141,12 +142,14 @@ $user = $_SESSION['username'];
                     ?>
                     {{showData | json}}
                     <tr ng-repeat="c in showData| filter:sData">
+                      <td>{{c.Seq_no}}</td>
                       <td>{{c.HN}}</td>
                       <td>{{c.patientName}}</td>
                       <td>{{c.hard_Date| date:'dd-MM-yyyy'}}</td>
                       <td>{{c.student_code}}</td>
                       <td>{{c.dentId}}</td>
                       <td><form action="report.php" method="post" name="summary" target="_blank">
+                        <input type="hidden" name="seqnum" value="{{c.Seq_no}}">
                         <input type="hidden" name="PatientHN" value="{{c.HN}}">
                         <input type="hidden" name="Stu_code" value="{{c.student_code}}">
                         <input type="hidden" name="Dent_id" value="{{c.dentId}}">
@@ -156,6 +159,7 @@ $user = $_SESSION['username'];
                       </form><br>
 
                       <form action="updateEndodontic.php" method="post" name="edit_detail" target="_blank">
+                        <input type="hidden" name="seqnum" value="{{c.Seq_no}}">
                         <input type="hidden" name="PatientHN" value="{{c.HN}}">
                         <input type="hidden" name="Stu_code" value="{{c.student_code}}">
                         <input type="hidden" name="Dent_id" value="{{c.dentId}}">
@@ -165,6 +169,7 @@ $user = $_SESSION['username'];
                       </form><br>
 
                       <form action="deleteEndodontic.php" method="post" name="delete_detail">
+                        <input type="hidden" name="seqnum" value="{{c.Seq_no}}">
                         <input type="hidden" name="PatientHN" value="{{c.HN}}">
                         <input type="hidden" name="Stu_code" value="{{c.student_code}}">
                         <input type="hidden" name="Dent_id" value="{{c.dentId}}">
@@ -175,13 +180,15 @@ $user = $_SESSION['username'];
                     <?php
                 }else{
                     ?>
-                    <tr ng-repeat="c in showData| filter:sData">                     
+                    <tr ng-repeat="c in showData| filter:sData"> 
+                      <td>{{c.Seq_no}}</td>                    
                       <td>{{c.HN}}</td>
                       <td>{{c.patientName}}</td>
                       <td>{{c.hard_Date| date:'dd-MM-yyyy'}}</td>
                       <td>{{c.student_code}}</td>
                       <td>{{c.dentId}}</td>
                       <td><form action="report.php" method="post" name="summary" target="_blank">
+                            <input type="hidden" name="seqnum" value="{{c.Seq_no}}">
                             <input type="hidden" name="PatientHN" value="{{c.HN}}">
                             <input type="hidden" name="Stu_code" value="{{c.student_code}}">
                             <input type="hidden" name="Dent_id" value="{{c.dentId}}">

@@ -192,6 +192,11 @@ if(isset($_SESSION['username'])){
                     <div class="panel-body">
                     <table>
                     <tr height="80">
+                        <td width="30%"><b>HN: </b></td>
+                        <td><input type="text" name="hn" maxlength="9"></td>
+                    </tr>
+
+                    <tr height="80">
                         <td width="30%"><b>Patient's name: </b></td>
                         <td><input type="text" name="patientname" maxlength="100"></td>
                     </tr>

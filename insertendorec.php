@@ -77,7 +77,7 @@ $personal_doctor = $_POST['personalmed'];
 $tel = $_POST['telmed'];
 $remark_medical = $_POST['remarkmed'];
 
- //  echo 'HN :'.$HN.'<br>date :'.$datedemo.'<br>none :'.$none.'<br>cardiovascular :'.$cardiovascular.'<br>pulmonary :'.$pulmonary.'<br>gastrointestinal :'.$gastrointestinal.'<br>hematologic :'.$hematologic.'<br>neurologic :'.$neurologic.'<br>allergic_to :'.$allergic_to.'<br>blood_pressure :'.$blood_pressure1.'<br>blood_pressure:'.$blood_pressure2.'<br>other :'.$other_medical.'<br>taking_medicine :'.$taking_medicine.'<br>personal_doctor :'.$personal_doctor.'<br>tel :'.$tel.'<br>remark :'.$remark_medical;
+   // echo 'HN :'.$HN.'<br>date :'.$datedemo.'<br>none :'.$none.'<br>cardiovascular :'.$cardiovascular.'<br>pulmonary :'.$pulmonary.'<br>gastrointestinal :'.$gastrointestinal.'<br>hematologic :'.$hematologic.'<br>neurologic :'.$neurologic.'<br>allergic_to :'.$allergic_to.'<br>blood_pressure :'.$blood_pressure1.'<br>blood_pressure:'.$blood_pressure2.'<br>other :'.$other_med.'<br>taking_medicine :'.$taking_medicine.'<br>personal_doctor :'.$personal_doctor.'<br>tel :'.$tel.'<br>remark :'.$remark_medical;
  $insert_medical = "INSERT INTO medical_his (HN, Date, none, cardiovascular, pulmonary, gastrointestinal, hematologis, Neurologic, allergic, blood_pres1, blood_pres2, Other, taking_med, personal_doc, Tel, remark, date_treatment)VALUES('$HN','$datedemo'"."'$timedemo',b'$none',b'$cardiovascular',b'$pulmonary',b'$gastrointestinal',b'$hematologic',b'$neurologic','$allergic_to','$blood_pressure1','$blood_pressure2','$other_med','$taking_medicine','$personal_doctor','$tel','$remark_medical','$datedemo')";
 $result_med = $conn->query($insert_medical);
 
@@ -815,23 +815,23 @@ $xraytime = $_POST['xraytime'];
 $insert_xray = "INSERT INTO patients_xray(HN,Date,xrayData,xray_datetime) VALUES('$HN','$datedemo','$xrayfile','$xraydate'"."'$xraytime')";
 $result_xray = $conn->query($insert_xray);
 
- if($result_endo === TRUE && $result_med === TRUE && $result_dental === TRUE && $result_subject === TRUE && $result_object === TRUE && $result_examination1 === TRUE && $result_radiocrown === TRUE && $result_radiopulpcham === TRUE && $result_radioroot === TRUE && $result_radiopulpcanal === TRUE && $result_radioperirad === TRUE && $result_alveolar === TRUE && $result_pulpaldiag === TRUE && $result_periraddiag === TRUE && $result_treatment === TRUE && $result_xray === TRUE){
+   if($result_endo === TRUE && $result_med === TRUE  && $result_dental === TRUE && $result_subject === TRUE && $result_object === TRUE && $result_examination1 === TRUE && $result_radiocrown === TRUE && $result_radiopulpcham === TRUE && $result_radioroot === TRUE &&  $result_radiopulpcanal === TRUE && $result_radioperirad === TRUE && $result_alveolar === TRUE && $result_pulpaldiag === TRUE && $result_periraddiag === TRUE && $result_treatment === TRUE && $result_xray === TRUE){
 
-    	?>
-    		<script>
-    			window.alert('Success');
-   				//window.location = "endorecord.php";
-    		</script>
-    	<?php
+     	?>
+     		<script>
+     			window.alert('Success');
+    				//window.location = "endorecord.php";
+     		</script>
+     	<?php
 
-    }else{
+     }else{
     	?>
-    		<script>
-    			window.alert('Unsuccess');
-    			//window.location = "endorecord.php";
-    		</script>
-    	<?php
-    	echo "Error description: " . mysqli_error($conn);
-    }
-    	
+     		<script>
+     			window.alert('Unsuccess');
+     			//window.location = "endorecord.php";
+     		</script>
+     	<?php
+     	echo "Error description: " . mysqli_error($conn);
+     	echo "<br>Error description: " . mysqli_error($result_med);
+     }  	
 ?>

@@ -11,13 +11,16 @@ $edit_time = date('Y-m-d H:i:s');
  $dent = $_POST['dent_id'];
  $datedemo = $_POST['datedemo'];
  $timedemo = $_POST['endo_time'];
- $image = addslashes(file_get_contents($_FILES['f1']['tmp_name']));
-
+ if(addslashes(file_get_contents($_FILES['f1']['tmp_name'])) == ""){
+ 	$image = "";
+ }else{
+ 	$image = addslashes(file_get_contents($_FILES['f1']['tmp_name']));
+ }
 // // echo 'edit by: '.$edit_by.'<br>';
 // // echo 'edit time: '.$edit_time.'<br>';
 // // echo 'date: '.$datedemo.'<br>';
 // // echo 'time: '.$timedemo.'<br>';
-  $update_endo = "INSERT INTO dent_hardcopy VALUES('$HN','$edit_time','$stu','$dent','$image','$datedemo','$edit_by')";
+  $update_endo = "INSERT INTO dent_hardcopy (HN, hard_Date, student_code, dentId, hardcopyData, date_treatment,edit_by)VALUES('$HN','$edit_time','$stu','$dent','$image','$datedemo','$edit_by')";
   $result_endo = $conn->query($update_endo);
 
 // //Patient's History----Medical History
@@ -83,14 +86,14 @@ $tel = $_POST['telmed'];
 $remark_medical = $_POST['remarkmed'];
 
 //  // echo 'HN :'.$HN.'<br>date :'.$datedemo.'<br>none :'.$none.'<br>cardiovascular :'.$cardiovascular.'<br>pulmonary :'.$pulmonary.'<br>gastrointestinal :'.$gastrointestinal.'<br>hematologic :'.$hematologic.'<br>neurologic :'.$neurologic.'<br>allergic_to :'.$allergic_to.'<br>blood_pressure :'.$blood_pressure.'<br>other :'.$other_medical.'<br>taking_medicine :'.$taking_medicine.'<br>personal_doctor :'.$personal_doctor.'<br>tel :'.$tel.'<br>remark :'.$remark_medical;
-$update_medical = "INSERT INTO medical_his VALUES('$HN','$edit_time',b'$none',b'$cardiovascular',b'$pulmonary',b'$gastrointestinal',b'$hematologic',b'$neurologic','$allergic_to','$blood_pressure1','$blood_pressure2','$other_med','$taking_medicine','$personal_doctor','$tel','$remark_medical','$datedemo','$edit_by')";
+$update_medical = "INSERT INTO medical_his (HN, Date, none, cardiovascular, pulmonary, gastrointestinal, hematologis, Neurologic, allergic, blood_pres1, blood_pres2, Other, taking_med, personal_doc, Tel, remark, date_treatment, edit_by)VALUES('$HN','$edit_time',b'$none',b'$cardiovascular',b'$pulmonary',b'$gastrointestinal',b'$hematologic',b'$neurologic','$allergic_to','$blood_pressure1','$blood_pressure2','$other_med','$taking_medicine','$personal_doctor','$tel','$remark_medical','$datedemo','$edit_by')";
 $result_med = $conn->query($update_medical);
 
 // //Patient's History----Dental History
 $chief_complaint = $_POST['chiefdent'];
 $present_illness = $_POST['presentilldent'];
 
-$update_dental = "INSERT INTO dental_his VALUES('$HN','$edit_time','$chief_complaint','$present_illness','$datedemo','$edit_by')";
+$update_dental = "INSERT INTO dental_his (HN, Date, chief_complaint, his_of_presentill, date_treatment, edit_by)VALUES('$HN','$edit_time','$chief_complaint','$present_illness','$datedemo','$edit_by')";
 $result_dental = $conn->query($update_dental);
 
 // //Examination----S.Subjective Symptoms
@@ -126,7 +129,7 @@ if(isset($_POST['locat_referred'])){
 }
 
 // // echo 'HN :'.$HN.'<br>date :'.$datedemo.'<br>pain inten :'.$pain_intensity.'<br>pain char :'.$pain_character.'<br>duration :'.$duration.'<br>location :'.$location.'<br>onset :'.$onset.'<br>onsetstimul :'.$onsetstimul.'<br>location_radiat : '.$location_radiat.'<br>refer :'.$refer;
-  $update_subject = "INSERT INTO subject_symptom VALUES('$HN','$edit_time','$pain_intensity','$pain_character','$duration','$location',b'$onset','$onsetstimul','$onset_other','$location_radiat','$refer','$datedemo','$edit_by')";
+  $update_subject = "INSERT INTO subject_symptom(HN, Date, paininten_id, painchar_id, duration_id, locat_locOrdiff, onset_spontaneous, stimulation_id, onset_other, locat_radiating, locat_referred, date_treatment, edit_by) VALUES('$HN','$edit_time','$pain_intensity','$pain_character','$duration','$location',b'$onset','$onsetstimul','$onset_other','$location_radiat','$refer','$datedemo','$edit_by')";
   $result_subject = $conn->query($update_subject);
 
 //Examination----O.Objective Symptoms 
@@ -213,7 +216,7 @@ if(isset($_POST['crowntooth'])){ //chek with checkbox name(fracturetoration is n
 
 $toothother = $_POST['toothother'];
 
-$update_object = "INSERT INTO object_symptom VALUES('$HN','$edit_time',b'$extrafacial_check',b'$extralymph_check',b'$extrasinus_check','$extraother',b'$swellsoftorfirm','$intraswell_area','$intrasinus',b'$tooth_caries','$restoration_with',b'$tooth_pulpexpo',b'$tooth_pulppoly','$fracture_at','$crown_discoloration',b'$tooth_open',b'$tooth_temp','$toothother','$datedemo','$edit_by')";
+$update_object = "INSERT INTO object_symptom (HN, Date, ext_facialswelling, ext_lymphnode, ext_sinustract, ext_other, intra_swellsoftOrfirm, intra_swellarea, intra_sinustract, tooth_caries, tooth_restoration, tooth_pulpexposure, tooth_pulppolyp, tooth_fracture, tooth_crown, tooth_open, tooth_temp, tooth_other, date_treatment, edit_by) VALUES('$HN','$edit_time',b'$extrafacial_check',b'$extralymph_check',b'$extrasinus_check','$extraother',b'$swellsoftorfirm','$intraswell_area','$intrasinus',b'$tooth_caries','$restoration_with',b'$tooth_pulpexpo',b'$tooth_pulppoly','$fracture_at','$crown_discoloration',b'$tooth_open',b'$tooth_temp','$toothother','$datedemo','$edit_by')";
 $result_object = $conn->query($update_object);
 
 //Examination----Examination 
@@ -248,22 +251,22 @@ $probe_dl2 = $_POST['probe_dl2'];
 if($_POST['special_test1'] != ""){
 	//echo "spec1";
 	$special_test1 = $_POST['special_test1'];
-	$update_examination1 = "INSERT INTO examination VALUES('$HN','$edit_time','$numtooth1','$ept1','$cold1','$heat1','$perc1','$palp1','$mobility1','$probe_mb1','$probe_b1','$probe_db1','$probe_ml1','$probe_l1','$probe_dl1','$special_test1','$datedemo','$edit_by')";
+	$update_examination1 = "INSERT INTO examination (HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, spectest_id, date_treatment ,edit_by) VALUES('$HN','$edit_time','$numtooth1','$ept1','$cold1','$heat1','$perc1','$palp1','$mobility1','$probe_mb1','$probe_b1','$probe_db1','$probe_ml1','$probe_l1','$probe_dl1','$special_test1','$datedemo','$edit_by')";
 	$result_examination1 = $conn->query($update_examination1);
 }else if($_POST['special_test1'] == ""){
 	//echo "spec1/1";
-	$update_examination1 = "INSERT INTO examination VALUES('$HN','$edit_time','$numtooth1','$ept1','$cold1','$heat1','$perc1','$palp1','$mobility1','$probe_mb1','$probe_b1','$probe_db1','$probe_ml1','$probe_l1','$probe_dl1','$datedemo','$edit_by')";
+	$update_examination1 = "INSERT INTO examination (HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, date_treatment ,edit_by) VALUES('$HN','$edit_time','$numtooth1','$ept1','$cold1','$heat1','$perc1','$palp1','$mobility1','$probe_mb1','$probe_b1','$probe_db1','$probe_ml1','$probe_l1','$probe_dl1','$datedemo','$edit_by')";
 	$result_examination1 = $conn->query($update_examination1);
 }
 
 if($_POST['numtooth2'] != "" && $_POST['special_test2'] != ""){
 	//echo "spec2";
 	$special_test2 = $_POST['special_test2'];
-	$update_examination2 = "INSERT INTO examination VALUES('$HN','$edit_time','$numtooth2','$ept2','$cold2','$heat2','$perc2','$palp2','$mobility2','$probe_mb2','$probe_b2','$probe_db2','$probe_ml2','$probe_l2','$probe_dl2','$special_test2','$datedemo','$edit_by')";
+	$update_examination2 = "INSERT INTO examination (HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, spectest_id, date_treatment, edit_by) VALUES('$HN','$edit_time','$numtooth2','$ept2','$cold2','$heat2','$perc2','$palp2','$mobility2','$probe_mb2','$probe_b2','$probe_db2','$probe_ml2','$probe_l2','$probe_dl2','$special_test2','$datedemo','$edit_by')";
 	$result_examination2 = $conn->query($update_examination2);
 }else if($_POST['numtooth2'] != "" && $_POST['special_test2'] == ""){
 	//echo "spec2/1";
-	$update_examination2 = "INSERT INTO examination VALUES('$HN','$edit_time','$numtooth2','$ept2','$cold2','$heat2','$perc2','$palp2','$mobility2','$probe_mb2','$probe_b2','$probe_db2','$probe_ml2','$probe_l2','$probe_dl2','$datedemo','$edit_by')";
+	$update_examination2 = "INSERT INTO examination (HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, date_treatment, edit_by)VALUES('$HN','$edit_time','$numtooth2','$ept2','$cold2','$heat2','$perc2','$palp2','$mobility2','$probe_mb2','$probe_b2','$probe_db2','$probe_ml2','$probe_l2','$probe_dl2','$datedemo','$edit_by')";
 	$result_examination2 = $conn->query($update_examination2);
 }
 
@@ -303,7 +306,7 @@ if($normcrown == 0 && $cariescrown == 1){
 $crownother = $_POST['crownother'];
 
 // //echo 'HN: '.$HN.'<br>date: '.$datedemo.'<br>normcrown:'.$normcrown.'<br>cariescrown:'.$cariescrown.'<br>crowarea:'.$crowarea.'<br>crowdepth:'.$crowdepth.'<br>restcrown:'.$restcrown.'<br>fractcrown:'.$fractcrown.'<br>crownother:'.$crownother;
- $update_radiocrown = "INSERT INTO radiograph_crown VALUES('$HN','$edit_time',b'$normcrown',b'$cariescrown','$crowarea','$crowdepth',b'$restcrown',b'$fractcrown','$crownother','$datedemo','$edit_by')";
+ $update_radiocrown = "INSERT INTO radiograph_crown (HN, Date, crown_normal, crown_caries, crown_cariesarea, crown_cariesdepth, crown_restoration, crown_fracture, crown_other, date_treatment, edit_by)VALUES('$HN','$edit_time',b'$normcrown',b'$cariescrown','$crowarea','$crowdepth',b'$restcrown',b'$fractcrown','$crownother','$datedemo','$edit_by')";
  $result_radiocrown = $conn->query($update_radiocrown);
 
  // // //Radiograph_pulpcham
@@ -331,7 +334,7 @@ if(isset($_POST['calcificatecham'])&& $pulpcham_normal == 0){
 }
 $pulpchamother = $_POST['pulpchamother'];
 
-$update_radiopulpcham = "INSERT INTO radiograph_pulpcham VALUES('$HN','$edit_time',b'$pulpcham_normal','$pulpcham_partorcomp',b'$pulpcham_stone',b'$pulpcham_resorp','$pulpchamother','$datedemo','$edit_by')";
+$update_radiopulpcham = "INSERT INTO radiograph_pulpcham(HN, Date, pulpcham_normal, pulpcham_calPartOrComp, pulpcham_pulpstone, pulpcham_resorption, pulpcham_other, date_treatment, edit_by) VALUES('$HN','$edit_time',b'$pulpcham_normal','$pulpcham_partorcomp',b'$pulpcham_stone',b'$pulpcham_resorp','$pulpchamother','$datedemo','$edit_by')";
 $result_radiopulpcham = $conn->query($update_radiopulpcham);
 
 // // //Radiograph_root
@@ -367,7 +370,7 @@ if(isset($_POST['fractroot']) && $root_normal == 0){
 
 $root_other = $_POST['root_other'];
 
-$update_radioroot = "INSERT INTO radiograph_root VALUES('$HN','$edit_time',b'$root_normal',b'$root_caries',b'$root_curvature',b'$root_extresorp',b'$root_fracture','$root_other','$datedemo','$edit_by')";
+$update_radioroot = "INSERT INTO radiograph_root (HN, Date, root_normal, root_caries, root_curvature, root_extresorption, root_fracture, root_other, date_treatment, edit_by) VALUES('$HN','$edit_time',b'$root_normal',b'$root_caries',b'$root_curvature',b'$root_extresorp',b'$root_fracture','$root_other','$datedemo','$edit_by')";
 $result_radioroot = $conn->query($update_radioroot);
 
 // //Radiograph_pulpcanal
@@ -412,7 +415,7 @@ if(isset($_POST['calcificatecanel']) && $pulpcan_normal == 0){ //check with chec
 
 $pulpcanother = $_POST['pulpcanother'];
 
-$update_radiopulpcanal = "INSERT INTO radiograph_pulpcanal VALUES('$HN','$edit_time',b'$pulpcan_normal','$pulpcan_selcal',b'$pulpcan_resorp',b'$pulpcan_perfor',b'$pulpcan_prev',b'$pulpcan_broke','$pulpcanother','$datedemo','$edit_by')";
+$update_radiopulpcanal = "INSERT INTO radiograph_pulpcanal(HN, Date, pulpcan_normal, pulpcan_calPartOrComp, pulpcan_resorption, pulpcan_perforation, pulpcan_previousRCT, pulpcan_broken, pulpcan_other, date_treatment, edit_by) VALUES('$HN','$edit_time',b'$pulpcan_normal','$pulpcan_selcal',b'$pulpcan_resorp',b'$pulpcan_perfor',b'$pulpcan_prev',b'$pulpcan_broke','$pulpcanother','$datedemo','$edit_by')";
 $result_radiopulpcanal = $conn->query($update_radiopulpcanal);
 
 //Radiograph_perirad 
@@ -477,7 +480,7 @@ if($perirad_normal == 0 && isset($_POST['laterlessperirad'])){
 
 $perother = $_POST['perother'];
 
-$update_radioperirad = "INSERT INTO radiograph_perirad VALUES('$HN','$edit_time',b'$perirad_normal',b'$perirad_widen',b'$perirad_loss','$periapical_lesion1','$periapical_lesion2','$lateral_lesion1','$lateral_lesion2',b'$perirad_resorp','$perirad_openapex',b'$perirad_osteos',b'$perirad_hyper','$perother','$datedemo','$edit_by')";
+$update_radioperirad = "INSERT INTO radiograph_perirad (HN, Date, perirad_normal, perirad_wideningPDL, perirad_lossoflam, perirad_periapical1, perirad_periapical2, perirad_lateral1, perirad_lateral2, perirad_resorption, perirad_openapex, perirad_osteos, perirad_hyper, perirad_other, date_treatment, edit_by) VALUES('$HN','$edit_time',b'$perirad_normal',b'$perirad_widen',b'$perirad_loss','$periapical_lesion1','$periapical_lesion2','$lateral_lesion1','$lateral_lesion2',b'$perirad_resorp','$perirad_openapex',b'$perirad_osteos',b'$perirad_hyper','$perother','$datedemo','$edit_by')";
 $result_radioperirad = $conn->query($update_radioperirad);
 
 //Radiograph_alveolar
@@ -505,7 +508,7 @@ else if($alveolar == "localalveolar"){
 $alveolarother = $_POST['alveolarother'];
 $remark = $_POST['otherremark'];
 
-$insert_alveolar = "INSERT INTO radiograph_alveolar VALUES('$HN','$edit_time',b'$normalveolar','$generalOrlocal','$alveolarother','$remark','$datedemo','$edit_by')";
+$insert_alveolar = "INSERT INTO radiograph_alveolar (HN, Date, bone_normal, bone_genOrlocal, bone_other, remark, date_treatment, edit_by) VALUES('$HN','$edit_time',b'$normalveolar','$generalOrlocal','$alveolarother','$remark','$datedemo','$edit_by')";
 $result_alveolar = $conn->query($insert_alveolar);
 
 //Diagnosis----Pulpal Diagnosis
@@ -567,7 +570,7 @@ else if($pul_normal==0 && $prev_treated==1 && $_POST['prevselect'] == 1){
 	$Incomplete = "";
 }
 
-$update_pulpaldiag = "INSERT INTO pulpal_diagnosis VALUES('$HN','$edit_time',b'$pul_normal','$ReverOrIrrever','$sympOrasymp',b'$pulpnecrosis',b'$prev_initiated',b'$prev_treated',b'$Improper',b'$Incomplete','$datedemo','$edit_by')";
+$update_pulpaldiag = "INSERT INTO pulpal_diagnosis (HN, Date, normal, ReverOrIrreversiblepulp, Irreversible_sympOrasymp, pulp_necrosis, prev_initiat, prev_treated, prev_treated_improper, prev_treated_incomplete, date_treatment, edit_by) VALUES('$HN','$edit_time',b'$pul_normal','$ReverOrIrrever','$sympOrasymp',b'$pulpnecrosis',b'$prev_initiated',b'$prev_treated',b'$Improper',b'$Incomplete','$datedemo','$edit_by')";
 $result_pulpaldiag = $conn->query($update_pulpaldiag);
 
 //Diagnosis----Periradicular Diagnosis
@@ -591,7 +594,7 @@ if(isset($_POST['acuteOrchronic']) && $per_normal == 0){
 }
 $perdiagother = $_POST['perdiagother'];
 
-$update_periraddiag = "INSERT INTO periradicular_diagnosis VALUES('$HN','$edit_time',b'$per_normal','$sympOrasympt_apical','$acuteOrchronic_apical','$perdiagother','$datedemo','$edit_by')";
+$update_periraddiag = "INSERT INTO periradicular_diagnosis (HN, Date, Normal, sympOrasympt_apical, acuteOrchronic_apical, other, date_treatment, edit_by) VALUES('$HN','$edit_time',b'$per_normal','$sympOrasympt_apical','$acuteOrchronic_apical','$perdiagother','$datedemo','$edit_by')";
 $result_periraddiag = $conn->query($update_periraddiag);
 
 //Treatment Planning
@@ -688,12 +691,16 @@ else if("anesnotrequired"){
 	$reqOrnotreq = 0; //not require
 }
 
-$update_treatment = "INSERT INTO treatment_plan VALUES('$HN','$edit_time',b'$notreat',b'$pulpotomy','$pulp_partialOrfull',b'$pulpectomy',b'$non_rootcanel',b'$non_retreatment',b'$apexification',b'$intentional_RCT',b'$rootcaneltreat',b'$perio','$periradother','$planrestor',b'$preop_caries',b'$preop_dam','$preopother',b'$reqOrnotreq','$datedemo','$edit_by')";
+$update_treatment = "INSERT INTO treatment_plan(HN, Date, no_treatment, Pulpotomy, pulp_partOrfull, pulpectomy, non_sur_root, non_sur_retreat, apexification, intentionalRCT, sur_root, perio_consult, treat_other, plan_for_final, pre_op_treat_caries, pre_op_treat_dam, pre_op_treat_other, Anest_reqOrnotreq, date_treatment, edit_by) VALUES('$HN','$edit_time',b'$notreat',b'$pulpotomy','$pulp_partialOrfull',b'$pulpectomy',b'$non_rootcanel',b'$non_retreatment',b'$apexification',b'$intentional_RCT',b'$rootcaneltreat',b'$perio','$periradother','$planrestor',b'$preop_caries',b'$preop_dam','$preopother',b'$reqOrnotreq','$datedemo','$edit_by')";
 $result_treatment = $conn->query($update_treatment);
 
-$xrayfile = addslashes(file_get_contents($_FILES['xrayfile']['tmp_name']));
 $xraydate = $_POST['xraydate'];
 $xraytime = $_POST['xraytime'];
+if(addslashes(file_get_contents($_FILES['xrayfile']['tmp_name'])) == ""){
+	$xrayfile = "";
+}else{
+	$xrayfile = addslashes(file_get_contents($_FILES['xrayfile']['tmp_name']));
+}
 
 $update_xray = "INSERT INTO patients_xray(HN,Date,xrayData,xray_datetime,edit_date,edit_by) VALUES('$HN','$datedemo','$xrayfile','$xraydate'"."'$xraytime','$edit_time','$edit_by')";
 $result_xray = $conn->query($update_xray);
@@ -715,5 +722,6 @@ if($result_endo === TRUE && $result_med === TRUE && $result_dental === TRUE && $
     		</script>
     	<?php
     	echo "Error description: " . mysqli_error($conn);
+    	 echo "<br>Error: ". mysqli_error($sql);
     }
 ?>

@@ -173,6 +173,7 @@ function insertendorec() {
 <body onload=enable_text(false);>
 <?php
     require('connect.php');
+    $seq_no = $_POST['seqnum'];
     $HN = $_POST['PatientHN'];
     $stucode = $_POST['Stu_code'];
     $dent = $_POST['Dent_id'];
@@ -212,7 +213,7 @@ function insertendorec() {
                 </div> 
 
                 <?php
-                    $searchTooth = "SELECT * FROM examination WHERE HN = '$HN' AND Date = '$harddate'";
+                    $searchTooth = "SELECT * FROM examination WHERE Seq_no = '$seq_no'";
                     $resultTooth = $conn->query($searchTooth);
                     $objresultTooth = mysqli_fetch_array($resultTooth);
                 ?>
@@ -272,7 +273,7 @@ function insertendorec() {
     <div class="panel-body">
        <h4>Medical History</h4>
        <?php
-            $searchMed = "SELECT * FROM medical_his WHERE HN = '$HN' AND Date = '$harddate'";
+            $searchMed = "SELECT * FROM medical_his WHERE Seq_no = '$seq_no'";
             $resultMed = $conn->query($searchMed);
             $objresultMed = mysqli_fetch_array($resultMed);
        ?>
@@ -465,7 +466,7 @@ function insertendorec() {
     </div>
 
     <?php
-      $searchDen = "SELECT * FROM dental_his WHERE HN = '$HN' AND Date = '$harddate'";
+      $searchDen = "SELECT * FROM dental_his WHERE Seq_no = '$seq_no'";
       $resultDen = $conn->query($searchDen);
       $objresultDen = mysqli_fetch_array($resultDen);
     ?>
@@ -497,7 +498,7 @@ function insertendorec() {
         
   <div class="panel panel-body">
   <?php
-    $searchSubj = "SELECT * FROM subject_symptom WHERE HN = '$HN' AND Date = '$harddate'";
+    $searchSubj = "SELECT * FROM subject_symptom WHERE Seq_no = '$seq_no'";
     $resultSubj = $conn->query($searchSubj);
     $objresultSubj = mysqli_fetch_array($resultSubj);
 
@@ -631,7 +632,7 @@ function insertendorec() {
     </div>
 
     <?php
-        $searchObj = "SELECT * FROM object_symptom WHERE HN='$HN' AND Date = '$harddate'";
+        $searchObj = "SELECT * FROM object_symptom WHERE Seq_no = '$seq_no'";
         $resultObj = $conn->query($searchObj);
         $objresultObj = mysqli_fetch_array($resultObj);
     ?>
@@ -873,7 +874,7 @@ function insertendorec() {
       <br><br>
       <h4>Examination</h4>
       <?php
-        $searchExam = "SELECT * FROM examination WHERE HN = '$HN' AND Date = '$harddate'";
+        $searchExam = "SELECT * FROM examination WHERE Seq_no = '$seq_no'";
         $resultExam = $conn->query($searchExam);
         
       ?>
@@ -1015,7 +1016,121 @@ function insertendorec() {
           </tr>
           <?php
            $i = $i+1;
-            }
+          }
+           
+           if($i==2){
+              ?>
+              <tr>
+            <td>
+              <input type="text" name="numtooth2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_tooth']; ?>">
+            </td>
+            <td>
+              <input type="text" name="epttooth2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_EPT']?>"></td>
+            <td>
+              <select name="cold2" style="width: 55px;">
+                <?php
+                  if($objresultExam['exam_cold'] != ""){
+                    $endo->selexamcold_edit($conn, $objresultExam['exam_cold']);
+                  }else{
+                    ?>
+                      <option value="">Please select</option>
+                      <option value="WNL">WNL</option>
+                      <option value="positive">positive</option>
+                      <option value="negative">negative</option>
+                    <?php
+                  }
+                  
+                ?>
+              </select>
+            </td>
+
+            <td>
+              <select name="heat2" style="width: 55px;">
+              <?php
+                  if($objresultExam['exam_heat'] != ""){
+                    $endo->selexamheat_edit($conn, $objresultExam['exam_heat']);
+                  }else{
+                    ?>
+                      <option value="">Please select</option>
+                      <option value="WNL">WNL</option>
+                      <option value="positive">positive</option>
+                      <option value="negative">negative</option>
+                    <?php
+                  }
+              ?>
+              </select>
+            </td>
+
+            <td>
+                <select name="perc2" style="width: 55px;">
+                <?php
+                  if($objresultExam['exam_perc'] != ""){
+                    $endo->selexamperc_edit($conn, $objresultExam['exam_perc']);
+                  }else{
+                    ?>
+                  <option value="">Please select</option>
+                  <option value="WNL">WNL</option>
+                  <option value="positive">positive</option>
+                  <option value="negative">negative</option>
+                   <?php
+                  }
+              ?>
+                </select>
+            </td>
+
+            <td>
+              <select name="palp2" style="width: 55px;">
+              <?php
+                if($objresultExam['exam_palp'] != ""){
+                  $endo->selexampalp_edit($conn, $objresultExam['exam_palp']);
+                }else{
+                  ?>
+                <option value="">Please select</option>
+                <option value="WNL">WNL</option>
+                <option value="positive">positive</option>
+                <option value="negative">negative</option>
+                <?php
+                }
+              ?>
+              </select>
+            </td>
+
+            <td>
+              <select name="mobility2" style="width: 55px;">
+              <?php
+                if($objresultExam['exam_mobility'] != ""){
+                  $endo->selexammobility_edit($conn, $objresultExam['exam_mobility']);
+                }else{
+                  ?>
+               <option value="">Please select</option>
+               <option value="1">1</option>
+               <option value="2">2</option>
+               <option value="3">3</option>
+               <?php
+                }
+              ?>
+              </select>
+            </td>
+
+            <td><input type="text" name="probe_mb2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioMB'] ?>"></td>
+            <td><input type="text" name="probe_b2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioB'] ?>"></td>
+            <td><input type="text" name="probe_db2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioDB'] ?>"></td>
+            <td><input type="text" name="probe_ml2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioML'] ?>"></td>
+            <td><input type="text" name="probe_l2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioL'] ?>"></td>
+            <td><input type="text" name="probe_dl2" style="width: 50px; height:30px;" value="<?php echo $objresultExam['exam_perioDL'] ?>"></td>
+            <td>
+              <select name="special_test2" style="float:left; width:100px;">
+                <?php
+               
+                  $endo->selspecialtest_edit($conn,$objresultExam['spectest_id']);
+      
+                ?>
+              </select>
+            </td>      
+          </tr>
+          <?php
+           }
+            
           ?>
             
         </table>
@@ -1023,7 +1138,7 @@ function insertendorec() {
       <br><br>
       <h4>Radiographic findings</h4>
        <?php
-        $searchRadio = "SELECT * FROM radiograph_crown WHERE HN = '$HN' AND Date = '$harddate'";
+        $searchRadio = "SELECT * FROM radiograph_crown WHERE Seq_no = '$seq_no'";
         $resultRadio = $conn->query($searchRadio);
         $objresultRadio = mysqli_fetch_array($resultRadio);  
       ?>
@@ -1101,7 +1216,7 @@ function insertendorec() {
       </div>
 
       <?php
-        $searchPulpcham = "SELECT * FROM radiograph_pulpcham WHERE HN = '$HN' AND Date = '$harddate'";
+        $searchPulpcham = "SELECT * FROM radiograph_pulpcham WHERE Seq_no = '$seq_no'";
         $resultPulpcham = $conn->query($searchPulpcham);
         $objresultPulpcham = mysqli_fetch_array($resultPulpcham);
       ?>
@@ -1198,7 +1313,7 @@ function insertendorec() {
       </div><br>
 
       <?php
-        $searchRoot = "SELECT * FROM radiograph_root WHERE HN = '$HN' AND Date = '$harddate'";
+        $searchRoot = "SELECT * FROM radiograph_root WHERE Seq_no = '$seq_no'";
         $resultRoot = $conn->query($searchRoot);
         $objresultRoot = mysqli_fetch_array($resultRoot);
           
@@ -1288,7 +1403,7 @@ function insertendorec() {
       </div>
 
       <?php
-        $searchPulpcan = "SELECT * FROM radiograph_pulpcanal WHERE HN = '$HN' AND Date = '$harddate'";
+        $searchPulpcan = "SELECT * FROM radiograph_pulpcanal WHERE Seq_no = '$seq_no'";
         $resultPulpcan = $conn->query($searchPulpcan);
         $objresultPulpcan = mysqli_fetch_array($resultPulpcan);
           
@@ -1416,7 +1531,7 @@ function insertendorec() {
       </div>
 
       <?php
-        $searchPerirad = "SELECT * FROM radiograph_perirad WHERE HN = '$HN' AND Date = '$harddate'";
+        $searchPerirad = "SELECT * FROM radiograph_perirad WHERE Seq_no = '$seq_no'";
         $resultPerirad = $conn->query($searchPerirad);
         $objresultPerirad = mysqli_fetch_array($resultPerirad);
       ?>
@@ -1572,7 +1687,7 @@ function insertendorec() {
       </div>
 
       <?php
-        $searchAlveolar = "SELECT * FROM radiograph_alveolar WHERE HN = '$HN' AND Date = '$harddate'";
+        $searchAlveolar = "SELECT * FROM radiograph_alveolar WHERE Seq_no = '$seq_no'";
         $resultAlveolar = $conn->query($searchAlveolar);
         $objresultAlveolar = mysqli_fetch_array($resultAlveolar);
           
@@ -1648,7 +1763,7 @@ function insertendorec() {
 <div class="panel-heading"><h3>Diagnosis</h3></div>
   <div class="panel-body">
   <?php
-      $searchPulpaldiag = "SELECT * FROM pulpal_diagnosis WHERE HN = '$HN' AND Date = '$harddate'";
+      $searchPulpaldiag = "SELECT * FROM pulpal_diagnosis WHERE Seq_no = '$seq_no'";
       $resultPulpaldiag = $conn->query($searchPulpaldiag);
       $objresultPulpaldiag = mysqli_fetch_array($resultPulpaldiag);
     ?>
@@ -1815,7 +1930,7 @@ function insertendorec() {
      </div>
 
       <?php
-        $searchPeriraddiag = "SELECT * FROM periradicular_diagnosis WHERE HN = '$HN' AND Date = '$harddate'";
+        $searchPeriraddiag = "SELECT * FROM periradicular_diagnosis WHERE Seq_no = '$seq_no'";
         $resultPeriraddiag = $conn->query($searchPeriraddiag);
         $objresultPeriraddiag = mysqli_fetch_array($resultPeriraddiag);
       ?>
@@ -1924,7 +2039,7 @@ function insertendorec() {
 
 <fieldset>
 <?php
-  $searchTreatment = "SELECT * FROM treatment_plan WHERE HN = '$HN' AND Date = '$harddate'";
+  $searchTreatment = "SELECT * FROM treatment_plan WHERE Seq_no = '$seq_no'";
   $resultTreatment = $conn->query($searchTreatment);
   $objresultTreatment = mysqli_fetch_array($resultTreatment);
 ?>
@@ -2094,7 +2209,7 @@ function insertendorec() {
 
 <?php
   $xray_harddate = substr($harddate, 0,10);
-  $searchXray = "SELECT * FROM patients_xray WHERE HN = '$HN' AND Date = '$xray_harddate'";
+  $searchXray = "SELECT * FROM patients_xray WHERE Seq_no = '$seq_no'";
   $resultXray = $conn->query($searchXray);
   $objresultXray = mysqli_fetch_array($resultXray);
   $datetime_Xray = $objresultXray['xray_datetime']; 
@@ -2121,7 +2236,7 @@ function insertendorec() {
     </div>
 
     <div class="col-md-2">
-        <input type="radio" style="float:left;" name="preop" value="cariesremove"
+        <input type="checkbox" style="float:left;" name="preop_carie" value="cariesremove"
         <?php 
             if($objresultTreatment['pre_op_treat_caries'] == "1"){
                 ?>
@@ -2135,7 +2250,7 @@ function insertendorec() {
     </div>
 
     <div class="col-md-2">
-        <input type="radio" style="float:left;" name="preop" value="dam"
+        <input type="checkbox" style="float:left;" name="preop_dam" value="dam"
         <?php 
             if($objresultTreatment['pre_op_treat_dam'] == "1"){
                 ?>
@@ -2211,6 +2326,7 @@ function insertendorec() {
 </div>
 </div>
   <input type="button" name="previous" class="previous action-button" value="Previous" />
+  <input type="hidden" name="seqno" value="<?php echo $seq_no; ?>">
   <input type="hidden" name="HN" value="<?php echo $HN; ?>">
   <input type="hidden" name="stu_code" value="<?php echo $stucode; ?>">
   <input type="hidden" name="dent_id" value="<?php echo $dent; ?>">

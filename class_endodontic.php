@@ -31,7 +31,7 @@ class Endodontic{
 		$sql = "SELECT * FROM stimulation_required";
 		$result = $conn->query($sql);
 		?>
-			<option value="">select stimulation required</option>
+			<option value="">select stimulation</option>
 		<?php
 		while($row = mysqli_fetch_array($result)){
 			?>
@@ -149,6 +149,7 @@ class Endodontic{
 		$strSQL = "SELECT * FROM pain_intensity WHERE paininten_id != '$painintenId' ORDER BY paininten_id";
 		$objQuery = $conn->query($strSQL);
 	
+			echo '<option value="">Select pain intensity</option>';
 		while($objResult = mysqli_fetch_array($objQuery))
 		{
 			?>
@@ -166,7 +167,7 @@ class Endodontic{
 		<?php
 		$strSQL = "SELECT * FROM pain_character WHERE painchar_id != '$paincharId' ORDER BY painchar_id";
 		$objQuery = $conn->query($strSQL); 
-	
+		echo '<option value="">Select pain character</option>';
 		while($objResult = mysqli_fetch_array($objQuery))
 		{
 			?>
@@ -185,6 +186,7 @@ class Endodontic{
 
 		$strSQL = "SELECT * FROM stimulation_required WHERE stimulation_id != '$stimulation_id' ORDER BY stimulation_id";
 		$objQuery = $conn->query($strSQL); 
+		echo '<option value="">Select stimulation required</option>';
 		while($row = mysqli_fetch_array($objQuery)){
 			?>
 			<option value="<?php echo $row['stimulation_id'] ?>"><?php echo $row['stimulation_detail'] ?></option>
@@ -201,7 +203,7 @@ class Endodontic{
 		<?php
 		$strSQL = "SELECT * FROM duration WHERE duration_id != '$durationId' ORDER BY duration_id";
 		$objQuery = $conn->query($strSQL); 
-	
+		echo '<option value="">Select duration</option>';
 		while($objResult = mysqli_fetch_array($objQuery))
 		{
 			?>
@@ -219,7 +221,7 @@ class Endodontic{
 		<?php
 		$strSQL = "SELECT * FROM location WHERE location_id != '$locat_locOrdiff' ORDER BY location_id";
 		$objQuery = $conn->query($strSQL); 
-	
+		echo '<option value="">Select location</option>';
 		while($objResult = mysqli_fetch_array($objQuery))
 		{
 			?>
