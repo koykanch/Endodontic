@@ -113,7 +113,7 @@ class Endodontic{
 		<?php
 		while($row = mysqli_fetch_array($result)){
 			?>
-			<option value="<?php echo $row['spectest_id'] ?>"><?php echo $row['spectest_detail'] ?></option>
+			<option value="<?php echo $row['spectest_id']; ?>"><?php echo $row['spectest_detail']; ?></option>
 			<?php
 		}
 	}
@@ -186,7 +186,7 @@ class Endodontic{
 
 		$strSQL = "SELECT * FROM stimulation_required WHERE stimulation_id != '$stimulation_id' ORDER BY stimulation_id";
 		$objQuery = $conn->query($strSQL); 
-		echo '<option value="">Select stimulation required</option>';
+		echo '<option value="">stimulation required</option>';
 		while($row = mysqli_fetch_array($objQuery)){
 			?>
 			<option value="<?php echo $row['stimulation_id'] ?>"><?php echo $row['stimulation_detail'] ?></option>
@@ -413,9 +413,11 @@ class Endodontic{
 		$searchSpecial = "SELECT * FROM special_test WHERE spectest_id = '$spectestId'";
 		$resultSpecial = $conn->query($searchSpecial);
 		$objresultSpecial = mysqli_fetch_array($resultSpecial);
+		if($objresultSpecial['spectest_id'] != ""){
 		?>
 			<option value="<?php echo $spectestId; ?>"><?php echo $spectestId; ?> : <?php echo $objresultSpecial['spectest_detail']; ?></option>
 		<?php
+		}
 		$strSQL = "SELECT * FROM special_test WHERE spectest_id != '$spectestId' ORDER BY spectest_id";
 		$objQuery = $conn->query($strSQL); 
 	

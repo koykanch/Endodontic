@@ -35,6 +35,8 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+
+
         <script type="text/javascript" src="dbcontroller.js"></script>
 
         <!-- Favicon and touch icons -->
@@ -124,6 +126,7 @@ $user = $_SESSION['username'];
     <form class="navbar-form" role="search">
         <div class="form-group">
             <p><input ng-model="sData"  class="form-control"  placeholder="ค้นหา"/></p>
+            <p><input ng-model="cData"  class="form-control"  placeholder="ค้นหา"/></p>
         </div>
      </form>       
 	    <table class="table table-bordered" border="1">
@@ -153,7 +156,7 @@ $user = $_SESSION['username'];
                         <input type="hidden" name="PatientHN" value="{{c.HN}}">
                         <input type="hidden" name="Stu_code" value="{{c.student_code}}">
                         <input type="hidden" name="Dent_id" value="{{c.dentId}}">
-                        <input type="hidden" name="hard_date" value="{{c.hard_Date}}">
+                        <input type="hidden" name="hard_date" value="{{c.hard_Date | date: 'dd-MM-yyyy'}}">
 
                         <input type="submit" class="btn btn-success" style="width:100px;" name="detail" value="VIEW">
                       </form><br>

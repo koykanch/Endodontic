@@ -248,25 +248,32 @@ $probe_db2 = $_POST['probe_db2'];
 $probe_ml2 = $_POST['probe_ml2'];
 $probe_l2 = $_POST['probe_l2'];
 $probe_dl2 = $_POST['probe_dl2'];
+
+	$searchSeqhard = "SELECT MAX(Seq_no) as maxid FROM dent_hardcopy";
+	$resultSeqhard = $conn->query($searchSeqhard);
+	$objresultSeqhard = mysqli_fetch_assoc($resultSeqhard);
+	//echo $objresultSeqhard['maxid'];
+	$last_seq = $objresultSeqhard['maxid'];
+
 if($_POST['special_test1'] != ""){
 	//echo "spec1";
 	$special_test1 = $_POST['special_test1'];
-	$update_examination1 = "INSERT INTO examination (HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, spectest_id, date_treatment ,edit_by) VALUES('$HN','$edit_time','$numtooth1','$ept1','$cold1','$heat1','$perc1','$palp1','$mobility1','$probe_mb1','$probe_b1','$probe_db1','$probe_ml1','$probe_l1','$probe_dl1','$special_test1','$datedemo','$edit_by')";
+	$update_examination1 = "INSERT INTO examination (Seq_hardcopy,HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, spectest_id, date_treatment ,edit_by) VALUES('$last_seq','$HN','$edit_time','$numtooth1','$ept1','$cold1','$heat1','$perc1','$palp1','$mobility1','$probe_mb1','$probe_b1','$probe_db1','$probe_ml1','$probe_l1','$probe_dl1','$special_test1','$datedemo','$edit_by')";
 	$result_examination1 = $conn->query($update_examination1);
 }else if($_POST['special_test1'] == ""){
 	//echo "spec1/1";
-	$update_examination1 = "INSERT INTO examination (HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, date_treatment ,edit_by) VALUES('$HN','$edit_time','$numtooth1','$ept1','$cold1','$heat1','$perc1','$palp1','$mobility1','$probe_mb1','$probe_b1','$probe_db1','$probe_ml1','$probe_l1','$probe_dl1','$datedemo','$edit_by')";
+	$update_examination1 = "INSERT INTO examination (Seq_hardcopy,HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, date_treatment ,edit_by) VALUES('$last_seq','$HN','$edit_time','$numtooth1','$ept1','$cold1','$heat1','$perc1','$palp1','$mobility1','$probe_mb1','$probe_b1','$probe_db1','$probe_ml1','$probe_l1','$probe_dl1','$datedemo','$edit_by')";
 	$result_examination1 = $conn->query($update_examination1);
 }
 
 if($_POST['numtooth2'] != "" && $_POST['special_test2'] != ""){
 	//echo "spec2";
 	$special_test2 = $_POST['special_test2'];
-	$update_examination2 = "INSERT INTO examination (HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, spectest_id, date_treatment, edit_by) VALUES('$HN','$edit_time','$numtooth2','$ept2','$cold2','$heat2','$perc2','$palp2','$mobility2','$probe_mb2','$probe_b2','$probe_db2','$probe_ml2','$probe_l2','$probe_dl2','$special_test2','$datedemo','$edit_by')";
+	$update_examination2 = "INSERT INTO examination (Seq_hardcopy,HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, spectest_id, date_treatment, edit_by) VALUES('$last_seq','$HN','$edit_time','$numtooth2','$ept2','$cold2','$heat2','$perc2','$palp2','$mobility2','$probe_mb2','$probe_b2','$probe_db2','$probe_ml2','$probe_l2','$probe_dl2','$special_test2','$datedemo','$edit_by')";
 	$result_examination2 = $conn->query($update_examination2);
 }else if($_POST['numtooth2'] != "" && $_POST['special_test2'] == ""){
 	//echo "spec2/1";
-	$update_examination2 = "INSERT INTO examination (HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, date_treatment, edit_by)VALUES('$HN','$edit_time','$numtooth2','$ept2','$cold2','$heat2','$perc2','$palp2','$mobility2','$probe_mb2','$probe_b2','$probe_db2','$probe_ml2','$probe_l2','$probe_dl2','$datedemo','$edit_by')";
+	$update_examination2 = "INSERT INTO examination (Seq_hardcopy,HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, date_treatment, edit_by)VALUES('$last_seq','$HN','$edit_time','$numtooth2','$ept2','$cold2','$heat2','$perc2','$palp2','$mobility2','$probe_mb2','$probe_b2','$probe_db2','$probe_ml2','$probe_l2','$probe_dl2','$datedemo','$edit_by')";
 	$result_examination2 = $conn->query($update_examination2);
 }
 

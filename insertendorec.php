@@ -14,7 +14,7 @@ $image = addslashes(file_get_contents($_FILES['f1']['tmp_name']));
  $insert_endo = "INSERT INTO dent_hardcopy(HN, hard_Date, student_code, dentId, hardcopyData, date_treatment) VALUES('$HN','$datedemo'"."'$timedemo','$stu','$dent','$image','$datedemo')";
  $result_endo = $conn->query($insert_endo);
 
-// //Patient's History----Medical History
+ // //Patient's History----Medical History
  
 if(!isset($_POST['nonemed'])){
 	$none = 0;
@@ -304,6 +304,17 @@ $probe_ml2 = $_POST['probe_ml2'];
 $probe_l2 = $_POST['probe_l2'];
 $probe_dl2 = $_POST['probe_dl2'];
 
+// if(isset($_POST['special_test1'])){
+// 	$special_test1 = $_POST['special_test1'];
+// }else{
+// 	$special_test1 = "";
+// }
+
+// if(isset($_POST['special_test2'])){
+// 	$special_test2 = $_POST['special_test2'];
+// }else{
+// 	$special_test2 = "";
+// }
 
 // if(!isset($_POST['checkcold'])){
 // 	$cold=0;
@@ -341,29 +352,37 @@ $probe_dl2 = $_POST['probe_dl2'];
 // 	$special_test = "";
 // }
 
-// echo 'HN: '.$HN.'<br>date:'.$datedemo.'<br>numtooth:'.$numtooth1.'<br>ept:'.$ept1.'<br>cold:'.$cold1.'<br>heat:'.$heat1.'<br>perc:'.$perc1.'<br>palp:'.$palp1.'<br>mobility:'.$mobility1.'<br>probe_mb:'.$probe_mb1.'<br>probe_b:'.$probe_b1.'<br>probe_db:'.$probe_db1.'<br>probe_ml:'.$probe_ml1.'<br>probe_l:'.$probe_l1.'<br>probe_dl:'.$probe_dl1.'<br>special_test:'.$special_test1;
+ //echo 'HN: '.$HN.'<br>date:'.$datedemo.'<br>time:'.$timedemo.'<br>numtooth:'.$numtooth1.'<br>ept:'.$ept1.'<br>cold:'.$cold1.'<br>heat:'.$heat1.'<br>perc:'.$perc1.'<br>palp:'.$palp1.'<br>mobility:'.$mobility1.'<br>probe_mb:'.$probe_mb1.'<br>probe_b:'.$probe_b1.'<br>probe_db:'.$probe_db1.'<br>probe_ml:'.$probe_ml1.'<br>probe_l:'.$probe_l1.'<br>probe_dl:'.$probe_dl1.'<br>special_test:'.$special_test1;
 
-// echo '<br><br>HN: '.$HN.'<br>date:'.$datedemo.'<br>numtooth:'.$numtooth2.'<br>ept:'.$ept2.'<br>cold:'.$cold2.'<br>heat:'.$heat2.'<br>perc:'.$perc2.'<br>palp:'.$palp2.'<br>mobility:'.$mobility2.'<br>probe_mb:'.$probe_mb2.'<br>probe_b:'.$probe_b2.'<br>probe_db:'.$probe_db2.'<br>probe_ml:'.$probe_ml2.'<br>probe_l:'.$probe_l2.'<br>probe_dl:'.$probe_dl2.'<br>special_test:'.$special_test2;
-// // echo 'HN: '.$HN.'<br>date:'.$datedemo.'<br>numtooth:'.$numtooth.'<br>ept:'.$ept.'<br>cold:'.$cold.'<br>heat:'.$heat.'<br>perc:'.$perc.'<br>palp:'.$palp.'<br>mobility:'.$mobility.'<br>probe_mb:'.$probe_mb.'<br>probe_b:'.$probe_b.'<br>probe_db:'.$probe_db.'<br>probe_ml:'.$probe_ml.'<br>probe_l:'.$probe_l.'<br>probe_dl:'.$probe_dl.'<br>special_test:'.$special_test;
+ //echo '<br><br>HN: '.$HN.'<br>date:'.$datedemo.'<br>time:'.$timedemo.'<br>numtooth:'.$numtooth2.'<br>ept:'.$ept2.'<br>cold:'.$cold2.'<br>heat:'.$heat2.'<br>perc:'.$perc2.'<br>palp:'.$palp2.'<br>mobility:'.$mobility2.'<br>probe_mb:'.$probe_mb2.'<br>probe_b:'.$probe_b2.'<br>probe_db:'.$probe_db2.'<br>probe_ml:'.$probe_ml2.'<br>probe_l:'.$probe_l2.'<br>probe_dl:'.$probe_dl2.'<br>special_test:'.$special_test2;
+
+ // // echo 'HN: '.$HN.'<br>date:'.$datedemo.'<br>numtooth:'.$numtooth.'<br>ept:'.$ept.'<br>cold:'.$cold.'<br>heat:'.$heat.'<br>perc:'.$perc.'<br>palp:'.$palp.'<br>mobility:'.$mobility.'<br>probe_mb:'.$probe_mb.'<br>probe_b:'.$probe_b.'<br>probe_db:'.$probe_db.'<br>probe_ml:'.$probe_ml.'<br>probe_l:'.$probe_l.'<br>probe_dl:'.$probe_dl.'<br>special_test:'.$special_test;
+
+	$searchSeqhard = "SELECT MAX(Seq_no) as maxid FROM dent_hardcopy";
+	$resultSeqhard = $conn->query($searchSeqhard);
+	$objresultSeqhard = mysqli_fetch_assoc($resultSeqhard);
+	//echo $objresultSeqhard['maxid'];
+	$last_seq = $objresultSeqhard['maxid'];
+
 if($_POST['special_test1'] != ""){
 	//echo "spec1";
 	$special_test1 = $_POST['special_test1'];
-	$insert_examination1 = "INSERT INTO examination(HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, spectest_id, date_treatment) VALUES('$HN','$datedemo'"."'$timedemo','$numtooth1','$ept1','$cold1','$heat1','$perc1','$palp1','$mobility1','$probe_mb1','$probe_b1','$probe_db1','$probe_ml1','$probe_l1','$probe_dl1','$special_test1','$datedemo')";
+	$insert_examination1 = "INSERT INTO examination(Seq_hardcopy,HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, spectest_id, date_treatment) VALUES('$last_seq','$HN','$datedemo'"."'$timedemo','$numtooth1','$ept1','$cold1','$heat1','$perc1','$palp1','$mobility1','$probe_mb1','$probe_b1','$probe_db1','$probe_ml1','$probe_l1','$probe_dl1','$special_test1','$datedemo')";
 	$result_examination1 = $conn->query($insert_examination1);
 }else if($_POST['special_test1'] == ""){
 	//echo "spec1/1";
-	$insert_examination1 = "INSERT INTO examination(HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, date_treatment) VALUES('$HN','$datedemo'"."'$timedemo','$numtooth1','$ept1','$cold1','$heat1','$perc1','$palp1','$mobility1','$probe_mb1','$probe_b1','$probe_db1','$probe_ml1','$probe_l1','$probe_dl1','$datedemo')";
+	$insert_examination1 = "INSERT INTO examination(Seq_hardcopy,HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, date_treatment) VALUES('$last_seq','$HN','$datedemo'"."'$timedemo','$numtooth1','$ept1','$cold1','$heat1','$perc1','$palp1','$mobility1','$probe_mb1','$probe_b1','$probe_db1','$probe_ml1','$probe_l1','$probe_dl1','$datedemo')";
 	$result_examination1 = $conn->query($insert_examination1);
 }
 
 if($_POST['numtooth2'] != "" && $_POST['special_test2'] != ""){
 	//echo "spec2";
 	$special_test2 = $_POST['special_test2'];
-	$insert_examination2 = "INSERT INTO examination(HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, spectest_id, date_treatment) VALUES('$HN','$datedemo'"."'$timedemo','$numtooth2','$ept2','$cold2','$heat2','$perc2','$palp2','$mobility2','$probe_mb2','$probe_b2','$probe_db2','$probe_ml2','$probe_l2','$probe_dl2','$special_test2','$datedemo')";
+	$insert_examination2 = "INSERT INTO examination(Seq_hardcopy,HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, spectest_id, date_treatment) VALUES('$last_seq','$HN','$datedemo'"."'$timedemo','$numtooth2','$ept2','$cold2','$heat2','$perc2','$palp2','$mobility2','$probe_mb2','$probe_b2','$probe_db2','$probe_ml2','$probe_l2','$probe_dl2','$special_test2','$datedemo')";
 	$result_examination2 = $conn->query($insert_examination2);
 }else if($_POST['numtooth2'] != "" && $_POST['special_test2'] == ""){
 	//echo "spec2/1";
-	$insert_examination2 = "INSERT INTO examination(HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, date_treatment) VALUES('$HN','$datedemo'"."'$timedemo','$numtooth2','$ept2','$cold2','$heat2','$perc2','$palp2','$mobility2','$probe_mb2','$probe_b2','$probe_db2','$probe_ml2','$probe_l2','$probe_dl2','$datedemo')";
+	$insert_examination2 = "INSERT INTO examination(Seq_hardcopy,HN, Date, exam_tooth, exam_EPT, exam_cold, exam_heat, exam_perc, exam_palp, exam_mobility, exam_perioMB, exam_perioB, exam_perioDB, exam_perioML, exam_perioL, exam_perioDL, date_treatment) VALUES('$last_seq','$HN','$datedemo'"."'$timedemo','$numtooth2','$ept2','$cold2','$heat2','$perc2','$palp2','$mobility2','$probe_mb2','$probe_b2','$probe_db2','$probe_ml2','$probe_l2','$probe_dl2','$datedemo')";
 	$result_examination2 = $conn->query($insert_examination2);
 }
 
@@ -823,7 +842,6 @@ $result_xray = $conn->query($insert_xray);
     				//window.location = "endorecord.php";
      		</script>
      	<?php
-
      }else{
     	?>
      		<script>
@@ -832,6 +850,6 @@ $result_xray = $conn->query($insert_xray);
      		</script>
      	<?php
      	echo "Error description: " . mysqli_error($conn);
-     	echo "<br>Error description: " . mysqli_error($result_med);
-     }  	
+     	//echo "<br>Error description: " . mysqli_error($result_med);
+     } 
 ?>

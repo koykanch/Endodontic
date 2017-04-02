@@ -632,7 +632,7 @@ $harddate = $_POST['hard_date'];
   
       <div style="font-size: 15px;"><b>Examination: </b></div>
       <?php
-        $searchExam = "SELECT * FROM examination WHERE Seq_no = '$sq'";
+        $searchExam = "SELECT * FROM examination WHERE Seq_hardcopy = '$sq'";
         $resultExam = $conn->query($searchExam);
         
       ?>
@@ -1931,14 +1931,13 @@ $harddate = $_POST['hard_date'];
     </table><br><br>
 
     <?php
-      $xray_harddate = substr($harddate, 0,10);
       $searchXray = "SELECT * FROM patients_xray WHERE Seq_no = '$sq'";
       $resultXray = $conn->query($searchXray);
       $objresultXray = mysqli_fetch_array($resultXray); 
     ?>
 
     <?php
-        echo '<img src="data:image/jpeg;base64,'.base64_encode( $objresultXray['xrayData'] ).'"style="width:200px; height:300px; float:center;"/>';
+        echo '<img src="data:image/jpeg;base64,'.base64_encode( $objresultXray['xrayData'] ).'"   style="width: 200px; height:300px;"/>';
 
     $searchStuname = "SELECT * FROM dentalstudent_info WHERE student_code = '$stucode'";
     $resultStuname = $conn->query($searchStuname);
@@ -1949,10 +1948,11 @@ $harddate = $_POST['hard_date'];
     $objresultDentname = mysqli_fetch_array($resultDentname);
 
     $date = substr($harddate, 0,10);
+    $newDate = date("d/m/Y", strtotime($date));
     ?>
     <p style="font-size: 14px; margin-left: 32em"><b>Dental student: </b><?php echo $objresultStuname['student_name']; ?></p>
     <p style="font-size: 14px; margin-left: 32em"><b>Instructor: </b><?php echo $objresultDentname['dent_name']; ?></p>
-    <p style="font-size: 14px; margin-left: 32em"><b>Date: </b><?php echo $date; ?></p>
+    <p style="font-size: 14px; margin-left: 32em"><b>Date: </b><?php echo $newDate; ?></p>
 
 
 

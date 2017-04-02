@@ -874,7 +874,7 @@ function insertendorec() {
       <br><br>
       <h4>Examination</h4>
       <?php
-        $searchExam = "SELECT * FROM examination WHERE Seq_no = '$seq_no'";
+        $searchExam = "SELECT * FROM examination WHERE Seq_hardcopy = '$seq_no'";
         $resultExam = $conn->query($searchExam);
         
       ?>
