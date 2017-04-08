@@ -1086,7 +1086,7 @@ $endo = new Endodontic;
 
       <div class="row">
           <div class="col-md-2">
-            <label>&nbsp;&nbsp;&nbsp;Pulp Chambar: </label>
+            <label>&nbsp;&nbsp;&nbsp;Pulp Chamber: </label>
           </div>
           <div class="col-md-2">
               <input type="checkbox" name="normcham" style="float:left;" value="1" onclick="enable_radiopulpcham(this.checked)"><label>&nbsp; Normal </label>

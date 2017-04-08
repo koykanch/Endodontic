@@ -32,9 +32,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- <link rel="stylesheet" href="http://bootswatch.com/yeti/bootstrap.min.css"> -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+        
 
 
         <script type="text/javascript" src="dbcontroller.js"></script>
@@ -126,9 +127,230 @@ $user = $_SESSION['username'];
     <form class="navbar-form" role="search">
         <div class="form-group">
             <p><input ng-model="sData"  class="form-control"  placeholder="ค้นหา"/></p>
-            <p><input ng-model="cData"  class="form-control"  placeholder="ค้นหา"/></p>
+        </div><br><br>
+
+        <div>
+            <p align="left"><b>Medical History</b></p>
+            <p align="left" style="padding-left: 2em;">
+                <input ng-model="nonemed" type="checkbox" ng-true-value="1" ng-false-value=""/>None &nbsp;&nbsp;
+                <input ng-model="cardiodismed" type="checkbox" ng-true-value="1" ng-false-value="" />Cardiovascular Diseases&nbsp;&nbsp;
+                <input ng-model="pulmonarydismed" type="checkbox" ng-true-value="1" ng-false-value="" />Pulmonary Diseases&nbsp;&nbsp;
+                
+            </p>
+            <p align="left" style="padding-left: 2em;">
+                <input ng-model="gastrodismed" type="checkbox" ng-true-value="1" ng-false-value="" />Gastrointestinal Diseases&nbsp;&nbsp;
+                <input ng-model="hemadismed" type="checkbox" ng-true-value="1" ng-false-value="" />Hematologic Diseases &nbsp;&nbsp;
+                <input ng-model="neurodismed" type="checkbox" ng-true-value="1" ng-false-value="" />Neurologic Diseases &nbsp;&nbsp;
+            </p>
+
+            <p align="left"><b>S. Subjective Symptoms</b></p>
+            <p align="left" style="padding-left: 2em;">
+                 <b>Pain intensity: </b>
+                 <select ng-model="paininten">
+                  <option value="">SELECT</option>
+                  <option value="01">None</option>
+                  <option value="02">Mild</option>
+                  <option value="03">Moderate</option>
+                  <option value="04">Severe</option>
+                </select> &nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 2em;">
+                <b>Pain Character: </b>
+                 <select ng-model="paincharacter">
+                  <option value="">SELECT</option>
+                  <option value="01">Dull</option>
+                  <option value="02">Sharp</option>
+                  <option value="03">Throbbing</option>
+                </select> &nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 2em;">
+                <b>Onset: </b> 
+                <input ng-model="onset_spont" type="checkbox" ng-true-value="1" ng-false-value="" />Spontaneous &nbsp;&nbsp;
+                Stimulation Required:
+                 <select ng-model="onset_stimu">
+                  <option value="">SELECT</option>
+                  <option value="01">Hot</option>
+                  <option value="02">Cold</option>
+                  <option value="03">Biting</option>
+                </select> &nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 2em;">
+                <b>Duration: </b> 
+                 <select ng-model="duration">
+                  <option value="">SELECT</option>
+                  <option value="01">Seconds</option>
+                  <option value="02">Minutes</option>
+                  <option value="03">Hours</option>
+                  <option value="04">Intermittent</option>
+                  <option value="05">Constant</option>
+
+                </select> &nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 2em;">
+                <b>Location: </b> 
+                 <select ng-model="location">
+                  <option value="">SELECT</option>
+                  <option value="01">Localized</option>
+                  <option value="02">Diffused</option>
+                </select> &nbsp;&nbsp;
+            </p>
+
+            <p align="left"><b>O. Objective Symptoms</b></p>
+            <p align="left" style="padding-left: 2em;">
+                 <b>Extraoral: </b>
+                <input ng-model="extrafacial_check" type="checkbox" ng-true-value="1" ng-false-value="" />Facial Swelling &nbsp;&nbsp;
+                <input ng-model="extralymph_check" type="checkbox" ng-true-value="1" ng-false-value="" />Lymph Node &nbsp;&nbsp;
+                <input ng-model="extrasinus_check" type="checkbox" ng-true-value="1" ng-false-value="" />Sinus Tract &nbsp;&nbsp;
+            </p>
+
+            <p align="left" style="padding-left: 2em;">
+                 <b>Intraoral: </b>
+                Swelling: <select ng-model="swellsoftorfirm">
+                  <option value="">SELECT</option>
+                  <option value="0">Soft</option>
+                  <option value="1">Firm</option>
+                </select> &nbsp;&nbsp;
+            </p>
+
+            <p align="left" style="padding-left: 2em;">
+                 <b>Tooth: </b>
+                <input ng-model="cariestooth" type="checkbox" ng-true-value="1" ng-false-value="" />Caries &nbsp;&nbsp;
+                <input ng-model="pulptoothex" type="checkbox" ng-true-value="1" ng-false-value="" />Pulp Exposure &nbsp;&nbsp;
+                <input ng-model="pulptoothpoly" type="checkbox" ng-true-value="1" ng-false-value="" />Pulp Polyp &nbsp;&nbsp;
+                <input ng-model="opentoothdrai" type="checkbox" ng-true-value="1" ng-false-value="" />Opened for Drainage &nbsp;&nbsp;
+                <input ng-model="temptooth" type="checkbox" ng-true-value="1" ng-false-value="" />Temp. Restoration &nbsp;&nbsp;
+
+            </p>
+
+            <p align="left"><b>Radiographic findings</b></p>
+            <p align="left" style="padding-left: 2em;">
+            <b>Crown: &nbsp;&nbsp;</b>
+                <input ng-model="normcrown" type="checkbox" ng-true-value="1" ng-false-value="" />Normal &nbsp;&nbsp;
+                <input ng-model="restcrown" type="checkbox" ng-true-value="1" ng-false-value="" />Restoration &nbsp;&nbsp;
+                <input ng-model="fractcrown" type="checkbox" ng-true-value="1" ng-false-value="" />Fracture  &nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 2em;">
+            <b>Pulp Chamber: &nbsp;&nbsp;</b>
+                <input ng-model="normcham" type="checkbox" ng-true-value="1" ng-false-value="" />Normal &nbsp;&nbsp;
+                Calcification: <select ng-model="calcificatecham">
+                  <option value="">SELECT</option>
+                  <option value="0">Partial</option>
+                  <option value="1">Complete</option>
+                </select> &nbsp;&nbsp;
+                <input ng-model="pulpcham_pulpstone" type="checkbox" ng-true-value="1" ng-false-value="" />Pulp Stone &nbsp;&nbsp;
+                <input ng-model="pulpcham_resorption" type="checkbox" ng-true-value="1" ng-false-value="" />Resorption  &nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 2em;">
+            <b>Root: &nbsp;&nbsp;</b>
+                <input ng-model="normroot" type="checkbox" ng-true-value="1" ng-false-value="" />Normal &nbsp;&nbsp;
+                <input ng-model="cariesroot" type="checkbox" ng-true-value="1" ng-false-value="" />Caries &nbsp;&nbsp;
+                <input ng-model="curvatureroot" type="checkbox" ng-true-value="1" ng-false-value="" />Curvature  &nbsp;&nbsp;
+                <input ng-model="extresroot" type="checkbox" ng-true-value="1" ng-false-value="" />Ext. Resorption  &nbsp;&nbsp;
+                <input ng-model="fractroot" type="checkbox" ng-true-value="1" ng-false-value="" />Fracture  &nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 2em;">
+            <b>Pulp Canal: &nbsp;&nbsp;</b>
+                <input ng-model="normcanel" type="checkbox" ng-true-value="1" ng-false-value="" />Normal &nbsp;&nbsp;
+                Calcification: <select ng-model="calcificatecanel">
+                  <option value="">SELECT</option>
+                  <option value="0">Partial</option>
+                  <option value="1">Complete</option>
+                </select> &nbsp;&nbsp;
+                <input ng-model="resorpcanel" type="checkbox" ng-true-value="1" ng-false-value="" />Resorption &nbsp;&nbsp;
+                <input ng-model="perforcanel" type="checkbox" ng-true-value="1" ng-false-value="" />Perforation &nbsp;&nbsp;
+                <input ng-model="prevcanel" type="checkbox" ng-true-value="1" ng-false-value="" />Previous RCT  &nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 8.2em;">
+                <input ng-model="brokecanel" type="checkbox" ng-true-value="1" ng-false-value="" />Broken Instrument  &nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 2em;">
+            <b>Periradicular: &nbsp;&nbsp;</b>
+                <input ng-model="normperirad" type="checkbox" ng-true-value="1" ng-false-value="" />Normal &nbsp;&nbsp;
+                <input ng-model="widenperirad" type="checkbox" ng-true-value="1" ng-false-value="" />Widening PDL &nbsp;&nbsp;
+                <input ng-model="lossperirad" type="checkbox" ng-true-value="1" ng-false-value="" />Loss of Lamina Dura &nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 9em;">
+                <input ng-model="resorpperirad" type="checkbox" ng-true-value="1" ng-false-value="" />Resorption  &nbsp;&nbsp;
+                <input ng-model="osteoperirad" type="checkbox" ng-true-value="1" ng-false-value="" />OsteosIcerosis  &nbsp;&nbsp;
+                <input ng-model="hyperperirad" type="checkbox" ng-true-value="1" ng-false-value="" />Hyperplasia of cementurn  &nbsp;&nbsp;
+            </p>
+             <p align="left" style="padding-left: 2em;">
+            <b>Alveolar Bone: &nbsp;&nbsp;</b>
+                <input ng-model="normalveolar" type="checkbox" ng-true-value="1" ng-false-value="" />Normal &nbsp;&nbsp;
+                <input ng-model="generalalveolar" type="checkbox" ng-true-value="0" ng-false-value="" />Generalized Bone loss &nbsp;&nbsp;
+                <input ng-model="localalveolar" type="checkbox" ng-true-value="1" ng-false-value="" />Localized Bone loss &nbsp;&nbsp;
+            </p>
+
+            <p align="left"><b>Pulpal Diagnosis</b></p>
+            <p align="left" style="padding-left: 2em;">
+                <input ng-model="puldiagnorm" type="checkbox" ng-true-value="1" ng-false-value="" />Normal &nbsp;&nbsp;
+                Reversible Or Irreversible Pulpitis: <select ng-model="reverOrirrever">
+                  <option value="">SELECT</option>
+                  <option value="0">Reversible</option>
+                  <option value="1">Irreversible</option>
+                </select> &nbsp;&nbsp;
+
+                Symptomatic Or Asymptomatic: <select ng-model="sympOrasymp">
+                  <option value="">SELECT</option>
+                  <option value="0">Symptomatic</option>
+                  <option value="1">Asymptomatic</option>
+                </select> &nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 2em;">
+                <input ng-model="pulpnecrosis" type="checkbox" ng-true-value="1" ng-false-value="" />Pulp Necrosis &nbsp;&nbsp;
+                <input ng-model="previnitiat" type="checkbox" ng-true-value="1" ng-false-value="" />Previously Initiated Therapy &nbsp;&nbsp;
+                <input ng-model="prev_improper" type="checkbox" ng-true-value="1" ng-false-value="" />Previously treated (Improper) &nbsp;&nbsp;
+                <input ng-model="prev_incomplete" type="checkbox" ng-true-value="1" ng-false-value="" />Previously treated (Incomplete RCT) &nbsp;&nbsp;
+            </p>
+
+            <p align="left"><b>Periradicular Diagnosis</b></p>
+            <p align="left" style="padding-left: 2em;">
+                <input ng-model="periraddiagnorm" type="checkbox" ng-true-value="1" ng-false-value="" />Normal &nbsp;&nbsp;
+                <input ng-model="per_symp" type="checkbox" ng-true-value="0" ng-false-value=""/>Symptomatic Apical Periodontitis&nbsp;&nbsp;
+                <input ng-model="per_asymp" type="checkbox" ng-true-value="1" ng-false-value="" />Asymptomatic Apical Periodontitis  &nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 2em;">
+                <input ng-model="acute" type="checkbox" ng-true-value="0" ng-false-value="" />Acute Apical Abscess  &nbsp;&nbsp;
+                <input ng-model="chronic" type="checkbox" ng-true-value="1" ng-false-value="" />Chronic Apical Abscess   &nbsp;&nbsp;
+            </p>
+
+            <p align="left"><b>Treatment planning</b></p>
+            <p align="left" style="padding-left: 2em;">
+                <input ng-model="notreat" type="checkbox" ng-true-value="1" ng-false-value="" />No Treatment &nbsp;&nbsp;
+                Pulpotomy: <select ng-model="pulpotomy">
+                  <option value="">SELECT</option>
+                  <option value="0">Partial</option>
+                  <option value="1">Full</option>
+                </select> &nbsp;&nbsp;
+                <input ng-model="pulpectomy" type="checkbox" ng-true-value="1" ng-false-value="" />Pulpectomy  &nbsp;&nbsp;
+                <input ng-model="nonrootcanel" type="checkbox" ng-true-value="1" ng-false-value="" />Non-surgical Root Canel Treatment   &nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 2em;">
+                <input ng-model="nonretreatment" type="checkbox" ng-true-value="1" ng-false-value="" />Non-surgical Retreatment   &nbsp;&nbsp;
+                <input ng-model="apexification" type="checkbox" ng-true-value="1" ng-false-value="" />Apexification   &nbsp;&nbsp;
+                <input ng-model="intentional" type="checkbox" ng-true-value="1" ng-false-value="" />Intentional RCT &nbsp;&nbsp;
+                <input ng-model="rootcaneltreat" type="checkbox" ng-true-value="1" ng-false-value="" />Surgical Root Canel Treatment &nbsp;&nbsp;
+                <input ng-model="perio" type="checkbox" ng-true-value="1" ng-false-value="" />Perio Consult &nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 2em;">
+            <b>Pre-op treatment: </b>&nbsp;&nbsp;
+                <input ng-model="preop_carie" type="checkbox" ng-true-value="1" ng-false-value="" />Caries Removal &nbsp;&nbsp;
+                <input ng-model="preop_dam" type="checkbox" ng-true-value="1" ng-false-value="" />Dam &nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 2em;">
+            
+            <b>Anesthesia: </b><select ng-model="anesthesis">
+                  <option value="">SELECT</option>
+                  <option value="1">Required</option>
+                  <option value="0">Not required</option>
+                </select> &nbsp;&nbsp;
+          
         </div>
+        <!-- <label ng-repeat="name in selectedName">
+            <input type="checkbox" name="selectedName[]" value="{{name.Name}}"  ng-checked="selectionList(name)">{{name.Name}}
+        </label>    -->     
      </form>       
+
 	    <table class="table table-bordered" border="1">
 	        <tr bgcolor="#D1C4E9">
                 <td>ลำดับที่</td>
@@ -139,12 +361,15 @@ $user = $_SESSION['username'];
 	            <td>ทันตแพทย์ผู้รักษา</td>
 	            <td>รายละเอียดการรักษา</td>
 	        </tr>
+        <!-- {{showData | json}} -->
+        {{blah | json}}
 
             <?php
                 if($user != ""){
                     ?>
-                    {{showData | json}}
-                    <tr ng-repeat="c in showData| filter:sData">
+                    
+                    <tr ng-repeat="c in showData| filter:sData | filter:{none: nonemed, cardiovascular: cardiodismed, pulmonary: pulmonarydismed, gastrointestinal: gastrodismed, hematologis: hemadismed, Neurologic: neurodismed, paininten_id: paininten, painchar_id: paincharacter, duration_id: duration, locat_locOrdiff: location, onset_spontaneous: onset_spont, stimulation_id: onset_stimu, ext_facialswelling: extrafacial_check, ext_lymphnode: extralymph_check, ext_sinustract: extrasinus_check, intra_swellsoftOrfirm: swellsoftorfirm, tooth_caries: cariestooth, tooth_pulpexposure: pulptoothex, tooth_pulppolyp: pulptoothpoly, tooth_open: opentoothdrai, tooth_temp: temptooth, crown_normal: normcrown, crown_restoration: restcrown, crown_fracture: fractcrown, pulpcham_normal: normcham, pulpcham_calPartOrComp: calcificatecham, pulpcham_pulpstone: pulpcham_pulpstone, pulpcham_resorption: pulpcham_resorption, root_normal: normroot, root_caries: cariesroot, root_curvature: curvatureroot, root_extresorption: extresroot, root_fracture: fractroot, pulpcan_normal: normcanel,  pulpcan_calPartOrComp: calcificatecanel, pulpcan_resorption: resorpcanel, pulpcan_perforation: perforcanel, pulpcan_previousRCT: prevcanel, pulpcan_broken: brokecanel, perirad_normal: normperirad, perirad_wideningPDL: widenperirad, perirad_lossoflam: lossperirad, perirad_resorption: resorpperirad, perirad_osteos: osteoperirad, perirad_hyper: hyperperirad, bone_normal: normalveolar, bone_genOrlocal: generalalveolar, bone_genOrlocal: localalveolar, normal: puldiagnorm, ReverOrIrreversiblepulp: reverOrirrever, Irreversible_sympOrasymp: sympOrasymp, pulp_necrosis: pulpnecrosis, prev_initiat: previnitiat, prev_treated_improper: prev_improper, prev_treated_incomplete: prev_incomplete, Normal: periraddiagnorm, sympOrasympt_apical: per_symp, sympOrasympt_apical: per_asymp, acuteOrchronic_apical: acute, acuteOrchronic_apical: chronic, no_treatment: notreat, pulp_partOrfull: pulpotomy, pulpectomy: pulpectomy, non_sur_root: nonrootcanel, non_sur_retreat: nonretreatment, apexification: apexification, intentionalRCT: intentional, sur_root: rootcaneltreat, perio_consult: perio, Anest_reqOrnotreq: anesthesis}">
+                  
                       <td>{{c.Seq_no}}</td>
                       <td>{{c.HN}}</td>
                       <td>{{c.patientName}}</td>
@@ -183,7 +408,11 @@ $user = $_SESSION['username'];
                     <?php
                 }else{
                     ?>
-                    <tr ng-repeat="c in showData| filter:sData"> 
+
+                    <tr ng-repeat="c in showData| filter:sData | filter:{none: nonemed, cardiovascular: cardiodismed, pulmonary: pulmonarydismed, gastrointestinal: gastrodismed, hematologis: hemadismed, Neurologic: neurodismed, paininten_id: paininten, painchar_id: paincharacter, duration_id: duration, locat_locOrdiff: location, onset_spontaneous: onset_spont, stimulation_id: onset_stimu, ext_facialswelling: extrafacial_check, ext_lymphnode: extralymph_check, ext_sinustract: extrasinus_check, intra_swellsoftOrfirm: swellsoftorfirm, tooth_caries: cariestooth, tooth_pulpexposure: pulptoothex, tooth_pulppolyp: pulptoothpoly, tooth_open: opentoothdrai, tooth_temp: temptooth, crown_normal: normcrown, crown_restoration: restcrown, crown_fracture: fractcrown, pulpcham_normal: normcham, pulpcham_calPartOrComp: calcificatecham, pulpcham_pulpstone: pulpcham_pulpstone, pulpcham_resorption: pulpcham_resorption, root_normal: normroot, root_caries: cariesroot, root_curvature: curvatureroot, root_extresorption: extresroot, root_fracture: fractroot, pulpcan_normal: normcanel,  pulpcan_calPartOrComp: calcificatecanel, pulpcan_resorption: resorpcanel, pulpcan_perforation: perforcanel, pulpcan_previousRCT: prevcanel, pulpcan_broken: brokecanel, perirad_normal: normperirad, perirad_wideningPDL: widenperirad, perirad_lossoflam: lossperirad, perirad_resorption: resorpperirad, perirad_osteos: osteoperirad, perirad_hyper: hyperperirad, bone_normal: normalveolar, bone_genOrlocal: generalalveolar, bone_genOrlocal: localalveolar, normal: puldiagnorm, ReverOrIrreversiblepulp: reverOrirrever, Irreversible_sympOrasymp: sympOrasymp, pulp_necrosis: pulpnecrosis, prev_initiat: previnitiat, prev_treated_improper: prev_improper, prev_treated_incomplete: prev_incomplete, Normal: periraddiagnorm, sympOrasympt_apical: per_symp, sympOrasympt_apical: per_asymp, acuteOrchronic_apical: acute, acuteOrchronic_apical: chronic, no_treatment: notreat, pulp_partOrfull: pulpotomy, pulpectomy: pulpectomy, non_sur_root: nonrootcanel, non_sur_retreat: nonretreatment, apexification: apexification, intentionalRCT: intentional, sur_root: rootcaneltreat, perio_consult: perio, Anest_reqOrnotreq: anesthesis}"> 
+
+                    
+
                       <td>{{c.Seq_no}}</td>                    
                       <td>{{c.HN}}</td>
                       <td>{{c.patientName}}</td>
