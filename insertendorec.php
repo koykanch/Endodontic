@@ -828,6 +828,7 @@ $insert_treatment = "INSERT INTO treatment_plan(HN, Date, no_treatment, Pulpotom
 $result_treatment = $conn->query($insert_treatment);
 
 $xrayfile = addslashes(file_get_contents($_FILES['xrayfile']['tmp_name']));
+
 $xraydate = $_POST['xraydate'];
 $xraytime = $_POST['xraytime'];
 

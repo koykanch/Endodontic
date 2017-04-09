@@ -48,7 +48,7 @@ $harddate = $_POST['hard_date'];
     <tr>
       <th style="font-size: 15px;" align="left" colspan="5">
       <?php
-        $searchMed = "SELECT * FROM medical_his WHERE Seq_no = '$sq'";
+        $searchMed = "SELECT * FROM medical_his WHERE Seq_no = '$sq' AND HN = '$HN'";
         $resultMed = $conn->query($searchMed);
         $objresultMed = mysqli_fetch_array($resultMed);
       ?>
@@ -260,7 +260,7 @@ $harddate = $_POST['hard_date'];
     <tr>
       <td colspan="4" style="font-size:12px;">
         <?php
-          $searchDen = "SELECT * FROM dental_his WHERE Seq_no = '$sq'";
+          $searchDen = "SELECT * FROM dental_his WHERE Seq_no = '$sq' AND HN = '$HN'";
           $resultDen = $conn->query($searchDen);
           $objresultDen = mysqli_fetch_array($resultDen);
         ?>  
@@ -284,7 +284,7 @@ $harddate = $_POST['hard_date'];
 
     <tr>
     <?php
-      $searchSubj = "SELECT * FROM subject_symptom WHERE Seq_no = '$sq'";
+      $searchSubj = "SELECT * FROM subject_symptom WHERE Seq_no = '$sq' AND HN = '$HN'";
       $resultSubj = $conn->query($searchSubj);
       $objresultSubj = mysqli_fetch_array($resultSubj);
     ?>
@@ -292,7 +292,7 @@ $harddate = $_POST['hard_date'];
       <th style="font-size:15px;" align="left"><u>S.Subjective Symptoms</u></th>
 
       <?php
-        $searchObj = "SELECT * FROM object_symptom WHERE Seq_no = '$sq'";
+        $searchObj = "SELECT * FROM object_symptom WHERE Seq_no = '$sq' AND HN = '$HN'";
         $resultObj = $conn->query($searchObj);
         $objresultObj = mysqli_fetch_array($resultObj);
       ?>
@@ -632,7 +632,7 @@ $harddate = $_POST['hard_date'];
   
       <div style="font-size: 15px;"><b>Examination: </b></div>
       <?php
-        $searchExam = "SELECT * FROM examination WHERE Seq_hardcopy = '$sq'";
+        $searchExam = "SELECT * FROM examination WHERE Seq_hardcopy = '$sq' AND HN = '$HN'";
         $resultExam = $conn->query($searchExam);
         
       ?>
@@ -783,7 +783,7 @@ $harddate = $_POST['hard_date'];
                 <b>Crown:</b>
              
               <?php
-                $searchRadio = "SELECT * FROM radiograph_crown WHERE Seq_no = '$sq'";
+                $searchRadio = "SELECT * FROM radiograph_crown WHERE Seq_no = '$sq' AND HN = '$HN'";
                 $resultRadio = $conn->query($searchRadio);
                 $objresultRadio = mysqli_fetch_array($resultRadio);  
               ?>
@@ -818,7 +818,7 @@ $harddate = $_POST['hard_date'];
                 <?php 
                     if($objresultRadio['crown_caries'] == "1"){
                         ?>
-                         <font><?php echo $objresultRadio['crown_cariesarea']; ?>"</font>                   
+                         <font><?php echo $objresultRadio['crown_cariesarea']; ?></font>                   
                         <?php
                     }else{
                         echo '';
@@ -871,7 +871,7 @@ $harddate = $_POST['hard_date'];
           <td style="font-size:12px;"><b>Pulp Chambar:</b>
 
             <?php
-              $searchPulpcham = "SELECT * FROM radiograph_pulpcham WHERE Seq_no = '$sq'";
+              $searchPulpcham = "SELECT * FROM radiograph_pulpcham WHERE Seq_no = '$sq' AND HN = '$HN'";
               $resultPulpcham = $conn->query($searchPulpcham);
               $objresultPulpcham = mysqli_fetch_array($resultPulpcham);
             ?>
@@ -950,7 +950,7 @@ $harddate = $_POST['hard_date'];
       
         <tr>
           <?php
-            $searchRoot = "SELECT * FROM radiograph_root WHERE Seq_no = '$sq'";
+            $searchRoot = "SELECT * FROM radiograph_root WHERE Seq_no = '$sq' AND HN = '$HN'";
             $resultRoot = $conn->query($searchRoot);
             $objresultRoot = mysqli_fetch_array($resultRoot); 
           ?>
@@ -1040,7 +1040,7 @@ $harddate = $_POST['hard_date'];
         <tr>
           <td style="font-size:12px;">
             <?php
-              $searchPulpcan = "SELECT * FROM radiograph_pulpcanal WHERE Seq_no = '$sq'";
+              $searchPulpcan = "SELECT * FROM radiograph_pulpcanal WHERE Seq_no = '$sq' AND HN = '$HN'";
               $resultPulpcan = $conn->query($searchPulpcan);
               $objresultPulpcan = mysqli_fetch_array($resultPulpcan); 
             ?>
@@ -1151,7 +1151,7 @@ $harddate = $_POST['hard_date'];
         <tr>
           <td style="font-size:12px;">
             <?php
-              $searchPerirad = "SELECT * FROM radiograph_perirad WHERE Seq_no = '$sq'";
+              $searchPerirad = "SELECT * FROM radiograph_perirad WHERE Seq_no = '$sq' AND HN = '$HN'";
               $resultPerirad = $conn->query($searchPerirad);
               $objresultPerirad = mysqli_fetch_array($resultPerirad);   
             ?>
@@ -1306,7 +1306,7 @@ $harddate = $_POST['hard_date'];
         <tr>
           <td style="font-size:12px;">
             <?php
-              $searchAlveolar = "SELECT * FROM radiograph_alveolar WHERE Seq_no = '$sq'";
+              $searchAlveolar = "SELECT * FROM radiograph_alveolar WHERE Seq_no = '$sq' AND HN = '$HN'";
               $resultAlveolar = $conn->query($searchAlveolar);
               $objresultAlveolar = mysqli_fetch_array($resultAlveolar);
             ?>
@@ -1369,7 +1369,7 @@ $harddate = $_POST['hard_date'];
 
       <table style="margin-top: 8em;">
         <?php
-          $searchPulpaldiag = "SELECT * FROM pulpal_diagnosis WHERE Seq_no = '$sq'";
+          $searchPulpaldiag = "SELECT * FROM pulpal_diagnosis WHERE Seq_no = '$sq' AND HN = '$HN'";
           $resultPulpaldiag = $conn->query($searchPulpaldiag);
           $objresultPulpaldiag = mysqli_fetch_array($resultPulpaldiag);
         ?>
@@ -1384,7 +1384,7 @@ $harddate = $_POST['hard_date'];
 
         <td style="font-size: 12px;">
           <?php
-            $searchPeriraddiag = "SELECT * FROM periradicular_diagnosis WHERE Seq_no = '$sq'";
+            $searchPeriraddiag = "SELECT * FROM periradicular_diagnosis WHERE Seq_no = '$sq' AND HN = '$HN'";
             $resultPeriraddiag = $conn->query($searchPeriraddiag);
             $objresultPeriraddiag = mysqli_fetch_array($resultPeriraddiag);
           ?>
@@ -1648,7 +1648,7 @@ $harddate = $_POST['hard_date'];
 
     <table style="margin-top: 1em;">
       <?php
-        $searchTreatment = "SELECT * FROM treatment_plan WHERE Seq_no = '$sq'";
+        $searchTreatment = "SELECT * FROM treatment_plan WHERE Seq_no = '$sq' AND HN = '$HN'";
         $resultTreatment = $conn->query($searchTreatment);
         $objresultTreatment = mysqli_fetch_array($resultTreatment);
       ?>
@@ -1931,7 +1931,7 @@ $harddate = $_POST['hard_date'];
     </table><br><br>
 
     <?php
-      $searchXray = "SELECT * FROM patients_xray WHERE Seq_no = '$sq'";
+      $searchXray = "SELECT * FROM patients_xray WHERE Seq_no = '$sq' AND HN = '$HN'";
       $resultXray = $conn->query($searchXray);
       $objresultXray = mysqli_fetch_array($resultXray); 
     ?>

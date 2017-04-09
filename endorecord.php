@@ -394,7 +394,19 @@ $endo = new Endodontic;
             <div class="row">
                <div class="col-md-12"><label>Dental student: &nbsp;&nbsp;</label>
                   <select name="codestudent" style="width: 300px; height:50px; float:left;">
-                      <?php $stu->searchstu($conn); ?>
+                    <?php
+                      $user_student = "SELECT * FROM dentalstudent_info WHERE student_code = '$user'";
+                      $resuser_stu = $conn->query($user_student);
+                      $objuser_stu = mysqli_fetch_array($resuser_stu);
+                      if(isset($objuser_stu['student_code'])){
+                        ?>
+                          <option value="<?php echo $objuser_stu['student_code']; ?>">
+                            <?php echo $objuser_stu['student_code']; ?> : <?php echo $objuser_stu['student_name']; ?>   
+                          </option> <?php
+                      }else{
+                          $stu->searchstu($conn); 
+                      }
+                      ?>
                   </select>
                </div>
             </div>
@@ -402,7 +414,20 @@ $endo = new Endodontic;
             <div class="row">
                <div class="col-md-12"><label> Instructor: &nbsp;&nbsp;</label>
                   <select name="dentname" style="width: 300px; height:50px; float:left;">
-                      <?php $instruc->searchdent($conn); ?>
+                    <?php
+                      $user_instruc = "SELECT * FROM dentist_info WHERE dentId = '$user'";
+                      $resuser_instruc = $conn->query($user_instruc);
+                      $objuser_instruc = mysqli_fetch_array($resuser_instruc);
+
+                      if(isset($objuser_instruc['dentId'])){
+                        ?>
+                          <option value="<?php echo $objuser_instruc['dentId']; ?>">
+                            <?php echo $objuser_instruc['dentId']; ?> : <?php echo $objuser_instruc['dent_name']; ?>
+                          </option> <?php
+                      }else{
+                         $instruc->searchdent($conn); 
+                      }
+                    ?>
                   </select>
                </div>
             </div>

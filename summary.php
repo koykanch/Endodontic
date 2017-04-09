@@ -142,6 +142,25 @@ $user = $_SESSION['username'];
                 <input ng-model="hemadismed" type="checkbox" ng-true-value="1" ng-false-value="" />Hematologic Diseases &nbsp;&nbsp;
                 <input ng-model="neurodismed" type="checkbox" ng-true-value="1" ng-false-value="" />Neurologic Diseases &nbsp;&nbsp;
             </p>
+            <!-- <p align="left" style="padding-left: 2em;">
+                 Blood Pressure: 
+                 <select ng-model="blood1">
+                    <option value="">SELECT</option>
+                 <?php
+                      // for($i=0; $i<=250; $i++){
+                      //   echo '<option value="<?php echo $i ?>">'.$i.'</option>';
+                      // }
+                 ?>
+                </select> &nbsp; / &nbsp;
+                <select ng-model="blood2">
+                    <option value="">SELECT</option>
+                 <?php
+                      // for($i=0; $i<=250; $i++){
+                      //   echo '<option value="<?php echo $i ?>">'.$i.'</option>';
+                      // }
+                 ?>
+                </select> &nbsp;&nbsp;
+            </p> -->
 
             <p align="left"><b>S. Subjective Symptoms</b></p>
             <p align="left" style="padding-left: 2em;">
@@ -193,6 +212,8 @@ $user = $_SESSION['username'];
                   <option value="01">Localized</option>
                   <option value="02">Diffused</option>
                 </select> &nbsp;&nbsp;
+            Radiating to: <input ng-model="locatradiat" style="width: 50px; height:25px;" />&nbsp;&nbsp;
+            Referred to: <input ng-model="refer" style="width: 50px; height:25px;" />&nbsp;&nbsp;
             </p>
 
             <p align="left"><b>O. Objective Symptoms</b></p>
@@ -210,22 +231,75 @@ $user = $_SESSION['username'];
                   <option value="0">Soft</option>
                   <option value="1">Firm</option>
                 </select> &nbsp;&nbsp;
+                area: <input ng-model="intraswell_area" style="width: 50px; height:25px;" />&nbsp;&nbsp;
+                Sinus Tract at: <input ng-model="intra_sinus" style="width: 50px; height:25px;" />&nbsp;&nbsp;
             </p>
 
             <p align="left" style="padding-left: 2em;">
                  <b>Tooth: </b>
                 <input ng-model="cariestooth" type="checkbox" ng-true-value="1" ng-false-value="" />Caries &nbsp;&nbsp;
+                Restoration with: <input ng-model="toothrestoration" style="width: 50px; height:25px;" />&nbsp;&nbsp;
                 <input ng-model="pulptoothex" type="checkbox" ng-true-value="1" ng-false-value="" />Pulp Exposure &nbsp;&nbsp;
                 <input ng-model="pulptoothpoly" type="checkbox" ng-true-value="1" ng-false-value="" />Pulp Polyp &nbsp;&nbsp;
+                Fracture at: <input ng-model="fracturetoration" style="width: 50px; height:25px;" />&nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 5em;">
+                Crown Discoloration to: <input ng-model="crowntooth" style="width: 50px; height:25px;" />&nbsp;&nbsp;
                 <input ng-model="opentoothdrai" type="checkbox" ng-true-value="1" ng-false-value="" />Opened for Drainage &nbsp;&nbsp;
                 <input ng-model="temptooth" type="checkbox" ng-true-value="1" ng-false-value="" />Temp. Restoration &nbsp;&nbsp;
-
             </p>
 
+            <p align="left"><b>Examination</b></p>
+            <p align="left" style="padding-left: 2em;">
+                
+             <!-- <b>Tooth: </b><input ng-model="tooth" style="width: 50px; height:25px;" />&nbsp;&nbsp;
+             <b>EPT: </b><input ng-model="epttooth" style="width: 50px; height:25px;" />&nbsp;&nbsp; -->
+             <b>Cold: </b><select ng-model="cold_exam">
+                  <option value="">SELECT</option>
+                  <option value="WNL">WNL</option>
+                  <option value="positive">Positive</option>
+                  <option value="negative">Negative</option>
+                </select> &nbsp;&nbsp;
+              <b>Heat: </b><select ng-model="heat_exam">
+                  <option value="">SELECT</option>
+                  <option value="WNL">WNL</option>
+                  <option value="positive">Positive</option>
+                  <option value="negative">Negative</option>
+                </select> &nbsp;&nbsp;
+              <b>Perc<sup>n</sup>: </b><select ng-model="perc_exam">
+                  <option value="">SELECT</option>
+                  <option value="WNL">WNL</option>
+                  <option value="positive">Positive</option>
+                  <option value="negative">Negative</option>
+                </select> &nbsp;&nbsp;
+              <b>Palp<sup>n</sup>: </b><select ng-model="palp_exam">
+                  <option value="">SELECT</option>
+                  <option value="WNL">WNL</option>
+                  <option value="positive">Positive</option>
+                  <option value="negative">Negative</option>
+                </select> &nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 2em;">
+              <b>Mobility: </b><select ng-model="mobility_exam">
+                  <option value="">SELECT</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select> &nbsp;&nbsp;
+              <b>Special Test: </b><select ng-model="spectest_exam">
+                  <option value="">SELECT</option>
+                  <option value="01">Illumination Test</option>
+                  <option value="02">Dye Test</option>
+                  <option value="03">Anes Test</option>
+                </select> &nbsp;&nbsp;
+            </p>
             <p align="left"><b>Radiographic findings</b></p>
             <p align="left" style="padding-left: 2em;">
             <b>Crown: &nbsp;&nbsp;</b>
                 <input ng-model="normcrown" type="checkbox" ng-true-value="1" ng-false-value="" />Normal &nbsp;&nbsp;
+                <input ng-model="cariescrown" type="checkbox" ng-true-value="1" ng-false-value="" />Caries
+                (area: <input ng-model="crowarea" placeholder="area" style="width: 60px; height: 25px;" /> &nbsp;&nbsp; 
+                depth: <input ng-model="crowdepth" placeholder="depth" style="width: 60px; height: 25px;"/> ) &nbsp;&nbsp; 
                 <input ng-model="restcrown" type="checkbox" ng-true-value="1" ng-false-value="" />Restoration &nbsp;&nbsp;
                 <input ng-model="fractcrown" type="checkbox" ng-true-value="1" ng-false-value="" />Fracture  &nbsp;&nbsp;
             </p>
@@ -268,6 +342,12 @@ $user = $_SESSION['username'];
                 <input ng-model="normperirad" type="checkbox" ng-true-value="1" ng-false-value="" />Normal &nbsp;&nbsp;
                 <input ng-model="widenperirad" type="checkbox" ng-true-value="1" ng-false-value="" />Widening PDL &nbsp;&nbsp;
                 <input ng-model="lossperirad" type="checkbox" ng-true-value="1" ng-false-value="" />Loss of Lamina Dura &nbsp;&nbsp;
+            </p>
+            <p align="left" style="padding-left: 9em;">
+                Periapical Lesion: <input ng-model="periradperialess1" style="width: 50px; height: 25px;"/>
+                X <input ng-model="periradperialess2" style="width: 50px; height: 25px;"/> mm
+                Lateral Lesionn: <input ng-model="laterlessperirad1" style="width: 50px; height: 25px;"/>
+                X <input ng-model="laterlessperirad2" style="width: 50px; height: 25px;"/> mm
             </p>
             <p align="left" style="padding-left: 9em;">
                 <input ng-model="resorpperirad" type="checkbox" ng-true-value="1" ng-false-value="" />Resorption  &nbsp;&nbsp;
@@ -332,6 +412,10 @@ $user = $_SESSION['username'];
                 <input ng-model="rootcaneltreat" type="checkbox" ng-true-value="1" ng-false-value="" />Surgical Root Canel Treatment &nbsp;&nbsp;
                 <input ng-model="perio" type="checkbox" ng-true-value="1" ng-false-value="" />Perio Consult &nbsp;&nbsp;
             </p>
+
+            <p align="left" style="padding-left: 2em;">
+                <b>Plan for final restoration: </b><input ng-model="planrestor" style="width: 200px; height: 30px;"/>
+            </p>
             <p align="left" style="padding-left: 2em;">
             <b>Pre-op treatment: </b>&nbsp;&nbsp;
                 <input ng-model="preop_carie" type="checkbox" ng-true-value="1" ng-false-value="" />Caries Removal &nbsp;&nbsp;
@@ -351,6 +435,12 @@ $user = $_SESSION['username'];
         </label>    -->     
      </form>       
 
+<?php
+$checkuser = "SELECT * FROM dentist_info WHERE dentId = '".$_SESSION['username']."'";
+$rescheckuser = $conn->query($checkuser);
+$rowcheckuser = mysqli_fetch_array($rescheckuser);   
+?>
+
 	    <table class="table table-bordered" border="1">
 	        <tr bgcolor="#D1C4E9">
                 <td>ลำดับที่</td>
@@ -359,16 +449,17 @@ $user = $_SESSION['username'];
 	            <td>ประจำวันที่</td>
 	            <td>นักศึกษาผู้รักษา</td>
 	            <td>ทันตแพทย์ผู้รักษา</td>
-	            <td>รายละเอียดการรักษา</td>
+        	    <td>จัดการการรักษา</td>
+                
 	        </tr>
         <!-- {{showData | json}} -->
-        {{blah | json}}
+        <!-- {{periradperialess2 | json}} -->
 
             <?php
                 if($user != ""){
                     ?>
                     
-                    <tr ng-repeat="c in showData| filter:sData | filter:{none: nonemed, cardiovascular: cardiodismed, pulmonary: pulmonarydismed, gastrointestinal: gastrodismed, hematologis: hemadismed, Neurologic: neurodismed, paininten_id: paininten, painchar_id: paincharacter, duration_id: duration, locat_locOrdiff: location, onset_spontaneous: onset_spont, stimulation_id: onset_stimu, ext_facialswelling: extrafacial_check, ext_lymphnode: extralymph_check, ext_sinustract: extrasinus_check, intra_swellsoftOrfirm: swellsoftorfirm, tooth_caries: cariestooth, tooth_pulpexposure: pulptoothex, tooth_pulppolyp: pulptoothpoly, tooth_open: opentoothdrai, tooth_temp: temptooth, crown_normal: normcrown, crown_restoration: restcrown, crown_fracture: fractcrown, pulpcham_normal: normcham, pulpcham_calPartOrComp: calcificatecham, pulpcham_pulpstone: pulpcham_pulpstone, pulpcham_resorption: pulpcham_resorption, root_normal: normroot, root_caries: cariesroot, root_curvature: curvatureroot, root_extresorption: extresroot, root_fracture: fractroot, pulpcan_normal: normcanel,  pulpcan_calPartOrComp: calcificatecanel, pulpcan_resorption: resorpcanel, pulpcan_perforation: perforcanel, pulpcan_previousRCT: prevcanel, pulpcan_broken: brokecanel, perirad_normal: normperirad, perirad_wideningPDL: widenperirad, perirad_lossoflam: lossperirad, perirad_resorption: resorpperirad, perirad_osteos: osteoperirad, perirad_hyper: hyperperirad, bone_normal: normalveolar, bone_genOrlocal: generalalveolar, bone_genOrlocal: localalveolar, normal: puldiagnorm, ReverOrIrreversiblepulp: reverOrirrever, Irreversible_sympOrasymp: sympOrasymp, pulp_necrosis: pulpnecrosis, prev_initiat: previnitiat, prev_treated_improper: prev_improper, prev_treated_incomplete: prev_incomplete, Normal: periraddiagnorm, sympOrasympt_apical: per_symp, sympOrasympt_apical: per_asymp, acuteOrchronic_apical: acute, acuteOrchronic_apical: chronic, no_treatment: notreat, pulp_partOrfull: pulpotomy, pulpectomy: pulpectomy, non_sur_root: nonrootcanel, non_sur_retreat: nonretreatment, apexification: apexification, intentionalRCT: intentional, sur_root: rootcaneltreat, perio_consult: perio, Anest_reqOrnotreq: anesthesis}">
+                    <tr ng-repeat="c in showData| filter:sData | filter:{none: nonemed, cardiovascular: cardiodismed, pulmonary: pulmonarydismed, gastrointestinal: gastrodismed, hematologis: hemadismed, Neurologic: neurodismed, paininten_id: paininten, painchar_id: paincharacter, duration_id: duration, locat_locOrdiff: location, onset_spontaneous: onset_spont, stimulation_id: onset_stimu, locat_radiating: locatradiat, locat_referred: refer, ext_facialswelling: extrafacial_check, ext_lymphnode: extralymph_check, ext_sinustract: extrasinus_check, intra_swellsoftOrfirm: swellsoftorfirm, intra_swellarea: intraswell_area, intra_sinustract: intra_sinus, tooth_caries: cariestooth, tooth_restoration: toothrestoration, tooth_pulpexposure: pulptoothex, tooth_pulppolyp: pulptoothpoly, tooth_fracture: fracturetoration, tooth_crown: crowntooth, tooth_open: opentoothdrai, tooth_temp: temptooth, exam_tooth: tooth, exam_EPT: epttooth, exam_cold: cold_exam, exam_heat: heat_exam, exam_perc: perc_exam, exam_palp: palp_exam,exam_mobility: mobility_exam, spectest_id: spectest_exam, crown_normal: normcrown, crown_caries: cariescrown, crown_cariesarea: crowarea, crown_cariesdepth: crowdepth, crown_restoration: restcrown, crown_fracture: fractcrown, pulpcham_normal: normcham, pulpcham_calPartOrComp: calcificatecham, pulpcham_pulpstone: pulpcham_pulpstone, pulpcham_resorption: pulpcham_resorption, root_normal: normroot, root_caries: cariesroot, root_curvature: curvatureroot, root_extresorption: extresroot, root_fracture: fractroot, pulpcan_normal: normcanel,  pulpcan_calPartOrComp: calcificatecanel, pulpcan_resorption: resorpcanel, pulpcan_perforation: perforcanel, pulpcan_previousRCT: prevcanel, pulpcan_broken: brokecanel, perirad_normal: normperirad, perirad_wideningPDL: widenperirad, perirad_lossoflam: lossperirad, perirad_periapical1: periradperialess1, perirad_periapical2: periradperialess2, perirad_lateral1: laterlessperirad1, perirad_lateral2: laterlessperirad2, perirad_resorption: resorpperirad, perirad_osteos: osteoperirad, perirad_hyper: hyperperirad, bone_normal: normalveolar, bone_genOrlocal: generalalveolar, bone_genOrlocal: localalveolar, normal: puldiagnorm, ReverOrIrreversiblepulp: reverOrirrever, Irreversible_sympOrasymp: sympOrasymp, pulp_necrosis: pulpnecrosis, prev_initiat: previnitiat, prev_treated_improper: prev_improper, prev_treated_incomplete: prev_incomplete, Normal: periraddiagnorm, sympOrasympt_apical: per_symp, sympOrasympt_apical: per_asymp, acuteOrchronic_apical: acute, acuteOrchronic_apical: chronic, no_treatment: notreat, pulp_partOrfull: pulpotomy, pulpectomy: pulpectomy, non_sur_root: nonrootcanel, non_sur_retreat: nonretreatment, apexification: apexification, intentionalRCT: intentional, sur_root: rootcaneltreat, perio_consult: perio, plan_for_final: planrestor,     pre_op_treat_caries: preop_carie, pre_op_treat_dam: preop_dam, Anest_reqOrnotreq: anesthesis}"> 
                   
                       <td>{{c.Seq_no}}</td>
                       <td>{{c.HN}}</td>
@@ -393,7 +484,13 @@ $user = $_SESSION['username'];
                         <input type="hidden" name="Dent_id" value="{{c.dentId}}">
                         <input type="hidden" name="hard_date" value="{{c.hard_Date}}">
 
-                        <input type="submit" class="btn btn-info" style="width:100px;" name="edit" value="EDIT">
+                        <span ng-if="c.student_code == <?php echo $user; ?>">
+                            <input type="submit" class="btn btn-info" style="width:100px;" name="edit" value="EDIT">
+                        </span>
+                        <span ng-if="c.dentId == <?php echo $user; ?>" >
+                            <input type="submit" class="btn btn-info" style="width:100px;" name="edit" value="EDIT">
+                        </span>
+                        </span>
                       </form><br>
 
                       <form action="deleteEndodontic.php" method="post" name="delete_detail">
@@ -403,15 +500,15 @@ $user = $_SESSION['username'];
                         <input type="hidden" name="Dent_id" value="{{c.dentId}}">
                         <input type="hidden" name="hard_date" value="{{c.hard_Date}}">
 
+                        <span ng-if="c.status == '01'" >
                         <input type="submit" class="btn btn-danger" style="width:100px;" name="delete" value="DELETE"></tr>
+                        </span>
                       </form></tr>
                     <?php
                 }else{
                     ?>
 
-                    <tr ng-repeat="c in showData| filter:sData | filter:{none: nonemed, cardiovascular: cardiodismed, pulmonary: pulmonarydismed, gastrointestinal: gastrodismed, hematologis: hemadismed, Neurologic: neurodismed, paininten_id: paininten, painchar_id: paincharacter, duration_id: duration, locat_locOrdiff: location, onset_spontaneous: onset_spont, stimulation_id: onset_stimu, ext_facialswelling: extrafacial_check, ext_lymphnode: extralymph_check, ext_sinustract: extrasinus_check, intra_swellsoftOrfirm: swellsoftorfirm, tooth_caries: cariestooth, tooth_pulpexposure: pulptoothex, tooth_pulppolyp: pulptoothpoly, tooth_open: opentoothdrai, tooth_temp: temptooth, crown_normal: normcrown, crown_restoration: restcrown, crown_fracture: fractcrown, pulpcham_normal: normcham, pulpcham_calPartOrComp: calcificatecham, pulpcham_pulpstone: pulpcham_pulpstone, pulpcham_resorption: pulpcham_resorption, root_normal: normroot, root_caries: cariesroot, root_curvature: curvatureroot, root_extresorption: extresroot, root_fracture: fractroot, pulpcan_normal: normcanel,  pulpcan_calPartOrComp: calcificatecanel, pulpcan_resorption: resorpcanel, pulpcan_perforation: perforcanel, pulpcan_previousRCT: prevcanel, pulpcan_broken: brokecanel, perirad_normal: normperirad, perirad_wideningPDL: widenperirad, perirad_lossoflam: lossperirad, perirad_resorption: resorpperirad, perirad_osteos: osteoperirad, perirad_hyper: hyperperirad, bone_normal: normalveolar, bone_genOrlocal: generalalveolar, bone_genOrlocal: localalveolar, normal: puldiagnorm, ReverOrIrreversiblepulp: reverOrirrever, Irreversible_sympOrasymp: sympOrasymp, pulp_necrosis: pulpnecrosis, prev_initiat: previnitiat, prev_treated_improper: prev_improper, prev_treated_incomplete: prev_incomplete, Normal: periraddiagnorm, sympOrasympt_apical: per_symp, sympOrasympt_apical: per_asymp, acuteOrchronic_apical: acute, acuteOrchronic_apical: chronic, no_treatment: notreat, pulp_partOrfull: pulpotomy, pulpectomy: pulpectomy, non_sur_root: nonrootcanel, non_sur_retreat: nonretreatment, apexification: apexification, intentionalRCT: intentional, sur_root: rootcaneltreat, perio_consult: perio, Anest_reqOrnotreq: anesthesis}"> 
-
-                    
+                    <tr ng-repeat="c in showData| filter:sData | filter:{none: nonemed, cardiovascular: cardiodismed, pulmonary: pulmonarydismed, gastrointestinal: gastrodismed, hematologis: hemadismed, Neurologic: neurodismed, paininten_id: paininten, painchar_id: paincharacter, duration_id: duration, locat_locOrdiff: location, onset_spontaneous: onset_spont, stimulation_id: onset_stimu, locat_radiating: locatradiat, locat_referred: refer, ext_facialswelling: extrafacial_check, ext_lymphnode: extralymph_check, ext_sinustract: extrasinus_check, intra_swellsoftOrfirm: swellsoftorfirm, intra_swellarea: intraswell_area, intra_sinustract: intra_sinus, tooth_caries: cariestooth, tooth_restoration: toothrestoration, tooth_pulpexposure: pulptoothex, tooth_pulppolyp: pulptoothpoly, tooth_fracture: fracturetoration, tooth_crown: crowntooth, tooth_open: opentoothdrai, tooth_temp: temptooth, exam_tooth: tooth, exam_EPT: epttooth, exam_cold: cold_exam, exam_heat: heat_exam, exam_perc: perc_exam, exam_palp: palp_exam,exam_mobility: mobility_exam, spectest_id: spectest_exam, crown_normal: normcrown, crown_caries: cariescrown, crown_cariesarea: crowarea, crown_cariesdepth: crowdepth, crown_restoration: restcrown, crown_fracture: fractcrown, pulpcham_normal: normcham, pulpcham_calPartOrComp: calcificatecham, pulpcham_pulpstone: pulpcham_pulpstone, pulpcham_resorption: pulpcham_resorption, root_normal: normroot, root_caries: cariesroot, root_curvature: curvatureroot, root_extresorption: extresroot, root_fracture: fractroot, pulpcan_normal: normcanel,  pulpcan_calPartOrComp: calcificatecanel, pulpcan_resorption: resorpcanel, pulpcan_perforation: perforcanel, pulpcan_previousRCT: prevcanel, pulpcan_broken: brokecanel, perirad_normal: normperirad, perirad_wideningPDL: widenperirad, perirad_lossoflam: lossperirad, perirad_periapical1: periradperialess1, perirad_periapical2: periradperialess2, perirad_lateral1: laterlessperirad1, perirad_lateral2: laterlessperirad2, perirad_resorption: resorpperirad, perirad_osteos: osteoperirad, perirad_hyper: hyperperirad, bone_normal: normalveolar, bone_genOrlocal: generalalveolar, bone_genOrlocal: localalveolar, normal: puldiagnorm, ReverOrIrreversiblepulp: reverOrirrever, Irreversible_sympOrasymp: sympOrasymp, pulp_necrosis: pulpnecrosis, prev_initiat: previnitiat, prev_treated_improper: prev_improper, prev_treated_incomplete: prev_incomplete, Normal: periraddiagnorm, sympOrasympt_apical: per_symp, sympOrasympt_apical: per_asymp, acuteOrchronic_apical: acute, acuteOrchronic_apical: chronic, no_treatment: notreat, pulp_partOrfull: pulpotomy, pulpectomy: pulpectomy, non_sur_root: nonrootcanel, non_sur_retreat: nonretreatment, apexification: apexification, intentionalRCT: intentional, sur_root: rootcaneltreat, perio_consult: perio, plan_for_final: planrestor,     pre_op_treat_caries: preop_carie, pre_op_treat_dam: preop_dam, Anest_reqOrnotreq: anesthesis}"> 
 
                       <td>{{c.Seq_no}}</td>                    
                       <td>{{c.HN}}</td>

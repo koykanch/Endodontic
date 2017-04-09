@@ -107,16 +107,25 @@
             <div class="loader-img"></div>
         </div>
 <?php
+$checkuser = "SELECT * FROM dentist_info WHERE dentId = '".$_SESSION['username']."'";
+$rescheckuser = $conn->query($checkuser);
+$rowcheckuser = mysqli_fetch_array($rescheckuser);
+
 if(isset($_SESSION['username'])){
-    ?>
-        <div class="container">
-            <button id="myBtn" style="float: right;">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true" style="float: left;"></span>
-                <!-- Trigger/Open The Modal -->
-                เพิ่มข้อมูลทันตแพทย์
-            </button>  
-        </div>
-    <?php
+    if(isset($rowcheckuser['dentId'])){
+        if($rowcheckuser['status'] == '01'){
+         ?>
+            <div class="container">
+                <button id="myBtn" style="float: right;">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true" style="float: left;"></span>
+                    <!-- Trigger/Open The Modal -->
+                    เพิ่มข้อมูลทันตแพทย์
+                </button>  
+            </div>
+        <?php
+        }
+    }
+   
 }
 ?>
         <div class="first-container">
@@ -132,7 +141,11 @@ if(isset($_SESSION['username'])){
                     <td>สถานะ</td>
                 <?php 
                 if(isset($_SESSION['username'])){
-                    echo '<td>จัดการข้อมูลนักศึกษา</td>';
+                    if(isset($rowcheckuser['dentId'])){
+                        if($rowcheckuser['status'] == '01'){
+                            echo '<td>จัดการข้อมูลนักศึกษา</td>';
+                        }
+                    }
                 }
                 ?>
                 </tr>
@@ -146,24 +159,29 @@ if(isset($_SESSION['username'])){
                         echo '<tr>
                             <td class="Id">'.$row['dentId'].'</td>
                             <td class="name">'.$row['dent_name'].'</td>';
-                            
-                            if($row['status'] == '0'){
-                                echo '<td class="stat">พนักงาน</td>';
-                            }else{
-                                echo '<td class="stat">ทันตแพทย์</td>';
-                            }
+
+                            $status_detail = "SELECT * FROM dentist_status WHERE status_id = '".$row['status']."'";
+                            $resstatus_detail = $conn->query($status_detail);
+                            $objstatus_detail = mysqli_fetch_array($resstatus_detail);
+
+                        echo '<td class="stat">'.$objstatus_detail['status_detail'].'</td>';
                         
                         if(isset($_SESSION['username'])){
-                        echo '<td>
-                                <form action="updateDentist.php" method="post" name="updatebtn">
-                                        <input type="hidden" name="dentId" value="'.$row['dentId'].'">
-                                        <input type="submit" class="btn btn-primary" name="'.$row['dentId'].'" value="Edit" style="width: 100px;">
-                                </form><br>'; ?>
-                                <form action="deleteDentist.php" method="post" name="deletebtn" onSubmit="return confirm('are you sure?')">
-                                        <input type="hidden" name="dentId" value="<?php echo $row['dentId']; ?>">
-                                        <input type="submit" class="btn btn-danger"  value="Delete" style="width: 100px;"name="<?php echo $row['dentId']; ?>">
-                                </form>
-                             </td> <?php } ?>
+                            if(isset($rowcheckuser['dentId'])){
+                                if($rowcheckuser['status'] == '01'){
+                                     echo '<td>
+                                        <form action="updateDentist.php" method="post" name="updatebtn">
+                                                <input type="hidden" name="dentId" value="'.$row['dentId'].'">
+                                                <input type="submit" class="btn btn-primary" name="'.$row['dentId'].'" value="Edit" style="width: 100px;">
+                                        </form><br>'; ?>
+                                        <form action="deleteDentist.php" method="post" name="deletebtn" onSubmit="return confirm('are you sure?')">
+                                                <input type="hidden" name="dentId" value="<?php echo $row['dentId']; ?>">
+                                                <input type="submit" class="btn btn-danger"  value="Delete" style="width: 100px;"name="<?php echo $row['dentId']; ?>">
+                                        </form>
+                                     </td> <?php } 
+                                }
+                            }
+                       ?>
                         </tr><?php } ?>   
                         </tbody>
                      </table>         
@@ -201,12 +219,21 @@ if(isset($_SESSION['username'])){
                         <td><input type="password" name="dentpassword"></td>
                     </tr>
 
+                    <?php
+                        $statusdent = "SELECT * FROM dentist_status";
+                        $resstatus = $conn->query($statusdent);
+                    ?>
                     <tr height="80">
                         <td><b>Status: </b></td>
                         <td>
                         <select name="dentstatus" style="height: 50px;">
-                            <option value="0">พนักงาน</option>
-                            <option value="1">ทันตแพทย์</option>
+                            <?php
+                            while($rowstatus = mysqli_fetch_array($resstatus)){
+                                ?>
+                                    <option value="<?php echo $rowstatus['status_id']; ?>"><?php echo $rowstatus['status_detail'] ?></option>';
+                               <?php
+                            }
+                            ?>
                         </select>
                         </td>
                     </tr>

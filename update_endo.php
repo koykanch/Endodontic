@@ -707,9 +707,22 @@ if(addslashes(file_get_contents($_FILES['xrayfile']['tmp_name'])) == ""){
 	$xrayfile = "";
 }else{
 	$xrayfile = addslashes(file_get_contents($_FILES['xrayfile']['tmp_name']));
+	 copy($_FILES['xrayfile']['tmp_name'], $_FILES['xrayfile']['name']);      //ทำการ copy รูป
+	$images = $_FILES['xrayfile']['name']; 
+	$height = 2000;      //กำหนดขนาดความสูง
+	$size = getimagesize($images);
+	$width = round($height*$size[0]/$size[1]);  
+	$images_orig = imagecreatefromjpeg($images); //resize รูปประเภท JPEG
+	$photoX = imagesx($images_orig);
+	$photoY = imagesy($images_orig);
+	$images_fin = imagecreatetruecolor($width, $height);
+	imagecopyresampled($images_fin, $images_orig, 0, 0, 0, 0, $width+1, $height+1, $photoX, $photoY);
+	imagejpeg($images_fin, $images); //ชื่อไฟล์ใหม่ 
+	// imagedestroy($images_orig);
+	// imagedestroy($images_fin);
 }
 
-$update_xray = "INSERT INTO patients_xray(HN,Date,xrayData,xray_datetime,edit_date,edit_by) VALUES('$HN','$datedemo','$xrayfile','$xraydate'"."'$xraytime','$edit_time','$edit_by')";
+$update_xray = "INSERT INTO patients_xray(HN,Date,xrayData,xray_datetime,edit_date,edit_by) VALUES('$HN','$datedemo','$images','$xraydate'"."'$xraytime','$edit_time','$edit_by')";
 $result_xray = $conn->query($update_xray);
 
 if($result_endo === TRUE && $result_med === TRUE && $result_dental === TRUE && $result_subject === TRUE && $result_object === TRUE && $result_examination1 === TRUE && $result_radiocrown === TRUE && $result_radiopulpcham === TRUE && $result_radioroot === TRUE && $result_radiopulpcanal=== TRUE && $result_radioperirad === TRUE && $result_alveolar === TRUE && $result_pulpaldiag === TRUE && $result_periraddiag === TRUE && $result_treatment === TRUE && $result_xray === TRUE ){

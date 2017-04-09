@@ -112,7 +112,14 @@
         <div class="loader">
             <div class="loader-img"></div>
         </div>
-<?php if(isset($_SESSION['username'])){
+<?php
+$checkuser = "SELECT * FROM dentist_info WHERE dentId = '".$_SESSION['username']."'";
+$rescheckuser = $conn->query($checkuser);
+$rowcheckuser = mysqli_fetch_array($rescheckuser);
+
+if(isset($_SESSION['username'])){
+    if(isset($rowcheckuser['dentId'])){
+        if($rowcheckuser['status'] == '01'){
     ?>
         <div class="container">
             <button id="myBtn" style="float: right;">
@@ -123,6 +130,8 @@
         </div> 
     <?php 
         }
+    }
+}
 ?>
         <div class="first-container">
         <div class="panel panel-info">
@@ -138,7 +147,11 @@
                     <td>ช่วงเวลาที่หยุดรักษาผู้ป่วย</td>
                 <?php
                 if(isset($_SESSION['username'])){
-                    echo '<td>จัดการข้อมูลนักศึกษา</td>';
+                    if(isset($rowcheckuser['dentId'])){
+                        if($rowcheckuser['status'] == '01'){
+                            echo '<td>จัดการข้อมูลนักศึกษา</td>';
+                        }
+                    }
                 }
                 ?>
                 </tr>
@@ -157,6 +170,8 @@
                             <td class="end">'.$end.'</td>';
 
                         if(isset($_SESSION['username'])){
+                             if(isset($rowcheckuser['dentId'])){
+                                if($rowcheckuser['status'] == '01'){
                         echo '<td>
                                 <form action="updateStudent.php" method="post" name="updatebtn">
                                         <input type="hidden" name="studentId" value="'.$row['student_code'].'">
@@ -167,7 +182,10 @@
                                         <input type="hidden" name="stu_code" value="<?php echo $row['student_code']; ?>">
                                         <input type="submit" class="btn btn-danger"  value="Delete" style="width: 100px;"name="<?php echo $row['student_code']; ?>">
                                 </form> 
-                            </td> <?php } ?>
+                            </td> <?php } 
+                                }
+                            }
+                       ?>
                         </tr><?php } ?>   
                         </tbody>
                      </table>

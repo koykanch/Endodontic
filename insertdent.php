@@ -3,10 +3,9 @@ require('connect.php');
 $dentId = $_POST['dentid'];
 $dentname = $_POST['dentname'];
 $status = $_POST['dentstatus'];
-$sub_status = substr($status, 0,1);
 $password = $_POST['dentpassword'];
 $encode = md5($password);
- $sql = "INSERT INTO dentist_info VALUES('$dentId','$dentname',b'$sub_status')";
+ $sql = "INSERT INTO dentist_info VALUES('$dentId','$dentname','$status')";
  $sql1 = "INSERT INTO dental_member VALUES('$dentId','$encode')";
  if($conn->query($sql) && ($conn->query($sql1)) === TRUE){
  	?>

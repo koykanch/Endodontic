@@ -5,8 +5,23 @@
 		$scope.sData= '';
 		// $scope.selectedName = '';
 
-   		$scope._HN = '';
-
+		// $scope.locatradiat = '';
+		// $scope.refer = '';
+   		$scope.crowarea = '';
+   		$scope.crowdepth = '';
+   		$scope.toothrestoration = '';
+   		$scope.intraswell_area = '';
+   		$scope.intra_sinus = '';
+   		$scope.toothrestoration = '';
+   		$scope.fracturetoration = '';
+   		$scope.crowntooth = '';
+   		$scope.crowarea = '';
+   		$scope.crowdepth = '';
+   		$scope.periradperialess1 = '';
+   		$scope.periradperialess2 = '';
+   		$scope.laterlessperirad1 = '';
+   		$scope.laterlessperirad2 = '';
+   		$scope.planrestor = '';
 		 // $scope.showData = [];
 		 function getData(){//สร้างฟังก์ชั่น getData เพื่อแสดงรายการสินค้า
 			$http.get("showpd.php").success(function(data){

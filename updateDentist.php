@@ -114,23 +114,22 @@
                         <td>
                         <select name="dentstatus" style="height: 50px;">
                         <?php
-                            $sqli = "SELECT * FROM dentist_info WHERE dentId = '$DentId' ";
-                            $result1 = $conn->query($sqli);
-                            while($row1 = mysqli_fetch_array($result1)){
-                                if($row1['status'] == '1'){
-                                  ?>
-                                    <option value="<?php echo $row1['status']; ?>"><?php echo $row1['status'] ?> - <?php echo 'ทันตแพทย์'; ?></option>
-                                    <option value="0">0 - พนักงาน</option>
-                                  <?php  
-                                }else{
-                                    ?>
-                                    <option value="<?php echo $row1['status']; ?>"><?php echo $row1['status'] ?> - <?php echo 'พนักงาน'; ?></option>
-                                    <option value="1">1 - ทันตแพทย์</option>
-                                  <?php  
-                                }
-                            
+                            $statusdent = "SELECT * FROM dentist_status WHERE status_id = '".$row['status']."'";
+                            $resstatus = $conn->query($statusdent);
+                            $objstatus = mysqli_fetch_array($resstatus);
+                            ?>
+                                <option value="<?php echo $objstatus['status_id']; ?>"><?php echo $objstatus['status_detail']; ?></option>
+                            <?php
+                            $status_detail = "SELECT * FROM dentist_status WHERE status_id != '".$row['status']."'";
+                            $resstatus_detail = $conn->query($status_detail);
+                            while($objstatus_detail = mysqli_fetch_array($resstatus_detail)){
+                                ?>
+                                <option value="<?php echo $objstatus_detail['status_id']; ?>"><?php echo $objstatus_detail['status_detail']; ?></option>
+                                <?php
                             }
-                        ?>
+
+                            ?>
+                                
                         </select>
                         </td>
                     </tr>

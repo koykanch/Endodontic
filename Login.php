@@ -69,8 +69,13 @@
   			<p>
 				<input type="submit" class="big-link-1 btn scroll-link" name="submit" value="Login">
 				<input type="reset" class="big-link-2 btn scroll-link" name="submit" value="Clear">
+
   			</p>
 			</form>
+
+            <!-- <form name="forgot_password" method="post" action="sendpassword.php">
+                 <input type="submit" class="big-link-1 btn scroll-link" name="forgot_pass" value="Forget Password">
+            </form> -->
 
 
             </div>
