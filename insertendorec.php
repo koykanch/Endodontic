@@ -7,12 +7,19 @@ $tooth = $_POST['tooth'];
 $stu = $_POST['codestudent'];
 $dent = $_POST['dentname'];
 $datedemo = $_POST['demo'];
-$timedemo = $_POST['endo_time'];
-$image = addslashes(file_get_contents($_FILES['f1']['tmp_name']));
+$timedemo1 = $_POST['endo_time'];
+$timedemo = substr($timedemo1, 0,5);
+$image = @addslashes(file_get_contents($_FILES['f1']['tmp_name']));
 
 // echo 'HN:'.$HN.'<br>student code: '.$stu.'<br>dent Id:'.$dent.'<br>date:'.$datedemo;
  $insert_endo = "INSERT INTO dent_hardcopy(HN, hard_Date, student_code, dentId, hardcopyData, date_treatment) VALUES('$HN','$datedemo'"."'$timedemo','$stu','$dent','$image','$datedemo')";
  $result_endo = $conn->query($insert_endo);
+
+$searchSeqhard = "SELECT MAX(Seq_no) as maxid FROM dent_hardcopy";
+$resultSeqhard = $conn->query($searchSeqhard);
+$objresultSeqhard = mysqli_fetch_assoc($resultSeqhard);
+//echo $objresultSeqhard['maxid'];
+$last_seq = $objresultSeqhard['maxid'];
 
  // //Patient's History----Medical History
  
@@ -78,14 +85,19 @@ $tel = $_POST['telmed'];
 $remark_medical = $_POST['remarkmed'];
 
    // echo 'HN :'.$HN.'<br>date :'.$datedemo.'<br>none :'.$none.'<br>cardiovascular :'.$cardiovascular.'<br>pulmonary :'.$pulmonary.'<br>gastrointestinal :'.$gastrointestinal.'<br>hematologic :'.$hematologic.'<br>neurologic :'.$neurologic.'<br>allergic_to :'.$allergic_to.'<br>blood_pressure :'.$blood_pressure1.'<br>blood_pressure:'.$blood_pressure2.'<br>other :'.$other_med.'<br>taking_medicine :'.$taking_medicine.'<br>personal_doctor :'.$personal_doctor.'<br>tel :'.$tel.'<br>remark :'.$remark_medical;
- $insert_medical = "INSERT INTO medical_his (HN, Date, none, cardiovascular, pulmonary, gastrointestinal, hematologis, Neurologic, allergic, blood_pres1, blood_pres2, Other, taking_med, personal_doc, Tel, remark, date_treatment)VALUES('$HN','$datedemo'"."'$timedemo',b'$none',b'$cardiovascular',b'$pulmonary',b'$gastrointestinal',b'$hematologic',b'$neurologic','$allergic_to','$blood_pressure1','$blood_pressure2','$other_med','$taking_medicine','$personal_doctor','$tel','$remark_medical','$datedemo')";
+ $insert_medical = "INSERT INTO medical_his (Seq_no, HN, Date, none, cardiovascular, pulmonary, gastrointestinal, hematologis, Neurologic, allergic, blood_pres1, blood_pres2, Other, taking_med, personal_doc, Tel, remark, date_treatment)VALUES('$last_seq','$HN','$datedemo'"."'$timedemo',b'$none',b'$cardiovascular',b'$pulmonary',b'$gastrointestinal',b'$hematologic',b'$neurologic','$allergic_to','$blood_pressure1','$blood_pressure2','$other_med','$taking_medicine','$personal_doctor','$tel','$remark_medical','$datedemo')";
 $result_med = $conn->query($insert_medical);
+//  echo $insert_medical;
+//  die;
+// $result_radioperirad = $conn->query($insert_radioperirad);
+// var_dump($conn->error);
+// die();
 
 // //Patient's History----Dental History
 $chief_complaint = $_POST['chiefdent'];
 $present_illness = $_POST['presentilldent'];
 
-$insert_dental = "INSERT INTO dental_his(HN, Date, chief_complaint, his_of_presentill, date_treatment) VALUES('$HN','$datedemo'"."'$timedemo','$chief_complaint','$present_illness','$datedemo')";
+$insert_dental = "INSERT INTO dental_his(Seq_no,HN, Date, chief_complaint, his_of_presentill, date_treatment) VALUES('$last_seq','$HN','$datedemo'"."'$timedemo','$chief_complaint','$present_illness','$datedemo')";
 $result_dental = $conn->query($insert_dental);
 
 // //Examination----S.Subjective Symptoms
@@ -132,7 +144,7 @@ if(isset($_POST['locat_referred'])){
 
 
 // // echo 'HN :'.$HN.'<br>date :'.$datedemo.'<br>pain inten :'.$pain_intensity.'<br>pain char :'.$pain_character.'<br>duration :'.$duration.'<br>location :'.$location.'<br>onset :'.$onset.'<br>onsetstimul :'.$onsetstimul.'<br>location_radiat : '.$location_radiat.'<br>refer :'.$refer;
-  $insert_subject = "INSERT INTO subject_symptom(HN, Date, paininten_id, painchar_id, duration_id, locat_locOrdiff, onset_spontaneous, stimulation_id, onset_other, locat_radiating, locat_referred, date_treatment) VALUES('$HN','$datedemo'"."'$timedemo','$pain_intensity','$pain_character','$duration','$location',b'$onset','$onsetstimul','$onset_other','$location_radiat','$refer','$datedemo')";
+  $insert_subject = "INSERT INTO subject_symptom(Seq_no,HN, Date, paininten_id, painchar_id, duration_id, locat_locOrdiff, onset_spontaneous, stimulation_id, onset_other, locat_radiating, locat_referred, date_treatment) VALUES('$last_seq','$HN','$datedemo'"."'$timedemo','$pain_intensity','$pain_character','$duration','$location',b'$onset','$onsetstimul','$onset_other','$location_radiat','$refer','$datedemo')";
   $result_subject = $conn->query($insert_subject);
 
 //Examination----O.Objective Symptoms 
@@ -220,7 +232,7 @@ if(isset($_POST['crowntooth'])){ //chek with checkbox name(fracturetoration is n
 
 $toothother = $_POST['toothother'];
 
-$insert_object = "INSERT INTO object_symptom(HN, Date, ext_facialswelling, ext_lymphnode, ext_sinustract, ext_other, intra_swellsoftOrfirm, intra_swellarea, intra_sinustract, tooth_caries, tooth_restoration, tooth_pulpexposure, tooth_pulppolyp, tooth_fracture, tooth_crown, tooth_open, tooth_temp, tooth_other, date_treatment)  VALUES('$HN','$datedemo'"."'$timedemo',b'$extrafacial_check',b'$extralymph_check',b'$extrasinus_check','$extraother',b'$swellsoftorfirm','$intraswell_area','$intrasinus',b'$tooth_caries','$restoration_with',b'$tooth_pulpexpo',b'$tooth_pulppoly','$fracture_at','$crown_discoloration',b'$tooth_open',b'$tooth_temp','$toothother','$datedemo')";
+$insert_object = "INSERT INTO object_symptom(Seq_no,HN, Date, ext_facialswelling, ext_lymphnode, ext_sinustract, ext_other, intra_swellsoftOrfirm, intra_swellarea, intra_sinustract, tooth_caries, tooth_restoration, tooth_pulpexposure, tooth_pulppolyp, tooth_fracture, tooth_crown, tooth_open, tooth_temp, tooth_other, date_treatment)  VALUES('$last_seq','$HN','$datedemo'"."'$timedemo',b'$extrafacial_check',b'$extralymph_check',b'$extrasinus_check','$extraother',b'$swellsoftorfirm','$intraswell_area','$intrasinus',b'$tooth_caries','$restoration_with',b'$tooth_pulpexpo',b'$tooth_pulppoly','$fracture_at','$crown_discoloration',b'$tooth_open',b'$tooth_temp','$toothother','$datedemo')";
 $result_object = $conn->query($insert_object);
 //  	// echo $insert_object;
 //   	$result_object = $conn->query($insert_object);
@@ -358,12 +370,6 @@ $probe_dl2 = $_POST['probe_dl2'];
 
  // // echo 'HN: '.$HN.'<br>date:'.$datedemo.'<br>numtooth:'.$numtooth.'<br>ept:'.$ept.'<br>cold:'.$cold.'<br>heat:'.$heat.'<br>perc:'.$perc.'<br>palp:'.$palp.'<br>mobility:'.$mobility.'<br>probe_mb:'.$probe_mb.'<br>probe_b:'.$probe_b.'<br>probe_db:'.$probe_db.'<br>probe_ml:'.$probe_ml.'<br>probe_l:'.$probe_l.'<br>probe_dl:'.$probe_dl.'<br>special_test:'.$special_test;
 
-	$searchSeqhard = "SELECT MAX(Seq_no) as maxid FROM dent_hardcopy";
-	$resultSeqhard = $conn->query($searchSeqhard);
-	$objresultSeqhard = mysqli_fetch_assoc($resultSeqhard);
-	//echo $objresultSeqhard['maxid'];
-	$last_seq = $objresultSeqhard['maxid'];
-
 if($_POST['special_test1'] != ""){
 	//echo "spec1";
 	$special_test1 = $_POST['special_test1'];
@@ -422,7 +428,7 @@ if($normcrown == 0 && $cariescrown == 1){
 $crownother = $_POST['crownother'];
 
 // //echo 'HN: '.$HN.'<br>date: '.$datedemo.'<br>normcrown:'.$normcrown.'<br>cariescrown:'.$cariescrown.'<br>crowarea:'.$crowarea.'<br>crowdepth:'.$crowdepth.'<br>restcrown:'.$restcrown.'<br>fractcrown:'.$fractcrown.'<br>crownother:'.$crownother;
- $insert_radiocrown = "INSERT INTO radiograph_crown(HN, Date, crown_normal, crown_caries, crown_cariesarea, crown_cariesdepth, crown_restoration, crown_fracture, crown_other, date_treatment)  VALUES('$HN','$datedemo'"."'$timedemo',b'$normcrown',b'$cariescrown','$crowarea','$crowdepth',b'$restcrown',b'$fractcrown','$crownother','$datedemo')";
+ $insert_radiocrown = "INSERT INTO radiograph_crown(Seq_no,HN, Date, crown_normal, crown_caries, crown_cariesarea, crown_cariesdepth, crown_restoration, crown_fracture, crown_other, date_treatment)  VALUES('$last_seq','$HN','$datedemo'"."'$timedemo',b'$normcrown',b'$cariescrown','$crowarea','$crowdepth',b'$restcrown',b'$fractcrown','$crownother','$datedemo')";
  $result_radiocrown = $conn->query($insert_radiocrown);
 
 
@@ -451,7 +457,7 @@ if(isset($_POST['calcificatecham'])&& $pulpcham_normal == 0){
 }
 $pulpchamother = $_POST['pulpchamother'];
 
-$insert_radiopulpcham = "INSERT INTO radiograph_pulpcham(HN, Date, pulpcham_normal, pulpcham_calPartOrComp, pulpcham_pulpstone, pulpcham_resorption, pulpcham_other, date_treatment) VALUES('$HN','$datedemo'"."'$timedemo',b'$pulpcham_normal','$pulpcham_partorcomp',b'$pulpcham_stone',b'$pulpcham_resorp','$pulpchamother','$datedemo')";
+$insert_radiopulpcham = "INSERT INTO radiograph_pulpcham(Seq_no,HN, Date, pulpcham_normal, pulpcham_calPartOrComp, pulpcham_pulpstone, pulpcham_resorption, pulpcham_other, date_treatment) VALUES('$last_seq','$HN','$datedemo'"."'$timedemo',b'$pulpcham_normal','$pulpcham_partorcomp',b'$pulpcham_stone',b'$pulpcham_resorp','$pulpchamother','$datedemo')";
 $result_radiopulpcham = $conn->query($insert_radiopulpcham);
 
 // // //Radiograph_root
@@ -487,7 +493,7 @@ if(isset($_POST['fractroot']) && $root_normal == 0){
 
 $root_other = $_POST['root_other'];
 
-$insert_radioroot = "INSERT INTO radiograph_root(HN, Date, root_normal, root_caries, root_curvature, root_extresorption, root_fracture, root_other, date_treatment) VALUES('$HN','$datedemo'"."'$timedemo',b'$root_normal',b'$root_caries',b'$root_curvature',b'$root_extresorp',b'$root_fracture','$root_other','$datedemo')";
+$insert_radioroot = "INSERT INTO radiograph_root(Seq_no,HN, Date, root_normal, root_caries, root_curvature, root_extresorption, root_fracture, root_other, date_treatment) VALUES('$last_seq','$HN','$datedemo'"."'$timedemo',b'$root_normal',b'$root_caries',b'$root_curvature',b'$root_extresorp',b'$root_fracture','$root_other','$datedemo')";
 $result_radioroot = $conn->query($insert_radioroot);
 
 // //Radiograph_pulpcanal
@@ -532,7 +538,7 @@ if(isset($_POST['calcificatecanel']) && $pulpcan_normal == 0){ //check with chec
 
 $pulpcanother = $_POST['pulpcanother'];
 
-$insert_radiopulpcanal = "INSERT INTO radiograph_pulpcanal(HN, Date, pulpcan_normal, pulpcan_calPartOrComp, pulpcan_resorption, pulpcan_perforation, pulpcan_previousRCT, pulpcan_broken, pulpcan_other, date_treatment) VALUES('$HN','$datedemo'"."'$timedemo',b'$pulpcan_normal','$pulpcan_selcal',b'$pulpcan_resorp',b'$pulpcan_perfor',b'$pulpcan_prev',b'$pulpcan_broke','$pulpcanother','$datedemo')";
+$insert_radiopulpcanal = "INSERT INTO radiograph_pulpcanal(Seq_no,HN, Date, pulpcan_normal, pulpcan_calPartOrComp, pulpcan_resorption, pulpcan_perforation, pulpcan_previousRCT, pulpcan_broken, pulpcan_other, date_treatment) VALUES('$last_seq','$HN','$datedemo'"."'$timedemo',b'$pulpcan_normal','$pulpcan_selcal',b'$pulpcan_resorp',b'$pulpcan_perfor',b'$pulpcan_prev',b'$pulpcan_broke','$pulpcanother','$datedemo')";
 $result_radiopulpcanal = $conn->query($insert_radiopulpcanal);
 
 //Radiograph_perirad 
@@ -597,8 +603,13 @@ if($perirad_normal == 0 && isset($_POST['laterlessperirad'])){
 
 $perother = $_POST['perother'];
 
-$insert_radioperirad = "INSERT INTO radiograph_perirad(HN, Date, perirad_normal, perirad_wideningPDL, perirad_lossoflam, perirad_periapical1, perirad_periapical2, perirad_lateral1, perirad_lateral2, perirad_resorption, perirad_openapex, perirad_osteos, perirad_hyper, perirad_other, date_treatment) VALUES('$HN','$datedemo'"."'$timedemo',b'$perirad_normal',b'$perirad_widen',b'$perirad_loss','$periapical_lesion1','$periapical_lesion2','$lateral_lesion1','$lateral_lesion2',b'$perirad_resorp','$perirad_openapex',b'$perirad_osteos',b'$perirad_hyper','$perother','$datedemo')";
-$result_radioperirad = $conn->query($insert_radioperirad);
+$insert_radioperirad = "INSERT INTO radiograph_perirad(Seq_no,HN, Date, perirad_normal, perirad_wideningPDL, perirad_lossoflam, perirad_periapical1, perirad_periapical2, perirad_lateral1, perirad_lateral2, perirad_resorption, perirad_openapex, perirad_osteos, perirad_hyper, perirad_other, date_treatment) 
+VALUES('$last_seq','$HN','$datedemo'"."'$timedemo',b'$perirad_normal',b'$perirad_widen',b'$perirad_loss','$periapical_lesion1','$periapical_lesion2','$lateral_lesion1','$lateral_lesion2',b'$perirad_resorp','$perirad_openapex',b'$perirad_osteos',b'$perirad_hyper','$perother','$datedemo')";
+// echo $insert_radioperirad;
+// die;
+ $result_radioperirad = $conn->query($insert_radioperirad);
+// var_dump($conn->error);
+// die();
 
 //Radiograph_alveolar
 if(isset($_POST['alveolar'])){
@@ -625,7 +636,7 @@ else if($alveolar == "localalveolar"){
 $alveolarother = $_POST['alveolarother'];
 $remark = $_POST['otherremark'];
 
-$insert_alveolar = "INSERT INTO radiograph_alveolar(HN, Date, bone_normal, bone_genOrlocal, bone_other, remark, date_treatment) VALUES('$HN','$datedemo'"."'$timedemo',b'$normalveolar','$generalOrlocal','$alveolarother','$remark','$datedemo')";
+$insert_alveolar = "INSERT INTO radiograph_alveolar(Seq_no,HN, Date, bone_normal, bone_genOrlocal, bone_other, remark, date_treatment) VALUES('$last_seq','$HN','$datedemo'"."'$timedemo',b'$normalveolar','$generalOrlocal','$alveolarother','$remark','$datedemo')";
 $result_alveolar = $conn->query($insert_alveolar);
 
 //Diagnosis----Pulpal Diagnosis
@@ -687,7 +698,7 @@ else if($pul_normal==0 && $prev_treated==1 && $_POST['prevselect'] == 1){
 	$Incomplete = "";
 }
 
-$insert_pulpaldiag = "INSERT INTO pulpal_diagnosis(HN, Date, normal, ReverOrIrreversiblepulp, Irreversible_sympOrasymp, pulp_necrosis, prev_initiat, prev_treated, prev_treated_improper, prev_treated_incomplete, date_treatment) VALUES('$HN','$datedemo'"."'$timedemo',b'$pul_normal','$ReverOrIrrever','$sympOrasymp',b'$pulpnecrosis',b'$prev_initiated',b'$prev_treated',b'$Improper',b'$Incomplete','$datedemo')";
+$insert_pulpaldiag = "INSERT INTO pulpal_diagnosis(Seq_no,HN, Date, normal, ReverOrIrreversiblepulp, Irreversible_sympOrasymp, pulp_necrosis, prev_initiat, prev_treated, prev_treated_improper, prev_treated_incomplete, date_treatment) VALUES('$last_seq','$HN','$datedemo'"."'$timedemo',b'$pul_normal','$ReverOrIrrever','$sympOrasymp',b'$pulpnecrosis',b'$prev_initiated',b'$prev_treated',b'$Improper',b'$Incomplete','$datedemo')";
 $result_pulpaldiag = $conn->query($insert_pulpaldiag);
 
 //Diagnosis----Periradicular Diagnosis
@@ -711,7 +722,7 @@ if(isset($_POST['acuteOrchronic']) && $per_normal == 0){
 }
 $perdiagother = $_POST['perdiagother'];
 
-$insert_periraddiag = "INSERT INTO periradicular_diagnosis(HN, Date, Normal, sympOrasympt_apical, acuteOrchronic_apical, other, date_treatment) VALUES('$HN','$datedemo'"."'$timedemo',b'$per_normal','$sympOrasympt_apical','$acuteOrchronic_apical','$perdiagother','$datedemo')";
+$insert_periraddiag = "INSERT INTO periradicular_diagnosis(Seq_no,HN, Date, Normal, sympOrasympt_apical, acuteOrchronic_apical, other, date_treatment) VALUES('$last_seq','$HN','$datedemo'"."'$timedemo',b'$per_normal','$sympOrasympt_apical','$acuteOrchronic_apical','$perdiagother','$datedemo')";
 $result_periraddiag = $conn->query($insert_periraddiag);
 
 //Treatment Planning
@@ -817,6 +828,7 @@ if(!isset($_POST['anesthesis'])){
 	$anesthesis = $_POST['anesthesis'];
 }
 
+$reqOrnotreq = "";
 if($anesthesis == "anesrequired"){
 	$reqOrnotreq = 1; //require
 }
@@ -824,15 +836,22 @@ else if($anesthesis == "anesnotrequired"){
 	$reqOrnotreq = 0; //not require
 }
 
-$insert_treatment = "INSERT INTO treatment_plan(HN, Date, no_treatment, Pulpotomy, pulp_partOrfull, pulpectomy, non_sur_root, non_sur_retreat, apexification, intentionalRCT, sur_root, perio_consult, treat_other, plan_for_final, pre_op_treat_caries, pre_op_treat_dam, pre_op_treat_other, Anest_reqOrnotreq, date_treatment) VALUES('$HN','$datedemo'"."'$timedemo',b'$notreat',b'$pulpotomy','$pulp_partialOrfull',b'$pulpectomy',b'$non_rootcanel',b'$non_retreatment',b'$apexification',b'$intentional_RCT',b'$rootcaneltreat',b'$perio','$periradother','$planrestor',b'$preop_caries',b'$preop_dam','$preopother',b'$reqOrnotreq','$datedemo')";
+$insert_treatment = "INSERT INTO treatment_plan(Seq_no,HN, Date, no_treatment, Pulpotomy, pulp_partOrfull, pulpectomy, non_sur_root, non_sur_retreat, apexification, intentionalRCT, sur_root, perio_consult, treat_other, plan_for_final, pre_op_treat_caries, pre_op_treat_dam, pre_op_treat_other, Anest_reqOrnotreq, date_treatment) VALUES('$last_seq','$HN','$datedemo'"."'$timedemo',b'$notreat',b'$pulpotomy','$pulp_partialOrfull',b'$pulpectomy',b'$non_rootcanel',b'$non_retreatment',b'$apexification',b'$intentional_RCT',b'$rootcaneltreat',b'$perio','$periradother','$planrestor',b'$preop_caries',b'$preop_dam','$preopother',b'$reqOrnotreq','$datedemo')";
 $result_treatment = $conn->query($insert_treatment);
 
-$xrayfile = addslashes(file_get_contents($_FILES['xrayfile']['tmp_name']));
-
+$xrayfile = @addslashes(file_get_contents($_FILES['xrayfile']['tmp_name']));
 $xraydate = $_POST['xraydate'];
-$xraytime = $_POST['xraytime'];
+$xraytime1 = $_POST['xraytime'];
+$xraytime = substr($xraytime1, 0,5);
 
-$insert_xray = "INSERT INTO patients_xray(HN,Date,xrayData,xray_datetime) VALUES('$HN','$datedemo','$xrayfile','$xraydate'"."'$xraytime')";
+$xray_datetime = date('Y-m-d H:i:s');
+if($xraydate == ""){
+	$xraydate = substr($xray_datetime, 0,10) ;
+}
+if($xraytime == ""){
+	$xraytime = substr($xray_datetime, 11);
+}
+$insert_xray = "INSERT INTO patients_xray(Seq_no,HN,Date,xrayData,xray_datetime) VALUES('$last_seq','$HN','$datedemo','$xrayfile','$xraydate'"."'$xraytime')";
 $result_xray = $conn->query($insert_xray);
 
    if($result_endo === TRUE && $result_med === TRUE  && $result_dental === TRUE && $result_subject === TRUE && $result_object === TRUE && $result_examination1 === TRUE && $result_radiocrown === TRUE && $result_radiopulpcham === TRUE && $result_radioroot === TRUE &&  $result_radiopulpcanal === TRUE && $result_radioperirad === TRUE && $result_alveolar === TRUE && $result_pulpaldiag === TRUE && $result_periraddiag === TRUE && $result_treatment === TRUE && $result_xray === TRUE){
@@ -844,6 +863,7 @@ $result_xray = $conn->query($insert_xray);
      		</script>
      	<?php
      }else{
+     		$conn->error;
     	?>
      		<script>
      			window.alert('Unsuccess');
@@ -853,4 +873,5 @@ $result_xray = $conn->query($insert_xray);
      	echo "Error description: " . mysqli_error($conn);
      	//echo "<br>Error description: " . mysqli_error($result_med);
      } 
+ 
 ?>

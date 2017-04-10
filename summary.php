@@ -252,8 +252,8 @@ $user = $_SESSION['username'];
             <p align="left"><b>Examination</b></p>
             <p align="left" style="padding-left: 2em;">
                 
-             <!-- <b>Tooth: </b><input ng-model="tooth" style="width: 50px; height:25px;" />&nbsp;&nbsp;
-             <b>EPT: </b><input ng-model="epttooth" style="width: 50px; height:25px;" />&nbsp;&nbsp; -->
+             <b>Tooth: </b><input ng-model="tooth" style="width: 50px; height:25px;" />&nbsp;&nbsp;
+             <!-- <b>EPT: </b><input ng-model="epttooth" style="width: 50px; height:25px;" />&nbsp;&nbsp; -->
              <b>Cold: </b><select ng-model="cold_exam">
                   <option value="">SELECT</option>
                   <option value="WNL">WNL</option>
@@ -465,8 +465,8 @@ $rowcheckuser = mysqli_fetch_array($rescheckuser);
                       <td>{{c.HN}}</td>
                       <td>{{c.patientName}}</td>
                       <td>{{c.hard_Date| date:'dd-MM-yyyy'}}</td>
-                      <td>{{c.student_code}}</td>
-                      <td>{{c.dentId}}</td>
+                      <td>{{c.student_name}}</td>
+                      <td>{{c.dent_name}}</td>
                       <td><form action="report.php" method="post" name="summary" target="_blank">
                         <input type="hidden" name="seqnum" value="{{c.Seq_no}}">
                         <input type="hidden" name="PatientHN" value="{{c.HN}}">
@@ -474,10 +474,10 @@ $rowcheckuser = mysqli_fetch_array($rescheckuser);
                         <input type="hidden" name="Dent_id" value="{{c.dentId}}">
                         <input type="hidden" name="hard_date" value="{{c.hard_Date | date: 'dd-MM-yyyy'}}">
 
-                        <input type="submit" class="btn btn-success" style="width:100px;" name="detail" value="VIEW">
-                      </form><br>
+                        <input type="submit" class="btn btn-success" style="width:100px; height:30px;" name="detail" value="VIEW">
+                      </form>
 
-                      <form action="updateEndodontic.php" method="post" name="edit_detail" target="_blank">
+                      <form action="updateEndodontic.php" method="post" name="edit_detail" target="_blank" style = "margin-top: .05cm;">
                         <input type="hidden" name="seqnum" value="{{c.Seq_no}}">
                         <input type="hidden" name="PatientHN" value="{{c.HN}}">
                         <input type="hidden" name="Stu_code" value="{{c.student_code}}">
@@ -485,23 +485,23 @@ $rowcheckuser = mysqli_fetch_array($rescheckuser);
                         <input type="hidden" name="hard_date" value="{{c.hard_Date}}">
 
                         <span ng-if="c.student_code == <?php echo $user; ?>">
-                            <input type="submit" class="btn btn-info" style="width:100px;" name="edit" value="EDIT">
+                            <input type="submit" class="btn btn-info" style="width:100px; height:30px;" name="edit" value="EDIT">
                         </span>
                         <span ng-if="c.dentId == <?php echo $user; ?>" >
-                            <input type="submit" class="btn btn-info" style="width:100px;" name="edit" value="EDIT">
+                            <input type="submit" class="btn btn-info" style="width:100px; height:30px;" name="edit" value="EDIT">
                         </span>
                         </span>
-                      </form><br>
+                      </form>
 
-                      <form action="deleteEndodontic.php" method="post" name="delete_detail">
+                      <form action="deleteEndodontic.php" method="post" name="delete_detail" style = "margin-top: .05cm;">
                         <input type="hidden" name="seqnum" value="{{c.Seq_no}}">
                         <input type="hidden" name="PatientHN" value="{{c.HN}}">
                         <input type="hidden" name="Stu_code" value="{{c.student_code}}">
                         <input type="hidden" name="Dent_id" value="{{c.dentId}}">
                         <input type="hidden" name="hard_date" value="{{c.hard_Date}}">
 
-                        <span ng-if="c.status == '01'" >
-                        <input type="submit" class="btn btn-danger" style="width:100px;" name="delete" value="DELETE"></tr>
+                        <span ng-if="c.dentId == <?php echo $user; ?> && c.status == '01'" >
+                        <input type="submit" class="btn btn-danger" style="width:100px; height:30px;" name="delete" value="DELETE"></tr>
                         </span>
                       </form></tr>
                     <?php
@@ -523,7 +523,7 @@ $rowcheckuser = mysqli_fetch_array($rescheckuser);
                             <input type="hidden" name="Dent_id" value="{{c.dentId}}">
                             <input type="hidden" name="hard_date" value="{{c.hard_Date}}">
 
-                            <input type="submit" class="btn btn-success" style="width:100px;" name="detail" value="VIEW">
+                            <input type="submit" class="btn btn-success" style="width:100px; height:30px;" name="detail" value="VIEW">
                             </form></td>
                     </tr>
                     <?php

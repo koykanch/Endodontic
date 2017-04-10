@@ -136,6 +136,7 @@ if(isset($_SESSION['username'])){
                 }
                 ?>
                 </tr>
+
         <?php
             $sql = "SELECT * FROM patients_info";
             $resSql = $conn->query($sql);
@@ -163,11 +164,20 @@ if(isset($_SESSION['username'])){
                     
                   </form><br>';?>
 
+            <?php
+                $sql_admin = "SELECT * FROM dentist_info WHERE dentId = '".$_SESSION['username']."'";
+                $resadmin = $conn->query($sql_admin);
+                $objadmin = mysqli_fetch_array($resadmin);
+               if($objadmin['status'] == '01'){
+                    ?>
                   <form action="deletePatient.php" method="post" name="deletebtn" onSubmit="return confirm('are you sure?')">
                       <input type="hidden" name="HN" value="<?php echo $row['HN']; ?>">
-                      <input type="submit" class="btn btn-danger" value="Delete" style="width: 100px;"name="<?php echo $row['HN']; ?>">
-
+                      
+                                <input type="submit" class="btn btn-danger" value="Delete" style="width: 100px;"name="<?php echo $row['HN']; ?>">
+                            
                   </form>   
+                  <?php
+                       } ?>
                 </td> <?php } ?>  
               </tr><?php  } ?>
              </tbody>

@@ -434,8 +434,14 @@ $endo = new Endodontic;
         
             <div class="row">
                 <div class="col-md-12">
+                <?php
+                date_default_timezone_set('Asia/Bangkok');
+                  $insert_datetime = date('Y-m-d H:i:s');
+                  $insert_date = substr($insert_datetime, 0,10);
+                  $insert_time = substr($insert_datetime, 11,12);
+                ?>
                   <label>Date: &nbsp;&nbsp;</label>
-                  <input type="date" name="demo" style="width:200px; float:left;">
+                  <input type="date" name="demo" style="width:200px; float:left;" value="<?php echo $insert_date; ?>">
                   <!-- <div type="text" id="demo" name="demo" style="width:200px; float:left;"> -->
                 </div>
             </div>
@@ -443,7 +449,7 @@ $endo = new Endodontic;
             <div class="row">
                 <div class="col-md-12">
                   <label>Time:&nbsp;</label>
-                  <input type="time" name="endo_time" style="float:left;">
+                  <input type="time" name="endo_time" style="float:left;" value="<?php echo $insert_time; ?>">
                 </div>
             </div>
         </div>
@@ -1541,12 +1547,12 @@ $endo = new Endodontic;
 
     <div class="col-md-4">
         <label>X-ray date:&nbsp;</label>
-        <input type="date" name="xraydate" style="float:left;">
+        <input type="date" name="xraydate" style="float:left;" value="<?php echo $insert_date; ?>">
     </div>
 
     <div class="col-md-3">
         <label>X-ray time:&nbsp;</label>
-        <input type="time" name="xraytime" style="float:left;">
+        <input type="time" name="xraytime" style="float:left;" value="<?php echo $insert_time; ?>">
     </div>
   </div>
 

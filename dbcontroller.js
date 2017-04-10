@@ -22,6 +22,7 @@
    		$scope.laterlessperirad1 = '';
    		$scope.laterlessperirad2 = '';
    		$scope.planrestor = '';
+   		$scope.tooth ='';
 		 // $scope.showData = [];
 		 function getData(){//สร้างฟังก์ชั่น getData เพื่อแสดงรายการสินค้า
 			$http.get("showpd.php").success(function(data){
