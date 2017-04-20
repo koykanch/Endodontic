@@ -2331,7 +2331,7 @@ function insertendorec() {
   <input type="hidden" name="stu_code" value="<?php echo $stucode; ?>">
   <input type="hidden" name="dent_id" value="<?php echo $dent; ?>">
   <input type="hidden" name="harddate" value="<?php echo $harddate; ?>">
-  <input type="submit" name="submit_insert" value="Submit"/>
+  <input type="submit" name="submit_insert" value="UPDATE"/>
   
 </fieldset>
 

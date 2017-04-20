@@ -632,7 +632,7 @@ $harddate = $_POST['hard_date'];
   
       <div style="font-size: 15px;"><b>Examination: </b></div>
       <?php
-        $searchExam = "SELECT * FROM examination WHERE Seq_hardcopy = '$sq'";
+        $searchExam = "SELECT * FROM examination WHERE Seq_hardcopy = '$sq' AND exam_tooth != ''";
         $resultExam = $conn->query($searchExam);
         
       ?>

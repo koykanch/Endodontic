@@ -138,8 +138,8 @@
 
                     <br><br>
                     <input type="hidden" name="id" value="<?php echo $DentId; ?>">
-                    <input type="submit" class="big-link-1 btn scroll-link" name="submit" value="Update">
-                    <input type="reset" class="big-link-1 btn scroll-link" name="reset" value="CLEAR">
+                    <input type="submit" class="big-link-1 btn scroll-link" name="submit" value="UPDATE">
+                    <!-- <input type="reset" class="big-link-1 btn scroll-link" name="reset" value="CLEAR"> -->
                 </div>
             </div>
         </form>

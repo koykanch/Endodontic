@@ -6,7 +6,7 @@ if(isset($_SESSION['username'])){
 <!DOCTYPE html>
 <html>
 <head>
-  <title>import picture</title>
+  <title>บันทึกประวัติการรักษา</title>
   <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -449,7 +449,7 @@ $endo = new Endodontic;
             <div class="row">
                 <div class="col-md-12">
                   <label>Time:&nbsp;</label>
-                  <input type="time" name="endo_time" style="float:left;" value="<?php echo $insert_time; ?>">
+                  <input type="time" name="endo_time" step="1" style="float:left;" value="<?php echo $insert_time; ?>">
                 </div>
             </div>
         </div>

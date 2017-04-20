@@ -100,7 +100,7 @@
 <?php 
     if(isset($_SESSION['username'])){
         ?>
-        <li><a href="endorecord.php" class="list-group-item-warning" target="_blank">อัพเดทประวัติการรักษา<br />Endodontic Record</a></li>
+        <li><a href="endorecord.php" class="list-group-item-warning" target="_blank">บันทึกประวัติการรักษา<br />Endodontic Record</a></li>
 <?php 
     } ?>
 

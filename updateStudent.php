@@ -105,7 +105,7 @@
 
                     <tr height="80">
                         <td width="30%"><b>Student ID: </b></td>
-                        <td><input type="text" name="studentid" value="<?php echo $row['student_code']; ?>"></td>
+                        <td><input type="text" name="studentid" value="<?php echo $row['student_code']; ?>" disabled></td>
                     </tr>
 
                     <tr height="80">
@@ -134,8 +134,8 @@
 
                     <br><br>
                     <input type="hidden" name="stu_code" value="<?php echo $StudentId; ?>">
-                    <input type="submit" class="big-link-1 btn scroll-link" name="submit" value="Update">
-                    <input type="reset" class="big-link-1 btn scroll-link" name="reset" value="CLEAR">
+                    <input type="submit" class="big-link-1 btn scroll-link" name="submit" value="UPDATE">
+                    <!-- <input type="reset" class="big-link-1 btn scroll-link" name="reset" value="CLEAR"> -->
                 </div>
             </div>
         </form>

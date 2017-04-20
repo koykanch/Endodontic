@@ -717,7 +717,7 @@ if($result_endo === TRUE && $result_med === TRUE && $result_dental === TRUE && $
     	?>
     		<script>
     			window.alert('Success');
-   				//window.location = "endorecord.php";
+   				window.location = "Endodontic_system.html";
     		</script>
     	<?php
 
@@ -725,7 +725,7 @@ if($result_endo === TRUE && $result_med === TRUE && $result_dental === TRUE && $
     	?>
     		<script>
     			window.alert('Unsuccess');
-    			//window.location = "endorecord.php";
+    			window.location = "endorecord.php";
     		</script>
     	<?php
     	echo "Error description: " . mysqli_error($conn);

@@ -5,7 +5,7 @@ class Student
 	public function searchstu($conn){
 		?>
 		
-		<option value=" "><-- Please Select Student --></option>
+		<option value=""><-- Please Select Student --></option>
 		<?php
 			$strSQL = "SELECT * FROM dentalstudent_info";
 			$objQuery = $conn->query($strSQL);

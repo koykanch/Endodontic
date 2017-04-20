@@ -113,6 +113,7 @@
             <div class="loader-img"></div>
         </div>
 <?php
+error_reporting(0);
 $checkuser = "SELECT * FROM dentist_info WHERE dentId = '".$_SESSION['username']."'";
 $rescheckuser = $conn->query($checkuser);
 $rowcheckuser = mysqli_fetch_array($rescheckuser);

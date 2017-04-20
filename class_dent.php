@@ -4,7 +4,7 @@ class Dentist
 {
 	public function searchdent($conn){
 		?>
-		<option value=" "><-- Please Select Dentist --></option>
+		<option value=""><-- Please Select Dentist --></option>
 		<?php
 			$strSQL = "SELECT * FROM dentist_info ORDER BY dentId";
 			$objQuery = $conn->query($strSQL);

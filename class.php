@@ -1,7 +1,7 @@
 <?php
 class Check{
 	//eieieiieiei
-	error_reporting(0);
+	//error_reporting(0);
 	public function CheckNone($image,$conn){
 		if($image == ""){
 			?>

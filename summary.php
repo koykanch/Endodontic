@@ -487,20 +487,25 @@ $rowcheckuser = mysqli_fetch_array($rescheckuser);
                         <span ng-if="c.student_code == <?php echo $user; ?>">
                             <input type="submit" class="btn btn-info" style="width:100px; height:30px;" name="edit" value="EDIT">
                         </span>
+                        
                         <span ng-if="c.dentId == <?php echo $user; ?>" >
                             <input type="submit" class="btn btn-info" style="width:100px; height:30px;" name="edit" value="EDIT">
                         </span>
                         </span>
                       </form>
 
-                      <form action="deleteEndodontic.php" method="post" name="delete_detail" style = "margin-top: .05cm;">
+                      <?php
+                          $duplication = "SELECT dentId FROM dentist_info WHERE dentId = '$user' AND status = '01'";
+                          $resduplication = $conn->query($duplication);
+                          $objduplication = mysqli_fetch_array($resduplication);
+                      ?>
+                      <form action="deleteEndodontic.php" method="post" name="delete_detail" onSubmit="return confirm('are you sure?')" style = "margin-top: .05cm;" >
                         <input type="hidden" name="seqnum" value="{{c.Seq_no}}">
                         <input type="hidden" name="PatientHN" value="{{c.HN}}">
                         <input type="hidden" name="Stu_code" value="{{c.student_code}}">
                         <input type="hidden" name="Dent_id" value="{{c.dentId}}">
                         <input type="hidden" name="hard_date" value="{{c.hard_Date}}">
-
-                        <span ng-if="c.dentId == <?php echo $user; ?> && c.status == '01'" >
+                        <span ng-if="<?php echo $objduplication['dentId'] != null ?>">
                         <input type="submit" class="btn btn-danger" style="width:100px; height:30px;" name="delete" value="DELETE"></tr>
                         </span>
                       </form></tr>
